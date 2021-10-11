@@ -1,10 +1,56 @@
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import * as React from 'react';
 import { Navbar } from 'react-bootstrap';
 import { Container } from 'react-bootstrap';
 import { Nav } from 'react-bootstrap';
 import { Button } from 'react-bootstrap';
-import { Card, CardGroup } from 'react-bootstrap';
+import { CardGroup } from 'react-bootstrap';
+import CartasProductos from './Componentes/CartasProductos';
+import Typography from '@mui/material/Typography';
+import GlobalStyles from '@mui/material/GlobalStyles';
+import Grid from '@mui/material/Grid';
+
+
+const tiers = [
+    {
+        title: 'Free',
+        price: '0',
+        description: [
+            '10 users included',
+            '2 GB of storage',
+            'Help center access',
+            'Email support',
+        ],
+        buttonText: 'Sign up for free',
+        buttonVariant: 'outlined',
+    },
+    {
+        title: 'Pro',
+        subheader: 'Most popular',
+        price: '15',
+        description: [
+            '20 users included',
+            '10 GB of storage',
+            'Help center access',
+            'Priority email support',
+        ],
+        buttonText: 'Get started',
+        buttonVariant: 'contained',
+    },
+    {
+        title: 'Enterprise',
+        price: '30',
+        description: [
+            '50 users included',
+            '30 GB of storage',
+            'Help center access',
+            'Phone & email support',
+        ],
+        buttonText: 'Contact us',
+        buttonVariant: 'outlined',
+    },
+];
 
 function Productos() {
     return (
@@ -35,51 +81,39 @@ function Productos() {
                     </Navbar.Collapse>
                 </Container>
             </Navbar>
-                <CardGroup className="CartasG">
-                    <Card className="Cartas">
-                        <Card.Title>Producto 1</Card.Title>
-                        <Card.Img  variant="top" src="imagen1.jpg" />
-                        <Card.Body>
-                            <label>Publicar Ahora</label>
-                            <Card.Text>
-                                This is a wider card with supporting text below as a natural lead-in to
-                                additional content. This content is a little bit longer.
-                            </Card.Text>
-                        </Card.Body>
-                        <Card.Footer>
-                        </Card.Footer>
-                    </Card>
-                    <Card className="Cartas">
-                        <Card.Title>Producto 2</Card.Title>
-                        <Card.Img variant="top" src="imagen1.jpg" />
-                        <Card.Body>
-                            <label>Publicar Ahora</label>
-                            <Card.Text>
-                                This card has supporting text below as a natural lead-in to additional
-                                content.{' '}
-                            </Card.Text>
-                        </Card.Body>
-                        <Card.Footer>
+            <CardGroup className="CartasG">
 
-                        </Card.Footer>
-                    </Card>
-                    <Card className="Cartas">
-                        <Card.Title>Producto 3</Card.Title>
-                        <Card.Img variant="top" src="imagen1.jpg" />
-                        <Card.Body>
+                <React.Fragment>
+                    <GlobalStyles styles={{ ul: { margin: 0, padding: 0, listStyle: 'none' } }} />
 
-                            <label>Publicar Ahora</label>
-                            <Card.Text>
-                                This is a wider card with supporting text below as a natural lead-in to
-                                additional content. This card has even longer content than the first to
-                                show that equal height action.
-                            </Card.Text>
-                        </Card.Body>
-                        <Card.Footer>
+                    <Container disableGutters maxWidth="sm" component="main" sx={{ pt: 8, pb: 6 }}>
+                        <Typography
+                            component="h1"
+                            variant="h2"
+                            align="center"
+                            color="text.primary"
+                            gutterBottom
+                        >
+                            Productos
+                        </Typography>
+                        <Typography variant="h5" align="center" color="text.secondary" component="p">
+                            Quickly build an effective pricing table for your potential customers with
+                            this layout. It&apos;s built with default MUI components with little
+                            customization.
+                        </Typography>
+                    </Container>
+                    <Container maxWidth="md" component="main">
+                 <Grid container spacing={5} alignItems="flex-end">
+                            {tiers.map((post) => (
+                                <CartasProductos key={post.title} post={post} />
+                            ))}
 
-                        </Card.Footer>
-                    </Card>
-                </CardGroup>
+                        </Grid>
+                    </Container>
+
+
+                </React.Fragment>
+            </CardGroup>
             <footer>
                 <div className="Fcontainer">
                     <div className="row">

@@ -1,0 +1,286 @@
+
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+.boton{
+  margin: 5px;
+}
+.botonC{
+  margin:15px;
+}
+.botonS{
+  margin: auto 10px;
+}
+.botonF{
+  margin-left: 50px;
+  width: 200px;
+}
+
+.Barra{
+  background-color: lightskyblue;
+}
+.BarraEm{
+  background-color:steelblue  ;
+}
+
+.CartasG{
+  width: 1000px;
+  margin: auto;
+}
+.Cartas{
+  margin:10px;
+  border: 1px;
+  border-color:slategrey;
+  border-style:groove;
+}
+
+.Fcontainer{
+  margin-top: 20px;
+  height: 200px;
+  background-color: lightgrey;
+}
+
+.Fcol-md-4{
+  flex: 0 0 auto;
+  width: 25%!important;
+}
+
+.FormularioC{
+  width: 350px;
+  text-align: left!important;
+  background-color: white;
+  margin: auto 47px;
+  margin-top: 0px;
+  border-style: groove;
+  border-radius: 10px;
+  
+}
+.FormularioS{
+  width: auto;
+  text-align: left!important;
+  margin: auto 20px;
+  
+}
+.Contenedor{
+  margin:100px auto;
+  display: inline-flex;
+  border-style: groove;
+  border: lightgrey;
+  background-color: white;
+  border-radius: 10px;
+}
+.ContenedorC{
+  margin:100px auto;
+  display: inline-flex;
+  border-style: groove;
+  border: lightgrey;
+  width: 800px;
+}
+
+
+.divB{
+  display: inline-flex;
+  margin-left: auto;
+}
+.divBD{
+  display: inline-flex;
+  margin-top: 20px;
+  margin-left: 75px;
+}
+.divBC{
+  display: inline-flex;
+  margin-left: 30px;
+}
+
+.ImagenC{
+  width: 350px;
+  height: 454px!important;
+  margin: 0px 0px 0px 0px!important;
+  display: inline-flex;
+}
+.ImgC{
+  width: 350px;
+  height: 454px!important;
+}
+
+.ImagenS{
+  width: 400px;
+  height: 400px;
+  margin: 0px 0px 0px 0px!important;
+  display: inline-flex;
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+  border-style: solid;
+  border-color: transparent;
+  
+}
+.PrincipalC{
+  text-align: center;
+  background-color: aquamarine;
+}
+.PrincipalS{
+  background-color: aquamarine;
+  text-align: center;
+}
+
+.form-control{
+  width: 90%!important;
+  margin: 0px 0px 0px 0px ;
+  align-self: center!important;
+}
+
+ .card-img-top{
+   margin: 15px!important;
+   width: 90%!important;
+ }
+
+ .labelI{
+   color: red;
+   margin: 0px 0px 0px 15px;
+ }
+
+ .ContenedorV{
+   margin-top: 25px;
+   border-style: solid;
+   border-radius: 22px;
+   border-color: rgb(94, 89, 89);
+   width: 900px!important;
+   height: 200px!important;
+   display: inline-flex;
+ }
+ .C{
+   text-align: left!important;
+  width: 700px!important;
+  height: auto;
+ }
+
+ .Opciones{
+    margin-left: 40px;
+ }
+
+ .BtnV{
+   display: inline-flex;
+   margin-left: 260px;
+   text-align: right!important;
+ }
+ .col-md-10{
+  width: 100%!important;
+ }
+
+ .FormC{
+   margin-left: 10px!important;
+ }
+ .FormI{
+   height: 454px!important;
+  margin-left: 5px!important;
+}
+
+ .FormularioI{
+  width: 400px;
+  height: 454px!important;
+  text-align: left!important;
+  background-color: white;
+  margin: auto 47px;
+  margin-top: 0px;
+  border-style: groove;
+  border-radius: 10px;
+ }
+
+ .FormD{
+   margin-left: 5px!important;
+   margin-right: 5px!important;
+   margin-top: 10px!important;
+ }
+
+ .VacanteForm{
+   width: 800px;
+   margin: auto;
+
+ }
+ .VacanteStep{
+  width: 800px;
+  margin: auto;
+  border-radius: 20px;
+  border-style: groove;
+ }
+ .botonStep{
+   margin-right: 50px;
+   margin-bottom: 10px;
+   width: 100px;
+ }
+
+
+ .TextP{
+   resize: none;
+   height: 150px!important;
+ }
+
+ .FormDatos{
+   margin: 15px;
+ }
+
+ .DivBF{
+    margin-left: 115px;
+ }
+
+ .InicioP{
+   width: 800px;
+   margin: 100px auto;
+ }
+ 
+ .LabelEmp{
+  text-align: left!important;
+  color:royalblue!important;
+}
+
+.CartasPr{
+  margin: 5px;
+  border-color: black;
+  border-radius: 22px;
+  border-style: groove;
+  max-width: 230px;
+
+}
+
+.ContApp{
+  margin-top:10px;
+}
+
+.ContCartas{
+  width: 855px!important;
+}

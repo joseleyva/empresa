@@ -6,6 +6,7 @@ import { Container } from 'react-bootstrap';
 import { Nav } from 'react-bootstrap';
 import { NavDropdown } from 'react-bootstrap';
 import { Badge } from 'react-bootstrap';
+import Pruebas from './Componentes/Pruebas';
 
 
 
@@ -60,7 +61,7 @@ function Empresas() {
                 </Navbar>
             </header>
            
-
+            <Pruebas/>
 
             <footer>
                 <div className="Fcontainer">

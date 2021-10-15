@@ -1,5 +1,5 @@
 import { Formik } from 'formik'
-import React from 'react'
+import React,{useState} from 'react'
 import * as yup from 'yup';
 import { Form, Col, Button, Row, InputGroup } from 'react-bootstrap';
 
@@ -18,6 +18,20 @@ const schema = yup.object().shape({
 
 });
 const FormEdu = () => {
+    const [fallo, setFallo]=useState(false);
+    const [validated, setValidated]= useState(false)
+
+    const handleSubmit = (event) => {
+        const form = event.currentTarget;
+        if (form.checkValidity() === false) {
+          event.preventDefault();
+          event.stopPropagation();
+        }
+        setValidated(true);
+        setFallo(true);
+        
+        
+      };
     return (
         <div className="VacanteForm">
             <Formik
@@ -37,7 +51,7 @@ const FormEdu = () => {
                 }}
             >
                 {({
-                    handleSubmit,
+                    
                     handleChange,
                     handleBlur,
                     values,
@@ -45,7 +59,7 @@ const FormEdu = () => {
                     isValid,
                     errors,
                 }) => (
-                    <Form noValidate onSubmit={handleSubmit} className="FormDatos">
+                    <Form noValidate validated={validated} onSubmit={handleSubmit} className="FormDatos">
                         <h4>Datos de la Educativos</h4>
                         <Row className="mb-3">
                             <Form.Group as={Col} md="4" controlId="validationFormik01" className="position-relative">
@@ -56,7 +70,7 @@ const FormEdu = () => {
                                     value={values.Escolaridad}
                                     onChange={handleChange}
                                     isValid={touched.Escolaridad && !errors.Escolaridad}
-                                    isInvalid={!!errors.Escolaridad}
+                                    isInvalid={fallo ? !!errors.Escolaridad : false}
                                 >
                                     <option value="0">0</option>
                                     <option value="1">1</option>

@@ -1,5 +1,5 @@
 import { Formik } from 'formik'
-import React from 'react'
+import React, { useState } from 'react'
 import * as yup from 'yup';
 import { Form, Col, Button, Row } from 'react-bootstrap';
 
@@ -12,6 +12,20 @@ const schema = yup.object().shape({
     Herramientas: yup.string().required("Ingrese las herramientas").matches(/^[a-zA-Z]+$/).min(1),
 });
 const FormSueldo = () => {
+    const [fallo, setFallo] = useState(false);
+
+
+    const handleSubmit = (event) => {
+        const form = event.currentTarget;
+        if (form.checkValidity() === false) {
+            event.preventDefault();
+            event.stopPropagation();
+        }
+       
+        setFallo(true);
+
+
+    };
     return (
         <div className="VacanteForm">
             <Formik
@@ -28,7 +42,6 @@ const FormSueldo = () => {
                 }}
             >
                 {({
-                    handleSubmit,
                     handleChange,
                     handleBlur,
                     values,
@@ -36,7 +49,7 @@ const FormSueldo = () => {
                     isValid,
                     errors,
                 }) => (
-                    <Form noValidate onSubmit={handleSubmit} className="FormDatos">
+                    <Form  onSubmit={handleSubmit} className="FormDatos">
                         <h4>Datos del Sueldo</h4>
                         <Row className="mb-3">
                             <Form.Group as={Col} md="4" controlId="validationFormik01" className="position-relative">
@@ -47,10 +60,9 @@ const FormSueldo = () => {
                                     value={values.Sueldo}
                                     onChange={handleChange}
                                     isValid={touched.Sueldo && !errors.Sueldo}
-                                    isInvalid={!!errors.Sueldo}
+                                   isInvalid={fallo ? !!errors.Sueldo: false}
                                 />
-                                <Form.Control.Feedback type="invalid" tooltip>{errors.Sueldo}</Form.Control.Feedback>
-
+                            <Form.Control.Feedback type="invalid" tooltip>{errors.Sueldo}</Form.Control.Feedback>
                             </Form.Group>
                             <Form.Group as={Col} md="3" controlId="validationFormik04" className="position-relative">
                                 <Form.Label> Periodo de pago</Form.Label>
@@ -80,7 +92,7 @@ const FormSueldo = () => {
                                     isValid={touched.TiempoExtra && !errors.TiempoExtra}
                                     isInvalid={!!errors.TiempoExtra}
                                 >
-                                     <option value="0"></option>
+                                    <option value="0"></option>
                                     <option value="1">One</option>
                                 </Form.Select>
                                 <Form.Control.Feedback type="invalid" tooltip>{errors.TiempoExtra}</Form.Control.Feedback>
@@ -97,11 +109,11 @@ const FormSueldo = () => {
                                     onChange={handleChange}
                                     isValid={touched.Prestaciones && !errors.Prestaciones}
                                     isInvalid={!!errors.Prestaciones}
-                                    
+
                                 >
                                     <option value="0">1</option>
                                     <option value="1">2</option>
-                                    </Form.Select>
+                                </Form.Select>
                                 <Form.Control.Feedback type="invalid" tooltip>{errors.Prestaciones}</Form.Control.Feedback>
 
                             </Form.Group>
@@ -135,7 +147,7 @@ const FormSueldo = () => {
 
                         </Row>
 
-                       
+
 
 
                         <div className="DivBF">
@@ -153,7 +165,7 @@ const FormSueldo = () => {
         </div>
 
     );
-    
+
 
 
 }

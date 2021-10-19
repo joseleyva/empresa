@@ -69,7 +69,7 @@ const FormVac = () => {
                     isInvalid,
                     errors,
                 }) => (
-                    <Form noValidate  onSubmit={handleSubmit} className="FormDatos">
+                    <Form noValidate validated={validated} onSubmit={handleSubmit} className="FormDatos">
                         <h4>Datos de la vacante</h4>
 
                         <Row className="mb-3">

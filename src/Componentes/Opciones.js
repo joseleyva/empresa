@@ -13,12 +13,35 @@ export const Turnos ={
 
 }
 
-export const Lugar={
+export const DiasP={
+    Lunes:'1',
+    Martes:'2',
+    Miercoles:'3',
+    Jueves:'4',
+    Viernes:'5',
+    Sabado:'6',
+    Domingo:'7',
+}
+
+export const LugarT={
     Oficina:'1',
     Industria:'2',
     Comercio: '3',
     Residencia:'4',
     'En el campo': '5',
+}
+
+export const RangoE={
+    '18 a 29':'1',
+    '30 a 39':'2',
+    '40 a 49':'3',
+    '50 a 59':'4',
+}
+
+export const Genero={
+    Masculino:'1',
+    Femenino:'2',
+    Indistinto:'3',
 }
 
 export const Escolariad={

@@ -19,7 +19,7 @@ function Empresas() {
             <header>
                 <Navbar collapseOnSelect expand="lg" className="BarraEm">
                     <Container>
-                        <Navbar.Brand href="">
+                        <Navbar.Brand >
                             <img
                                 alt=""
                                 src="logo512.png"
@@ -32,11 +32,19 @@ function Empresas() {
                         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                         <Navbar.Collapse id="responsive-navbar-nav">
                             <Nav className="me-auto">
-                                <Nav.Link href="/Vacante">Publicar vacante</Nav.Link>
-                                <Nav.Link href="/Solicitudes">Solicitudes
-                                    <Badge bg="danger">3</Badge>
+                                <Nav.Link href="/Datos">Datos de la Empresa
+                                    <Badge bg="danger">1</Badge>
                                 </Nav.Link>
-                                <Nav.Link href="">Estadisticas</Nav.Link>
+                                <Nav.Link href="/Vacante">Publicar vacante</Nav.Link>
+                                <Nav.Link href="/Solicitudes">Evaluaciones
+                                    <Badge bg="danger">1</Badge>
+                                </Nav.Link>
+                                <Nav.Link href="">Referencias
+                                    <Badge bg="danger">1</Badge>
+                                </Nav.Link>
+                                <Nav.Link>
+                                    Estudios
+                                    <Badge bg="danger">1</Badge></Nav.Link>
                             </Nav>
                             <Nav>
                                 <Navbar.Brand>
@@ -60,8 +68,8 @@ function Empresas() {
                     </Container>
                 </Navbar>
             </header>
-           
-          
+
+
 
             <footer>
                 <div className="Fcontainer">

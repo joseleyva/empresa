@@ -2,45 +2,60 @@ import { Formik } from 'formik'
 import React, { useState } from 'react'
 import * as yup from 'yup';
 import { Form, Col, Button, Row, InputGroup } from 'react-bootstrap';
-import { Puesto,DiasP,SN, LugarT, RangoE, Genero } from './Opciones';
+import { Puesto, DiasP, SN, LugarT, RangoE, Genero } from './Opciones';
+import Stack from '@mui/material/Stack';
+import Snackbar from '@mui/material/Snackbar';
+import Alert from '@mui/material/Alert';
 
 const schema = yup.object().shape({
     Nombre: yup.string().required("Ingrese el puesto").matches(/^[a-zA-Z ]+$/, "Solo letras").min(5, 'muy corto'),
     NumeroP: yup.number().required("Numero de vacantes").min(1, 'Ingrese un numero'),
     Actividades: yup.string().max(100, 'Muy largo').min(0, 'Ingrese la descripción').required("Describir la actividad"),
-    PuestoR: yup.string().required("Seleccione el puesto"),
+    PuestoR: yup.string().required("Seleccione una opción"),
     Dias: yup.string().required("Ingrese los días laborales"),
     Horario: yup.string().required("Ingrese el horario laboral"),
-    Turno: yup.string().required("Ingrese el Turno").matches(/^[a-zA-Z -&]+$/),
+    Turno: yup.string().required("Seleccione una opción"),
     DiasPago: yup.string().required("Seleccione una opción"),
-    Semana: yup.string().required(""),
-    Viajar: yup.string().required("Seleccione la opcion"),
-    Lugar: yup.string().required("Ingrese el lugar de trabajo"),
-    Rango: yup.string().required("Ingrese el rango de edad"),
+    Semana: yup.string().required("Seleccione una opción"),
+    Viajar: yup.string().required("Seleccione una opcion"),
+    Lugar: yup.string().required("Seleccione una opción"),
+    Rango: yup.string().required("Seleccione una opción"),
     Sexo: yup.string().required("Seleccione una opcion"),
     Discapacidad: yup.string().required("Seleccione una opción"),
     GenCar: yup.string().required("Seleccione una opción"),
 
 });
 const FormVac = () => {
-     const [validated, setValidated]= useState(false)
+    const [validated, setValidated] = useState(false)
     const [fallo, setFallo] = useState(false);
+    const [enviado, setEnviado] = useState(false);
+    const [open, setOpen] = React.useState(false);
 
-    const handleSubmit = (event) => {
-        const form = event.currentTarget;
-        if (form.checkValidity() === false) {
-            event.preventDefault();
-            event.stopPropagation();
+    const handleClick = (event) => {
+        const Button = event.currentTarget;
+        if (Button.checkValidity() === false) {
+
         }
-         setValidated(true);
+        setOpen(true);
         setFallo(true);
     };
+    const handleClose = (event, reason) => {
+        if (reason === 'clickaway') {
+            return;
+        }
 
+        setOpen(false);
+    };
     return (
         <div className="VacanteForm">
             <Formik
                 validationSchema={schema}
-                onSubmit={console.log}
+                onSubmit={(valores, { resetForm }) => {
+                    console.log(valores)
+                    setEnviado(true);
+                    setValidated(true);
+                    setTimeout(() => setEnviado(false), 5000);
+                }}
                 initialValues={{
                     Nombre: "",
                     NumeroP: "",
@@ -61,6 +76,7 @@ const FormVac = () => {
                 }
             >
                 {({
+                    handleSubmit,
                     handleChange,
                     handleBlur,
                     values,
@@ -176,16 +192,20 @@ const FormVac = () => {
 
                         <Row className="mb-3">
                             <Form.Group as={Col} md="4" controlId="validationFormik03" className="position-relative">
-                                <Form.Label>¿Rola turnos? ¿Cuales?</Form.Label>
-                                <Form.Control
-                                    type="text"
+                                <Form.Label>¿Rola turnos?</Form.Label>
+                                <Form.Select
+                                    type="select"
                                     name="Turno"
                                     value={values.Turno}
                                     onChange={handleChange}
                                     isValid={touched.Turno && !errors.Turno}
                                     isInvalid={fallo ? !!errors.Turno : false}
                                     required
-                                />
+                                >
+
+                                    <option value="">Seleccionar</option>
+                                    {Object.keys(SN).map((x, i) => (<option value={i} key={i}>{x}</option>))}
+                                </Form.Select>
 
                                 <Form.Control.Feedback type="invalid" tooltip>{errors.Turno}
                                 </Form.Control.Feedback>
@@ -338,9 +358,21 @@ const FormVac = () => {
                         </Row>
 
                         <div className="DivBF">
-                            <Button type="submit" className="botonF"  >Guardar</Button>
+                            <Button type="submit" onClick={handleClick} className="botonF"  >Guardar</Button>
                             <Button variant="danger" className="botonF">Cancelar</Button>
                         </div>
+                        {
+                            (enviado && (
+                                <Stack spacing={2} sx={{ width: '100%' }}>
+                                    <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
+                                        <Alert onClose={handleClose} variant="filled" severity="success" sx={{ width: '100%' }}>
+                                            Datos guardados correctamente
+                                        </Alert>
+                                    </Snackbar>
+
+                                </Stack>
+                            ))
+                        }
 
 
 

@@ -2,35 +2,50 @@ import { Formik } from 'formik'
 import React, { useState } from 'react'
 import * as yup from 'yup';
 import { Form, Col, Button, Row } from 'react-bootstrap';
+import { Pago, PrestacionesOp, SN } from './Opciones';
+import Stack from '@mui/material/Stack';
+import Snackbar from '@mui/material/Snackbar';
+import Alert from '@mui/material/Alert';
 
 const schema = yup.object().shape({
     Sueldo: yup.string().required("Ingrese el sueldo").min(1),
-    Periodo: yup.string().required("Seleccione un periodo").min(1).matches(/^[a-zA-Z]+$/),
-    TiempoExtra: yup.string().required("Selecione una opcion").min(1).matches(/^[a-zA-Z]+$/),
-    Prestaciones: yup.string().required("Ingrese las pretaciones").min(1).matches(/^[a-zA-Z]+$/),
+    Periodo: yup.string().required("Seleccione una opción"),
+    TiempoExtra: yup.string().required("Seleccione una opción"),
+    Prestaciones: yup.string().required("Seleccione una opción"),
     Bonos: yup.string().required("Ingrese los bonos").matches(/^[a-zA-Z]+$/).min(1),
     Herramientas: yup.string().required("Ingrese las herramientas").matches(/^[a-zA-Z]+$/).min(1),
 });
 const FormSueldo = () => {
+    const [validated, setValidated]= useState(false)
     const [fallo, setFallo] = useState(false);
+    const [enviado, setEnviado] = useState(false);
+    const [open, setOpen] = React.useState(false);
 
-
-    const handleSubmit = (event) => {
-        const form = event.currentTarget;
-        if (form.checkValidity() === false) {
-            event.preventDefault();
-            event.stopPropagation();
+    const handleClick = (event) => {
+        const Button = event.currentTarget;
+        if (Button.checkValidity() === false) {
+           
         }
-       
+        setOpen(true);
         setFallo(true);
-
-
     };
+    const handleClose = (event, reason) => {
+        if (reason === 'clickaway') {
+          return;
+        }
+    
+        setOpen(false);
+      };
     return (
         <div className="VacanteForm">
             <Formik
                 validationSchema={schema}
-                onSubmit={console.log}
+                onSubmit={(valores, {resetForm})=>{
+                    console.log(valores)
+                    setEnviado(true);
+                    setValidated(true);
+                    setTimeout(()=>setEnviado(false),5000);
+                }}
                 initialValues={{
                     Sueldo: "",
                     Periodo: "",
@@ -42,6 +57,7 @@ const FormSueldo = () => {
                 }}
             >
                 {({
+                    handleSubmit,
                     handleChange,
                     handleBlur,
                     values,
@@ -49,51 +65,52 @@ const FormSueldo = () => {
                     isValid,
                     errors,
                 }) => (
-                    <Form  onSubmit={handleSubmit} className="FormDatos">
+                    <Form noValidate validated={validated} onSubmit={handleSubmit} className="FormDatos">
                         <h4>Datos del Sueldo</h4>
                         <Row className="mb-3">
                             <Form.Group as={Col} md="4" controlId="validationFormik01" className="position-relative">
                                 <Form.Label>Sueldo Mensual Bruto</Form.Label>
                                 <Form.Control
+                                    required
                                     type="text"
                                     name="Sueldo"
                                     value={values.Sueldo}
                                     onChange={handleChange}
                                     isValid={touched.Sueldo && !errors.Sueldo}
-                                   isInvalid={fallo ? !!errors.Sueldo: false}
+                                    isInvalid={fallo ? !!errors.Sueldo : false}
                                 />
-                            <Form.Control.Feedback type="invalid" tooltip>{errors.Sueldo}</Form.Control.Feedback>
+                                <Form.Control.Feedback type="invalid" tooltip>{errors.Sueldo}</Form.Control.Feedback>
                             </Form.Group>
                             <Form.Group as={Col} md="3" controlId="validationFormik04" className="position-relative">
                                 <Form.Label> Periodo de pago</Form.Label>
 
                                 <Form.Select
-                                    type="text"
+                                    required
+                                    type="select"
                                     name="Periodo"
                                     value={values.Periodo}
                                     onChange={handleChange}
                                     isValid={touched.Periodo && !errors.Periodo}
-                                    isInvalid={!!errors.Periodo}
+                                    isInvalid={fallo ? !!errors.Periodo : false}
                                 >
-                                    <option value="0"></option>
-                                    <option value="1">One</option>
-                                    <option value="2">Two</option>
-                                    <option value="3">Three</option>
+                                    <option value="">Seleccione</option>
+                                    {Object.keys(Pago).map((x, i) => (<option value={i} key={i}>{x}</option>))}
                                 </Form.Select>
                                 <Form.Control.Feedback type="invalid" tooltip>{errors.Periodo}</Form.Control.Feedback>
                             </Form.Group>
                             <Form.Group as={Col} md="4" controlId="validationFormik01" className="position-relative">
                                 <Form.Label>Opcion a tiempo extra</Form.Label>
                                 <Form.Select
-                                    type="text"
+                                    required
+                                    type="select"
                                     name="TiempoExtra"
                                     value={values.TiempoExtra}
                                     onChange={handleChange}
                                     isValid={touched.TiempoExtra && !errors.TiempoExtra}
-                                    isInvalid={!!errors.TiempoExtra}
+                                    isInvalid={fallo ? !!errors.TiempoExtra : false}
                                 >
-                                    <option value="0"></option>
-                                    <option value="1">One</option>
+                                    <option value="">Seleccione</option>
+                                    {Object.keys(SN).map((x, i) => (<option value={i} key={i}>{x}</option>))}
                                 </Form.Select>
                                 <Form.Control.Feedback type="invalid" tooltip>{errors.TiempoExtra}</Form.Control.Feedback>
                             </Form.Group>
@@ -103,16 +120,17 @@ const FormSueldo = () => {
                             <Form.Group as={Col} md="4" controlId="validationFormik01" className="position-relative">
                                 <Form.Label>Prestaciones</Form.Label>
                                 <Form.Select
-                                    type="text"
+                                    required
+                                    type="select"
                                     name="Prestaciones"
                                     value={values.Prestaciones}
                                     onChange={handleChange}
                                     isValid={touched.Prestaciones && !errors.Prestaciones}
-                                    isInvalid={!!errors.Prestaciones}
+                                    isInvalid={fallo ? !!errors.Prestaciones : false}
 
                                 >
-                                    <option value="0">1</option>
-                                    <option value="1">2</option>
+                                    <option value="">Seleccione</option>
+                                    {Object.keys(PrestacionesOp).map((x, i) => (<option value={i} key={i}>{x}</option>))}
                                 </Form.Select>
                                 <Form.Control.Feedback type="invalid" tooltip>{errors.Prestaciones}</Form.Control.Feedback>
 
@@ -120,12 +138,13 @@ const FormSueldo = () => {
                             <Form.Group as={Col} md="4" controlId="validationFormik01" className="position-relative">
                                 <Form.Label>Bonos</Form.Label>
                                 <Form.Control
+                                    required
                                     type="text"
                                     name="Bonos"
                                     value={values.Bonos}
                                     onChange={handleChange}
                                     isValid={touched.Bonos && !errors.Bonos}
-                                    isInvalid={!!errors.Bonos}
+                                    isInvalid={fallo ? !!errors.Bonos : false}
                                 />
                                 <Form.Control.Feedback type="invalid" tooltip>{errors.Bonos}</Form.Control.Feedback>
 
@@ -133,30 +152,36 @@ const FormSueldo = () => {
                             <Form.Group as={Col} md="4" controlId="validationFormik03" className="position-relative">
                                 <Form.Label>Herramientas de trabajo</Form.Label>
                                 <Form.Control
+                                    required
                                     type="text"
                                     name="Herramientas"
                                     value={values.Herramientas}
                                     onChange={handleChange}
                                     isValid={touched.Herramientas && !errors.Herramientas}
-                                    isInvalid={!!errors.Herramientas}
+                                    isInvalid={fallo ? !!errors.Herramientas : false}
                                 />
 
                                 <Form.Control.Feedback type="invalid" tooltip>{errors.Herramientas}
                                 </Form.Control.Feedback>
                             </Form.Group>
-
                         </Row>
-
-
-
-
                         <div className="DivBF">
-                            <Button type="submit" className="botonF" >Guardar</Button>
+                            <Button type="submit" onClick={handleClick} className="botonF" >Guardar</Button>
                             <Button variant="danger" className="botonF">Cancelar</Button>
                         </div>
 
-
-
+                        {
+                                    (enviado&&(
+                                        <Stack spacing={2} sx={{ width: '100%' }}>
+                                        <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
+                                          <Alert onClose={handleClose} variant="filled" severity="success"sx={{ width: '100%' }}>
+                                            Datos guardados correctamente
+                                          </Alert>
+                                        </Snackbar>
+                                        
+                                      </Stack>
+                                    ))
+                                }
                     </Form>
                 )}
             </Formik>

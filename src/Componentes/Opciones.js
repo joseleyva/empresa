@@ -44,7 +44,7 @@ export const Genero={
     Indistinto:'3',
 }
 
-export const Escolariad={
+export const EscolaridadOp={
     Escuela:'1',
     Primaria:'2',
     Secundaria:'3',
@@ -66,6 +66,7 @@ export const Nivel={
     Avanzado:'3',
 }
 
+
 export const Pago={
     Diario:'1',
     Semanal:'2',
@@ -73,7 +74,7 @@ export const Pago={
     Mensual:'4',
 }
 
-export const Prestaciones={
+export const PrestacionesOp={
     'Sin prestaciones':'1',
     'Prestaciones de Ley':'2',
     'Superiores a la ley':'3'

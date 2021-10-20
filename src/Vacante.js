@@ -24,7 +24,7 @@ function Vacante() {
     const [skipped, setSkipped] = React.useState(new Set());
 
 
-    const handleNext = () => {
+  const handleNext = () => {
         let newSkipped = skipped;
         setActiveStep((prevActiveStep) => prevActiveStep + 1);
         setSkipped(newSkipped);

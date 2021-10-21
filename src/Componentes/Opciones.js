@@ -79,3 +79,10 @@ export const PrestacionesOp={
     'Prestaciones de Ley':'2',
     'Superiores a la ley':'3'
 }
+export const NoEmpleadosOp={
+    '1 a 10' : '1',
+    '11 a 50' : '2',
+    '51 a 250' : '3',
+    '+250' : '4',
+
+}

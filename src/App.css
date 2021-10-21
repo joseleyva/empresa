@@ -44,7 +44,7 @@
   margin:15px;
 }
 .botonS{
-  margin: auto 10px;
+  margin: auto 0px 0px 20px;
 }
 .botonF{
   margin-left: 50px;
@@ -84,14 +84,14 @@
   width: 350px;
   text-align: left!important;
   background-color: white;
-  margin: auto 47px;
+  margin: auto 10px;
   margin-top: 0px;
   border-style: groove;
   border-radius: 10px;
   
 }
 .FormularioS{
-  width: auto;
+  width: 280px;
   text-align: left!important;
   margin: auto 20px;
   
@@ -119,14 +119,13 @@
 }
 .divBD{
   display: inline-flex;
-  margin-top: 20px;
-  margin-left: 75px;
+  margin-top: 10px;
+  margin-left: 90px;
 }
 .divBC{
   display: inline-flex;
   margin-left: 30px;
 }
-
 .ImagenC{
   width: 350px;
   height: 454px!important;
@@ -286,4 +285,9 @@
 }
 .btnP{
   margin: auto!important;
+}
+.FormInicio{
+  width: 100%!important;
+  margin: 0px 0px 0px 0px ;
+  align-self: center!important;
 }

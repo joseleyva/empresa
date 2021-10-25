@@ -12,12 +12,9 @@ import Vacante from './Vacante';
 import Formulario from './Componentes/Formulario';
 import DatosR from './DatosR';
 import Solicitudes from './Solicitudes';
-import BotonesP from './Componentes/BotonesP';
-import FormVac from './Componentes/FormVac';
 import reportWebVitals from './reportWebVitals';
 import {BrowserRouter,Switch, Route} from 'react-router-dom';
-import FormEdu from './Componentes/FormEdu';
-import FormSueldo from './Componentes/FormSueldo';
+import Referencias from './Referencias';
 
 
 
@@ -42,11 +39,8 @@ ReactDOM.render(
     <Route path="/Vacante" component={Vacante} />
     <Route path="/Formulario" component={Formulario} />
     <Route path="/DatosR" component={DatosR} />
-    <Route path="/BotonesP" component={BotonesP} />
-    <Route path="/FormVac" component={FormVac} />
-    <Route path="/FormEdu" component={FormEdu} />
-    <Route path="/FormSueldo" component={FormSueldo} />
     <Route path="/Solicitudes" component={Solicitudes} />
+    <Route path="/Referencias" component={Referencias} />
     
   </Switch>
   </BrowserRouter>,

@@ -35,7 +35,7 @@ function Solicitudes() {
                                 <Nav.Link href="/Solicitudes">Evaluaciones
                                     <Badge bg="danger">1</Badge>
                                 </Nav.Link>
-                                <Nav.Link href="">Referencias
+                                <Nav.Link href="/Referencias">Referencias
                                     <Badge bg="danger">1</Badge>
                                 </Nav.Link>
                                 <Nav.Link>

@@ -6,33 +6,26 @@ import { Nav } from 'react-bootstrap';
 import { NavDropdown } from 'react-bootstrap';
 import { Badge } from 'react-bootstrap';
 import * as React from 'react';
-import Box from '@mui/material/Box';
-import Stepper from '@mui/material/Stepper';
-import Step from '@mui/material/Step';
-import StepLabel from '@mui/material/StepLabel';
-import {Button} from 'react-bootstrap';
-import Typography from '@mui/material/Typography';
-import FormSueldo from './Componentes/FormSueldo';
-import FormVac from './Componentes/FormVac';
-import FormEdu from './Componentes/FormEdu';
+import GitHubIcon from '@mui/icons-material/GitHub';
+import FacebookIcon from '@mui/icons-material/Facebook';
+import TwitterIcon from '@mui/icons-material/Twitter';
+import { Instagram } from '@mui/icons-material';
+import Link from '@mui/material/Link';
+import CardsReferencias from './Componentes/CardsReferencias';
 
 
-const steps = ['Datos de la vacante', 'Datos Educativos', 'Datos del pagó'];
+const cards = [
+    {
+      Nombre: 'jose leyva robles',
+      Imagen: 'imagen1.jpg',
+      id:1,
+     
+    }];
 
-function Vacante() {
-    const [activeStep, setActiveStep] = React.useState(0);
-    const [skipped, setSkipped] = React.useState(new Set());
-
-
-  const handleNext = () => {
-        let newSkipped = skipped;
-        setActiveStep((prevActiveStep) => prevActiveStep + 1);
-        setSkipped(newSkipped);
-    };
-
-    return (
+    function Referencias() {
+    return(
         <>
-           <header>
+         <header>
                 <Navbar collapseOnSelect expand="lg" className="BarraEm">
                     <Container>
                         <Navbar.Brand >
@@ -84,62 +77,86 @@ function Vacante() {
                     </Container>
                 </Navbar>
             </header>
-            <div className="VacanteStep">
-                
-            <Box sx={{ width: '100%' }}>
-                <Stepper activeStep={activeStep}>
-                    {steps.map((label, index) => {
-                        const stepProps = {};
-                        const labelProps = {};
+            {cards.map((post) => (
+                  <CardsReferencias key={post.id} post={post} />
+                ))}
+            <footer>
+        <div className="Fcontainer">
+          <div className="row">
+            <div className="Fcol-md-4 footer-col">
+              <h4>Dirección</h4>
+              <p>
 
-                        return (
-                            <Step key={label} {...stepProps}>
-                                <StepLabel {...labelProps}>{label}</StepLabel>
-                            </Step>
-                            
-                        );
-                       
-                    })}
-                </Stepper>
-
-                {activeStep === steps.length ? (
-                   
-                    <React.Fragment>
-                        <Typography sx={{ mt: 2, mb: 1 }}>
-                            Formulario terminado
-                        </Typography>
-                        <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
-                            <Box sx={{ flex: '1 1 auto' }} />
-                            <Button href={'./Empresas'} variant="outline-success" className="botonStep">Guardar</Button>
-                        </Box>
-                    </React.Fragment>
-                ) : (
-                    <React.Fragment>
-                        <Typography sx={{ mt: 2, mb: 1 }}>{getStepContent( activeStep)}</Typography>
-                        <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
-                            <Box sx={{ flex: '1 1 auto' }} />
-                            <Button onClick={handleNext} type="submit" className="botonStep" variant="outline-secondary">
-                                {activeStep === steps.length - 1 ? 'Finish' : 'Next'}
-                            </Button>
-                        </Box>
-                    </React.Fragment>
-                )}
-            </Box>
+              </p>
             </div>
+            <div className="Fcol-md-4 footer-col">
+              <h4>Correo</h4>
+              <p>
+
+              </p>
+            </div>
+            <div className="Fcol-md-4 footer-col">
+              <h4>Redes Sociales</h4>
+              <Link
+                display="block"
+                variant="body1"
+                href="#"
+                name="GitHub"
+                sx={{ mb: 0.5 }}
+              >
+                <GitHubIcon name='GitHub'
+                />
+                <span>GitHub</span>
+              </Link>
+              <Link
+                display="block"
+                variant="body1"
+                href="#"
+                name="Facebook"
+                sx={{ mb: 0.5 }}
+              >
+                <FacebookIcon name='Facebook'
+                />
+                <span>Facebook</span>
+              </Link>
+              <p>
+                <Link
+                  display="block"
+                  variant="body1"
+                  href="#"
+                  name="Twitter"
+                  sx={{ mb: 0.5 }}
+                >
+                  <TwitterIcon name='Twitter'
+                  />
+                  <span>Twitter</span>
+                </Link>
+
+                <Link
+                  display="block"
+                  variant="body1"
+                  href="#"
+                  name="Instagram"
+                  sx={{ mb: 0.5 }}
+                >
+                  <Instagram name='Instagram'
+                  />
+                  <span>Instagram</span>
+                </Link>
+              </p>
+            </div>
+            <div className="Fcol-md-4 footer-col">
+              <h4>Empresa</h4>
+              <p>
+
+              </p>
+            </div>
+          </div>
+        </div>
+      </footer>
         </>
+
     );
 }
-function getStepContent(step) {
-    switch (step) {
-        case 0:
-            return <FormVac />;
-        case 1:
-            return <FormEdu />;
-        case 2:
-            return <FormSueldo />;
-        default:
-            return 'Unknown step';
-    }
-}
 
-export default Vacante;
+export default Referencias;

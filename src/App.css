@@ -291,3 +291,22 @@
   margin: 0px 0px 0px 0px ;
   align-self: center!important;
 }
+
+.ContenedorRef{
+  margin-top: 25px;
+  border-style: solid;
+  border-radius: 22px;
+  border-color: rgb(94, 89, 89);
+  width: 500px!important;
+  height: 150px!important;
+  display: flex;
+}
+.botonRef{
+  margin: auto;
+  width: 120px;
+  text-align: center!important;
+}
+.DivRef{
+  display: flex;
+  align-self: center!important;
+}

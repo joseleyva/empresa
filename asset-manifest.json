@@ -1,0 +1,25 @@
+{
+  "files": {
+    "main.css": "/ALEF-GLOBAL/static/css/main.d11e58f9.chunk.css",
+    "main.js": "/ALEF-GLOBAL/static/js/main.f9388576.chunk.js",
+    "main.js.map": "/ALEF-GLOBAL/static/js/main.f9388576.chunk.js.map",
+    "runtime-main.js": "/ALEF-GLOBAL/static/js/runtime-main.3ac27204.js",
+    "runtime-main.js.map": "/ALEF-GLOBAL/static/js/runtime-main.3ac27204.js.map",
+    "static/css/2.5211fcfd.chunk.css": "/ALEF-GLOBAL/static/css/2.5211fcfd.chunk.css",
+    "static/js/2.4f26f5b7.chunk.js": "/ALEF-GLOBAL/static/js/2.4f26f5b7.chunk.js",
+    "static/js/2.4f26f5b7.chunk.js.map": "/ALEF-GLOBAL/static/js/2.4f26f5b7.chunk.js.map",
+    "static/js/3.bced1a46.chunk.js": "/ALEF-GLOBAL/static/js/3.bced1a46.chunk.js",
+    "static/js/3.bced1a46.chunk.js.map": "/ALEF-GLOBAL/static/js/3.bced1a46.chunk.js.map",
+    "index.html": "/ALEF-GLOBAL/index.html",
+    "static/css/2.5211fcfd.chunk.css.map": "/ALEF-GLOBAL/static/css/2.5211fcfd.chunk.css.map",
+    "static/css/main.d11e58f9.chunk.css.map": "/ALEF-GLOBAL/static/css/main.d11e58f9.chunk.css.map",
+    "static/js/2.4f26f5b7.chunk.js.LICENSE.txt": "/ALEF-GLOBAL/static/js/2.4f26f5b7.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.3ac27204.js",
+    "static/css/2.5211fcfd.chunk.css",
+    "static/js/2.4f26f5b7.chunk.js",
+    "static/css/main.d11e58f9.chunk.css",
+    "static/js/main.f9388576.chunk.js"
+  ]
+}

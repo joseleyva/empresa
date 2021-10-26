@@ -1,23 +1,10 @@
-import React,{useState} from "react";
+import React from "react";
 import { Row, Col, Image } from 'react-bootstrap';
 import { Button, Container } from 'react-bootstrap';
 import PropTypes from 'prop-types';
-import FormReferencias from './FormReferencias';
 
 function CardsReferencias(props)  {
     const { post} = props;
-    const [enviado, setEnviado] = useState(false);
-    const handleClick = (event) => {
-        const Button = event.currentTarget;
-        if (Button.checkValidity() === false) {
-           
-        }
-        if(setEnviado===true){
-            setEnviado(false)
-        }else{
-        setEnviado(true);
-        }
-    };
         return (
             <>
 
@@ -32,7 +19,11 @@ function CardsReferencias(props)  {
                             <div class="card-body">
                                 <h5 align="left">El Candidato {post.Nombre} ha mencionado haber trabajado con la empresa a la que representas</h5>
                                 <div className="DivRef">
-                                    <Button variant="primary" onClick={handleClick} className="botonRef" >Mostrar</Button>
+                                    <label>¿Trabajó en la empresa?</label>
+                                    <div className="BtnsRef">
+                                    <Button variant="primary" href="/FormReferencias" className="botonRef" >Si</Button>
+                                    <Button variant="danger" className="botonRef" >No</Button>
+                                    </div>
                                 </div>
                             </div>
 
@@ -42,13 +33,6 @@ function CardsReferencias(props)  {
                     </div>
 
                 </Container>
-                {
-                                    (enviado&&(
-                                        <div className="VacanteForm">
-                                       <FormReferencias/>
-                                   </div>
-                                    ))
-                                }
             </>
 
 
@@ -61,6 +45,7 @@ CardsReferencias.propTypes = {
     post: PropTypes.shape({
       Nombre: PropTypes.string.isRequired,
       Imagen: PropTypes.string.isRequired,
+      id:PropTypes.number.isRequired,
     }).isRequired,
   };
 export default CardsReferencias;

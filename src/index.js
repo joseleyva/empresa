@@ -15,6 +15,7 @@ import Solicitudes from './Solicitudes';
 import reportWebVitals from './reportWebVitals';
 import {BrowserRouter,Switch, Route} from 'react-router-dom';
 import Referencias from './Referencias';
+import FormReferencias from './Componentes/FormReferencias';
 
 
 
@@ -41,6 +42,7 @@ ReactDOM.render(
     <Route path="/DatosR" component={DatosR} />
     <Route path="/Solicitudes" component={Solicitudes} />
     <Route path="/Referencias" component={Referencias} />
+    <Route path="/FormReferencias" component={FormReferencias} />
     
   </Switch>
   </BrowserRouter>,

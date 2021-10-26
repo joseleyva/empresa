@@ -16,15 +16,21 @@ import CardsReferencias from './Componentes/CardsReferencias';
 
 const cards = [
     {
-      Nombre: 'jose leyva robles',
+      Nombre: 'Jose Leyva Robles',
       Imagen: 'imagen1.jpg',
       id:1,
      
-    }];
+    },
+    {
+      Nombre: 'Juan Perez',
+      Imagen: 'imagen1.jpg',
+      id:2,
+    }
+  ];
 
     function Referencias() {
     return(
-        <>
+        <div className="App">
          <header>
                 <Navbar collapseOnSelect expand="lg" className="BarraEm">
                     <Container>
@@ -154,7 +160,7 @@ const cards = [
           </div>
         </div>
       </footer>
-        </>
+        </div>
 
     );
 }

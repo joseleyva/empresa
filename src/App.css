@@ -73,6 +73,7 @@
   margin-top: 20px;
   height: 200px;
   background-color: lightgrey;
+  align-content: center!important;
 }
 
 .Fcol-md-4{
@@ -302,11 +303,27 @@
   display: flex;
 }
 .botonRef{
-  margin: auto;
-  width: 120px;
+  margin-left: 10px;
+  width: 50px;
   text-align: center!important;
 }
 .DivRef{
   display: flex;
   align-self: center!important;
+}
+.ReferenciasForm{
+  width: 800px;
+  margin: auto;
+  border-style: solid;
+  border-radius: 22px;
+  border-color: rgb(94, 89, 89);
+}
+
+.BtnsRef{
+  margin-left: 20px;
+}
+.ContenedorRefForm{
+  width: 500px!important;
+  height: 150px!important;
+  display: inline-flex;
 }

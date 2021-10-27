@@ -62,7 +62,7 @@ const cards = [
                                     <Badge bg="danger">1</Badge></Nav.Link>
                             </Nav>
                             <Nav>
-                                <Navbar.Brand>
+                                <Navbar.Brand className="UsuarioImg">
                                     <img
                                         alt=""
                                         src="perfil.png"

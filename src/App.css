@@ -119,9 +119,8 @@
   margin-left: auto;
 }
 .divBD{
-  display: inline-flex;
-  margin-top: 10px;
-  margin-left: 90px;
+  display: table;
+  margin:auto;
 }
 .divBC{
   display: inline-flex;
@@ -152,6 +151,7 @@
 .PrincipalC{
   text-align: center;
   background-color: aquamarine;
+  
 }
 .PrincipalS{
   background-color: aquamarine;
@@ -211,12 +211,11 @@
 }
 
  .FormularioI{
-  width: 400px;
-  height: 454px!important;
+  width: 700px;
+  margin:50px auto;
+  display: inline-flex;
   text-align: left!important;
   background-color: white;
-  margin: auto 47px;
-  margin-top: 0px;
   border-style: groove;
   border-radius: 10px;
  }
@@ -326,4 +325,18 @@
   width: 500px!important;
   height: 150px!important;
   display: inline-flex;
+}
+
+.navbar-brand {
+  padding-top: 0px!important;
+}
+.navbar {
+  padding-top: .2rem!important;
+  padding-bottom: .2rem!important;
+}
+.nav-link {
+  color: black!important;
+}
+.UsuarioImg {
+  padding-top: 4px!important;
 }

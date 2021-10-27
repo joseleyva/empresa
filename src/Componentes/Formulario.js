@@ -14,11 +14,18 @@ import { useTheme } from '@mui/material/styles';
 
 const schema = yup.object().shape({
   Nombre: yup.string().required("Ingrese su nombre").matches(/^[a-zA-Z ]+$/, "Solo letras"),
-  Apellidos: yup.string().required("Ingrese sus apellidos").matches(/^[a-zA-Z ]+$/, 'Solo letras'),
+  ApellidoM: yup.string().required("Ingrese su apellido").matches(/^[a-zA-Z ]+$/, 'Solo letras'),
+  ApellidoP: yup.string().required("Ingrese su apellido").matches(/^[a-zA-Z ]+$/, 'Solo letras'),
   Telefono: yup.string().matches(/^[0-9]+$/, 'Ingrese solo numeros').max(10, 'Muy largo').min(10, 'Muy corto').required("Ingrese su numero"),
   NoEmpleados: yup.string().required('Seleccione una opción'),
-  RFC: yup.string().required("Ingrese su RFC").max(13, 'Muy largo').min(13, 'Muy Corto').matches(/^[a-zA-Z0-9]+$/, 'No se aceptan caracteres especiales'),
-  RSocial: yup.string().required("Ingrese su Razón Social").matches(/^[a-zA-Z -&]+$/),
+  RFC: yup.string().required("Ingrese el RFC").max(13, 'Muy largo').min(13, 'Muy Corto').matches(/^[a-zA-Z0-9]+$/, 'No se aceptan caracteres especiales'),
+  RSocial: yup.string().required("Ingrese la Razón Social").matches(/^[a-zA-Z -&]+$/),
+  Calle: yup.string().required("Ingrese la calle").matches(/^[a-zA-Z -&]+$/),
+  Numero: yup.string().required("Ingrese el numero").matches(/^[a-zA-Z 0-9]+$/),
+  Colonia: yup.string().required("Ingrese la Col/Fracc").matches(/^[a-zA-Z -&]+$/),
+  Codigo: yup.string().required("Ingrese el Codigo postal").matches(/^[0-9]+$/, 'Solo numeros'),
+  Estado: yup.string().required("Ingrese el Estado").matches(/^[a-zA-Z ]+$/),
+  Cedula: yup.mixed().required("Ingrese su Cedula"),
 });
 
 function Formulario() {
@@ -56,11 +63,18 @@ function Formulario() {
       }}
       initialValues={{
         Nombre: '',
-        Apellidos: '',
+        ApellidoM: '',
+        ApellidoP: '',
         Telefono: '',
         NoEmpleados: '',
         RFC: '',
         RSocial: '',
+        Calle:"",
+        Numero:"",
+        Colonia:"",
+        Codigo:"",
+        Estado:"",
+        Cedula:null,
       }}
     >
       {({
@@ -74,8 +88,9 @@ function Formulario() {
       }) => (
         <Form className="FormD" validated={validated} noValidate onSubmit={handleSubmit}>
           <h4>Datos de acceso y Contacto</h4>
+
           <Row className="mb-3">
-            <Form.Group as={Col} md="6" controlId="validationFormik01" className="position-relative">
+            <Form.Group as={Col} md="4" controlId="validationFormik01" className="position-relative">
               <Form.Label>Nombre(s)</Form.Label>
               <Form.Control
                 type="text"
@@ -90,23 +105,38 @@ function Formulario() {
               <Form.Control.Feedback type="invalid" tooltip>{errors.Nombre}</Form.Control.Feedback>
 
             </Form.Group>
-            <Form.Group as={Col} md="6" controlId="validationFormik02" className="position-relative">
-              <Form.Label>Apellidos</Form.Label>
+            <Form.Group as={Col} md="4" controlId="validationFormik02" className="position-relative">
+              <Form.Label>Apellido Materno</Form.Label>
               <Form.Control
                 type="text"
-                name="Apellidos"
-                placeholder="Apellidos"
-                value={values.Apellidos}
+                name="ApellidoM"
+                placeholder="Apellido"
+                value={values.ApellidoM}
                 onChange={handleChange}
-                isValid={touched.Apellidos && !errors.Apellidos}
-                isInvalid={fallo ? !!errors.Apellidos : false}
+                isValid={touched.ApellidoM && !errors.ApellidoM}
+                isInvalid={fallo ? !!errors.ApellidoM : false}
                 required
               />
-              <Form.Control.Feedback type="invalid" tooltip>{errors.Apellidos}</Form.Control.Feedback>
+              <Form.Control.Feedback type="invalid" tooltip>{errors.ApellidoM}</Form.Control.Feedback>
+            </Form.Group>
+
+            <Form.Group as={Col} md="4" controlId="validationFormik02" className="position-relative">
+              <Form.Label>Apellido Paterno</Form.Label>
+              <Form.Control
+                type="text"
+                name="ApellidoP"
+                placeholder="Apellido"
+                value={values.ApellidoP}
+                onChange={handleChange}
+                isValid={touched.ApellidoP && !errors.ApellidoP}
+                isInvalid={fallo ? !!errors.ApellidoP : false}
+                required
+              />
+              <Form.Control.Feedback type="invalid" tooltip>{errors.ApellidoP}</Form.Control.Feedback>
             </Form.Group>
           </Row>
           <Row className="mb-3">
-            <Form.Group as={Col} md="7" controlId="validationFormikUsername" className="position-relative">
+            <Form.Group as={Col} md="4" controlId="validationFormikUsername" className="position-relative">
               <Form.Label>Telefono</Form.Label>
               <InputGroup hasValidation>
                 <Form.Control
@@ -124,26 +154,9 @@ function Formulario() {
               </InputGroup>
             </Form.Group>
           </Row>
-          <Row className="mb-3">
-            <Form.Group as={Col} md="7" controlId="validationFormik03" className="position-relative">
-              <Form.Label>Numero de empleados</Form.Label>
-              <Form.Select
-                type="select"
-                name="NoEmpleados"
-                value={values.NoEmpleados}
-                onChange={handleChange}
-                isValid={touched.NoEmpleados && !errors.NoEmpleados}
-                isInvalid={fallo ? !!errors.NoEmpleados : false}
-                required
-              >
-                <option value="">Seleccione</option>
-                {Object.keys(NoEmpleadosOp).map((x, i) => (<option value={i} key={i}>{x}</option>))}
-              </Form.Select>
-              <Form.Control.Feedback type="invalid" tooltip>{errors.NoEmpleados}
-              </Form.Control.Feedback>
-            </Form.Group>
+          <Row className="mb-2">
+          <h4>Datos de la Empresa</h4>
           </Row>
-
           <Row className="mb-2">
             <Form.Group as={Col} md="6" controlId="validationFormik03" className="position-relative">
               <Form.Label>R.F.C.</Form.Label>
@@ -176,6 +189,120 @@ function Formulario() {
               <Form.Control.Feedback type="invalid" tooltip>{errors.RSocial}</Form.Control.Feedback>
             </Form.Group>
           </Row>
+          <Row className="mb-3">
+          <Form.Group as={Col} md="4" controlId="validationFormik03" className="position-relative">
+              <Form.Label>Numero de empleados</Form.Label>
+              <Form.Select
+                type="select"
+                name="NoEmpleados"
+                value={values.NoEmpleados}
+                onChange={handleChange}
+                isValid={touched.NoEmpleados && !errors.NoEmpleados}
+                isInvalid={fallo ? !!errors.NoEmpleados : false}
+                required
+              >
+                <option value="">Seleccione</option>
+                {Object.keys(NoEmpleadosOp).map((x, i) => (<option value={i} key={i}>{x}</option>))}
+              </Form.Select>
+              <Form.Control.Feedback type="invalid" tooltip>{errors.NoEmpleados}
+              </Form.Control.Feedback>
+            </Form.Group>
+
+            <Form.Group as={Col} md="8" className="position-relative">
+            <Form.Label>Cedula fiscal</Form.Label>
+            <Form.Control
+              type="file"
+              required
+              name="Cedula"
+              onChange={handleChange}
+              isValid={touched.Cedula && !errors.Cedula}
+              isInvalid={fallo ? !!errors.Cedula : false}
+            />
+            <Form.Control.Feedback type="invalid" tooltip> {errors.Cedula}</Form.Control.Feedback>
+            </Form.Group>
+            </Row>
+
+          <Row className="mb-3">
+            <Form.Label>DIRECCIÓN:</Form.Label>
+            <Form.Group as={Col} md="5" controlId="validationFormik03" className="position-relative">
+              <Form.Label>Calle</Form.Label>
+              <Form.Control
+                type="text"
+                placeholder="Calle"
+                name="Calle"
+                value={values.Calle}
+                onChange={handleChange}
+                isValid={touched.Calle && !errors.Calle}
+                isInvalid={fallo ? !!errors.Calle : false}
+                required
+              />
+              <Form.Control.Feedback type="invalid" tooltip>{errors.Calle} </Form.Control.Feedback>
+              </Form.Group>
+              <Form.Group as={Col} md="2" controlId="validationFormik03" className="position-relative">
+              <Form.Label>Numero</Form.Label>
+              <Form.Control
+                type="text"
+                placeholder="Numero"
+                name="Numero"
+                value={values.Numero}
+                onChange={handleChange}
+                isValid={touched.Numero && !errors.Numero}
+                isInvalid={fallo ? !!errors.Numero : false}
+                required
+              />
+              <Form.Control.Feedback type="invalid" tooltip>{errors.Numero} </Form.Control.Feedback>
+              </Form.Group>
+              <Form.Group as={Col} md="5" controlId="validationFormik03" className="position-relative">
+              <Form.Label>Colonia o Fraccionamiento</Form.Label>
+              <Form.Control
+                type="text"
+                placeholder="Colonia"
+                name="Colonia"
+                value={values.Colonia}
+                onChange={handleChange}
+                isValid={touched.Colonia && !errors.Colonia}
+                isInvalid={fallo ? !!errors.Colonia : false}
+                required
+              />
+              <Form.Control.Feedback type="invalid" tooltip>{errors.Colonia} </Form.Control.Feedback>
+              </Form.Group>
+          </Row>
+          <Row className="mb-3">
+          <Form.Group as={Col} md="3" controlId="validationFormik03" className="position-relative">
+              <Form.Label>Codigo Postal</Form.Label>
+              <Form.Control
+                type="text"
+                placeholder="Codigo"
+                name="Codigo"
+                value={values.Codigo}
+                onChange={handleChange}
+                isValid={touched.Codigo && !errors.Codigo}
+                isInvalid={fallo ? !!errors.Codigo : false}
+                required
+              />
+              <Form.Control.Feedback type="invalid" tooltip>{errors.Codigo} </Form.Control.Feedback>
+              </Form.Group>
+              <Form.Group as={Col} md="4" controlId="validationFormik03" className="position-relative">
+              <Form.Label>Estado</Form.Label>
+              <Form.Control
+                type="text"
+                placeholder="Estado"
+                name="Estado"
+                value={values.Estado}
+                onChange={handleChange}
+                isValid={touched.Estado && !errors.Estado}
+                isInvalid={fallo ? !!errors.Estado : false}
+                required
+              />
+              <Form.Control.Feedback type="invalid" tooltip>{errors.Estado} </Form.Control.Feedback>
+              </Form.Group>
+              <Form.Group as={Col} md="3">
+                <Form.Label>Paquetes Ofrecidos </Form.Label>
+              <Button variant="outline-success">Pagar Servicio</Button>
+              </Form.Group>
+          </Row>
+         
+          
           <div className="divBD">
             <Button type="submit" onClick={handleClick} className="boton">Guardar</Button>
             <Button variant="danger" className="boton">Cancelar</Button>

@@ -48,7 +48,7 @@ function Vacante() {
                         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                         <Navbar.Collapse id="responsive-navbar-nav">
                             <Nav className="me-auto">
-                                <Nav.Link href="/Datos">Datos de la Empresa
+                                <Nav.Link href="/DatosEmpresa">Datos de la Empresa
                                     <Badge bg="danger">1</Badge>
                                 </Nav.Link>
                                 <Nav.Link href="/Vacante">Publicar vacante</Nav.Link>
@@ -63,7 +63,7 @@ function Vacante() {
                                     <Badge bg="danger">1</Badge></Nav.Link>
                             </Nav>
                             <Nav>
-                                <Navbar.Brand>
+                                <Navbar.Brand className="UsuarioImg">
                                     <img
                                         alt=""
                                         src="perfil.png"

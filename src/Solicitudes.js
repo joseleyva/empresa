@@ -15,10 +15,11 @@ function Solicitudes() {
             <header>
                 <Navbar collapseOnSelect expand="lg" className="BarraEm">
                     <Container>
-                        <Navbar.Brand >
+                        <Navbar.Brand  href="/Empresas">
                             <img
                                 alt=""
                                 src="logo512.png"
+                               
                                 width="30"
                                 height="30"
                                 className="d-inline-block align-top"

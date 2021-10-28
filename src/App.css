@@ -340,3 +340,42 @@
 .UsuarioImg {
   padding-top: 4px!important;
 }
+
+.ContenedorEmpresas{
+  width: 800px;
+  margin: 20px auto;
+  border-radius: 20px;
+  border-style: groove;
+}
+
+.Graficas{
+  width:500px;
+  margin: 20px auto;
+  border-radius: 20px;
+  border-style: groove;
+  
+}
+
+.BotonesEm{
+  margin: 20px auto !important;;
+}
+.DivDatosEmpresa{
+  width: 800px;
+  margin: 20px auto;
+  border-radius: 20px;
+  border-style: groove;
+}
+
+.ImagenDatosEmpresa{
+  margin-top: 5px!important;
+}
+
+.DatosEmpresas{
+  text-align: left!important;
+}
+.AlinDatosEmpresas{
+display: grid!important;
+}
+.DivBtnDE{
+  margin-top: 150px;
+}

@@ -1,14 +1,13 @@
 import React, { useState } from 'react';
 import Avatar from '@mui/material/Avatar';
 import CssBaseline from '@mui/material/CssBaseline';
-import Link from '@mui/material/Link';
 import Paper from '@mui/material/Paper';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import { ThemeProvider } from '@mui/material/styles';
-import { Form, Row, FloatingLabel,Col,Button } from 'react-bootstrap';
+import { Form, Row, FloatingLabel, Col, Button } from 'react-bootstrap';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { useTheme } from '@mui/material/styles';
 import { Formik } from 'formik';
@@ -20,12 +19,14 @@ import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 
 const schema = yup.object().shape({
-    Correo: yup.string().required("Ingrese el correo").email("Correo Invalido"),
-    Contra: yup.string().matches(/^[a-zA-Z0-9]+$/).required("Ingrese la contraseña").min(8, 'Muy Corta'),
+    Nombre: yup.string().required("Ingrese su nombre"),
+    Correo: yup.string().required("Ingrese sus Correo").email('Correo Invalido'),
+    Contra: yup.string().max(20, 'Muy larga').min(8, 'Muy corta').required("Ingrese su contraseña"),
+    ConfContra: yup.string().required("Confirme su contraseña").max(20, 'Muy larga').min(8, 'Muy corta'),
 });
 
 
-function InicioS() {
+export default function Prueba() {
     const [validated, setValidated] = useState(false)
     const [fallo, setFallo] = useState(false);
     const [enviado, setEnviado] = useState(false);
@@ -56,8 +57,10 @@ function InicioS() {
                 setValidated(true);
             }}
             initialValues={{
+                Nombre: '',
                 Correo: '',
                 Contra: '',
+                ConfContra: '',
             }}
         >
             {({
@@ -97,50 +100,71 @@ function InicioS() {
                                 }}
                             >
                                 <div className="InicioAli">
-                                <Avatar className="InicioAli" sx={{ m: 2, bgcolor: 'secondary.main' }}>
-                                    <LockOutlinedIcon   />
-                                </Avatar>
-                                <Typography component="h1" variant="h5">
-                                    Inicio de Sesion
-                                </Typography>
+                                    <Avatar className="InicioAli" sx={{ m: 2, bgcolor: 'secondary.main' }}>
+                                        <LockOutlinedIcon />
+                                    </Avatar>
+                                    <Typography component="h1" variant="h5">
+                                        Registro
+                                    </Typography>
                                 </div>
                                 <Box component="form" validated={validated} noValidate onSubmit={handleSubmit} sx={{ mt: 2 }}>
-                                    <Row className="mb-4">
-                                        <Form.Group as={Col} md="15" controlId="formGroupEmail" className="position-relative">
+                                    <Row className="mb-3">
+                                        <Form.Group as={Col} md="15" controlId="validationFormik01" className="position-relative">
+                                            <FloatingLabel
+                                                controlId="floatingInput"
+                                                label="Nombre Comercial"
+                                                
+                                            >
+                                            <Form.Control
+                                            className="FormInicio"
+                                                type="text"
+                                                placeholder="Ingrese el nombre"
+                                                name="Nombre"
+                                                value={values.Nombre}
+                                                onChange={handleChange}
+                                                isValid={touched.Nombre && !errors.Nombre}
+                                                isInvalid={fallo ? !!errors.Nombre : false}
+                                                required
+                                            />
+                                            <Form.Control.Feedback type="invalid" tooltip>{errors.Nombre}</Form.Control.Feedback>
+                                            </FloatingLabel>
+                                        </Form.Group>
+                                    </Row>
+                                    <Row className="mb-3">
+                                        <Form.Group as={Col} md="15" className="position-relative" controlId="formGroupEmail">
                                             <FloatingLabel
                                                 controlId="floatingInput"
                                                 label="Correo electronico"
                                                 
                                             >
-                                                <Form.Control
-                                                    className="FormInicio"
-                                                    type="email"
-                                                    placeholder="Ingrese el correo"
-                                                    name="Correo"
-                                                    value={values.Correo}
-                                                    onChange={handleChange}
-                                                    onBlur={handleBlur}
-                                                    isValid={touched.Correo && !errors.Correo}
-                                                    isInvalid={fallo ? !!errors.Correo : false}
-                                                    required
-                                                />
-                                                <Form.Control.Feedback type="invalid" tooltip>{errors.Correo}</Form.Control.Feedback>
+                                            <Form.Control
+                                            className="FormInicio"
+                                                type="email"
+                                                name="Correo"
+                                                placeholder="Ingrese el correo"
+                                                value={values.Correo}
+                                                onChange={handleChange}
+                                                isValid={touched.Correo && !errors.Correo}
+                                                isInvalid={fallo ? !!errors.Correo : false}
+                                                required
+                                            />
+                                            <Form.Control.Feedback type="invalid" tooltip>{errors.Correo}</Form.Control.Feedback>
                                             </FloatingLabel>
-                                            
                                         </Form.Group>
                                     </Row>
                                     <Row className="mb-3">
-                                        <Form.Group className="position-relative" controlId="formGroupPassword">
+                                        <Form.Group as={Col} md="15" className="position-relative" controlId="formGroupPassword">
+        
                                             <FloatingLabel
                                                 controlId="floatingInput"
                                                 label="Contraseña"
-                                               
+                                                
                                             >
                                             <Form.Control
-                                                className="FormInicio"
+                                            className="FormInicio"
                                                 type="password"
-                                                placeholder="Contraseña"
                                                 name="Contra"
+                                                placeholder="Contraseña"
                                                 value={values.Contra}
                                                 onChange={handleChange}
                                                 isValid={touched.Contra && !errors.Contra}
@@ -149,25 +173,34 @@ function InicioS() {
                                             />
                                             <Form.Control.Feedback type="invalid" tooltip>{errors.Contra}</Form.Control.Feedback>
                                             </FloatingLabel>
-                                            
+                                        </Form.Group>
+                                    </Row>
+                                    <Row className="mb-3">
+                                        <Form.Group as={Col} md="15" className="position-relative" controlId="Password">
+                                            <FloatingLabel
+                                                controlId="floatingInput"
+                                                label="Confirmar Contraseña"
+                                                
+                                            >
+                                            <Form.Control
+                                            className="FormInicio"
+                                                type="password"
+                                                name="ConfContra"
+                                                placeholder="Confirmar Contraseña"
+                                                value={values.ConfContra}
+                                                onChange={handleChange}
+                                                isValid={touched.ConfContra && !errors.ConfContra}
+                                                isInvalid={fallo ? !!errors.ConfContra : false}
+                                                required
+                                            />
+                                            <Form.Control.Feedback type="invalid" tooltip>{errors.ConfContra}</Form.Control.Feedback>
+                                            </FloatingLabel>
                                         </Form.Group>
                                     </Row>
                                     <div className="d-grid gap-2">
-                                    <Button className="botonS" type="submit" onClick={handleClick}>Iniciar Sesion</Button>
-                                    <Button className="botonS" variant="danger" href="/">Cancelar</Button>
-                                </div>
-                                    <Grid container className="MargenL">
-                                        <Grid item xs>
-                                            <Link  variant="body3" >
-                                                Olvide la Contraseña
-                                            </Link>
-                                        </Grid>
-                                        <Grid item>
-                                            <Link href="/CrearC" variant="body3" className="labelI">
-                                                {"¿No tienes una cuenta? Crea una aquí"}
-                                            </Link>
-                                        </Grid>
-                                    </Grid>
+                                        <Button className="botonS" type="submit" onClick={handleClick}>Iniciar Sesion</Button>
+                                        <Button className="botonS" variant="danger" href="/">Cancelar</Button>
+                                    </div>
                                     {
                                         (enviado && (
                                             <Dialog
@@ -177,11 +210,11 @@ function InicioS() {
                                                 aria-labelledby="responsive-dialog-title"
                                             >
                                                 <DialogTitle id="responsive-dialog-title">
-                                                    {"Inicio de sesion"}
+                                                    {"Crear Cuenta"}
                                                 </DialogTitle>
                                                 <DialogContent>
                                                     <DialogContentText>
-                                                        Inicio de Sesion Exitoso
+                                                        Cuenta Creada Correctamente
                                                     </DialogContentText>
                                                 </DialogContent>
                                                 <DialogActions>
@@ -201,5 +234,3 @@ function InicioS() {
         </Formik>
     );
 }
-
-export default InicioS;

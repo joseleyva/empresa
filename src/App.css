@@ -43,9 +43,7 @@
 .botonC{
   margin:15px;
 }
-.botonS{
-  margin: auto 0px 0px 20px;
-}
+
 .botonF{
   margin-left: 50px;
   width: 200px;
@@ -91,12 +89,7 @@
   border-radius: 10px;
   
 }
-.FormularioS{
-  width: 280px;
-  text-align: left!important;
-  margin: auto 20px;
-  
-}
+
 .Contenedor{
   margin:100px auto;
   display: inline-flex;
@@ -137,26 +130,13 @@
   height: 454px!important;
 }
 
-.ImagenS{
-  width: 400px;
-  height: 400px;
-  margin: 0px 0px 0px 0px!important;
-  display: inline-flex;
-  border-top-left-radius: 10px;
-  border-bottom-left-radius: 10px;
-  border-style: solid;
-  border-color: transparent;
-  
-}
+
 .PrincipalC{
   text-align: center;
   background-color: aquamarine;
   
 }
-.PrincipalS{
-  background-color: aquamarine;
-  text-align: center;
-}
+
 
 .form-control{
   width: 90%!important;
@@ -170,19 +150,40 @@
  }
 
  .labelI{
-   color: red;
-   margin: 0px 0px 0px 15px;
+   color: red!important;
+ }
+ .MargenL{
+   margin-top: 5px!important;
  }
 
  .ContenedorV{
-   margin-top: 25px;
+   margin-top: 5px;
+   margin-bottom: 5px;
    border-style: solid;
    border-radius: 22px;
    border-color: rgb(94, 89, 89);
-   width: 900px!important;
+   width: 700px!important;
    height: 200px!important;
    display: inline-flex;
  }
+ .IconCartas{
+   margin-top: 5px!important;
+ }
+ .BtnV{
+  display: initial;
+  margin-left: 80px;
+  text-align: right!important;
+}
+ .ContenedorVacante{
+  margin-top: 5px;
+  margin-bottom: 5px;
+  border-style: solid;
+  border-radius: 15px;
+  border-color: rgb(94, 89, 89);
+  width: 380px!important;
+  height: 150px!important;
+  display: table-caption;
+}
  .C{
    text-align: left!important;
   width: 700px!important;
@@ -193,11 +194,7 @@
     margin-left: 40px;
  }
 
- .BtnV{
-   display: inline-flex;
-   margin-left: 260px;
-   text-align: right!important;
- }
+
  .col-md-10{
   width: 100%!important;
  }
@@ -233,7 +230,7 @@
  }
  .VacanteStep{
   width: 800px;
-  margin: auto;
+  margin: 20px auto;
   border-radius: 20px;
   border-style: groove;
  }
@@ -288,8 +285,6 @@
 }
 .FormInicio{
   width: 100%!important;
-  margin: 0px 0px 0px 0px ;
-  align-self: center!important;
 }
 
 .ContenedorRef{
@@ -347,6 +342,10 @@
   border-radius: 20px;
   border-style: groove;
 }
+.VacantesActivas{
+  width: 800px;
+  display: flex!important;
+}
 
 .Graficas{
   width:500px;
@@ -378,4 +377,7 @@ display: grid!important;
 }
 .DivBtnDE{
   margin-top: 150px;
+}
+.InicioAli{
+  margin: auto!important;
 }

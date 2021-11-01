@@ -1,50 +1,41 @@
-import './App.css';
+import '../App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Navbar } from 'react-bootstrap';
 import { Container } from 'react-bootstrap';
 import { Nav } from 'react-bootstrap';
 import { NavDropdown } from 'react-bootstrap';
 import { Badge } from 'react-bootstrap';
-import { Row, Form, Col } from 'react-bootstrap';
 import * as React from 'react';
+import Box from '@mui/material/Box';
+import Stepper from '@mui/material/Stepper';
+import Step from '@mui/material/Step';
+import StepLabel from '@mui/material/StepLabel';
 import {Button} from 'react-bootstrap';
+import Typography from '@mui/material/Typography';
+import FormSueldo from './FormSueldo';
+import FormVac from './FormVac';
+import FormEdu from './FormEdu';
 import GitHubIcon from '@mui/icons-material/GitHub';
 import FacebookIcon from '@mui/icons-material/Facebook';
 import TwitterIcon from '@mui/icons-material/Twitter';
 import { Instagram } from '@mui/icons-material';
 import Link from '@mui/material/Link';
-import { Divider } from '@mui/material';
-import CardsVacantes from './Componentes/CardsVacantes';
-import Cartas from './Componentes/Cartas';
+
+const steps = ['Datos de la vacante', 'Datos Educativos', 'Datos del pagó'];
+
+function VacanteForm() {
+    const [activeStep, setActiveStep] = React.useState(0);
+    const [skipped, setSkipped] = React.useState(new Set());
 
 
-const cards = [
-    {
-      Nombre: 'Contador',
-      id:1,
-     
-    },
-    {
-      Nombre: 'Desarrollador de software',
-      id:2,
-    }
-  ];
-  const cardsPuestos = [
-    {
-      Nombre: 'Juan',
-      Area: 'Contador',
-      Experiencia:'',
-      id:1,
-     
-    },
-   
-  ];
-
-function Vacante() {
-   
+  const handleNext = () => {
+        let newSkipped = skipped;
+        setActiveStep((prevActiveStep) => prevActiveStep + 1);
+        setSkipped(newSkipped);
+    };
 
     return (
-        <div className="App">
+        <div>
            <header>
                 <Navbar collapseOnSelect expand="lg" className="BarraEm">
                     <Container>
@@ -98,37 +89,48 @@ function Vacante() {
                     </Container>
                 </Navbar>
             </header>
-
-            <div className="ContenedorEmpresas">
-                <h4> Escritorio Virtual</h4>
-                <Row className="mb-3 BotonesEm">
-                    <Form.Group as={Col} md="4">
-                        <Button variant="outline-primary" href="/VacanteForm">Publicar Vacante</Button>{' '}
-                    </Form.Group>
-                    <Form.Group as={Col} md="4">
-                        <Button variant="outline-primary">Candidatos Postulados</Button>{' '}
-                    </Form.Group>
-                    <Form.Group as={Col} md="4">
-                        <Button variant="outline-primary">Vacantes Activas</Button>{' '}
-                    </Form.Group>
-                </Row>
-                <Divider/>
-                <h5>Vacantes Activas</h5>
-                <div className="VacantesActivas">
-                {cards.map((post) => (
-                  <CardsVacantes key={post.id} post={post} />
-                ))}
+            <div className="VacanteStep">
+                
+                <Box sx={{ width: '100%' }}>
+                    <Stepper activeStep={activeStep}>
+                        {steps.map((label, index) => {
+                            const stepProps = {};
+                            const labelProps = {};
+    
+                            return (
+                                <Step key={label} {...stepProps}>
+                                    <StepLabel {...labelProps}>{label}</StepLabel>
+                                </Step>                    
+                            );
+                           
+                        })}
+                    </Stepper>
+    
+                    {activeStep === steps.length ? (
+                       
+                        <React.Fragment>
+                            <Typography sx={{ mt: 2, mb: 1 }}>
+                                Formulario terminado
+                            </Typography>
+                            <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
+                                <Box sx={{ flex: '1 1 auto' }} />
+                                <Button href={'./Vacante'} variant="outline-success" className="botonStep">Guardar</Button>
+                            </Box>
+                        </React.Fragment>
+                    ) : (
+                        <React.Fragment>
+                            <Typography sx={{ mt: 2, mb: 1 }}>{getStepContent( activeStep)}</Typography>
+                            <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
+                                <Box sx={{ flex: '1 1 auto' }} />
+                                <Button onClick={handleNext} type="submit" className="botonStep" variant="outline-secondary">
+                                    {activeStep === steps.length - 1 ? 'Finish' : 'Next'}
+                                </Button>
+                            </Box>
+                        </React.Fragment>
+                    )}
+                </Box>
                 </div>
-                <Divider/>
-                <h5>Candidatos Postulados</h5>
-                <div className="VacantesActivas">
-                {cardsPuestos.map((post) => (
-                  <Cartas key={post.id} post={post} />
-                ))}
-
-                </div>
-            </div>
-          
+           
             <footer>
                 <div className="Fcontainer">
                     <div className="row">
@@ -197,7 +199,6 @@ function Vacante() {
                         <div className="Fcol-md-4 footer-col">
                             <h4>Empresa</h4>
                             <p>
-
                             </p>
                         </div>
                     </div>
@@ -207,5 +208,17 @@ function Vacante() {
     );
 }
 
+function getStepContent(step) {
+    switch (step) {
+        case 0:
+            return <FormVac />;
+        case 1:
+            return <FormEdu />;
+        case 2:
+            return <FormSueldo />;
+        default:
+            return 'Unknown step';
+    }
+}
 
-export default Vacante;
+export default VacanteForm;

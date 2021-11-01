@@ -1,10 +1,15 @@
-import './App.css';
-import 'bootstrap/dist/css/bootstrap.min.css';
 import React, { useState } from 'react';
-import { Form } from 'react-bootstrap';
-import { Button } from 'react-bootstrap';
-import { Figure } from 'react-bootstrap';
-import { Row } from 'react-bootstrap';
+import Avatar from '@mui/material/Avatar';
+import CssBaseline from '@mui/material/CssBaseline';
+import Paper from '@mui/material/Paper';
+import Box from '@mui/material/Box';
+import Grid from '@mui/material/Grid';
+import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
+import Typography from '@mui/material/Typography';
+import { ThemeProvider } from '@mui/material/styles';
+import { Form, Row, FloatingLabel, Col, Button } from 'react-bootstrap';
+import useMediaQuery from '@mui/material/useMediaQuery';
+import { useTheme } from '@mui/material/styles';
 import { Formik } from 'formik';
 import * as yup from 'yup';
 import Dialog from '@mui/material/Dialog';
@@ -12,8 +17,6 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
-import useMediaQuery from '@mui/material/useMediaQuery';
-import { useTheme } from '@mui/material/styles';
 
 const schema = yup.object().shape({
     Nombre: yup.string().required("Ingrese su nombre"),
@@ -21,6 +24,7 @@ const schema = yup.object().shape({
     Contra: yup.string().max(20, 'Muy larga').min(8, 'Muy corta').required("Ingrese su contraseña"),
     ConfContra: yup.string().required("Confirme su contraseña").max(20, 'Muy larga').min(8, 'Muy corta'),
 });
+
 
 function CrearC() {
     const [validated, setValidated] = useState(false)
@@ -44,152 +48,191 @@ function CrearC() {
         }
         setOpen(false);
     };
-
     return (
-        <div className="PrincipalC">
-            <div className="ContenedorC">
-
-                <Figure className="ImagenC">
-                    <Figure.Image
-                        src="imagen1.jpg"
-                        className="ImgC"
-
-                    />
-                </Figure>
-
-
-                <div className="FormularioC">
-                    <Formik
-                        validationSchema={schema}
-                        onSubmit={(valores, { resetForm }) => {
-                            console.log()
-                            setEnviado(true);
-                            setValidated(true);
-                        }}
-                        initialValues={{
-                            Nombre: '',
-                            Correo: '',
-                            Contra: '',
-                            ConfContra: '',
-                        }}
-                    >
-                        {({
-                            handleSubmit,
-                            handleChange,
-                            values,
-                            touched,
-                            isValid,
-                            errors,
-                        }) => (
-                            <Form className="FormC" validated={validated} noValidate onSubmit={handleSubmit}>
-                                <h4>Registro:</h4>
-                                <Row className="mb-3">
-                                    <Form.Group controlId="validationFormik01" className="position-relative">
-                                        <Form.Label>Nombre Comercial</Form.Label>
-                                        <Form.Control
-                                            type="text"
-                                            placeholder="Ingrese el nombre"
-                                            name="Nombre"
-                                            value={values.Nombre}
-                                            onChange={handleChange}
-                                            isValid={touched.Nombre && !errors.Nombre}
-                                            isInvalid={fallo ? !!errors.Nombre : false}
-                                            required
-                                        />
-                                        <Form.Control.Feedback type="invalid" tooltip>{errors.Nombre}</Form.Control.Feedback>
-                                    </Form.Group>
-                                </Row>
-                                <Row className="mb-3">
-                                    <Form.Group className="position-relative" controlId="formGroupEmail">
-                                        <Form.Label>Correo electronico</Form.Label>
-                                        <Form.Control
-                                            type="email"
-                                            name="Correo"
-                                            placeholder="Ingrese el correo"
-                                            value={values.Correo}
-                                            onChange={handleChange}
-                                            isValid={touched.Correo && !errors.Correo}
-                                            isInvalid={fallo ? !!errors.Correo : false}
-                                            required
-                                        />
-                                        <Form.Control.Feedback type="invalid" tooltip>{errors.Correo}</Form.Control.Feedback>
-
-                                    </Form.Group>
-                                </Row>
-                                <Row className="mb-3">
-                                    <Form.Group className="position-relative" controlId="formGroupPassword">
-                                        <Form.Label>Contraseña</Form.Label>
-                                        <Form.Control
-                                            type="password"
-                                            name="Contra"
-                                            placeholder="Contraseña"
-                                            value={values.Contra}
-                                            onChange={handleChange}
-                                            isValid={touched.Contra && !errors.Contra}
-                                            isInvalid={fallo ? !!errors.Contra : false}
-                                            required
-                                        />
-                                        <Form.Control.Feedback type="invalid" tooltip>{errors.Contra}</Form.Control.Feedback>
-                                    </Form.Group>
-                                </Row>
-                                <Row className="mb-3">
-                                    <Form.Group className="position-relative" controlId="Password">
-                                        <Form.Label>Confirmar Contraseña</Form.Label>
-                                        <Form.Control
-                                            type="password"
-                                            name="ConfContra"
-                                            placeholder="Confirmar Contraseña"
-                                            value={values.ConfContra}
-                                            onChange={handleChange}
-                                            isValid={touched.ConfContra && !errors.ConfContra}
-                                            isInvalid={fallo ? !!errors.ConfContra : false}
-                                            required
-                                        />
-                                        <Form.Control.Feedback type="invalid" tooltip>{errors.ConfContra}</Form.Control.Feedback>
-                                    </Form.Group>
-                                </Row>
-                                <div className="divBC">
-                                    <Button className="botonC" onClick={handleClick} type="submit">Registrar</Button>
-                                    <Button className="botonC" variant="danger" href="/">Cancelar</Button>
+        <Formik
+            validationSchema={schema}
+            onSubmit={(valores, { resetForm }) => {
+                console.log()
+                setEnviado(true);
+                setValidated(true);
+            }}
+            initialValues={{
+                Nombre: '',
+                Correo: '',
+                Contra: '',
+                ConfContra: '',
+            }}
+        >
+            {({
+                handleSubmit,
+                handleChange,
+                handleBlur,
+                values,
+                touched,
+                isValid,
+                errors,
+            }) => (
+                <ThemeProvider theme={theme}>
+                    <Grid container component="main" sx={{ height: '100vh' }}>
+                        <CssBaseline />
+                        <Grid
+                            item
+                            xs={false}
+                            sm={4}
+                            md={7}
+                            sx={{
+                                backgroundImage: 'url(https://source.unsplash.com/random)',
+                                backgroundRepeat: 'no-repeat',
+                                backgroundColor: (t) =>
+                                    t.palette.mode === 'light' ? t.palette.grey[50] : t.palette.grey[900],
+                                backgroundSize: 'cover',
+                                backgroundPosition: 'center',
+                            }}
+                        />
+                        <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
+                            <Box
+                                sx={{
+                                    my: 8,
+                                    mx: 7,
+                                    display: 'flex',
+                                    flexDirection: 'column',
+                                    alignItems: 'unset',
+                                }}
+                            >
+                                <div className="InicioAli">
+                                    <Avatar className="InicioAli" sx={{ m: 2, bgcolor: 'secondary.main' }}>
+                                        <LockOutlinedIcon />
+                                    </Avatar>
+                                    <Typography component="h1" variant="h5">
+                                        Registro
+                                    </Typography>
                                 </div>
-                                {
-                                    (enviado && (
-                                        <Dialog
-                                            fullScreen={fullScreen}
-                                            open={open}
-                                            onClose={handleClose}
-                                            aria-labelledby="responsive-dialog-title"
-                                        >
-                                            <DialogTitle id="responsive-dialog-title">
-                                                {"Regístro"}
-                                            </DialogTitle>
-                                            <DialogContent>
-                                                <DialogContentText>
-                                                   Datos guardador correctamente
-                                                </DialogContentText>
-                                            </DialogContent>
-                                            <DialogActions>
-                                                <Button href="/" onClick={handleClose} autoFocus>
-                                                    Aceptar
-                                                </Button>
-                                            </DialogActions>
-                                        </Dialog>
-                                    ))
-                                }
-
-                            </Form>
-                        )}
-                    </Formik>
-
-
-                </div>
-            </div>
-
-        </div>
-
-
+                                <Box component="form" validated={validated} noValidate onSubmit={handleSubmit} sx={{ mt: 2 }}>
+                                    <Row className="mb-3">
+                                        <Form.Group as={Col} md="15" controlId="validationFormik01" className="position-relative">
+                                            <FloatingLabel
+                                                controlId="floatingInput"
+                                                label="Nombre Comercial"
+                                                
+                                            >
+                                            <Form.Control
+                                            className="FormInicio"
+                                                type="text"
+                                                placeholder="Ingrese el nombre"
+                                                name="Nombre"
+                                                value={values.Nombre}
+                                                onChange={handleChange}
+                                                isValid={touched.Nombre && !errors.Nombre}
+                                                isInvalid={fallo ? !!errors.Nombre : false}
+                                                required
+                                            />
+                                            <Form.Control.Feedback type="invalid" tooltip>{errors.Nombre}</Form.Control.Feedback>
+                                            </FloatingLabel>
+                                        </Form.Group>
+                                    </Row>
+                                    <Row className="mb-3">
+                                        <Form.Group as={Col} md="15" className="position-relative" controlId="formGroupEmail">
+                                            <FloatingLabel
+                                                controlId="floatingInput"
+                                                label="Correo electronico"
+                                                
+                                            >
+                                            <Form.Control
+                                            className="FormInicio"
+                                                type="email"
+                                                name="Correo"
+                                                placeholder="Ingrese el correo"
+                                                value={values.Correo}
+                                                onChange={handleChange}
+                                                isValid={touched.Correo && !errors.Correo}
+                                                isInvalid={fallo ? !!errors.Correo : false}
+                                                required
+                                            />
+                                            <Form.Control.Feedback type="invalid" tooltip>{errors.Correo}</Form.Control.Feedback>
+                                            </FloatingLabel>
+                                        </Form.Group>
+                                    </Row>
+                                    <Row className="mb-3">
+                                        <Form.Group as={Col} md="15" className="position-relative" controlId="formGroupPassword">
+        
+                                            <FloatingLabel
+                                                controlId="floatingInput"
+                                                label="Contraseña"
+                                                
+                                            >
+                                            <Form.Control
+                                            className="FormInicio"
+                                                type="password"
+                                                name="Contra"
+                                                placeholder="Contraseña"
+                                                value={values.Contra}
+                                                onChange={handleChange}
+                                                isValid={touched.Contra && !errors.Contra}
+                                                isInvalid={fallo ? !!errors.Contra : false}
+                                                required
+                                            />
+                                            <Form.Control.Feedback type="invalid" tooltip>{errors.Contra}</Form.Control.Feedback>
+                                            </FloatingLabel>
+                                        </Form.Group>
+                                    </Row>
+                                    <Row className="mb-3">
+                                        <Form.Group as={Col} md="15" className="position-relative" controlId="Password">
+                                            <FloatingLabel
+                                                controlId="floatingInput"
+                                                label="Confirmar Contraseña"
+                                                
+                                            >
+                                            <Form.Control
+                                            className="FormInicio"
+                                                type="password"
+                                                name="ConfContra"
+                                                placeholder="Confirmar Contraseña"
+                                                value={values.ConfContra}
+                                                onChange={handleChange}
+                                                isValid={touched.ConfContra && !errors.ConfContra}
+                                                isInvalid={fallo ? !!errors.ConfContra : false}
+                                                required
+                                            />
+                                            <Form.Control.Feedback type="invalid" tooltip>{errors.ConfContra}</Form.Control.Feedback>
+                                            </FloatingLabel>
+                                        </Form.Group>
+                                    </Row>
+                                    <div className="d-grid gap-2">
+                                        <Button className="botonS" type="submit" onClick={handleClick}>Iniciar Sesion</Button>
+                                        <Button className="botonS" variant="danger" href="/">Cancelar</Button>
+                                    </div>
+                                    {
+                                        (enviado && (
+                                            <Dialog
+                                                fullScreen={fullScreen}
+                                                open={open}
+                                                onClose={handleClose}
+                                                aria-labelledby="responsive-dialog-title"
+                                            >
+                                                <DialogTitle id="responsive-dialog-title">
+                                                    {"Crear Cuenta"}
+                                                </DialogTitle>
+                                                <DialogContent>
+                                                    <DialogContentText>
+                                                        Cuenta Creada Correctamente
+                                                    </DialogContentText>
+                                                </DialogContent>
+                                                <DialogActions>
+                                                    <Button href="/Empresas" onClick={handleClose} autoFocus>
+                                                        Aceptar
+                                                    </Button>
+                                                </DialogActions>
+                                            </Dialog>
+                                        ))
+                                    }
+                                </Box>
+                            </Box>
+                        </Grid>
+                    </Grid>
+                </ThemeProvider>
+            )}
+        </Formik>
     );
-
 }
 
 export default CrearC;

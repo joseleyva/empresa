@@ -8,6 +8,22 @@ import { NavDropdown } from 'react-bootstrap';
 import { Badge } from 'react-bootstrap';
 import Cartas from './Componentes/Cartas';
 
+const cards = [
+    {
+      Nombre: 'Juan',
+      Area: 'Contador',
+      Experiencia:'',
+      id:1,
+     
+    },
+    {
+      Nombre: 'Pedro',
+      Area: 'Desarrollador',
+      Experiencia:'',
+      id:2,
+    }
+  ];
+
 function Solicitudes() {
     return (
 
@@ -65,7 +81,9 @@ function Solicitudes() {
                     </Container>
                 </Navbar>
             </header>
-            <Cartas />
+            {cards.map((post) => (
+                  <Cartas key={post.id} post={post} />
+                ))}
             <footer>
                 <div className="Fcontainer">
                     <div className="row">

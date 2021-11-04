@@ -1,40 +1,38 @@
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Navbar } from 'react-bootstrap';
-import { Container, Row, Button, Form, Col } from 'react-bootstrap';
+import { Container } from 'react-bootstrap';
 import { Nav } from 'react-bootstrap';
 import { NavDropdown } from 'react-bootstrap';
 import { Badge } from 'react-bootstrap';
-import { Line } from 'react-chartjs-2';
+import * as React from 'react';
 import GitHubIcon from '@mui/icons-material/GitHub';
 import FacebookIcon from '@mui/icons-material/Facebook';
 import TwitterIcon from '@mui/icons-material/Twitter';
 import { Instagram } from '@mui/icons-material';
 import Link from '@mui/material/Link';
-const data = {
-    labels: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio'],
-    datasets: [
-        {
-            label: 'Reputación',
-            data: [8, 10, 5, 6, 1, 7],
-            fill: false,
-            backgroundColor: 'rgb(255, 99, 132)',
-            borderColor: 'rgba(255, 99, 132, 0.2)',
-        },
-    ],
-};
+import { Divider } from '@mui/material';
+import { Row, Form, Col } from 'react-bootstrap';
+import CardsEstudios from './Componentes/CardsEstudios';
 
-const options = {
-    scales: {
-        y: {
-            beginAtZero: true
-        }
+
+
+const cards = [
+    {
+      Nombre: 'Juan Lopez',
+      Imagen: 'Usuario.jpg',
+      id:1,
+     
+    },
+    {
+      Nombre: 'Pedro Paramo',
+      Imagen: 'Usuario.jpg',
+      id:2,
     }
-};
+  ];
 
-function Empresas() {
+function Estudios() {
     return (
-
         <div className="App">
             <header>
                 <Navbar collapseOnSelect expand="lg" className="BarraEm">
@@ -53,7 +51,7 @@ function Empresas() {
                         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                         <Navbar.Collapse id="responsive-navbar-nav">
                             <Nav className="me-auto">
-                                <Nav.Link href="/DatosEmpresa">Datos de la Empresa
+                                <Nav.Link href="/Datos">Datos de la Empresa
                                     <Badge bg="danger">1</Badge>
                                 </Nav.Link>
                                 <Nav.Link href="/Vacante">Publicar vacante</Nav.Link>
@@ -89,24 +87,28 @@ function Empresas() {
                     </Container>
                 </Navbar>
             </header>
-
             <div className="ContenedorEmpresas">
                 <h4> Escritorio Virtual</h4>
-                <div className="Graficas">
-                    <Line data={data} options={options} />
-                </div>
-                <Row className="mb-3 BotonesEm">
-                    <Form.Group as={Col} md="4">
-                        <Button variant="outline-primary">Encuentra capacitaciones avaladas ante STPS</Button>{' '}
+                <Divider />
+                <Row className="MargenL" >
+                    <Form.Group as={Col} md="4" className="Candidato">
+                        <h6>Candidato/Perfil que se postuló </h6>
+
                     </Form.Group>
-                    <Form.Group as={Col} md="4">
-                        <Button variant="outline-primary">Mira el status de tus vacantes activas</Button>{' '}
+                    <Form.Group as={Col} md="5" className="Aspectos">
+                        <h6>¿Qué aspectos deseas evaluar?</h6>
                     </Form.Group>
-                    <Form.Group as={Col} md="4">
-                        <Button variant="outline-primary">Cotiza estudios socio economicos</Button>{' '}
+                    <Form.Group as={Col} md="3" className="Aplica">
+                        <h6>Seleccionar si aplica</h6>
                     </Form.Group>
                 </Row>
+                <div className="MarginB">
+                {cards.map((post) => (
+                  <CardsEstudios key={post.id} post={post} />
+                ))}
+                </div>
             </div>
+
             <footer>
                 <div className="Fcontainer">
                     <div className="row">
@@ -182,8 +184,8 @@ function Empresas() {
                 </div>
             </footer>
         </div>
+
     );
 }
 
-export default Empresas;
-
+export default Estudios;

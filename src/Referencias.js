@@ -11,23 +11,40 @@ import FacebookIcon from '@mui/icons-material/Facebook';
 import TwitterIcon from '@mui/icons-material/Twitter';
 import { Instagram } from '@mui/icons-material';
 import Link from '@mui/material/Link';
-import CardsReferencias from './Componentes/CardsReferencias';
-
+import {Row, Form, Col} from 'react-bootstrap';
+import {Divider} from '@mui/material';
+import CardsReferenciasMini from './Componentes/CardsReferenciasMini';
+import CardsRefRecibidas from './Componentes/CardsRefRecibidas';
 
 const cards = [
-    {
-      Nombre: 'Jose Leyva Robles',
-      Imagen: 'imagen1.jpg',
-      id:1,
-     
-    },
-    {
-      Nombre: 'Juan Perez',
-      Imagen: 'imagen1.jpg',
-      id:2,
-    }
-  ];
+  {
+    Nombre: 'Juan Lopez',
+    Area: 'Contador',
+    Experiencia:'2 Años',
+    id:1,
+   
+  },
+  {
+    Nombre: 'Pedro Paramo',
+    Area: 'Desarrollador de Software',
+    Experiencia:'6 meses',
+    id:2,
+  }
+];
 
+const cardsRec = [
+  {
+    Nombre: 'Juan Lopez',
+    Imagen: 'Usuario.jpg',
+    id:1,
+   
+  },
+  {
+    Nombre: 'Pedro Paramo',
+    Imagen:'Usuario.jpg',
+    id:2,
+  }
+];
     function Referencias() {
     return(
         <div className="App">
@@ -58,7 +75,7 @@ const cards = [
                                 <Nav.Link href="/Referencias">Referencias
                                     <Badge bg="danger">1</Badge>
                                 </Nav.Link>
-                                <Nav.Link>
+                                <Nav.Link href="/Estudios">
                                     Estudios
                                     <Badge bg="danger">1</Badge></Nav.Link>
                             </Nav>
@@ -84,9 +101,35 @@ const cards = [
                     </Container>
                 </Navbar>
             </header>
-            {cards.map((post) => (
-                  <CardsReferencias key={post.id} post={post} />
+            <div className="ContenedorEmpresas">
+            <h4> Escritorio Virtual</h4>
+            <Divider/>
+                <Row className="MargenL" >
+                <Form.Group as={Col} md="4">
+                        <h6>Candidato activo </h6>
+                
+                </Form.Group>
+                <Form.Group as={Col} md="4">
+                        <h6>Area de especialidad</h6>
+                </Form.Group>
+                <Form.Group as={Col} md="4">
+                        <h6>Años de experiancia</h6>
+                </Form.Group>
+                </Row>
+                <div className="MarginB">
+                {cards.map((post) => (
+                  <CardsReferenciasMini key={post.id} post={post} />
                 ))}
+                </div>
+              <Divider/>
+              <h4>Referencias recibidas</h4>
+              <div className="DivRefRec">
+              {cardsRec.map((post) => (
+                  <CardsRefRecibidas key={post.id} post={post} />
+                ))}
+              </div>
+            </div>
+
             <footer>
         <div className="Fcontainer">
           <div className="row">

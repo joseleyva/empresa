@@ -17,6 +17,7 @@ import {BrowserRouter,Switch, Route} from 'react-router-dom';
 import Referencias from './Referencias';
 import FormReferencias from './Componentes/FormReferencias';
 import DatosEmpresa from './DatosEmpresa';
+import Estudios from './Estudios';
 
 
 ReactDOM.render(
@@ -44,6 +45,7 @@ ReactDOM.render(
     <Route path="/Referencias" component={Referencias} />
     <Route path="/FormReferencias" component={FormReferencias} />
     <Route path="/DatosEmpresa" component={DatosEmpresa} />
+    <Route path="/Estudios" component={Estudios} />
   </Switch>
   </BrowserRouter>,
   rootElement

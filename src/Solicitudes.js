@@ -6,23 +6,8 @@ import { Container } from 'react-bootstrap';
 import { Nav } from 'react-bootstrap';
 import { NavDropdown } from 'react-bootstrap';
 import { Badge } from 'react-bootstrap';
-import Cartas from './Componentes/Cartas';
-
-const cards = [
-    {
-      Nombre: 'Juan',
-      Area: 'Contador',
-      Experiencia:'',
-      id:1,
-     
-    },
-    {
-      Nombre: 'Pedro',
-      Area: 'Desarrollador',
-      Experiencia:'',
-      id:2,
-    }
-  ];
+import {Col, Button, Form, Row} from 'react-bootstrap';
+import { Divider } from '@mui/material';
 
 function Solicitudes() {
     return (
@@ -55,7 +40,7 @@ function Solicitudes() {
                                 <Nav.Link href="/Referencias">Referencias
                                     <Badge bg="danger">1</Badge>
                                 </Nav.Link>
-                                <Nav.Link>
+                                <Nav.Link href="/Estudios">
                                     Estudios
                                     <Badge bg="danger">1</Badge></Nav.Link>
                             </Nav>
@@ -81,9 +66,55 @@ function Solicitudes() {
                     </Container>
                 </Navbar>
             </header>
-            {cards.map((post) => (
-                  <Cartas key={post.id} post={post} />
-                ))}
+            <div className="ContenedorEmpresas">
+            <h4> Escritorio Virtual</h4>
+            <Divider/>
+                <Row className="MargenL" >
+                <Form.Group as={Col} md="4">
+                        <h6>Evaluacíon Psicometrica </h6>
+                
+                </Form.Group>
+                <Form.Group as={Col} md="4">
+                        <h6> Evaluacíon de Conocimientos</h6>
+                </Form.Group>
+                <Form.Group as={Col} md="4">
+                        <h6>Resultados</h6>
+                </Form.Group>
+                </Row>
+                <Row className="mb-3 ">
+                    <Form.Group as={Col} md="4">
+                        <Button variant="outline-primary" className="BtnSolicitudes"></Button>{' '}
+                    </Form.Group>
+                    <Form.Group as={Col} md="4">
+                        <Button variant="outline-primary" className="BtnSolicitudes">Crea tu Evaluación</Button>{' '}
+                    </Form.Group>
+                    <Form.Group as={Col} md="4">
+                        <Button variant="outline-primary" className="BtnSolicitudes">Pruebas Finalizadas</Button>{' '}
+                    </Form.Group>
+                </Row>
+                <Row className="mb-3 ">
+                    <Form.Group as={Col} md="4">
+                        <Button variant="outline-primary" className="BtnSolicitudes" ></Button>{' '}
+                    </Form.Group>
+                    <Form.Group as={Col} md="4">
+                        <Button variant="outline-primary" className="BtnSolicitudes">Evaluaciones Disponibles</Button>{' '}
+                    </Form.Group>
+                    <Form.Group as={Col} md="4">
+                        <Button variant="outline-primary" className="BtnSolicitudes">Ranking de Resultados</Button>{' '}
+                    </Form.Group>
+                </Row>
+                <Row className="mb-3 ">
+                    <Form.Group as={Col} md="4">
+                        <Button variant="outline-primary" className="BtnSolicitudes" ></Button>{' '}
+                    </Form.Group>
+                    <Form.Group as={Col} md="4">
+                    </Form.Group>
+                    <Form.Group as={Col} md="4">
+                        <Button variant="outline-primary" className="BtnSolicitudes">Volver al Inicio</Button>{' '}
+                    </Form.Group>
+                </Row>
+            </div>
+
             <footer>
                 <div className="Fcontainer">
                     <div className="row">

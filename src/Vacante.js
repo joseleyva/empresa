@@ -72,7 +72,7 @@ function Vacante() {
                                 <Nav.Link href="/Referencias">Referencias
                                     <Badge bg="danger">1</Badge>
                                 </Nav.Link>
-                                <Nav.Link>
+                                <Nav.Link href="/Estudios">
                                     Estudios
                                     <Badge bg="danger">1</Badge></Nav.Link>
                             </Nav>

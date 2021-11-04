@@ -133,10 +133,10 @@ function App() {
                 <Nav.Link href="/Acerca">Acerca de</Nav.Link>
                 <Nav.Link href="/Contacto">Contacto</Nav.Link>
               </Nav>
-              <Nav>
+              <div>
                 <Button className="boton" variant="danger" href="/CrearC">Crear Cuenta</Button>
                 <Button className="boton" href="/InicioS">Iniciar Sesion</Button>
-              </Nav>
+              </div>
             </Navbar.Collapse>
           </Container>
         </Navbar>

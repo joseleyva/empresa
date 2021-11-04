@@ -33,7 +33,7 @@ const cards = [
     {
       Nombre: 'Juan',
       Area: 'Contador',
-      Experiencia:'',
+      Experiencia:'2 años',
       id:1,
      
     },

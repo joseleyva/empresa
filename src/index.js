@@ -18,7 +18,7 @@ import Referencias from './Referencias';
 import FormReferencias from './Componentes/FormReferencias';
 import DatosEmpresa from './DatosEmpresa';
 import Estudios from './Estudios';
-
+import Pruebas from './Componentes/Pruebas';
 
 ReactDOM.render(
   <React.StrictMode>
@@ -46,6 +46,7 @@ ReactDOM.render(
     <Route path="/FormReferencias" component={FormReferencias} />
     <Route path="/DatosEmpresa" component={DatosEmpresa} />
     <Route path="/Estudios" component={Estudios} />
+    <Route path="/Pruebas" component={Pruebas} />
   </Switch>
   </BrowserRouter>,
   rootElement

@@ -33,7 +33,7 @@ const Ops = [
 
   ];
 
-export default function CheckboxList() {
+export default function CheckListEstudios() {
   const [checked, setChecked] = React.useState([0]);
 
   const handleToggle = (value) => () => {

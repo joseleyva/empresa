@@ -472,3 +472,18 @@ display: grid!important;
   width: 150px!important;
   margin: 5px auto auto 15px!important;
 }
+
+.BtnSolicitar{
+  margin: 50px auto!important;
+  width: 160px!important;
+}
+.Paquetes{
+  width: 700px;
+  margin: auto!important;
+  border-radius: 20px;
+  border-style: groove;
+}
+.Texto{
+  margin: 10px auto 0px auto!important;
+  width: 650px!important;
+}

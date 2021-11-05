@@ -2,7 +2,7 @@ import React from "react";
 import { Row, Col, Form } from 'react-bootstrap';
 import { Button, Container, Image } from 'react-bootstrap';
 import PropTypes from 'prop-types';
-import Pruebas from './Pruebas';
+import CheckListEstudios from './CheckListEstudios';
 import List from '@mui/material/List';
 import Collapse from '@mui/material/Collapse';
 import ExpandLess from '@mui/icons-material/ExpandLess';
@@ -30,7 +30,7 @@ function CardsEstudios(props) {
             </Button>{' '}
             <Collapse in={open} timeout="auto" unmountOnExit>
               <List component="div" disablePadding>
-                  <Pruebas/>
+                  <CheckListEstudios/>
               </List>
             </Collapse>
           </Form.Group>

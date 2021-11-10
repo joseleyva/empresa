@@ -20,6 +20,8 @@ import DatosEmpresa from './DatosEmpresa';
 import Estudios from './Estudios';
 import EstudiosSimple from './EstudiosSimple';
 import VacanteForm from './Componentes/VacanteForm';
+import VacantesActivas from './VacantesActivas';
+import CandidatosPostulados from './CandidatosPostulados';
 
 ReactDOM.render(
   <React.StrictMode>
@@ -49,6 +51,8 @@ ReactDOM.render(
     <Route path="/Estudios" component={Estudios} />
     <Route path="/EstudiosSimple" component={EstudiosSimple} />
     <Route path="/VacanteForm" component={VacanteForm} />
+    <Route path="/VacantesActivas" component={VacantesActivas} />
+    <Route path="/CandidatosPostulados" component={CandidatosPostulados} />
   </Switch>
   </BrowserRouter>,
   rootElement

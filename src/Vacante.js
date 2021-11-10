@@ -106,10 +106,10 @@ function Vacante() {
                         <Button variant="outline-primary" href="/VacanteForm">Publicar Vacante</Button>{' '}
                     </Form.Group>
                     <Form.Group as={Col} md="4">
-                        <Button variant="outline-primary">Candidatos Postulados</Button>{' '}
+                        <Button variant="outline-primary" href="/CandidatosPostulados">Candidatos Postulados</Button>{' '}
                     </Form.Group>
                     <Form.Group as={Col} md="4">
-                        <Button variant="outline-primary">Vacantes Activas</Button>{' '}
+                        <Button variant="outline-primary" href="/VacantesActivas">Vacantes Activas</Button>{' '}
                     </Form.Group>
                 </Row>
                 <Divider/>

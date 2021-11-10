@@ -5,41 +5,52 @@ import { Container } from 'react-bootstrap';
 import { Nav } from 'react-bootstrap';
 import { NavDropdown } from 'react-bootstrap';
 import { Badge } from 'react-bootstrap';
-import React, { useState } from 'react';
+import { Row, Form, Col } from 'react-bootstrap';
+import * as React from 'react';
+import {Button} from 'react-bootstrap';
 import GitHubIcon from '@mui/icons-material/GitHub';
 import FacebookIcon from '@mui/icons-material/Facebook';
 import TwitterIcon from '@mui/icons-material/Twitter';
 import { Instagram } from '@mui/icons-material';
 import Link from '@mui/material/Link';
 import { Divider } from '@mui/material';
-import { Button, Form, Col, Row } from 'react-bootstrap';
-import ModalEstudios from './Componentes/ModalEstudios';
-import ModalPagos from './Componentes/ModalPagos';
+import CardsVacantes from './Componentes/CardsVacantes';
 
 
-function EstudiosSimple() {
-    const [Enviado, setEnviado] = useState(false);
-    const [show, setShow] = useState(false);
-    const [showPago, setShowPago] = useState(false);
-    const handleClick = (event) => {
-        const Button = event.currentTarget;
-        if (Button.checkValidity() === false) {
+const cards = [
+    {
+      Nombre: 'Contador',
+      id:1,
+     
+    },
+    {
+      Nombre: 'Desarrollador de software',
+      id:2,
+    },
+    {
+        Nombre: 'Velador',
+        id:3,
+       
+      },
+      {
+        Nombre: 'Electrico',
+        id:4,
+      }
+  ];
+ 
+function Vacante() {
+   
 
-        }
-        setEnviado(!Enviado);
-    };
-    const handleShow = () => setShow(!show);
-    const handleShowPago = () => setShowPago(!showPago);
     return (
         <div className="App">
-            <header>
+           <header>
                 <Navbar collapseOnSelect expand="lg" className="BarraEm">
                     <Container>
                         <Navbar.Brand href="/Empresas">
                             <img
                                 alt=""
                                 src="logo512.png"
-
+                                
                                 width="30"
                                 height="30"
                                 className="d-inline-block align-top"
@@ -49,7 +60,7 @@ function EstudiosSimple() {
                         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                         <Navbar.Collapse id="responsive-navbar-nav">
                             <Nav className="me-auto">
-                                <Nav.Link href="/Datos">Datos de la Empresa
+                                <Nav.Link href="/DatosEmpresa">Datos de la Empresa
                                     <Badge bg="danger">1</Badge>
                                 </Nav.Link>
                                 <Nav.Link href="/Vacante">Publicar vacante</Nav.Link>
@@ -85,45 +96,29 @@ function EstudiosSimple() {
                     </Container>
                 </Navbar>
             </header>
+
             <div className="ContenedorEmpresas">
                 <h4> Escritorio Virtual</h4>
-                <Divider />
-                <Button variant="outline-primary" onClick={handleClick} className="BtnSolicitar">Solicitar estudios socioeconómicos</Button>
-                {(Enviado && (
-                    <div className="Paquetes">
-                        <Row className="mb-3">
-                            <Form.Group as={Col} md="10" className="Texto">
-                                <Form.Label align="justify">
-                                    Se ha avisado a la plataforma que deseas incluir estudios socioeconómicos a tu paquete,
-                                    tu esquema de pago séra por estudio realizado con un costo de $343,98 por estudio
-                                    si deseas cambiar tu paquete a otro selecciona una de la opciones y cambiaremos tu esquema de cobro
-                                    a otro, en un plazo de 72hr. Se activara la pestaña de estudios socioeconómicos
-                                </Form.Label>
-                            </Form.Group>
-
-                        </Row>
-                        <Row className="mb-3">
-                            <Form.Group as={Col} md="5">
-                                <Button variant="outline-primary" onClick={handleShowPago}>Cambiar paquete</Button>
-                            </Form.Group>
-                            <Form.Group as={Col} md="7">
-                                <Button variant="outline-primary" onClick={handleShow}>ok, Quiero pagar por estudio realizado</Button>
-                            </Form.Group>
-                        </Row>
-
-
-                    </div>
+                <Row className="mb-3 BotonesEm">
+                    <Form.Group as={Col} md="4">
+                        <Button variant="outline-primary" href="/VacanteForm">Publicar Vacante</Button>{' '}
+                    </Form.Group>
+                    <Form.Group as={Col} md="4">
+                        <Button variant="outline-primary" href="/CandidatosPostulados">Candidatos Postulados</Button>{' '}
+                    </Form.Group>
+                    <Form.Group as={Col} md="4">
+                        <Button variant="outline-primary" href="/VacantesActivas">Vacantes Activas</Button>{' '}
+                    </Form.Group>
+                </Row>
+                <Divider/>
+                <h5>Vacantes Activas</h5>
+                <div className="VacantesActivas">
+                {cards.map((post) => (
+                  <CardsVacantes key={post.id} post={post} />
                 ))}
-                {(show && (
-                    <ModalEstudios />
-
-                ))}
-                {(showPago && (
-                    <ModalPagos />
-
-                ))}
+                </div>
             </div>
-
+          
             <footer>
                 <div className="Fcontainer">
                     <div className="row">
@@ -199,8 +194,8 @@ function EstudiosSimple() {
                 </div>
             </footer>
         </div>
-
     );
 }
 
-export default EstudiosSimple;
+
+export default Vacante;

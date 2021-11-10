@@ -10,6 +10,7 @@ import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { useTheme } from '@mui/material/styles';
+import ModalPagos from './ModalPagos';
 
 
 const schema = yup.object().shape({
@@ -35,7 +36,10 @@ function Formulario() {
   const [open, setOpen] = React.useState(false);
   const theme = useTheme();
   const fullScreen = useMediaQuery(theme.breakpoints.down('md'));
+  const [show, setShow] = useState(false);
 
+
+  const handleShow = () => setShow(!show);
   const handleClick = (event) => {
     const Button = event.currentTarget;
     if (Button.checkValidity() === false) {
@@ -69,12 +73,12 @@ function Formulario() {
         NoEmpleados: '',
         RFC: '',
         RSocial: '',
-        Calle:"",
-        Numero:"",
-        Colonia:"",
-        Codigo:"",
-        Estado:"",
-        Cedula:null,
+        Calle: "",
+        Numero: "",
+        Colonia: "",
+        Codigo: "",
+        Estado: "",
+        Cedula: null,
       }}
     >
       {({
@@ -155,7 +159,7 @@ function Formulario() {
             </Form.Group>
           </Row>
           <Row className="mb-2">
-          <h4>Datos de la Empresa</h4>
+            <h4>Datos de la Empresa</h4>
           </Row>
           <Row className="mb-2">
             <Form.Group as={Col} md="6" controlId="validationFormik03" className="position-relative">
@@ -190,7 +194,7 @@ function Formulario() {
             </Form.Group>
           </Row>
           <Row className="mb-3">
-          <Form.Group as={Col} md="4" controlId="validationFormik03" className="position-relative">
+            <Form.Group as={Col} md="4" controlId="validationFormik03" className="position-relative">
               <Form.Label>Numero de empleados</Form.Label>
               <Form.Select
                 type="select"
@@ -209,18 +213,18 @@ function Formulario() {
             </Form.Group>
 
             <Form.Group as={Col} md="8" className="position-relative">
-            <Form.Label>Cedula fiscal</Form.Label>
-            <Form.Control
-              type="file"
-              required
-              name="Cedula"
-              onChange={handleChange}
-              isValid={touched.Cedula && !errors.Cedula}
-              isInvalid={fallo ? !!errors.Cedula : false}
-            />
-            <Form.Control.Feedback type="invalid" tooltip> {errors.Cedula}</Form.Control.Feedback>
+              <Form.Label>Cedula fiscal</Form.Label>
+              <Form.Control
+                type="file"
+                required
+                name="Cedula"
+                onChange={handleChange}
+                isValid={touched.Cedula && !errors.Cedula}
+                isInvalid={fallo ? !!errors.Cedula : false}
+              />
+              <Form.Control.Feedback type="invalid" tooltip> {errors.Cedula}</Form.Control.Feedback>
             </Form.Group>
-            </Row>
+          </Row>
 
           <Row className="mb-3">
             <Form.Label>DIRECCIÓN:</Form.Label>
@@ -237,8 +241,8 @@ function Formulario() {
                 required
               />
               <Form.Control.Feedback type="invalid" tooltip>{errors.Calle} </Form.Control.Feedback>
-              </Form.Group>
-              <Form.Group as={Col} md="2" controlId="validationFormik03" className="position-relative">
+            </Form.Group>
+            <Form.Group as={Col} md="2" controlId="validationFormik03" className="position-relative">
               <Form.Label>Numero</Form.Label>
               <Form.Control
                 type="text"
@@ -251,8 +255,8 @@ function Formulario() {
                 required
               />
               <Form.Control.Feedback type="invalid" tooltip>{errors.Numero} </Form.Control.Feedback>
-              </Form.Group>
-              <Form.Group as={Col} md="5" controlId="validationFormik03" className="position-relative">
+            </Form.Group>
+            <Form.Group as={Col} md="5" controlId="validationFormik03" className="position-relative">
               <Form.Label>Colonia o Fraccionamiento</Form.Label>
               <Form.Control
                 type="text"
@@ -265,10 +269,10 @@ function Formulario() {
                 required
               />
               <Form.Control.Feedback type="invalid" tooltip>{errors.Colonia} </Form.Control.Feedback>
-              </Form.Group>
+            </Form.Group>
           </Row>
           <Row className="mb-3">
-          <Form.Group as={Col} md="3" controlId="validationFormik03" className="position-relative">
+            <Form.Group as={Col} md="3" controlId="validationFormik03" className="position-relative">
               <Form.Label>Codigo Postal</Form.Label>
               <Form.Control
                 type="text"
@@ -281,8 +285,8 @@ function Formulario() {
                 required
               />
               <Form.Control.Feedback type="invalid" tooltip>{errors.Codigo} </Form.Control.Feedback>
-              </Form.Group>
-              <Form.Group as={Col} md="4" controlId="validationFormik03" className="position-relative">
+            </Form.Group>
+            <Form.Group as={Col} md="4" controlId="validationFormik03" className="position-relative">
               <Form.Label>Estado</Form.Label>
               <Form.Control
                 type="text"
@@ -295,14 +299,14 @@ function Formulario() {
                 required
               />
               <Form.Control.Feedback type="invalid" tooltip>{errors.Estado} </Form.Control.Feedback>
-              </Form.Group>
-              <Form.Group as={Col} md="3">
-                <Form.Label>Paquetes Ofrecidos </Form.Label>
-              <Button variant="outline-success">Pagar Servicio</Button>
-              </Form.Group>
+            </Form.Group>
+            <Form.Group as={Col} md="3">
+              <Form.Label>Paquetes Ofrecidos </Form.Label>
+              <Button variant="outline-success" onClick={handleShow}>Pagar Servicio</Button>
+            </Form.Group>
           </Row>
-         
-          
+
+
           <div className="divBD">
             <Button type="submit" onClick={handleClick} className="boton">Guardar</Button>
             <Button variant="danger" href="/" className="boton">Cancelar</Button>
@@ -331,10 +335,15 @@ function Formulario() {
               </Dialog>
             ))
           }
+          {(show && (
+            <ModalPagos />
+          ))}
 
         </Form>
       )}
+
     </Formik>
+
   );
 
 }

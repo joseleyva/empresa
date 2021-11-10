@@ -9,6 +9,10 @@ import FacebookIcon from '@mui/icons-material/Facebook';
 import TwitterIcon from '@mui/icons-material/Twitter';
 import { Instagram } from '@mui/icons-material';
 import Link from '@mui/material/Link';
+import Grid from '@mui/material/Grid';
+import Paper from '@mui/material/Paper';
+import Typography from '@mui/material/Typography';
+import FormularioContacto from './Componentes/FormularioContacto';
 
 function Contacto() {
     return (
@@ -39,7 +43,24 @@ function Contacto() {
                     </Navbar.Collapse>
                 </Container>
             </Navbar>
-            <h1>Pagina de prueba de Contacto</h1>
+            <Container>
+                <Grid container spacing={0} sx={{ mt: 2 }}>
+                    <h3>Por favor complete el formulario</h3>
+                    <Grid container spacing={0} className="Contacto">
+                    <FormularioContacto/>
+
+                    </Grid>
+                    <Grid item xs={12} md={2}>
+                        <Paper elevation={0} sx={{ p: 2,  }}>
+                            <Typography variant="h6" gutterBottom>
+                                Ubicación
+                            </Typography>
+                            <Typography>Numero: 927329837</Typography>
+                        </Paper>
+
+                    </Grid>
+                </Grid>
+            </Container>
             <footer>
                 <div className="Fcontainer">
                     <div className="row">
@@ -115,7 +136,7 @@ function Contacto() {
                 </div>
             </footer>
         </div>
-     
+
 
     );
 

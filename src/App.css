@@ -175,14 +175,13 @@
   text-align: right!important;
 }
  .ContenedorVacante{
-  margin-top: 5px;
-  margin-bottom: 5px;
+  margin: 5px !important;
   border-style: solid;
   border-radius: 15px;
   border-color: rgb(94, 89, 89);
   width: 380px!important;
   height: 150px!important;
-  display: table-caption;
+  display: inline-block;
 }
  .C{
    text-align: left!important;
@@ -344,7 +343,7 @@
 }
 .VacantesActivas{
   width: 800px;
-  display: flex!important;
+  display: inline-block!important;
 }
 
 .Graficas{
@@ -486,4 +485,27 @@ display: grid!important;
 .Texto{
   margin: 10px auto 0px auto!important;
   width: 650px!important;
+}
+.pagos{
+  border-style: solid;
+  border-radius: 22px;
+  border-width:thin;
+  border-color: rgb(94, 89, 89);
+  height: 350px!important;
+  margin: 5px auto!important;
+}
+
+.BtnPagos{
+  width: 160px!important;
+ margin-left: 10px!important;
+ margin-top: 5px!important;
+}
+
+.Contacto{
+  width: 80%!important;
+}
+
+.FormContacto{
+  width: 890px!important;
+  text-align: left!important;
 }

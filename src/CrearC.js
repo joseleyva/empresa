@@ -20,9 +20,12 @@ import DialogTitle from '@mui/material/DialogTitle';
 
 const schema = yup.object().shape({
     Nombre: yup.string().required("Ingrese su nombre"),
-    Correo: yup.string().required("Ingrese sus Correo").email('Correo Invalido'),
-    Contra: yup.string().max(20, 'Muy larga').min(8, 'Muy corta').required("Ingrese su contraseña"),
-    ConfContra: yup.string().required("Confirme su contraseña").max(20, 'Muy larga').min(8, 'Muy corta'),
+    Correo: yup.string().required("Ingrese sus Correo").email('Correo no valido'),
+    Contra: yup.string().required("Ingrese su contraseña").matches(
+        /^.*(?=.{8,})((?=.*[!@#$%^&*()\-_=+{};:,<.>]){1})(?=.*\d)((?=.*[a-z]){1})((?=.*[A-Z]){1}).*$/,
+        "Min 8 Caracteres, 1 Mayúscula, 1 Minúscula, Un Numero y Un Carácter Especial"
+      ),
+    ConfContra: yup.string().required("Confirme su contraseña").min(8, 'Muy corta').oneOf([yup.ref("Contra"), null], "Passwords must match"),
 });
 
 
@@ -218,7 +221,7 @@ function CrearC() {
                                                     </DialogContentText>
                                                 </DialogContent>
                                                 <DialogActions>
-                                                    <Button href="/Empresas" onClick={handleClose} autoFocus>
+                                                    <Button href="/" onClick={handleClose} autoFocus>
                                                         Aceptar
                                                     </Button>
                                                 </DialogActions>

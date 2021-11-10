@@ -7,12 +7,12 @@ import Snackbar from '@mui/material/Snackbar';
 import Alert from '@mui/material/Alert';
 
 const schema = yup.object().shape({
-    Nombre: yup.string().required("Seleccione la Escolaridad"),
-    Correo: yup.string().required("especifique los conociemntos").email('Correo no valido'),
-    Telefono: yup.string().required("Especifique el puesto"),
-    Asunto: yup.string().required("Especifique las competencias").matches(/^[a-zA-Z ]+$/),
-    Ciudad: yup.string().required("Especifique las habilidades").matches(/^[a-zA-Z]+$/),
-    Mensaje: yup.string().required("Especifique"),
+    Nombre: yup.string().required("Ingrese su nombre completo").min(5, 'Muy Corto'),
+    Correo: yup.string().required("Ingrese su correo").email('Correo no valido'),
+    Telefono: yup.string().required("Ingrese su Num. de Telefono").min(10, 'Muy Corto'),
+    Asunto: yup.string().required("Ingrese el Asunto").matches(/^[a-zA-Z ]+$/).min(5, 'Muy Corto'),
+    Ciudad: yup.string().required("Ingrese su Ciudad").matches(/^[a-zA-Z]+$/).min(5, 'Muy Corto'),
+    Mensaje: yup.string().required("Ingrese el Mensaje").min(10, 'Muy Corto'),
 
 });
 const FormEdu = () => {
@@ -156,15 +156,15 @@ const FormEdu = () => {
                                 </InputGroup>
                             </Form.Group>
                         </Row>
-                        <div className="DivBF">
-                            <Button type="submit" onClick={handleClick} className="botonF" >Guardar</Button>
-                        </div>
+                     
+                            <Button type="submit" onClick={handleClick} >Enviar</Button>
+                        
                         {
                                     (enviado&&(
                                         <Stack spacing={2} sx={{ width: '100%' }}>
                                         <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
                                           <Alert onClose={handleClose} variant="filled" severity="success"sx={{ width: '100%' }}>
-                                            Datos guardados correctamente
+                                            Datos Enviados correctamente
                                           </Alert>
                                         </Snackbar>
                                         

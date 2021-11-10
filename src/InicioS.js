@@ -20,8 +20,8 @@ import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 
 const schema = yup.object().shape({
-    Correo: yup.string().required("Ingrese el correo").email("Correo Invalido"),
-    Contra: yup.string().matches(/^[a-zA-Z0-9]+$/).required("Ingrese la contraseña").min(8, 'Muy Corta'),
+    Correo: yup.string().required("Ingrese el correo").email("Correo no valido"),
+    Contra: yup.string().required("Ingrese la contraseña"),
 });
 
 

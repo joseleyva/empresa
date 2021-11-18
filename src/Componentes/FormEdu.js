@@ -21,12 +21,13 @@ const schema = yup.object().shape({
 
 
 });
-const FormEdu = () => {
+const FormEdu = (props) => {
     const [validated, setValidated]= useState(false)
     const [fallo, setFallo] = useState(false);
     const [enviado, setEnviado] = useState(false);
     const [open, setOpen] = React.useState(false);
-
+    const [estado,setEstado]=React.useState(true);
+    const {funcion, place}=props;
     const handleClick = (event) => {
         const Button = event.currentTarget;
         if (Button.checkValidity() === false) {
@@ -50,6 +51,7 @@ const FormEdu = () => {
                     console.log(valores)
                     setEnviado(true);
                     setValidated(true);
+                    setEstado(false);
                     setTimeout(()=>setEnviado(false),5000);
                 }}
                 initialValues={{
@@ -75,7 +77,7 @@ const FormEdu = () => {
                     errors,
                 }) => (
                     <Form noValidate validated={validated} onSubmit={handleSubmit} className="FormDatos">
-                        <h4>Datos de la Educativos</h4>
+                        <Form.Label className="titulo">Datos de Escolaridad</Form.Label>
                         <Row className="mb-3">
                             <Form.Group as={Col} md="4" controlId="validationFormik01" className="position-relative">
                                 <Form.Label>Escolaridad</Form.Label>
@@ -241,6 +243,13 @@ const FormEdu = () => {
                             <Button type="submit" onClick={handleClick} className="botonF" >Guardar</Button>
                             <Button variant="danger" className="botonF">Cancelar</Button>
                         </div>
+                        <Row className="mt-3">
+                        <Form.Group as={Col} md={{span:10, offset: 10}}>
+                        <Button onClick={funcion} disabled={estado} className="botonStep" variant="outline-secondary">
+                                {place}
+                                </Button>
+                        </Form.Group>
+                        </Row>
                         {
                                     (enviado&&(
                                         <Stack spacing={2} sx={{ width: '100%' }}>

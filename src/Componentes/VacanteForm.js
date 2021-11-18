@@ -33,7 +33,18 @@ function VacanteForm() {
         setActiveStep((prevActiveStep) => prevActiveStep + 1);
         setSkipped(newSkipped);
     };
-
+    function getStepContent(step, funcion) {
+        switch (step) {
+            case 0:
+                return <FormVac funcion={handleNext} place={activeStep === steps.length - 1 ? 'Finish' : 'Next'}/>;
+            case 1:
+                return <FormEdu funcion={handleNext} place={activeStep === steps.length - 1 ? 'Finish' : 'Next'}/>;
+            case 2:
+                return <FormSueldo funcion={handleNext} place={activeStep === steps.length - 1 ? 'Finish' : 'Next'}/>;
+            default:
+                return 'Unknown step';
+        }
+    }
     return (
         <div>
            <header>
@@ -112,25 +123,23 @@ function VacanteForm() {
                             <Typography sx={{ mt: 2, mb: 1 }}>
                                 Formulario terminado
                             </Typography>
-                            <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
+                            <Box sx={{ display: 'flex', flexDirection: 'row', pt: 1 }}>
                                 <Box sx={{ flex: '1 1 auto' }} />
-                                <Button href={'./Vacante'} variant="outline-success" className="botonStep">Guardar</Button>
+                                <Button href={'./Vacante'} variant="outline-success" className="botonStepG mb-3">Guardar</Button>
                             </Box>
                         </React.Fragment>
                     ) : (
                         <React.Fragment>
-                            <Typography sx={{ mt: 2, mb: 1 }}>{getStepContent( activeStep)}</Typography>
+                            <Typography sx={{ mt: 2, mb: 1 }}>{getStepContent(activeStep)}</Typography>
                             <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
                                 <Box sx={{ flex: '1 1 auto' }} />
-                                <Button onClick={handleNext} type="submit" className="botonStep" variant="outline-secondary">
-                                    {activeStep === steps.length - 1 ? 'Finish' : 'Next'}
-                                </Button>
+                                
                             </Box>
                         </React.Fragment>
                     )}
                 </Box>
                 </div>
-           
+   
             <footer>
                 <div className="Fcontainer">
                     <div className="row">
@@ -208,17 +217,6 @@ function VacanteForm() {
     );
 }
 
-function getStepContent(step) {
-    switch (step) {
-        case 0:
-            return <FormVac />;
-        case 1:
-            return <FormEdu />;
-        case 2:
-            return <FormSueldo />;
-        default:
-            return 'Unknown step';
-    }
-}
+
 
 export default VacanteForm;

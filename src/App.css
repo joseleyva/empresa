@@ -234,9 +234,14 @@
   border-style: groove;
  }
  .botonStep{
-   margin-right: 50px;
-   margin-bottom: 10px;
    width: 100px;
+ }
+ .botonStepG{
+   margin-right: 10px!important;
+  width: 100px;
+}
+ .titulo{
+   font-size: xx-large!important;
  }
 
 

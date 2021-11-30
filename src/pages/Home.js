@@ -21,7 +21,6 @@ import Typography from '@mui/material/Typography';
 import Divider from '@mui/material/Divider';
 
 
-
 const mainFeaturedPost = {
   title: 'Title of a longer featured blog post',
   description:
@@ -113,7 +112,35 @@ function App() {
   return (
 
     <div className="App">
-      
+          <header >
+        <Navbar collapseOnSelect expand="lg" className="Barra ">
+          <Container>
+            <Navbar.Brand href="/">
+              <img
+                alt=""
+                src="logo512.png"
+                width="30"
+                height="30"
+                className="d-inline-block align-top"
+              />{' '}
+              Nombre de la empresa
+            </Navbar.Brand>
+            <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+            <Navbar.Collapse id="responsive-navbar-nav">
+              <Nav className="me-auto">
+                <Nav.Link href="/Productos">Productos</Nav.Link>
+                <Nav.Link href="/Acerca">Acerca de</Nav.Link>
+                <Nav.Link href="/Contacto">Contacto</Nav.Link>
+              </Nav>
+              <div>
+                <Button className="boton" variant="danger" href="/CrearC">Crear Cuenta</Button>
+                <Button className="boton" href="/InicioS">Iniciar Sesion</Button>
+              </div>
+            </Navbar.Collapse>
+          </Container>
+        </Navbar>
+
+      </header>
 
       <ThemeProvider theme={theme}>
         <CssBaseline />

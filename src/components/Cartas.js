@@ -2,6 +2,7 @@ import React from "react";
 import { Row, Col, Image } from 'react-bootstrap';
 import { Dropdown, ButtonGroup, Button, Container } from 'react-bootstrap';
 import PropTypes from 'prop-types';
+import Imagen from '../assets/img/jpg/imagen1.jpg';
 
 function Cartas(props) {
     const { post} = props;
@@ -11,7 +12,7 @@ function Cartas(props) {
                 <Container className="ContenedorV">
                     <Row className="IconCartas">
                         <Col xs={2} md={1}>
-                            <Image src="imagen1.jpg" roundedCircle width="150px" height="150px" />
+                            <Image src={Imagen} roundedCircle width="150px" height="150px" />
                         </Col>
                     </Row>
                     <div className="C">

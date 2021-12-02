@@ -19,8 +19,8 @@ import Sidebar from '../components/Sidebar';
 import Link from '@mui/material/Link';
 import Typography from '@mui/material/Typography';
 import Divider from '@mui/material/Divider';
-
-
+import { getAccessTokenApi } from "../api/auth";
+import { Redirect } from "react-router-dom";
 const mainFeaturedPost = {
   title: 'Title of a longer featured blog post',
   description:
@@ -109,13 +109,16 @@ const theme = createTheme();
 
 
 function App() {
+  if (getAccessTokenApi()) {
+    return <Redirect to="/Empresas" />;
+  }
   return (
 
     <div className="App">
           <header >
         <Navbar collapseOnSelect expand="lg" className="Barra ">
           <Container>
-            <Navbar.Brand href="/">
+            <Navbar.Brand href="/Home">
               <img
                 alt=""
                 src="logo512.png"

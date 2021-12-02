@@ -1,36 +1,36 @@
-import '../App.css';
+import '../../App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Navbar } from 'react-bootstrap';
-import { Container, Col, Row, Image, Form, Button } from 'react-bootstrap';
+import { Container } from 'react-bootstrap';
 import { Nav } from 'react-bootstrap';
 import { NavDropdown } from 'react-bootstrap';
 import { Badge } from 'react-bootstrap';
+import React, { useState } from 'react';
 import GitHubIcon from '@mui/icons-material/GitHub';
 import FacebookIcon from '@mui/icons-material/Facebook';
 import TwitterIcon from '@mui/icons-material/Twitter';
 import { Instagram } from '@mui/icons-material';
 import Link from '@mui/material/Link';
+import { Divider } from '@mui/material';
+import { Button, Form, Col, Row } from 'react-bootstrap';
+import ModalEstudios from '../../components/ModalEstudios';
+import ModalPagos from '../../components/ModalPagos';
 
 
+function EstudiosSimple() {
+    const [Enviado, setEnviado] = useState(false);
+    const [show, setShow] = useState(false);
+    const [showPago, setShowPago] = useState(false);
+    const handleClick = (event) => {
+        const Button = event.currentTarget;
+        if (Button.checkValidity() === false) {
 
-function DatosEmpresas() {
-    const Datos ={
-        RazonSocial:' Empresa 100% reponsable',
-        Direccion:'palenque, 602, Huizache 2',
-        RFC:'KDH7765875JHG',
-        Giro:'Servicios',
-        Nombre:'Paulo Lopez',
-        Puesto:'Gerente',
-        Estado:'Durango',
-        Municipio:'Durango',
-        Codigo:'34000',
-        telefono:'6180456456',
-        Horario:'10:00 am- 04:00pm',
-        Correo:'localsid@hotmail.com'
+        }
+        setEnviado(!Enviado);
     };
+    const handleShow = () => setShow(!show);
+    const handleShowPago = () => setShowPago(!showPago);
     return (
-      
-
         <div className="App">
             <header>
                 <Navbar collapseOnSelect expand="lg" className="BarraEm">
@@ -39,6 +39,7 @@ function DatosEmpresas() {
                             <img
                                 alt=""
                                 src="logo512.png"
+
                                 width="30"
                                 height="30"
                                 className="d-inline-block align-top"
@@ -48,7 +49,7 @@ function DatosEmpresas() {
                         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                         <Navbar.Collapse id="responsive-navbar-nav">
                             <Nav className="me-auto">
-                                <Nav.Link href="/DatosEmpresa">Datos de la Empresa
+                                <Nav.Link href="/Datos">Datos de la Empresa
                                     <Badge bg="danger">1</Badge>
                                 </Nav.Link>
                                 <Nav.Link href="/Vacante">Publicar vacante</Nav.Link>
@@ -84,37 +85,44 @@ function DatosEmpresas() {
                     </Container>
                 </Navbar>
             </header>
-            <div className="DivDatosEmpresa">
-                <Row className="mb-3 ImagenDatosEmpresa">
-                <Form.Group as={Col} md="3" >
-                        <Image src="imagen1.jpg" width="150px" height="150px" />
-                        <div className="DivBtnDE">
-                        <Button variant="outline-primary" className="boton">Editar datos</Button>
-                        <Button variant="outline-primary" className="boton">Volver al inicio</Button>
-                        </div>
-                </Form.Group>
-                <Form.Group as={Col} md="5" className="DatosEmpresas">
-                    <div className="AlinDatosEmpresas">
-                    <h5>Datos de la Empresa: </h5>
-                    <Form.Label>Razon Social: {Datos.RazonSocial}</Form.Label>
-                    <Form.Label>Dirección: {Datos.Direccion} </Form.Label>
-                    <Form.Label>RFC: {Datos.RFC}</Form.Label>
-                    <Form.Label>Giro Empresarial: {Datos.Giro} </Form.Label>
-                    <Form.Label>Responsable de la Empresa: {Datos.Nombre}</Form.Label>
-                    <Form.Label>Puesto del Responsable: {Datos.Puesto}</Form.Label>
-                    <Form.Label>Estado: {Datos.Estado}</Form.Label>
-                    <Form.Label>Municipio: {Datos.Municipio}</Form.Label>
-                    <Form.Label>Codigo Postal: {Datos.Codigo}</Form.Label>
-                    <Form.Label>Télefono: {Datos.telefono}</Form.Label>
-                    <Form.Label>Horario de atención: {Datos.Horario}</Form.Label>
-                    <Form.Label>Correo: {Datos.Correo}</Form.Label>
-                </div>
-                </Form.Group>
-                </Row>
+            <div className="ContenedorEmpresas">
+                <h4> Escritorio Virtual</h4>
+                <Divider />
+                <Button variant="outline-primary" onClick={handleClick} className="BtnSolicitar">Solicitar estudios socioeconómicos</Button>
+                {(Enviado && (
+                    <div className="Paquetes">
+                        <Row className="mb-3">
+                            <Form.Group as={Col} md="10" className="Texto">
+                                <Form.Label align="justify">
+                                    Se ha avisado a la plataforma que deseas incluir estudios socioeconómicos a tu paquete,
+                                    tu esquema de pago séra por estudio realizado con un costo de $343,98 por estudio
+                                    si deseas cambiar tu paquete a otro selecciona una de la opciones y cambiaremos tu esquema de cobro
+                                    a otro, en un plazo de 72hr. Se activara la pestaña de estudios socioeconómicos
+                                </Form.Label>
+                            </Form.Group>
+
+                        </Row>
+                        <Row className="mb-3">
+                            <Form.Group as={Col} md="5">
+                                <Button variant="outline-primary" onClick={handleShowPago}>Cambiar paquete</Button>
+                            </Form.Group>
+                            <Form.Group as={Col} md="7">
+                                <Button variant="outline-primary" onClick={handleShow}>ok, Quiero pagar por estudio realizado</Button>
+                            </Form.Group>
+                        </Row>
 
 
+                    </div>
+                ))}
+                {(show && (
+                    <ModalEstudios />
+
+                ))}
+                {(showPago && (
+                    <ModalPagos />
+
+                ))}
             </div>
-
 
             <footer>
                 <div className="Fcontainer">
@@ -191,8 +199,8 @@ function DatosEmpresas() {
                 </div>
             </footer>
         </div>
+
     );
 }
 
-export default DatosEmpresas;
-
+export default EstudiosSimple;

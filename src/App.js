@@ -2,9 +2,10 @@ import React from "react";
 import routes from "./config/routes";
 import {BrowserRouter as Router,Route, Switch} from "react-router-dom";
 import "./App.css";
-
+import AuthProvider from './providers/AuthProvider';
 function App(){
   return(
+    <AuthProvider>
       <Router>
         <Switch>
         {routes.map((route, index)=>(
@@ -12,7 +13,8 @@ function App(){
         ))} 
         </Switch>
       </Router>
-  )
+      </AuthProvider>
+  );
 }
 function RouterWithSubRouters(route){
   return(

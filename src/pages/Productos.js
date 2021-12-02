@@ -15,6 +15,8 @@ import FacebookIcon from '@mui/icons-material/Facebook';
 import TwitterIcon from '@mui/icons-material/Twitter';
 import { Instagram } from '@mui/icons-material';
 import Link from '@mui/material/Link';
+import { getAccessTokenApi } from "../api/auth";
+import { Redirect } from "react-router-dom";
 
 const tiers = [
     {
@@ -57,6 +59,9 @@ const tiers = [
 ];
 
 function Productos() {
+    if (getAccessTokenApi()) {
+        return <Redirect to="/Empresas" />;
+      }
     return (
         <div className="App">
             <Navbar collapseOnSelect expand="lg" className="Barra">

@@ -11,8 +11,10 @@ import { Form, Row, FloatingLabel, Col, Button } from "react-bootstrap";
 import { useTheme } from "@mui/material/styles";
 import { Formik } from "formik";
 import * as yup from "yup";
+import {notification} from 'antd';
 import * as React from 'react';
-import { Alert } from 'react-bootstrap';
+import { getAccessTokenApi } from "../api/auth";
+import { Redirect } from "react-router-dom";
 import { signUpApi } from "../api/user";
 
 const schema = yup.object().shape({
@@ -35,8 +37,6 @@ const schema = yup.object().shape({
 function CrearC() {
     const [validated, setValidated] = useState(false);
     const [fallo, setFallo] = useState(false);
-    const [alerta, setAlerta] = useState("");
-    const [visible, setVisible] = useState(false);
     const theme = useTheme();
     const handleClick = (event) => {
         const Button = event.currentTarget;
@@ -44,6 +44,9 @@ function CrearC() {
         }
         setFallo(true);
     };
+    if (getAccessTokenApi()) {
+        return <Redirect to="/Empresas" />;
+      }
     return (
         <Formik
             validationSchema={schema}
@@ -51,9 +54,18 @@ function CrearC() {
                 setValidated(true);
                 const result = await signUpApi(valores);
                 if (!result.ok) {
-                    setVisible(true);
-                   setAlerta(result.message);
+                    notification["error"]({
+                      description: result.message,
+                     placement: 'bottomLeft',
+                    });
+                }else{
+                  notification["success"]({
+                    description: result.message,
+                    placement: 'bottomLeft',
+                  });
+                  resetForm();
                 }
+                window.location.href="/";
             }}
             initialValues={{
                 name: "",
@@ -246,17 +258,12 @@ function CrearC() {
                                             type="submit"
                                             onClick={handleClick}
                                         >
-                                            Iniciar Sesion
+                                            Crear cuenta
                                         </Button>
                                         <Button className="botonS" variant="danger" href="/">
                                             Cancelar
                                         </Button>
                                     </div>
-                                    {(visible && (
-                                       <Alert  variant="danger">
-                                       {alerta}
-                                     </Alert>
-                                    ))}
                                 </Box>
                                 
                             </Box>

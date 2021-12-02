@@ -13,8 +13,13 @@ import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
 import Typography from '@mui/material/Typography';
 import FormularioContacto from '../components/FormularioContacto';
+import { getAccessTokenApi } from "../api/auth";
+import { Redirect } from "react-router-dom";
 
 function Contacto() {
+    if (getAccessTokenApi()) {
+        return <Redirect to="/Empresas" />;
+      }
     return (
         <div className="App">
             <Navbar collapseOnSelect expand="lg" className="Barra">

@@ -47,6 +47,6 @@ function LoadRoutes({ routes }) {
         component={route.component}
       />
       ))}
-    </Switch>
+    </Switch> 
   );
 }

@@ -1,6 +1,6 @@
 import React from "react";
 import {Layout, Tabs} from 'antd';
-import {Redirrect} from 'react-router-dom';
+
 import Logo from '../../../assets/img/png/logo512.png';
 import "./SignIn.scss";
 

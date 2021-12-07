@@ -1,5 +1,5 @@
-import React,{useState, useCallback} from 'react';
-import {Avatar,Select} from 'antd';
+import React,{useState,useEffect, useCallback} from 'react';
+import {Avatar} from 'antd';
 import {useDropzone} from 'react-dropzone';
 import "./EditUserForm.scss";
 import { Form, Col, Button, Row, InputGroup } from 'react-bootstrap';
@@ -16,12 +16,19 @@ export default function EditUserForm(props){
        active: user.active,
        avatar: user.avatar
    });
+   const [avatar, setAvatar]=useState(null);
+   useEffect(()=>{
+    if(avatar){
+      setUserData({...userData, avatar})
+    }
+   // eslint-disable-next-line no-use-before-define
+   }, [avatar]);
    const updateUser= e=>{
        e.preventDefault();
        console.log(userData);
 
    }
-    const [avatar, setAvatar]=useState(null);
+    
     return(
         <div className="edit-user-form">
         <UploadAvatar avatar={avatar} setAvatar={setAvatar}/>
@@ -62,7 +69,7 @@ function UploadAvatar(props){
 
 function EditForm(props){
     const { userData, setUserData, updateUser}=props;
-    const {Option} = Select;
+   
     return(
         <Form className="form-edit" onSubmit={updateUser}>
 
@@ -157,9 +164,11 @@ function EditForm(props){
                 </Form.Select>
               </Form.Group>
           </Row>
+          <Row>
           <Form.Group as={Col} md="10">
-              <Button variant="primary" type="submit">Actualizar datos</Button>
+              <Button variant="primary" className="form-edit__boton" type="submit">Actualizar datos</Button>
             </Form.Group>
+        </Row>
         </Form>
 
     )

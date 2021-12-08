@@ -1,6 +1,6 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import * as React from "react";
-import { Switch } from "antd";
+import { Switch, notification } from "antd";
 import Button from "@mui/material/Button";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
@@ -15,11 +15,12 @@ import DoNotDisturbAltIcon from "@mui/icons-material/DoNotDisturbAlt";
 import NoAvatar from "../../../../assets/img/png/logo512.png";
 import Modal from "../../../../components/Modal";
 import EditUserForm from "../EditUserForm";
-
+import {getAvatarApi, activateUserApi} from '../../../../api/user';
+import {getAccessTokenApi} from '../../../../api/auth';
 import "./ListUsers.scss";
 
 export default function ListUsers(props) {
-  const { usersActive, usersInactive } = props;
+  const { usersActive, usersInactive, setReloadUsers } = props;
   const [viewUsersActives, setViewUsersActives] = useState(true);
   const [isVisibleModal, setIsVisibleModal] = useState(false);
   const [modalTitle, setModalTitle] = useState("");
@@ -42,9 +43,10 @@ export default function ListUsers(props) {
           setIsVisibleModal={setIsVisibleModal}
           setModalTitle={setModalTitle}
           setModalContent={setModalContent}
+          setReloadUsers={setReloadUsers}
         />
       ) : (
-        <UsersInactive usersInactive={usersInactive} />
+        <UsersInactive setReloadUsers={setReloadUsers} usersInactive={usersInactive} />
       )}
       <Modal
         title={modalTitle}
@@ -57,12 +59,14 @@ export default function ListUsers(props) {
   );
 }
 
+
+
 function UsersActive(props) {
-  const { usersActive, setIsVisibleModal, setModalTitle, setModalContent } = props;
+  const { usersActive, setIsVisibleModal, setModalTitle, setModalContent, setReloadUsers } = props;
 const editUser = user =>{
     setIsVisibleModal(true);
     setModalTitle(`Editar ${user.name} ${user.lastname}`);
-    setModalContent(<EditUserForm user={user}/>);
+    setModalContent(<EditUserForm user={user} setReloadUsers={setReloadUsers} setIsVisibleModal={setIsVisibleModal}/>);
 }
 
   return (
@@ -71,102 +75,171 @@ const editUser = user =>{
       dense
       sx={{ width: "100%", bgcolor: "background.paper" }}
     >
-      {usersActive.map((user) => {
-        return (
-          <ListItem
-            alignItems="flex-start"
-            key={user.name}
-            secondaryAction={
-              <>
-                <Button style={{ margin: 5 }} variant="contained" onClick={()=> editUser(user)}>
-                  {<EditIcon />}
-                </Button>
-                <Button
-                  style={{ margin: 5 }}
-                  variant="contained"
-                  color="warning"
-                >
-                  {<DoNotDisturbAltIcon />}
-                </Button>
-                <Button style={{ margin: 5 }} variant="contained" color="error">
-                  {<DeleteIcon />}
-                </Button>
-              </>
-            }
-          >
-            <ListItemAvatar>
-              <Avatar
-                alt="Remy Sharp"
-                src={user.avatar ? user.avatar : NoAvatar}
-              />
-            </ListItemAvatar>
-            <ListItemText
-              primary={user.name ? user.name : "..."}
-              secondary={
-                <React.Fragment>
-                  <Typography
-                    sx={{ display: "inline" }}
-                    component="span"
-                    variant="body2"
-                    color="text.primary"
-                  >
-                    {user.email ? user.email : "..."}
-                  </Typography>
-                </React.Fragment>
-              }
-            />
-          </ListItem>
-        );
-      })}
+      {usersActive.map(user => <UserActive user={user} setReloadUsers={setReloadUsers} editUser={editUser}/>)}
     </List>
   );
 }
+
+
+function UserActive(props){
+  const {user, editUser, setReloadUsers} = props;
+  const [avatar, setAvatar] = useState(null);
+  
+  useEffect(()=>{
+
+    if(user.avatar){
+      getAvatarApi(user.avatar).then(response=>{
+        setAvatar(response);
+      })
+    }else{
+      setAvatar(null);
+    }
+  }, [user]);
+
+  const desactivateUser= ()=>{
+    const accessToken= getAccessTokenApi();
+    activateUserApi(accessToken, user._id, false).then(response=>{
+      notification["success"]({
+        message: response,
+        placement: 'bottomLeft',
+      });
+      setReloadUsers(true);
+    }).catch(err=>{
+      notification["error"]({
+        message: err,
+        placement: 'bottomLeft',
+      });
+    });
+  }
+  
+  return(
+    <ListItem
+    alignItems="flex-start"
+    key={user.name}
+    secondaryAction={
+      <>
+        <Button style={{ margin: 5 }} variant="contained" onClick={()=> editUser(user)}>
+          {<EditIcon />}
+        </Button>
+        <Button
+          style={{ margin: 5 }}
+          variant="contained"
+          color="warning"
+          onClick={desactivateUser}
+        >
+          {<DoNotDisturbAltIcon />}
+        </Button>
+        <Button style={{ margin: 5 }} variant="contained" color="error">
+          {<DeleteIcon />}
+        </Button>
+      </>
+    }
+  >
+    <ListItemAvatar>
+      <Avatar
+        alt="Remy Sharp"
+        src={avatar ? avatar : NoAvatar}
+      />
+    </ListItemAvatar>
+    <ListItemText
+    
+    primary={(user.name ? user.name : "...")+ " "+ (user.lastname? user.lastname : "...")}
+      secondary={
+        <React.Fragment>
+          <Typography
+            sx={{ display: "inline" }}
+            component="span"
+            variant="body2"
+            color="text.primary"
+          >
+            {user.email ? user.email : "..."}
+          </Typography>
+        </React.Fragment>
+      }
+    />
+  </ListItem>
+  )
+}
+
 
 function UsersInactive(props) {
-  const { usersInactive } = props;
+  const { usersInactive, setReloadUsers } = props;
   return (
     <List
       className="users-active"
       dense
       sx={{ width: "100%", bgcolor: "background.paper" }}
     >
-      {usersInactive.map((user) => {
-        return (
-          <ListItem
-            alignItems="flex-start"
-            key={user.name}
-            secondaryAction={
-              <>
-                <Button style={{ margin: 5 }} variant="contained">
-                  {<CheckIcon />}
-                </Button>
-                <Button style={{ margin: 5 }} variant="contained" color="error">
-                  {<DeleteIcon />}
-                </Button>
-              </>
-            }
-          >
-            <ListItemAvatar>
-              <Avatar alt="" src={user.avatar ? user.avatar : NoAvatar} />
-            </ListItemAvatar>
-            <ListItemText
-              primary={user.name ? user.name : "..."}
-              secondary={
-                <React.Fragment>
-                  <Typography
-                    sx={{ display: "inline" }}
-                    component="span"
-                    variant="body2"
-                    color="text.primary"
-                  >
-                    {user.email ? user.email : "..."}
-                  </Typography>
-                </React.Fragment>
-              }
-            />
-          </ListItem>
-        );
-      })}
+      {usersInactive.map(user => <UserInactive setReloadUsers={setReloadUsers} user={user}/>)}
     </List>
   );
+}
+
+
+function UserInactive(props){
+  const {user ,setReloadUsers}= props;
+  const [avatar, setAvatar] = useState(null);
+
+  useEffect(()=>{
+
+    if(user.avatar){
+      getAvatarApi(user.avatar).then(response=>{
+        setAvatar(response);
+      })
+    }else{
+      setAvatar(null);
+    }
+  }, [user]);
+  const activateUser= ()=>{
+    const accessToken= getAccessTokenApi();
+    activateUserApi(accessToken, user._id, true).then(response=>{
+      notification["success"]({
+        message: response,
+        placement: 'bottomLeft',
+      });
+      setReloadUsers(true);
+    }).catch(err=>{
+      notification["error"]({
+        message: err,
+        placement: 'bottomLeft',
+      });
+    });
+  }
+
+  return(
+    <ListItem
+    alignItems="flex-start"
+    key={user.name}
+    secondaryAction={
+      <>
+        <Button style={{ margin: 5 }} variant="contained" onClick={activateUser}>
+          {<CheckIcon />}
+        </Button>
+        <Button style={{ margin: 5 }} variant="contained" color="error">
+          {<DeleteIcon />}
+        </Button>
+      </>
+    }
+  >
+    <ListItemAvatar>
+      <Avatar alt="" src={avatar ? avatar : NoAvatar} />
+    </ListItemAvatar>
+    <ListItemText
+      primary={user.name ? user.name : "..."}
+      secondary={
+        <React.Fragment>
+          <Typography
+            sx={{ display: "inline" }}
+            component="span"
+            variant="body2"
+            color="text.primary"
+          >
+            {user.email ? user.email : "..."}
+          </Typography>
+        </React.Fragment>
+      }
+    />
+  </ListItem>
+  );
+
 }

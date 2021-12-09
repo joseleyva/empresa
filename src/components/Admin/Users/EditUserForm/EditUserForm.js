@@ -1,13 +1,13 @@
 import React,{useState,useEffect, useCallback} from 'react';
 import {Avatar, notification} from 'antd';
 import {useDropzone} from 'react-dropzone';
-import "./EditUserForm.scss";
 import { Form, Col, Button, Row, InputGroup } from 'react-bootstrap';
 import NoAvatar from "../../../../assets/img/png/logo512.png"
 import {UserOutlined} from '@ant-design/icons';
 import {getAvatarApi, updateUserApi, uploadAvatarApi} from '../../../../api/user';
 import {getAccessTokenApi} from "../../../../api/auth" 
 
+import "./EditUserForm.scss";
 export default function EditUserForm(props){
    const {user, setIsVisibleModal, setReloadUsers} = props;
    const [avatar, setAvatar]=useState(null);

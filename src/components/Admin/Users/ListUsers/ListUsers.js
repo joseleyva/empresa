@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import * as React from "react";
-import { Switch, notification } from "antd";
+import { Switch, notification, Modal as ModalAntd } from "antd";
 import Button from "@mui/material/Button";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
@@ -15,9 +15,11 @@ import DoNotDisturbAltIcon from "@mui/icons-material/DoNotDisturbAlt";
 import NoAvatar from "../../../../assets/img/png/logo512.png";
 import Modal from "../../../../components/Modal";
 import EditUserForm from "../EditUserForm";
-import {getAvatarApi, activateUserApi} from '../../../../api/user';
+import {getAvatarApi, activateUserApi, deleteUserApi} from '../../../../api/user';
+import AddUserForm from '../AddUserForm';
 import {getAccessTokenApi} from '../../../../api/auth';
 import "./ListUsers.scss";
+const { confirm} = ModalAntd;
 
 export default function ListUsers(props) {
   const { usersActive, usersInactive, setReloadUsers } = props;
@@ -26,9 +28,20 @@ export default function ListUsers(props) {
   const [modalTitle, setModalTitle] = useState("");
   const [modalContent, setModalContent] = useState("");
 
+  const addUserModal=()=>{
+      setIsVisibleModal(true);
+      setModalTitle("Creando nuevo usuario");
+      setModalContent(
+        <AddUserForm setIsVisibleModal={setIsVisibleModal} setReloadUsers={setReloadUsers}/>
+      )
+  }
+
   return (
     <div className="list-users">
-      <div className="list-users__switch">
+
+      <div className="list-users__header"> 
+
+      <div className="list-users__header-switch">
         <Switch
           defaultChecked
           onChange={() => setViewUsersActives(!viewUsersActives)}
@@ -37,7 +50,9 @@ export default function ListUsers(props) {
           {viewUsersActives ? "Usuarios Activos" : "Usuarios Inactivos"}
         </span>
       </div>
-      {viewUsersActives ? (
+      <Button variant="contained" color="primary" onClick={addUserModal}>Nuevo Usuario </Button>
+      </div>   
+         {viewUsersActives ? (
         <UsersActive
           usersActive={usersActive}
           setIsVisibleModal={setIsVisibleModal}
@@ -112,6 +127,32 @@ function UserActive(props){
     });
   }
   
+const showDeleteConfirm=()=>{
+  const AccessToken= getAccessTokenApi();
+
+  confirm({
+    title: "Eliminar usuario",
+    content: `¿Estas seguro que quieres eliminar a ${user.email}?`,
+    okText: "Eliminar",
+    okType: "danger",
+    cancelText: "Cancelar",
+    onOk(){
+      deleteUserApi(AccessToken, user._id).then(response=>{
+        notification["success"]({
+          message: response,
+          placement: "bottomLeft",
+        });
+        setReloadUsers(true);
+      }).catch(err=>{
+        notification["err"]({
+          message: err,
+          placement: "bottomLeft",
+        })
+      })
+    }
+  })
+}
+
   return(
     <ListItem
     alignItems="flex-start"
@@ -129,7 +170,7 @@ function UserActive(props){
         >
           {<DoNotDisturbAltIcon />}
         </Button>
-        <Button style={{ margin: 5 }} variant="contained" color="error">
+        <Button style={{ margin: 5 }} variant="contained" color="error" onClick={e=> showDeleteConfirm(user)}>
           {<DeleteIcon />}
         </Button>
       </>
@@ -190,6 +231,29 @@ function UserInactive(props){
       setAvatar(null);
     }
   }, [user]);
+  const showDeleteConfirm=()=>{
+    const AccessToken= getAccessTokenApi();
+  
+    confirm({
+      title: "Eliminar usuario",
+      content: `¿Estas seguro que quieres eliminar a ${user.email}?`,
+      okText: "Eliminar",
+      okType: "danger",
+      cancelText: "Cancelar",
+      onOk(){
+        deleteUserApi(AccessToken, user._id).then(response=>{
+          notification["success"]({
+            message: response
+          });
+          setReloadUsers(true);
+        }).catch(err=>{
+          notification["err"]({
+            message: err
+          })
+        })
+      }
+    })
+  }
   const activateUser= ()=>{
     const accessToken= getAccessTokenApi();
     activateUserApi(accessToken, user._id, true).then(response=>{
@@ -215,7 +279,7 @@ function UserInactive(props){
         <Button style={{ margin: 5 }} variant="contained" onClick={activateUser}>
           {<CheckIcon />}
         </Button>
-        <Button style={{ margin: 5 }} variant="contained" color="error">
+        <Button style={{ margin: 5 }} variant="contained" color="error"  onClick={e=> showDeleteConfirm(user)}>
           {<DeleteIcon />}
         </Button>
       </>

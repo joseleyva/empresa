@@ -55,12 +55,12 @@ function CrearC() {
                 const result = await signUpApi(valores);
                 if (!result.ok) {
                     notification["error"]({
-                      description: result.message,
+                      message: result,
                      placement: 'bottomLeft',
                     });
                 }else{
                   notification["success"]({
-                    description: result.message,
+                    message: result,
                     placement: 'bottomLeft',
                   });
                   resetForm();

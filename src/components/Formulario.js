@@ -3,40 +3,34 @@ import { Form, Col, Button, Row, InputGroup } from 'react-bootstrap';
 import { Formik } from 'formik';
 import * as yup from 'yup';
 import { NoEmpleadosOp } from './Opciones';
-import Dialog from '@mui/material/Dialog';
-import DialogActions from '@mui/material/DialogActions';
-import DialogContent from '@mui/material/DialogContent';
-import DialogContentText from '@mui/material/DialogContentText';
-import DialogTitle from '@mui/material/DialogTitle';
-import useMediaQuery from '@mui/material/useMediaQuery';
-import { useTheme } from '@mui/material/styles';
 import ModalPagos from './ModalPagos';
-
+import useAuth from '../hooks/useAuth';
+import { getAccessTokenApi } from '../api/auth';
+import { updateInfoUserApi } from '../api/user';
+import { notification } from 'antd';
 
 const schema = yup.object().shape({
-  Nombre: yup.string().required("Ingrese su nombre").matches(/^[a-zA-Z ]+$/, "Solo letras"),
-  ApellidoM: yup.string().required("Ingrese su apellido").matches(/^[a-zA-Z ]+$/, 'Solo letras'),
-  ApellidoP: yup.string().required("Ingrese su apellido").matches(/^[a-zA-Z ]+$/, 'Solo letras'),
-  Telefono: yup.string().matches(/^[0-9]+$/, 'Ingrese solo numeros').max(10, 'Muy largo').min(10, 'Muy corto').required("Ingrese su numero"),
-  NoEmpleados: yup.string().required('Seleccione una opción'),
+  nameUser: yup.string().required("Ingrese su nombre").matches(/^[a-zA-Z ]+$/, "Solo letras"),
+  lastnameP: yup.string().required("Ingrese su apellido").matches(/^[a-zA-Z ]+$/, 'Solo letras'),
+  lastnameM: yup.string().required("Ingrese su apellido").matches(/^[a-zA-Z ]+$/, 'Solo letras'),
+  numberphone: yup.string().matches(/^[0-9]+$/, 'Ingrese solo numeros').max(10, 'Muy largo').min(10, 'Muy corto').required("Ingrese su numero"),
+  numberEm: yup.string().required('Seleccione una opción'),
   RFC: yup.string().required("Ingrese el RFC").max(13, 'Muy largo').min(13, 'Muy Corto').matches(/^[a-zA-Z0-9]+$/, 'No se aceptan caracteres especiales'),
   RSocial: yup.string().required("Ingrese la Razón Social").matches(/^[a-zA-Z -&]+$/),
-  Calle: yup.string().required("Ingrese la calle").matches(/^[a-zA-Z -&]+$/),
-  Numero: yup.string().required("Ingrese el numero").matches(/^[a-zA-Z 0-9]+$/),
-  Colonia: yup.string().required("Ingrese la Col/Fracc").matches(/^[a-zA-Z -&]+$/),
-  Codigo: yup.string().required("Ingrese el Codigo postal").matches(/^[0-9]+$/, 'Solo numeros'),
-  Estado: yup.string().required("Ingrese el Estado").matches(/^[a-zA-Z ]+$/),
-  Cedula: yup.mixed().required("Ingrese su Cedula"),
+  street: yup.string().required("Ingrese la calle").matches(/^[a-zA-Z -&]+$/),
+  houseNumber: yup.string().required("Ingrese el numero").matches(/^[a-zA-Z 0-9]+$/),
+  suburb: yup.string().required("Ingrese la Col/Fracc").matches(/^[a-zA-Z -&]+$/),
+  zip: yup.string().required("Ingrese el Codigo postal").matches(/^[0-9]+$/, 'Solo numeros'),
+  estado: yup.string().required("Ingrese el Estado").matches(/^[a-zA-Z ]+$/),
+  card: yup.mixed().required("Ingrese su Cedula"),
 });
 
 function Formulario() {
-  const [validated, setValidated] = useState(false)
+  const [validated, setValidated] = useState(false);
   const [fallo, setFallo] = useState(false);
-  const [enviado, setEnviado] = useState(false);
-  const [open, setOpen] = React.useState(false);
-  const theme = useTheme();
-  const fullScreen = useMediaQuery(theme.breakpoints.down('md'));
   const [show, setShow] = useState(false);
+  const {user} = useAuth();
+  const token = getAccessTokenApi();
 
 
   const handleShow = () => setShow(!show);
@@ -45,15 +39,7 @@ function Formulario() {
     if (Button.checkValidity() === false) {
 
     }
-    setOpen(true);
     setFallo(true);
-  };
-  const handleClose = (event, reason) => {
-    if (reason === 'clickaway') {
-      return;
-    }
-
-    setOpen(false);
   };
 
   return (
@@ -61,24 +47,35 @@ function Formulario() {
       validationSchema={schema}
       onSubmit={(valores, { resetForm }) => {
         console.log(valores)
-        setEnviado(true);
         setValidated(true);
-        setTimeout(() => setEnviado(false), 5000);
+        updateInfoUserApi(token, valores, user.id).then(result=>{
+          notification["success"]({
+              message: result.message,
+              placement: "bottomLeft",
+            });
+            
+      }).catch(err=>{
+          notification["error"]({
+              message: err.message,
+              placement: "bottomLeft",
+            });
+      })
+        
       }}
       initialValues={{
-        Nombre: '',
-        ApellidoM: '',
-        ApellidoP: '',
-        Telefono: '',
-        NoEmpleados: '',
+        nameUser: '',
+         lastnameP: '',
+        lastnameM: '',
+        numberphone: '',
+        numberEm: '',
         RFC: '',
         RSocial: '',
-        Calle: "",
-        Numero: "",
-        Colonia: "",
-        Codigo: "",
-        Estado: "",
-        Cedula: null,
+        street: "",
+        houseNumber: "",
+        suburb: "",
+        zip: "",
+        estado: "",
+        card: null,
       }}
     >
       {({
@@ -98,45 +95,45 @@ function Formulario() {
               <Form.Label>Nombre(s)</Form.Label>
               <Form.Control
                 type="text"
-                name="Nombre"
+                name="nameUser"
                 placeholder="Nombre(s)"
-                value={values.Nombre}
+                value={values.nameUser}
                 onChange={handleChange}
-                isValid={touched.Nombre && !errors.Nombre}
-                isInvalid={fallo ? !!errors.Nombre : false}
+                isValid={touched.nameUser && !errors.nameUser}
+                isInvalid={fallo ? !!errors.nameUser : false}
                 required
               />
-              <Form.Control.Feedback type="invalid" tooltip>{errors.Nombre}</Form.Control.Feedback>
+              <Form.Control.Feedback type="invalid" tooltip>{errors.nameUser}</Form.Control.Feedback>
 
             </Form.Group>
-            <Form.Group as={Col} md="4" controlId="validationFormik02" className="position-relative">
-              <Form.Label>Apellido Materno</Form.Label>
-              <Form.Control
-                type="text"
-                name="ApellidoM"
-                placeholder="Apellido"
-                value={values.ApellidoM}
-                onChange={handleChange}
-                isValid={touched.ApellidoM && !errors.ApellidoM}
-                isInvalid={fallo ? !!errors.ApellidoM : false}
-                required
-              />
-              <Form.Control.Feedback type="invalid" tooltip>{errors.ApellidoM}</Form.Control.Feedback>
-            </Form.Group>
-
             <Form.Group as={Col} md="4" controlId="validationFormik02" className="position-relative">
               <Form.Label>Apellido Paterno</Form.Label>
               <Form.Control
                 type="text"
-                name="ApellidoP"
+                name="lastnameP"
                 placeholder="Apellido"
-                value={values.ApellidoP}
+                value={values.lastnameP}
                 onChange={handleChange}
-                isValid={touched.ApellidoP && !errors.ApellidoP}
-                isInvalid={fallo ? !!errors.ApellidoP : false}
+                isValid={touched.lastnameP && !errors.lastnameP}
+                isInvalid={fallo ? !!errors.lastnameP : false}
                 required
               />
-              <Form.Control.Feedback type="invalid" tooltip>{errors.ApellidoP}</Form.Control.Feedback>
+              <Form.Control.Feedback type="invalid" tooltip>{errors.lastnameP}</Form.Control.Feedback>
+            </Form.Group>
+
+            <Form.Group as={Col} md="4" controlId="validationFormik02" className="position-relative">
+              <Form.Label>Apellido Materno</Form.Label>
+              <Form.Control
+                type="text"
+                name="lastnameM"
+                placeholder="Apellido"
+                value={values.lastnameM}
+                onChange={handleChange}
+                isValid={touched.lastnameM && !errors.lastnameM}
+                isInvalid={fallo ? !!errors.lastnameM : false}
+                required
+              />
+              <Form.Control.Feedback type="invalid" tooltip>{errors.lastnameM}</Form.Control.Feedback>
             </Form.Group>
           </Row>
           <Row className="mb-3">
@@ -146,14 +143,14 @@ function Formulario() {
                 <Form.Control
                   type="text"
                   placeholder="No. Telefono"
-                  name="Telefono"
-                  value={values.Telefono}
+                  name="numberphone"
+                  value={values.numberphone}
                   onChange={handleChange}
-                  isValid={touched.Telefono && !errors.Telefono}
-                  isInvalid={fallo ? !!errors.Telefono : false}
+                  isValid={touched.numberphone && !errors.numberphone}
+                  isInvalid={fallo ? !!errors.numberphone : false}
                   required
                 />
-                <Form.Control.Feedback type="invalid" tooltip>{errors.Telefono}
+                <Form.Control.Feedback type="invalid" tooltip>{errors.numberphone}
                 </Form.Control.Feedback>
               </InputGroup>
             </Form.Group>
@@ -198,17 +195,17 @@ function Formulario() {
               <Form.Label>Numero de empleados</Form.Label>
               <Form.Select
                 type="select"
-                name="NoEmpleados"
-                value={values.NoEmpleados}
+                name="numberEm"
+                value={values.numberEm}
                 onChange={handleChange}
-                isValid={touched.NoEmpleados && !errors.NoEmpleados}
-                isInvalid={fallo ? !!errors.NoEmpleados : false}
+                isValid={touched.numberEm && !errors.numberEm}
+                isInvalid={fallo ? !!errors.numberEm : false}
                 required
               >
                 <option value="">Seleccione</option>
-                {Object.keys(NoEmpleadosOp).map((x, i) => (<option value={i} key={i}>{x}</option>))}
+                {Object.keys(NoEmpleadosOp).map((x, i) => (<option value={x} key={i}>{x}</option>))}
               </Form.Select>
-              <Form.Control.Feedback type="invalid" tooltip>{errors.NoEmpleados}
+              <Form.Control.Feedback type="invalid" tooltip>{errors.numberEm}
               </Form.Control.Feedback>
             </Form.Group>
 
@@ -217,12 +214,12 @@ function Formulario() {
               <Form.Control
                 type="file"
                 required
-                name="Cedula"
+                name="card"
                 onChange={handleChange}
-                isValid={touched.Cedula && !errors.Cedula}
-                isInvalid={fallo ? !!errors.Cedula : false}
+                isValid={touched.card && !errors.card}
+                isInvalid={fallo ? !!errors.card : false}
               />
-              <Form.Control.Feedback type="invalid" tooltip> {errors.Cedula}</Form.Control.Feedback>
+              <Form.Control.Feedback type="invalid" tooltip> {errors.card}</Form.Control.Feedback>
             </Form.Group>
           </Row>
 
@@ -233,42 +230,42 @@ function Formulario() {
               <Form.Control
                 type="text"
                 placeholder="Calle"
-                name="Calle"
-                value={values.Calle}
+                name="street"
+                value={values.street}
                 onChange={handleChange}
-                isValid={touched.Calle && !errors.Calle}
-                isInvalid={fallo ? !!errors.Calle : false}
+                isValid={touched.street && !errors.street}
+                isInvalid={fallo ? !!errors.street : false}
                 required
               />
-              <Form.Control.Feedback type="invalid" tooltip>{errors.Calle} </Form.Control.Feedback>
+              <Form.Control.Feedback type="invalid" tooltip>{errors.street} </Form.Control.Feedback>
             </Form.Group>
             <Form.Group as={Col} md="2" controlId="validationFormik03" className="position-relative">
               <Form.Label>Numero</Form.Label>
               <Form.Control
                 type="text"
                 placeholder="Numero"
-                name="Numero"
-                value={values.Numero}
+                name="houseNumber"
+                value={values.houseNumber}
                 onChange={handleChange}
-                isValid={touched.Numero && !errors.Numero}
-                isInvalid={fallo ? !!errors.Numero : false}
+                isValid={touched.houseNumber && !errors.houseNumber}
+                isInvalid={fallo ? !!errors.houseNumber : false}
                 required
               />
-              <Form.Control.Feedback type="invalid" tooltip>{errors.Numero} </Form.Control.Feedback>
+              <Form.Control.Feedback type="invalid" tooltip>{errors.houseNumber} </Form.Control.Feedback>
             </Form.Group>
             <Form.Group as={Col} md="5" controlId="validationFormik03" className="position-relative">
               <Form.Label>Colonia o Fraccionamiento</Form.Label>
               <Form.Control
                 type="text"
                 placeholder="Colonia"
-                name="Colonia"
-                value={values.Colonia}
+                name="suburb"
+                value={values.suburb}
                 onChange={handleChange}
-                isValid={touched.Colonia && !errors.Colonia}
-                isInvalid={fallo ? !!errors.Colonia : false}
+                isValid={touched.suburb && !errors.suburb}
+                isInvalid={fallo ? !!errors.suburb : false}
                 required
               />
-              <Form.Control.Feedback type="invalid" tooltip>{errors.Colonia} </Form.Control.Feedback>
+              <Form.Control.Feedback type="invalid" tooltip>{errors.suburb} </Form.Control.Feedback>
             </Form.Group>
           </Row>
           <Row className="mb-3">
@@ -277,28 +274,28 @@ function Formulario() {
               <Form.Control
                 type="text"
                 placeholder="Codigo"
-                name="Codigo"
-                value={values.Codigo}
+                name="zip"
+                value={values.zip}
                 onChange={handleChange}
-                isValid={touched.Codigo && !errors.Codigo}
-                isInvalid={fallo ? !!errors.Codigo : false}
+                isValid={touched.zip && !errors.zip}
+                isInvalid={fallo ? !!errors.zip : false}
                 required
               />
-              <Form.Control.Feedback type="invalid" tooltip>{errors.Codigo} </Form.Control.Feedback>
+              <Form.Control.Feedback type="invalid" tooltip>{errors.zip} </Form.Control.Feedback>
             </Form.Group>
             <Form.Group as={Col} md="4" controlId="validationFormik03" className="position-relative">
               <Form.Label>Estado</Form.Label>
               <Form.Control
                 type="text"
                 placeholder="Estado"
-                name="Estado"
-                value={values.Estado}
+                name="estado"
+                value={values.estado}
                 onChange={handleChange}
-                isValid={touched.Estado && !errors.Estado}
-                isInvalid={fallo ? !!errors.Estado : false}
+                isValid={touched.estado && !errors.estado}
+                isInvalid={fallo ? !!errors.estado : false}
                 required
               />
-              <Form.Control.Feedback type="invalid" tooltip>{errors.Estado} </Form.Control.Feedback>
+              <Form.Control.Feedback type="invalid" tooltip>{errors.estado} </Form.Control.Feedback>
             </Form.Group>
             <Form.Group as={Col} md="3">
               <Form.Label>Paquetes Ofrecidos </Form.Label>
@@ -311,30 +308,7 @@ function Formulario() {
             <Button type="submit" onClick={handleClick} className="boton">Guardar</Button>
             <Button variant="danger" href="/" className="boton">Cancelar</Button>
           </div>
-          {
-            (enviado && (
-              <Dialog
-                fullScreen={fullScreen}
-                open={open}
-                onClose={handleClose}
-                aria-labelledby="responsive-dialog-title"
-              >
-                <DialogTitle id="responsive-dialog-title">
-                  {"Registro"}
-                </DialogTitle>
-                <DialogContent>
-                  <DialogContentText>
-                    Inicio de Sesion Exitoso
-                  </DialogContentText>
-                </DialogContent>
-                <DialogActions>
-                  <Button href="/Empresas" onClick={handleClose} autoFocus>
-                    Aceptar
-                  </Button>
-                </DialogActions>
-              </Dialog>
-            ))
-          }
+      
           {(show && (
             <ModalPagos />
           ))}

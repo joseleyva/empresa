@@ -53,19 +53,21 @@ function CrearC() {
             onSubmit={async (valores, { resetForm }) => {
                 setValidated(true);
                 const result = await signUpApi(valores);
-                if (!result.ok) {
-                    notification["error"]({
-                      message: result,
-                     placement: 'bottomLeft',
-                    });
-                }else{
-                  notification["success"]({
-                    message: result,
-                    placement: 'bottomLeft',
+              if (!result.ok) {
+                  notification["error"]({
+                    description: result.message,
+                   placement: 'bottomLeft',
                   });
-                  resetForm();
-                }
-                window.location.href="/";
+              }else{
+                notification["success"]({
+                  description: result.message,
+                  placement: 'bottomLeft',
+                });
+                resetForm();
+              
+                  window.location.href="/";
+            }
+                
             }}
             initialValues={{
                 name: "",

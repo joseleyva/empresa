@@ -6,6 +6,7 @@ import { EscolaridadOp, Nivel } from './Opciones';
 import Stack from '@mui/material/Stack';
 import Snackbar from '@mui/material/Snackbar';
 import Alert from '@mui/material/Alert';
+import useAuth from '../hooks/useAuth';
 
 const schema = yup.object().shape({
     Escolaridad: yup.string().required("Seleccione la Escolaridad"),
@@ -27,6 +28,9 @@ const FormEdu = (props) => {
     const [enviado, setEnviado] = useState(false);
     const [open, setOpen] = React.useState(false);
     const [estado,setEstado]=React.useState(true);
+    const {poll} = useAuth();
+    console.log(useAuth());
+    console.log(poll);
     const {funcion, place}=props;
     const handleClick = (event) => {
         const Button = event.currentTarget;

@@ -16,7 +16,7 @@ export function createPollApi(token, poll) {
         if (result.poll) {
             return {
                 ok: true,
-                message: 'Vacante creada correctamente'
+                message: result.message
             };
         }
         return {

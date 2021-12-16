@@ -231,8 +231,6 @@ export function getUserApi(token, userId){
 
   return fetch(url, params).then(response=>{
     return response.json();
-  }).then(result=>{
-    return result.message;
   }).catch(err=>{
     return err.message;
   })

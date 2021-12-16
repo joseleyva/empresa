@@ -80,7 +80,7 @@ function UsersActive(props) {
   const { usersActive, setIsVisibleModal, setModalTitle, setModalContent, setReloadUsers } = props;
 const editUser = user =>{
     setIsVisibleModal(true);
-    setModalTitle(`Editar ${user.name} ${user.lastname}`);
+    setModalTitle(`Editar ${user.name}`);
     setModalContent(<EditUserForm user={user} setReloadUsers={setReloadUsers} setIsVisibleModal={setIsVisibleModal}/>);
 }
 
@@ -184,7 +184,7 @@ const showDeleteConfirm=()=>{
     </ListItemAvatar>
     <ListItemText
     
-    primary={(user.name ? user.name : "...")+ " "+ (user.lastname? user.lastname : "...")}
+    primary={user.name ? user.name : "..."}
       secondary={
         <React.Fragment>
           <Typography

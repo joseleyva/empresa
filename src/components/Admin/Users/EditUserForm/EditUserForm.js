@@ -15,8 +15,10 @@ export default function EditUserForm(props){
   
    useEffect(()=>{
       setUserData({
+        nameUser: user.nameUser,
         name: user.name,
-        lastname: user.lastname,
+        lastnameP: user.lastnameP,
+        lastnameM: user.lastnameM,
         email: user.email,
         role: user.role,
         active: user.active,
@@ -59,7 +61,7 @@ export default function EditUserForm(props){
         }
 
       }
-      if(!userUpdate.name || !userUpdate.lastname || !userUpdate.email){
+      if(!userUpdate.name || !userUpdate.lastnameP || !userUpdate.email||!userUpdate.lastnameM || !userUpdate.nameUser){
         notification["error"]({
           message: "El nombre, apellidos y email son obligatorios",
           placement: 'bottomLeft',
@@ -146,10 +148,9 @@ function EditForm(props){
    
     return(
         <Form className="form-edit" onSubmit={updateUser}>
-
           <Row className="mb-3">
-            <Form.Group as={Col} md="4" controlId="validationFormik01" className="position-relative">
-              <Form.Label>Nombre(s)</Form.Label>
+          <Form.Group as={Col} md="4" controlId="validationFormik01" className="position-relative">
+              <Form.Label>Nombre de la Empresa</Form.Label>
               <Form.Control
               prefix={<UserOutlined/>}
                 type="text"
@@ -161,15 +162,43 @@ function EditForm(props){
                 })}
               />
             </Form.Group>
+          </Row>
+          <Row className="mb-3">
+            <Form.Group as={Col} md="4" controlId="validationFormik01" className="position-relative">
+              <Form.Label>Nombre(s)</Form.Label>
+              <Form.Control
+              prefix={<UserOutlined/>}
+                type="text"
+                name="Nombre"
+                placeholder="Nombre(s)"
+                value={userData.nameUser}
+                onChange={e=> setUserData({
+                    ...userData, nameUser: e.target.value
+                })}
+              />
+            </Form.Group>
+            <Form.Group as={Col} md="4" controlId="validationFormik02" className="position-relative">
+              <Form.Label>Apellido Paterno</Form.Label>
+              <Form.Control
+                type="text"
+                name="lastnameP"
+                placeholder="Apellidos"
+                value={userData.lastnameP}
+                onChange={e=> setUserData({
+                    ...userData, lastnameP: e.target.value
+                })}
+                required
+              />
+            </Form.Group>
             <Form.Group as={Col} md="4" controlId="validationFormik02" className="position-relative">
               <Form.Label>Apellido Materno</Form.Label>
               <Form.Control
                 type="text"
-                name="Apellidos"
+                name="lastnameM"
                 placeholder="Apellidos"
-                value={userData.lastname}
+                value={userData.lastnameM}
                 onChange={e=> setUserData({
-                    ...userData, lastname: e.target.value
+                    ...userData, lastnameM: e.target.value
                 })}
                 required
               />
@@ -201,6 +230,7 @@ function EditForm(props){
                   <option value="admin">Administrador</option>
                   <option value="editor"> Editor</option>
                   <option value="review">Revisor</option>
+                  <option value="usuario">Usuario</option>
                 </Form.Select>
               </Form.Group>
           </Row>

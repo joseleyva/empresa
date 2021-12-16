@@ -11,7 +11,6 @@ import "./AddUserForm.scss";
 
 const schema = yup.object().shape({
   name: yup.string().required("Ingrese su nombre").min(3, 'muy corto'),
-  lastname: yup.string().required("Ingrese sus apellidos").min(4, "muy corto"),
   email: yup.string().required("Ingrese sus Correo").email("Correo no valido"),
   password: yup
     .string()
@@ -25,7 +24,7 @@ const schema = yup.object().shape({
     .required("Confirme su contraseña")
     .min(8, "Muy corta")
     .oneOf([yup.ref("password"), null], "Passwords must match"),
-    role: yup.string().required("Selecione una opción"),
+  role: yup.string().required("Selecione una opción"),
 });
 
 export default function AddUserForm(props) {
@@ -33,13 +32,13 @@ export default function AddUserForm(props) {
 
   return (
     <div className="add-user-form">
-      <AddForm setIsVisibleModal={setIsVisibleModal} setReloadUsers={setReloadUsers}/>
+      <AddForm setIsVisibleModal={setIsVisibleModal} setReloadUsers={setReloadUsers} />
     </div>
   );
 }
 
 function AddForm(props) {
-    const {setIsVisibleModal, setReloadUsers} = props;
+  const { setIsVisibleModal, setReloadUsers } = props;
   const [validated, setValidated] = useState(false);
   const [fallo, setFallo] = useState(false);
   const token = getAccessTokenApi();
@@ -52,28 +51,27 @@ function AddForm(props) {
   return (
     <Formik
       validationSchema={schema}
-      onSubmit={ (valores, { resetForm }) => {
+      onSubmit={(valores, { resetForm }) => {
         setValidated(true);
-        signUpAdminApi(token, valores).then(response=>{
-            notification["success"]({
-                message: response,
-                placement: "bottomLeft",
-              });
-              setFallo(false);
-              setIsVisibleModal(false);
-              setReloadUsers(true);
-              resetForm();
-              
-        }).catch(err=>{
-            notification["error"]({
-                message: err,
-                placement: "bottomLeft",
-              });
+        signUpAdminApi(token, valores).then(response => {
+          notification["success"]({
+            message: response,
+            placement: "bottomLeft",
+          });
+          setFallo(false);
+          setIsVisibleModal(false);
+          setReloadUsers(true);
+          resetForm();
+
+        }).catch(err => {
+          notification["error"]({
+            message: err,
+            placement: "bottomLeft",
+          });
         })
       }}
       initialValues={{
         name: "",
-        lastname:"",
         email: "",
         password: "",
         repeatPassword: "",
@@ -99,7 +97,7 @@ function AddForm(props) {
           <Row className="mb-3">
             <Form.Group
               as={Col}
-              md="6"
+              md="10"
               controlId="validationFormik01"
               className="position-relative"
             >
@@ -117,29 +115,6 @@ function AddForm(props) {
                 />
                 <Form.Control.Feedback type="invalid" tooltip>
                   {errors.name}
-                </Form.Control.Feedback>
-              </FloatingLabel>
-            </Form.Group>
-            <Form.Group
-              as={Col}
-              md="6"
-              controlId="validationFormik01"
-              className="position-relative"
-            >
-              <FloatingLabel controlId="floatingInput" label="Apellidos ">
-                <Form.Control
-                  className="FormInicio"
-                  type="text"
-                  placeholder="Apellidos"
-                  name="lastname"
-                  value={values.lastname}
-                  onChange={handleChange}
-                  isValid={touched.lastname && !errors.lastname}
-                  isInvalid={fallo ? !!errors.lastname : false}
-                  required
-                />
-                <Form.Control.Feedback type="invalid" tooltip>
-                  {errors.lastname}
                 </Form.Control.Feedback>
               </FloatingLabel>
             </Form.Group>
@@ -236,25 +211,25 @@ function AddForm(props) {
                 controlId="floatingInput"
                 label="Seleccione un rol"
               >
-              <Form.Select
-                type="select"
-                name="role"
-                placeholder="Seleccióna un rol"
-                onChange={handleChange}
-                value={values.role}
-                isValid={touched.role && !errors.role}
-                isInvalid={fallo ? !!errors.role : false}
-                required
-              >
+                <Form.Select
+                  type="select"
+                  name="role"
+                  placeholder="Seleccióna un rol"
+                  onChange={handleChange}
+                  value={values.role}
+                  isValid={touched.role && !errors.role}
+                  isInvalid={fallo ? !!errors.role : false}
+                  required
+                >
                   <option value=""> Seleccione</option>
-                <option value="admin">Administrador</option>
-                <option value="editor"> Editor</option>
-                <option value="review">Revisor</option>
-              </Form.Select>
+                  <option value="admin">Administrador</option>
+                  <option value="editor"> Editor</option>
+                  <option value="review">Revisor</option>
+                </Form.Select>
               </FloatingLabel>
               <Form.Control.Feedback type="invalid" tooltip>
-                  {errors.role}
-                </Form.Control.Feedback>
+                {errors.role}
+              </Form.Control.Feedback>
             </Form.Group>
           </Row>
           <div className="d-grid gap-2">

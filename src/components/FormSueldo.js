@@ -6,55 +6,62 @@ import { Pago, PrestacionesOp, SN } from './Opciones';
 import Stack from '@mui/material/Stack';
 import Snackbar from '@mui/material/Snackbar';
 import Alert from '@mui/material/Alert';
+import { updateInfoVacanciesApi } from '../api/vacancies';
+import { getAccessTokenApi } from '../api/auth';
+import { notification } from 'antd';
 
 const schema = yup.object().shape({
-    Sueldo: yup.string().required("Ingrese el sueldo").min(1),
-    Periodo: yup.string().required("Seleccione una opción"),
-    TiempoExtra: yup.string().required("Seleccione una opción"),
-    Prestaciones: yup.string().required("Seleccione una opción"),
-    Bonos: yup.string().required("Ingrese los bonos").matches(/^[a-zA-Z]+$/).min(1),
-    Herramientas: yup.string().required("Ingrese las herramientas").matches(/^[a-zA-Z]+$/).min(1),
+    salary: yup.string().required("Ingrese el sueldo").min(1),
+    period: yup.string().required("Seleccione una opción"),
+    extratime: yup.string().required("Seleccione una opción"),
+    benefits: yup.string().required("Seleccione una opción"),
+    bonds: yup.string().required("Ingrese los bonos").matches(/^[a-zA-Z]+$/).min(1),
+    tools: yup.string().required("Ingrese las herramientas").matches(/^[a-zA-Z]+$/).min(1),
 });
 const FormSueldo = (props) => {
     const [validated, setValidated]= useState(false)
     const [fallo, setFallo] = useState(false);
-    const [enviado, setEnviado] = useState(false);
-    const [open, setOpen] = React.useState(false);
     const [estado,setEstado]=React.useState(true);
-    const {funcion, place}=props;
+    const { funcion, place, valores } = props;
+    const token = getAccessTokenApi();
+    const { name, nameP } = valores;
     const handleClick = (event) => {
         const Button = event.currentTarget;
         if (Button.checkValidity() === false) {
            
         }
-        setOpen(true);
         setFallo(true);
     };
-    const handleClose = (event, reason) => {
-        if (reason === 'clickaway') {
-          return;
-        }
-    
-        setOpen(false);
-      };
     return (
         <div className="VacanteForm">
             <Formik
                 validationSchema={schema}
                 onSubmit={(valores, {resetForm})=>{
-                    console.log(valores)
-                    setEnviado(true);
                     setValidated(true);
                     setEstado(false);
-                    setTimeout(()=>setEnviado(false),5000);
+                    updateInfoVacanciesApi(token, valores).then(result => {
+                        notification["success"]({
+                            message: result.message,
+                            placement: "bottomLeft",
+                        });
+
+                    }).catch(err => {
+                        notification["error"]({
+                            message: err.message,
+                            placement: "bottomLeft",
+                        });
+                    })
+                    
                 }}
                 initialValues={{
-                    Sueldo: "",
-                    Periodo: "",
-                    TiempoExtra: "",
-                    Prestaciones: "",
-                    Bonos: "",
-                    Herramientas: "",
+                    name: name,
+                    nameP: nameP,
+                    salary: "",
+                    period: "",
+                    extratime: "",
+                    benefits: "",
+                    bonds: "",
+                    tools: "",
 
                 }}
             >
@@ -75,13 +82,13 @@ const FormSueldo = (props) => {
                                 <Form.Control
                                     required
                                     type="text"
-                                    name="Sueldo"
-                                    value={values.Sueldo}
+                                    name="salary"
+                                    value={values.salary}
                                     onChange={handleChange}
-                                    isValid={touched.Sueldo && !errors.Sueldo}
-                                    isInvalid={fallo ? !!errors.Sueldo : false}
+                                    isValid={touched.salary && !errors.salary}
+                                    isInvalid={fallo ? !!errors.salary : false}
                                 />
-                                <Form.Control.Feedback type="invalid" tooltip>{errors.Sueldo}</Form.Control.Feedback>
+                                <Form.Control.Feedback type="invalid" tooltip>{errors.salary}</Form.Control.Feedback>
                             </Form.Group>
                             <Form.Group as={Col} md="3" controlId="validationFormik04" className="position-relative">
                                 <Form.Label> Periodo de pago</Form.Label>
@@ -89,32 +96,32 @@ const FormSueldo = (props) => {
                                 <Form.Select
                                     required
                                     type="select"
-                                    name="Periodo"
-                                    value={values.Periodo}
+                                    name="period"
+                                    value={values.period}
                                     onChange={handleChange}
-                                    isValid={touched.Periodo && !errors.Periodo}
-                                    isInvalid={fallo ? !!errors.Periodo : false}
+                                    isValid={touched.period && !errors.period}
+                                    isInvalid={fallo ? !!errors.period : false}
                                 >
                                     <option value="">Seleccione</option>
-                                    {Object.keys(Pago).map((x, i) => (<option value={i} key={i}>{x}</option>))}
+                                    {Object.keys(Pago).map((x, i) => (<option value={x} key={i}>{x}</option>))}
                                 </Form.Select>
-                                <Form.Control.Feedback type="invalid" tooltip>{errors.Periodo}</Form.Control.Feedback>
+                                <Form.Control.Feedback type="invalid" tooltip>{errors.period}</Form.Control.Feedback>
                             </Form.Group>
                             <Form.Group as={Col} md="4" controlId="validationFormik01" className="position-relative">
                                 <Form.Label>Opcion a tiempo extra</Form.Label>
                                 <Form.Select
                                     required
                                     type="select"
-                                    name="TiempoExtra"
-                                    value={values.TiempoExtra}
+                                    name="extratime"
+                                    value={values.extratime}
                                     onChange={handleChange}
-                                    isValid={touched.TiempoExtra && !errors.TiempoExtra}
-                                    isInvalid={fallo ? !!errors.TiempoExtra : false}
+                                    isValid={touched.extratime && !errors.extratime}
+                                    isInvalid={fallo ? !!errors.extratime : false}
                                 >
                                     <option value="">Seleccione</option>
-                                    {Object.keys(SN).map((x, i) => (<option value={i} key={i}>{x}</option>))}
+                                    {Object.keys(SN).map((x, i) => (<option value={x} key={i}>{x}</option>))}
                                 </Form.Select>
-                                <Form.Control.Feedback type="invalid" tooltip>{errors.TiempoExtra}</Form.Control.Feedback>
+                                <Form.Control.Feedback type="invalid" tooltip>{errors.extratime}</Form.Control.Feedback>
                             </Form.Group>
                         </Row>
 
@@ -124,17 +131,17 @@ const FormSueldo = (props) => {
                                 <Form.Select
                                     required
                                     type="select"
-                                    name="Prestaciones"
-                                    value={values.Prestaciones}
+                                    name="benefits"
+                                    value={values.benefits}
                                     onChange={handleChange}
-                                    isValid={touched.Prestaciones && !errors.Prestaciones}
-                                    isInvalid={fallo ? !!errors.Prestaciones : false}
+                                    isValid={touched.Benefits && !errors.benefits}
+                                    isInvalid={fallo ? !!errors.benefits : false}
 
                                 >
                                     <option value="">Seleccione</option>
-                                    {Object.keys(PrestacionesOp).map((x, i) => (<option value={i} key={i}>{x}</option>))}
+                                    {Object.keys(PrestacionesOp).map((x, i) => (<option value={x} key={i}>{x}</option>))}
                                 </Form.Select>
-                                <Form.Control.Feedback type="invalid" tooltip>{errors.Prestaciones}</Form.Control.Feedback>
+                                <Form.Control.Feedback type="invalid" tooltip>{errors.benefits}</Form.Control.Feedback>
 
                             </Form.Group>
                             <Form.Group as={Col} md="4" controlId="validationFormik01" className="position-relative">
@@ -142,13 +149,13 @@ const FormSueldo = (props) => {
                                 <Form.Control
                                     required
                                     type="text"
-                                    name="Bonos"
-                                    value={values.Bonos}
+                                    name="bonds"
+                                    value={values.bonds}
                                     onChange={handleChange}
-                                    isValid={touched.Bonos && !errors.Bonos}
-                                    isInvalid={fallo ? !!errors.Bonos : false}
+                                    isValid={touched.bonds && !errors.bonds}
+                                    isInvalid={fallo ? !!errors.bonds : false}
                                 />
-                                <Form.Control.Feedback type="invalid" tooltip>{errors.Bonos}</Form.Control.Feedback>
+                                <Form.Control.Feedback type="invalid" tooltip>{errors.bonds}</Form.Control.Feedback>
 
                             </Form.Group>
                             <Form.Group as={Col} md="4" controlId="validationFormik03" className="position-relative">
@@ -156,14 +163,14 @@ const FormSueldo = (props) => {
                                 <Form.Control
                                     required
                                     type="text"
-                                    name="Herramientas"
-                                    value={values.Herramientas}
+                                    name="tools"
+                                    value={values.tools}
                                     onChange={handleChange}
-                                    isValid={touched.Herramientas && !errors.Herramientas}
-                                    isInvalid={fallo ? !!errors.Herramientas : false}
+                                    isValid={touched.tools && !errors.tools}
+                                    isInvalid={fallo ? !!errors.tools : false}
                                 />
 
-                                <Form.Control.Feedback type="invalid" tooltip>{errors.Herramientas}
+                                <Form.Control.Feedback type="invalid" tooltip>{errors.tools}
                                 </Form.Control.Feedback>
                             </Form.Group>
                         </Row>
@@ -179,18 +186,6 @@ const FormSueldo = (props) => {
                         </Form.Group>
                         </Row>
 
-                        {
-                                    (enviado&&(
-                                        <Stack spacing={2} sx={{ width: '100%' }}>
-                                        <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
-                                          <Alert onClose={handleClose} variant="filled" severity="success"sx={{ width: '100%' }}>
-                                            Datos guardados correctamente
-                                          </Alert>
-                                        </Snackbar>
-                                        
-                                      </Stack>
-                                    ))
-                                }
                     </Form>
                 )}
             </Formik>

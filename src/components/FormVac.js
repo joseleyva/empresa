@@ -7,7 +7,8 @@ import { Puesto, DiasP, SN, LugarT, RangoE, Genero } from './Opciones';
 import useAuth from '../hooks/useAuth';
 import { notification } from 'antd'; 
 import { getAccessTokenApi } from '../api/auth';
-import { createPollApi } from '../api/polls';
+import { createVacanciesApi } from '../api/vacancies';
+import FormEdu from './FormEdu';
 import '../scss/index.scss';
 
 const schema = yup.object().shape({
@@ -33,7 +34,7 @@ const FormVac = (props) => {
     const [validated, setValidated] = useState(false)
     const [fallo, setFallo] = useState(false);
     const [estado,setEstado]=React.useState(true);
-    const {funcion, place}=props;
+    const {funcion, place, setValores}=props;
     const token = getAccessTokenApi();
     const {user} = useAuth();
     const handleClick = (event) => {
@@ -51,7 +52,7 @@ const FormVac = (props) => {
                 onSubmit={async(valores, { resetForm }) => {
                     setValidated(true);
                     setEstado(false);
-                    const result = await createPollApi(token,valores);
+                    const result = await createVacanciesApi(token,valores);
                     if (!result.ok) {
                         notification["error"]({
                           description: result.message,
@@ -62,7 +63,8 @@ const FormVac = (props) => {
                         description: result.message,
                         placement: 'bottomLeft',
                       });
-                      resetForm();
+                      setValores(valores);
+                      
                     }
                 }}
                 initialValues={{
@@ -389,7 +391,7 @@ const FormVac = (props) => {
                         </div>
                         <Row className="mt-3">
                         <Form.Group as={Col} md={{span:10, offset: 10}}>
-                        <Button onClick={funcion} disabled={estado} className="botonStep" variant="outline-secondary">
+                        <Button  onClick={funcion} disabled={estado} className="botonStep" variant="outline-secondary">
                                 {place}
                                 </Button>
                         </Form.Group>

@@ -10,9 +10,11 @@ export function signUpApi(data){
         }
     };
  return fetch(url, params).then(response => {
-          return response.json();
+  return response.json();
+          
        }).then(result =>{
-         if(result.user){
+         console.log(result);
+         if(result.vacancies){
             return {
               ok:true,
               message:'Usuario creado correctamente'
@@ -156,7 +158,7 @@ export function updateUserApi(token, user, userId){
   });
 }
 export function updateInfoUserApi(token, user, userId){
-  const url=`${basePath}/${apiVersion}/update-info-user/${userId}`;
+  const url=`${basePath}/${apiVersion}/update-info-user`;
 
   const params={
     method:"PUT",

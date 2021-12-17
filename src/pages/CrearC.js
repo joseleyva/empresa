@@ -65,7 +65,7 @@ function CrearC() {
                 });
                 resetForm();
               
-                  window.location.href="/";
+                  
             }
                 
             }}

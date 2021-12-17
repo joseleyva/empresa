@@ -90,11 +90,11 @@ function DatosEmpresas() {
                 Razon Social: {Datos.RazonSocial ? Datos.RazonSocial : " "}
               </Form.Label>
               <Form.Label>
-                Dirección: {Datos.Direccion ? Datos.Direccion : " "}{" "}
+                Dirección: {Datos.Direccion ? Datos.Direccion : " "}
               </Form.Label>
               <Form.Label>RFC: {Datos.RFC ? Datos.RFC : " "}</Form.Label>
               <Form.Label>
-                Giro Empresarial: {Datos.Giro ? Datos.Giro : " "}{" "}
+                Giro Empresarial: {Datos.Giro ? Datos.Giro : " "}
               </Form.Label>
               <Form.Label>
                 Responsable de la Empresa: {Datos.Nombre ? Datos.Nombre : " "}

@@ -21,6 +21,7 @@ const steps = ['Datos de la vacante', 'Datos Educativos', 'Datos del pagó'];
 function VacanteForm() {
     const [activeStep, setActiveStep] = React.useState(0);
     const [skipped, setSkipped] = React.useState(new Set());
+    const [valores, setValores]= React.useState([]);
 
 
   const handleNext = () => {
@@ -31,11 +32,11 @@ function VacanteForm() {
     function getStepContent(step, funcion) {
         switch (step) {
             case 0:
-                return <FormVac funcion={handleNext} place={activeStep === steps.length - 1 ? 'Finish' : 'Next'}/>;
+                return <FormVac setValores={setValores} valores={valores} funcion={handleNext} place={activeStep === steps.length - 1 ? 'Finish' : 'Next'}/>;
             case 1:
-                return <FormEdu funcion={handleNext} place={activeStep === steps.length - 1 ? 'Finish' : 'Next'}/>;
+                return <FormEdu setValores={setValores} valores={valores} funcion={handleNext} place={activeStep === steps.length - 1 ? 'Finish' : 'Next'}/>;
             case 2:
-                return <FormSueldo funcion={handleNext} place={activeStep === steps.length - 1 ? 'Finish' : 'Next'}/>;
+                return <FormSueldo setValores={setValores} valores={valores} funcion={handleNext} place={activeStep === steps.length - 1 ? 'Finish' : 'Next'}/>;
             default:
                 return 'Unknown step';
         }
@@ -67,7 +68,7 @@ function VacanteForm() {
                             </Typography>
                             <Box sx={{ display: 'flex', flexDirection: 'row', pt: 1 }}>
                                 <Box sx={{ flex: '1 1 auto' }} />
-                                <Button href={'./Vacante'} variant="outline-success" className="botonStepG mb-3">Guardar</Button>
+                                <Button href={'./Vacante'} variant="outline-success" className="botonStepG mb-3">Terminar</Button>
                             </Box>
                         </React.Fragment>
                     ) : (

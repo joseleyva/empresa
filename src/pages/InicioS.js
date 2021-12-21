@@ -37,183 +37,185 @@ function InicioS() {
   if (getAccessTokenApi()) {
     return <Redirect to="/Empresas" />;
   }
-    return (
-      <Formik
-        validationSchema={schema}
-        onSubmit={async (valores, { resetForm }) => {
-          setValidated(true);
-          const result = await signInApi(valores);
-          if (result.message) {
-            notification["error"]({
-              message: result.message,
-              placement: 'bottomLeft',
-            });
-          } else {
-            const { accessToken, refreshToken } = result;
-            localStorage.setItem(ACCESS_TOKEN, accessToken);
-            localStorage.setItem(REFRESH_TOKEN, refreshToken);
-            notification["success"]({
-              message: "Login correcto",
-              placement: 'bottomLeft',
-            });
-            window.location.href = "/Empresas";
-          }
-        }}
-        initialValues={{
-          email: "",
-          password: "",
-        }}
-      >
-        {({
-          handleSubmit,
-          handleChange,
-          handleBlur,
-          values,
-          touched,
-          isValid,
-          errors,
-        }) => (
-          <ThemeProvider theme={theme}>
-            <Grid container component="main" sx={{ height: "100vh" }}>
-              <CssBaseline />
-              <Grid
-                item
-                xs={false}
-                sm={4}
-                md={7}
+  return (
+    <Formik
+      validationSchema={schema}
+      onSubmit={async (valores, { resetForm }) => {
+        setValidated(true);
+        const result = await signInApi(valores);
+        if (result.message) {
+          notification["error"]({
+            message: result.message,
+            placement: 'bottomLeft',
+          });
+        } else {
+          const { accessToken, refreshToken } = result;
+          localStorage.setItem(ACCESS_TOKEN, accessToken);
+          localStorage.setItem(REFRESH_TOKEN, refreshToken);
+          notification["success"]({
+            message: "Login correcto",
+            placement: 'bottomLeft',
+          });
+     
+        window.location.href="/Empresas/DatosR"
+      
+        }
+      }}
+      initialValues={{
+        email: "",
+        password: "",
+      }}
+    >
+      {({
+        handleSubmit,
+        handleChange,
+        handleBlur,
+        values,
+        touched,
+        isValid,
+        errors,
+      }) => (
+        <ThemeProvider theme={theme}>
+          <Grid container component="main" sx={{ height: "100vh" }}>
+            <CssBaseline />
+            <Grid
+              item
+              xs={false}
+              sm={4}
+              md={7}
+              sx={{
+                backgroundImage: "url(https://source.unsplash.com/random)",
+                backgroundRepeat: "no-repeat",
+                backgroundColor: (t) =>
+                  t.palette.mode === "light"
+                    ? t.palette.grey[50]
+                    : t.palette.grey[900],
+                backgroundSize: "cover",
+                backgroundPosition: "center",
+              }}
+            />
+            <Grid
+              item
+              xs={12}
+              sm={8}
+              md={5}
+              component={Paper}
+              elevation={6}
+              square
+            >
+              <Box
                 sx={{
-                  backgroundImage: "url(https://source.unsplash.com/random)",
-                  backgroundRepeat: "no-repeat",
-                  backgroundColor: (t) =>
-                    t.palette.mode === "light"
-                      ? t.palette.grey[50]
-                      : t.palette.grey[900],
-                  backgroundSize: "cover",
-                  backgroundPosition: "center",
+                  my: 8,
+                  mx: 7,
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "unset",
                 }}
-              />
-              <Grid
-                item
-                xs={12}
-                sm={8}
-                md={5}
-                component={Paper}
-                elevation={6}
-                square
               >
-                <Box
-                  sx={{
-                    my: 8,
-                    mx: 7,
-                    display: "flex",
-                    flexDirection: "column",
-                    alignItems: "unset",
-                  }}
-                >
-                  <div className="InicioAli">
-                    <Avatar
-                      className="InicioAli"
-                      sx={{ m: 2, bgcolor: "secondary.main" }}
-                    >
-                      <LockOutlinedIcon />
-                    </Avatar>
-                    <Typography component="h1" variant="h5">
-                      Inicio de Sesion
-                    </Typography>
-                  </div>
-                  <Box
-                    component="form"
-                    validated={validated}
-                    noValidate
-                    onSubmit={handleSubmit}
-                    sx={{ mt: 2 }}
+                <div className="InicioAli">
+                  <Avatar
+                    className="InicioAli"
+                    sx={{ m: 2, bgcolor: "secondary.main" }}
                   >
-                    <Row className="mb-4">
-                      <Form.Group
-                        as={Col}
-                        md="15"
-                        controlId="formGroupEmail"
-                        className="position-relative"
+                    <LockOutlinedIcon />
+                  </Avatar>
+                  <Typography component="h1" variant="h5">
+                    Inicio de Sesion
+                  </Typography>
+                </div>
+                <Box
+                  component="form"
+                  validated={validated}
+                  noValidate
+                  onSubmit={handleSubmit}
+                  sx={{ mt: 2 }}
+                >
+                  <Row className="mb-4">
+                    <Form.Group
+                      as={Col}
+                      md="15"
+                      controlId="formGroupEmail"
+                      className="position-relative"
+                    >
+                      <FloatingLabel
+                        controlId="floatingInput"
+                        label="Correo electronico"
                       >
-                        <FloatingLabel
-                          controlId="floatingInput"
-                          label="Correo electronico"
-                        >
-                          <Form.Control
-                            className="FormInicio"
-                            type="email"
-                            placeholder="Ingrese el correo"
-                            name="email"
-                            value={values.email}
-                            onChange={handleChange}
-                            onBlur={handleBlur}
-                            isValid={touched.email && !errors.email}
-                            isInvalid={fallo ? !!errors.email : false}
-                            required
-                          />
-                          <Form.Control.Feedback type="invalid" tooltip>
-                            {errors.email}
-                          </Form.Control.Feedback>
-                        </FloatingLabel>
-                      </Form.Group>
-                    </Row>
-                    <Row className="mb-3">
-                      <Form.Group
-                        className="position-relative"
-                        controlId="formGroupPassword"
+                        <Form.Control
+                          className="FormInicio"
+                          type="email"
+                          placeholder="Ingrese el correo"
+                          name="email"
+                          value={values.email}
+                          onChange={handleChange}
+                          onBlur={handleBlur}
+                          isValid={touched.email && !errors.email}
+                          isInvalid={fallo ? !!errors.email : false}
+                          required
+                        />
+                        <Form.Control.Feedback type="invalid" tooltip>
+                          {errors.email}
+                        </Form.Control.Feedback>
+                      </FloatingLabel>
+                    </Form.Group>
+                  </Row>
+                  <Row className="mb-3">
+                    <Form.Group
+                      className="position-relative"
+                      controlId="formGroupPassword"
+                    >
+                      <FloatingLabel
+                        controlId="floatingInput"
+                        label="Contraseña"
                       >
-                        <FloatingLabel
-                          controlId="floatingInput"
-                          label="Contraseña"
-                        >
-                          <Form.Control
-                            className="FormInicio"
-                            type="password"
-                            placeholder="Contraseña"
-                            name="password"
-                            value={values.password}
-                            onChange={handleChange}
-                            isValid={touched.password && !errors.password}
-                            isInvalid={fallo ? !!errors.password : false}
-                            required
-                          />
-                          <Form.Control.Feedback type="invalid" tooltip>
-                            {errors.password}
-                          </Form.Control.Feedback>
-                        </FloatingLabel>
-                      </Form.Group>
-                    </Row>
-                    <div className="d-grid gap-2">
-                      <Button
-                        className="botonS"
-                        type="submit"
-                        onClick={handleClick}
-                      >
-                        Iniciar Sesion
-                      </Button>
-                      <Button className="botonS" variant="danger" href="/">
-                        Cancelar
-                      </Button>
-                    </div>
-                    <Grid container className="MargenL">
-                      <Grid item xs>
-                        <Link variant="body3">Olvide la Contraseña</Link>
-                      </Grid>
-                      <Grid item>
-                        <Link href="/CrearC" variant="body3" className="labelI">
-                          {"¿No tienes una cuenta? Crea una aquí"}
-                        </Link>
-                      </Grid>
+                        <Form.Control
+                          className="FormInicio"
+                          type="password"
+                          placeholder="Contraseña"
+                          name="password"
+                          value={values.password}
+                          onChange={handleChange}
+                          isValid={touched.password && !errors.password}
+                          isInvalid={fallo ? !!errors.password : false}
+                          required
+                        />
+                        <Form.Control.Feedback type="invalid" tooltip>
+                          {errors.password}
+                        </Form.Control.Feedback>
+                      </FloatingLabel>
+                    </Form.Group>
+                  </Row>
+                  <div className="d-grid gap-2">
+                    <Button
+                      className="botonS"
+                      type="submit"
+                      onClick={handleClick}
+                    >
+                      Iniciar Sesion
+                    </Button>
+                    <Button className="botonS" variant="danger" href="/">
+                      Cancelar
+                    </Button>
+                  </div>
+                  <Grid container className="MargenL">
+                    <Grid item xs>
+                      <Link variant="body3">Olvide la Contraseña</Link>
                     </Grid>
-                  </Box>
+                    <Grid item>
+                      <Link href="/CrearC" variant="body3" className="labelI">
+                        {"¿No tienes una cuenta? Crea una aquí"}
+                      </Link>
+                    </Grid>
+                  </Grid>
                 </Box>
-              </Grid>
+              </Box>
             </Grid>
-          </ThemeProvider>
-        )}
-      </Formik>
-    );
-  
+          </Grid>
+        </ThemeProvider>
+      )}
+    </Formik>
+  );
+
 }
 
 export default InicioS;

@@ -1,6 +1,7 @@
 import '../../App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Row, Form, Col } from 'react-bootstrap';
+import { useState,useEffect } from 'react';
 import * as React from 'react';
 import {Button} from 'react-bootstrap';
 import GitHubIcon from '@mui/icons-material/GitHub';
@@ -10,7 +11,8 @@ import { Instagram } from '@mui/icons-material';
 import Link from '@mui/material/Link';
 import { Divider } from '@mui/material';
 import CardsVacantes from '../../components/CardsVacantes';
-
+import {getVacanciesActiveApi} from '../../api/vacancies';
+import { getAccessTokenApi } from '../../api/auth';
 
 const cards = [
     {
@@ -34,7 +36,20 @@ const cards = [
   ];
  
 function Vacante() {
+    const token = getAccessTokenApi();
+    const [reloadUsers, setReloadUsers] = useState(false);
+    const [vacanciesActive, setVacanciesActive]= useState([]);
+    const [vacanciesInactive, setVacanciesInactive] = useState([]);
    
+    useEffect(()=>{
+        getVacanciesActiveApi(token, true).then(response=>{
+            setVacanciesActive(response.vacancies);
+        });
+        getVacanciesActiveApi(token, false).then(response=>{
+            setVacanciesInactive(response.vacancies);
+        });
+        setReloadUsers(false);
+    }, [token, reloadUsers]);
 
     return (
         <div className="App">
@@ -55,7 +70,7 @@ function Vacante() {
                 <Divider/>
                 <h5>Vacantes Activas</h5>
                 <div className="VacantesActivas">
-                {cards.map((post) => (
+                {vacanciesActive.map((post) => (
                   <CardsVacantes key={post.id} post={post} />
                 ))}
                 </div>

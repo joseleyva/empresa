@@ -49,7 +49,6 @@ const FormEdu = (props) => {
                             placement: "bottomLeft",
                         });
                         setValores(valores);
-
                     }).catch(err => {
                         notification["error"]({
                             message: err.message,

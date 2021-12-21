@@ -13,9 +13,9 @@ function CardsVacantes(props) {
                     <div className="C">
                         <div class="col-md-10">
                             <div class="card-body">
-                                <h6 align="left" class="card-title">Nombre: {post.Nombre} </h6>
-                                <h6 align="left" class="card-title">Area: </h6>
-                                <h6 align="left" class="card-title">Experiencia:</h6>
+                                <h6 align="left" class="card-title">Nombre: {post.nameP} </h6>
+                                <h6 align="left" class="card-title">Lugar: {post.place}</h6>
+                                <h6 align="left" class="card-title">Experiencia: {post.levelExpe}</h6>
                                 <h6 align="left" class="card-title">Examenes:</h6>
                             </div>
 

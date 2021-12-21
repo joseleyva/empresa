@@ -36,10 +36,10 @@ const FormSueldo = (props) => {
         <div className="VacanteForm">
             <Formik
                 validationSchema={schema}
-                onSubmit={(valores, {resetForm})=>{
+                onSubmit={async(valores, {resetForm})=>{
                     setValidated(true);
                     setEstado(false);
-                    updateInfoVacanciesApi(token, valores).then(result => {
+                    await updateInfoVacanciesApi(token, valores).then(result => {
                         notification["success"]({
                             message: result.message,
                             placement: "bottomLeft",

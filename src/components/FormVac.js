@@ -37,6 +37,7 @@ const FormVac = (props) => {
     const {funcion, place, setValores}=props;
     const token = getAccessTokenApi();
     const {user} = useAuth();
+    console.log(user);
     const handleClick = (event) => {
         const Button = event.currentTarget;
         if (Button.checkValidity() === false) {

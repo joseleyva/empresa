@@ -64,7 +64,7 @@ function CrearC() {
                   placement: 'bottomLeft',
                 });
                 resetForm();
-              
+                window.location.href = "/";
                   
             }
                 

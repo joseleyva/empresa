@@ -13,8 +13,7 @@ export function signUpApi(data){
   return response.json();
           
        }).then(result =>{
-         console.log(result);
-         if(result.vacancies){
+         if(result.user){
             return {
               ok:true,
               message:'Usuario creado correctamente'

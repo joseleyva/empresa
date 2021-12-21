@@ -157,7 +157,7 @@ export function updateUserApi(token, user, userId){
   });
 }
 export function updateInfoUserApi(token, user, userId){
-  const url=`${basePath}/${apiVersion}/update-info-user`;
+  const url=`${basePath}/${apiVersion}/update-info-user/${userId}`;
 
   const params={
     method:"PUT",

@@ -38,6 +38,7 @@ function DatosEmpresas() {
       setAvatar(null);
     }
   }, [users]);
+  console.log(users);
   const editUser = (user) => {
     setIsVisibleModal(true);
     setModalTitle(`Editar ${users.name}`);

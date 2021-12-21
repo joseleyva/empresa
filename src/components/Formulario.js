@@ -53,6 +53,7 @@ function Formulario() {
               message: result.message,
               placement: "bottomLeft",
             });
+            window.location.href="/Empresas";
             
       }).catch(err=>{
           notification["error"]({

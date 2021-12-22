@@ -1,0 +1,15 @@
+
+
+.ContenedorDatosR{
+    text-align: center;
+  }
+
+  .FormularioI{
+    width: 700px;
+    margin:50px auto;
+    display: inline-flex;
+    text-align: left!important;
+    background-color: white;
+    border-style: groove;
+    border-radius: 10px;
+   }

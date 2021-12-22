@@ -30,14 +30,10 @@ function Vacante() {
     const token = getAccessTokenApi();
     const [reloadUsers, setReloadUsers] = useState(false);
     const [vacanciesActive, setVacanciesActive]= useState([]);
-    const [vacanciesInactive, setVacanciesInactive] = useState([]);
    
     useEffect(()=>{
         getVacanciesActiveApi(token, true).then(response=>{
             setVacanciesActive(response.vacancies);
-        });
-        getVacanciesActiveApi(token, false).then(response=>{
-            setVacanciesInactive(response.vacancies);
         });
         setReloadUsers(false);
     }, [token, reloadUsers]);

@@ -5,10 +5,17 @@ import * as yup from 'yup';
 import { NoEmpleadosOp } from './Opciones';
 import ModalPagos from './ModalPagos';
 import useAuth from '../hooks/useAuth';
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogContentText from '@mui/material/DialogContentText';
+import DialogTitle from '@mui/material/DialogTitle';
+import useMediaQuery from '@mui/material/useMediaQuery';
+import { useTheme } from '@mui/material/styles';
 import { getAccessTokenApi } from '../api/auth';
 import { updateInfoUserApi } from '../api/user';
 import { notification } from 'antd';
-
+import {logout} from '../api/auth'
 const schema = yup.object().shape({
   nameUser: yup.string().required("Ingrese su nombre").matches(/^[a-zA-Z ]+$/, "Solo letras"),
   lastnameP: yup.string().required("Ingrese su apellido").matches(/^[a-zA-Z ]+$/, 'Solo letras'),
@@ -28,6 +35,10 @@ const schema = yup.object().shape({
 function Formulario() {
   const [validated, setValidated] = useState(false);
   const [fallo, setFallo] = useState(false);
+  const [enviado, setEnviado] = useState(false);
+  const [open, setOpen] = React.useState(false);
+  const theme = useTheme();
+  const fullScreen = useMediaQuery(theme.breakpoints.down('md'));
   const [show, setShow] = useState(false);
   const {user} = useAuth();
   const token = getAccessTokenApi();
@@ -39,21 +50,31 @@ function Formulario() {
     if (Button.checkValidity() === false) {
 
     }
+    setOpen(true);
     setFallo(true);
+  };
+  const handleClose = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+    setOpen(false);
+    logout();
+    window.location.reload();
+
   };
 
   return (
     <Formik
       validationSchema={schema}
       onSubmit={(valores, { resetForm }) => {
-        console.log(valores)
         setValidated(true);
         updateInfoUserApi(token, valores, user.id).then(result=>{
           notification["success"]({
               message: result.message,
               placement: "bottomLeft",
             });
-            window.location.href="/Empresas";
+            setEnviado(true);
+            
             
       }).catch(err=>{
           notification["error"]({
@@ -64,6 +85,8 @@ function Formulario() {
         
       }}
       initialValues={{
+        active: false,
+        date: true,
         nameUser: '',
          lastnameP: '',
         lastnameM: '',
@@ -309,7 +332,30 @@ function Formulario() {
             <Button type="submit" onClick={handleClick} className="boton">Guardar</Button>
             <Button variant="danger" href="/" className="boton">Cancelar</Button>
           </div>
-      
+          {
+            (enviado && (
+              <Dialog
+                fullScreen={fullScreen}
+                open={open}
+                onClose={handleClose}
+                aria-labelledby="responsive-dialog-title"
+              >
+                <DialogTitle id="responsive-dialog-title">
+                  {"Registro"}
+                </DialogTitle>
+                <DialogContent>
+                  <DialogContentText>
+                    Tus datos serán verificados a la brevedad
+                  </DialogContentText>
+                </DialogContent>
+                <DialogActions>
+                  <Button onClick={handleClose} autoFocus>
+                    Aceptar
+                  </Button>
+                </DialogActions>
+              </Dialog>
+            ))
+          }
           {(show && (
             <ModalPagos />
           ))}

@@ -16,7 +16,8 @@ export function createVacanciesApi(token, data){
          if(result.vacancies){
             return {
               ok:true,
-              message:'Vacante creada correctamente'
+              message:'Vacante creada correctamente',
+              valor: result.vacancies
             };
           }
          return {
@@ -30,8 +31,8 @@ export function createVacanciesApi(token, data){
        };
        })
 }
-export function updateInfoVacanciesApi(token, vacancies){
-    const url=`${basePath}/${apiVersion}/update-vacancies`;
+export function updateInfoVacanciesApi(token, vacancies, userId){
+    const url=`${basePath}/${apiVersion}/update-vacancies/${userId}`;
   
     const params={
       method:"PUT",

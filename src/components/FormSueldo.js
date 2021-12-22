@@ -3,9 +3,6 @@ import React, { useState } from 'react'
 import * as yup from 'yup';
 import { Form, Col, Button, Row } from 'react-bootstrap';
 import { Pago, PrestacionesOp, SN } from './Opciones';
-import Stack from '@mui/material/Stack';
-import Snackbar from '@mui/material/Snackbar';
-import Alert from '@mui/material/Alert';
 import { updateInfoVacanciesApi } from '../api/vacancies';
 import { getAccessTokenApi } from '../api/auth';
 import { notification } from 'antd';
@@ -22,9 +19,9 @@ const FormSueldo = (props) => {
     const [validated, setValidated]= useState(false)
     const [fallo, setFallo] = useState(false);
     const [estado,setEstado]=React.useState(true);
-    const { funcion, place, valores } = props;
+    const { funcion, place, valor } = props;
     const token = getAccessTokenApi();
-    const { name, nameP } = valores;
+    const { _id} = valor;
     const handleClick = (event) => {
         const Button = event.currentTarget;
         if (Button.checkValidity() === false) {
@@ -36,26 +33,24 @@ const FormSueldo = (props) => {
         <div className="VacanteForm">
             <Formik
                 validationSchema={schema}
-                onSubmit={async(valores, {resetForm})=>{
+                onSubmit={(valores, {resetForm})=>{
                     setValidated(true);
                     setEstado(false);
-                    await updateInfoVacanciesApi(token, valores).then(result => {
+                    updateInfoVacanciesApi(token, valores, _id).then(result => {
                         notification["success"]({
                             message: result.message,
                             placement: "bottomLeft",
                         });
-
                     }).catch(err => {
                         notification["error"]({
                             message: err.message,
                             placement: "bottomLeft",
                         });
                     })
+
                     
                 }}
                 initialValues={{
-                    name: name,
-                    nameP: nameP,
                     salary: "",
                     period: "",
                     extratime: "",

@@ -38,7 +38,6 @@ function DatosEmpresas() {
       setAvatar(null);
     }
   }, [users]);
-  console.log(users);
   const editUser = (user) => {
     setIsVisibleModal(true);
     setModalTitle(`Editar ${users.name}`);
@@ -70,16 +69,17 @@ function DatosEmpresas() {
               src={avatar ? avatar : NoAvatar}
               width="150px"
               height="150px"
+              thumbnail 
             />
             <div className="DivBtnDE">
               <Button
-                variant="outline-primary"
+                variant="success"
                 onClick={() => editUser(users)}
                 className="boton"
               >
                 Editar datos
               </Button>
-              <Button variant="outline-primary" className="boton" href="/Empresas">
+              <Button variant="primary" className="boton" href="/Empresas">
                 Volver al inicio
               </Button>
             </div>

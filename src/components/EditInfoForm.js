@@ -78,6 +78,7 @@ export default function EditInfoForm(props){
             });
             setIsVisibleModal(false);
             setReloadUsers(true);
+            window.location.reload();
           });
         });
       }else{

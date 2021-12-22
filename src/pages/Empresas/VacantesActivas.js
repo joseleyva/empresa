@@ -14,39 +14,16 @@ import CardsVacantes from '../../components/CardsVacantes';
 import {getVacanciesActiveApi} from '../../api/vacancies';
 import { getAccessTokenApi } from '../../api/auth';
 
-const cards = [
-    {
-      Nombre: 'Contador',
-      id:1,
-     
-    },
-    {
-      Nombre: 'Desarrollador de software',
-      id:2,
-    },
-    {
-        Nombre: 'Velador',
-        id:3,
-       
-      },
-      {
-        Nombre: 'Electrico',
-        id:4,
-      }
-  ];
  
 function Vacante() {
     const token = getAccessTokenApi();
     const [reloadUsers, setReloadUsers] = useState(false);
     const [vacanciesActive, setVacanciesActive]= useState([]);
-    const [vacanciesInactive, setVacanciesInactive] = useState([]);
+
    
     useEffect(()=>{
         getVacanciesActiveApi(token, true).then(response=>{
             setVacanciesActive(response.vacancies);
-        });
-        getVacanciesActiveApi(token, false).then(response=>{
-            setVacanciesInactive(response.vacancies);
         });
         setReloadUsers(false);
     }, [token, reloadUsers]);

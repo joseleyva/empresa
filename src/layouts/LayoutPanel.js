@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import '../App.css';
 import { Layout } from "antd";
 import { Route, Switch } from "react-router-dom";
@@ -10,13 +10,17 @@ import { Container } from 'react-bootstrap';
 import { Nav } from 'react-bootstrap';
 import { NavDropdown } from 'react-bootstrap';
 import { Badge } from 'react-bootstrap';
+import { Image } from "react-bootstrap";
 import {logout} from '../api/auth';
 import Logo from '../assets/img/png/logo512.png';
 import Perfil from '../assets/img/png/perfil.png';
+import AvatarPer from '../components/AvatarPer';
 
 export default function LayoutsPanel({ routes }) {
   const { Content} = Layout;
   const { user, isLoading } = useAuth();
+  const [avatar, setAvatar] = useState(null);
+  
   const logoutUser=()=>{
     logout();
     window.location.reload();
@@ -39,7 +43,7 @@ export default function LayoutsPanel({ routes }) {
                 <Navbar collapseOnSelect expand="lg" className="BarraEm">
                     <Container>
                         <Navbar.Brand href="/Empresas">
-                            <img
+                            <Image
                                 alt=""
                                 src={Logo}
                                 width="30"
@@ -67,12 +71,14 @@ export default function LayoutsPanel({ routes }) {
                             </Nav>
                             <Nav>
                                 <Navbar.Brand className="UsuarioImg">
-                                    <img
+                                  <AvatarPer users={user} setAvatar={setAvatar}/>
+                                    <Image
+                                    roundedCircle
                                         alt=""
-                                        src={Perfil}
+                                        src={avatar ? avatar : Perfil}
                                         width="30"
                                         height="30"
-                                        className="d-inline-block align-top"
+                                        className="d-inline-block align-top "
                                     />
                                 </Navbar.Brand>
                                 <NavDropdown title="Perfil" id="basic-nav-dropdown">

@@ -25,9 +25,9 @@ const FormEdu = (props) => {
     const [validated, setValidated] = useState(false)
     const [fallo, setFallo] = useState(false);
     const [estado, setEstado] = React.useState(true);
-    const { funcion, place, valores ,setValores} = props;
+    const { funcion, place, valor } = props;
     const token = getAccessTokenApi();
-    const { name, nameP } = valores;
+    const { _id } = valor;
     const handleClick = (event) => {
         const Button = event.currentTarget;
         if (Button.checkValidity() === false) {
@@ -43,12 +43,11 @@ const FormEdu = (props) => {
                 onSubmit={(valores, { resetForm }) => {
                     setValidated(true);
                     setEstado(false);
-                    updateInfoVacanciesApi(token, valores).then(result => {
+                    updateInfoVacanciesApi(token, valores, _id).then(result => {
                         notification["success"]({
                             message: result.message,
                             placement: "bottomLeft",
                         });
-                        setValores(valores);
                     }).catch(err => {
                         notification["error"]({
                             message: err.message,
@@ -58,8 +57,6 @@ const FormEdu = (props) => {
 
                 }}
                 initialValues={{
-                    name: name,
-                    nameP: nameP,
                     scholarship: "",
                     knowledge: "",
                     experience: "",

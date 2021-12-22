@@ -8,7 +8,6 @@ import useAuth from '../hooks/useAuth';
 import { notification } from 'antd'; 
 import { getAccessTokenApi } from '../api/auth';
 import { createVacanciesApi } from '../api/vacancies';
-import FormEdu from './FormEdu';
 import '../scss/index.scss';
 
 const schema = yup.object().shape({
@@ -34,10 +33,9 @@ const FormVac = (props) => {
     const [validated, setValidated] = useState(false)
     const [fallo, setFallo] = useState(false);
     const [estado,setEstado]=React.useState(true);
-    const {funcion, place, setValores}=props;
+    const {funcion, place, setValor}=props;
     const token = getAccessTokenApi();
     const {user} = useAuth();
-    console.log(user);
     const handleClick = (event) => {
         const Button = event.currentTarget;
         if (Button.checkValidity() === false) {
@@ -64,7 +62,7 @@ const FormVac = (props) => {
                         description: result.message,
                         placement: 'bottomLeft',
                       });
-                      setValores(valores);
+                      setValor(result.valor);
                       
                     }
                 }}

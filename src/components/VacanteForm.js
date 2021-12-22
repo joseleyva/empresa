@@ -21,7 +21,7 @@ const steps = ['Datos de la vacante', 'Datos Educativos', 'Datos del pagó'];
 function VacanteForm() {
     const [activeStep, setActiveStep] = React.useState(0);
     const [skipped, setSkipped] = React.useState(new Set());
-    const [valores, setValores]= React.useState([]);
+    const [valor, setValor]= React.useState([]);
 
 
   const handleNext = () => {
@@ -32,11 +32,11 @@ function VacanteForm() {
     function getStepContent(step, funcion) {
         switch (step) {
             case 0:
-                return <FormVac setValores={setValores} valores={valores} funcion={handleNext} place={activeStep === steps.length - 1 ? 'Finish' : 'Next'}/>;
+                return <FormVac setValor={setValor} valor={valor} funcion={handleNext} place={activeStep === steps.length - 1 ? 'Finish' : 'Next'}/>;
             case 1:
-                return <FormEdu setValores={setValores} valores={valores} funcion={handleNext} place={activeStep === steps.length - 1 ? 'Finish' : 'Next'}/>;
+                return <FormEdu setValor={setValor} valor={valor} funcion={handleNext} place={activeStep === steps.length - 1 ? 'Finish' : 'Next'}/>;
             case 2:
-                return <FormSueldo setValores={setValores} valores={valores} funcion={handleNext} place={activeStep === steps.length - 1 ? 'Finish' : 'Next'}/>;
+                return <FormSueldo setValor={setValor} valor={valor} funcion={handleNext} place={activeStep === steps.length - 1 ? 'Finish' : 'Next'}/>;
             default:
                 return 'Unknown step';
         }

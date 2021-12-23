@@ -1,32 +1,37 @@
 import '../../App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Row, Form, Col } from 'react-bootstrap';
-import { useState,useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import * as React from 'react';
-import {Button} from 'react-bootstrap';
+import { Button } from 'react-bootstrap';
 import GitHubIcon from '@mui/icons-material/GitHub';
 import FacebookIcon from '@mui/icons-material/Facebook';
 import TwitterIcon from '@mui/icons-material/Twitter';
 import { Instagram } from '@mui/icons-material';
+import {Switch} from 'antd';
 import Link from '@mui/material/Link';
 import { Divider } from '@mui/material';
 import CardsVacantes from '../../components/CardsVacantes';
-import {getVacanciesActiveApi} from '../../api/vacancies';
+import { getVacanciesActiveApi } from '../../api/vacancies';
 import { getAccessTokenApi } from '../../api/auth';
+import useAuth from '../../hooks/useAuth'
 
- 
 function Vacante() {
     const token = getAccessTokenApi();
     const [reloadUsers, setReloadUsers] = useState(false);
-    const [vacanciesActive, setVacanciesActive]= useState([]);
-
-   
-    useEffect(()=>{
-        getVacanciesActiveApi(token, true).then(response=>{
+    const [vacanciesActive, setVacanciesActive] = useState([]);
+    const [vacanciesInactive, setVacanciesInactive] = useState([]);
+    const { user } = useAuth();
+    const [viewUsersActives, setViewUsersActives] = useState(true);
+    useEffect(() => {
+        getVacanciesActiveApi(token, user.name, true).then(response => {
             setVacanciesActive(response.vacancies);
         });
+        getVacanciesActiveApi(token, user.name, false).then(response => {
+            setVacanciesInactive(response.vacancies);
+        });
         setReloadUsers(false);
-    }, [token, reloadUsers]);
+    }, [token, reloadUsers, user]);
 
     return (
         <div className="App">
@@ -44,15 +49,37 @@ function Vacante() {
                         <Button variant="outline-primary" href="/Empresas/VacantesActivas">Vacantes Activas</Button>{' '}
                     </Form.Group>
                 </Row>
-                <Divider/>
-                <h5>Vacantes Activas</h5>
-                <div className="VacantesActivas">
-                {vacanciesActive.map((post) => (
-                  <CardsVacantes key={post.id} post={post} />
-                ))}
-                </div>
+                <Divider />
+                <div className="list-users">
+
+                        <div className="switch">
+                            <Switch
+                                defaultChecked
+                                onChange={() => setViewUsersActives(!viewUsersActives)}
+                            />
+                            <span>
+                                {viewUsersActives ? "Vacantes Activas" : "Vacantes Inactivas"}
+                            </span>
+                        </div>
+                    </div>
+                    {viewUsersActives ? (
+                         <div className="VacantesActivas">
+                         {vacanciesActive.map((post) => (
+                             <CardsVacantes key={post.id} post={post} setReloadUsers={setReloadUsers}/>
+                         ))}
+                     </div>
+                    ) : (
+                        <div className="VacantesActivas">
+                        {vacanciesInactive.map((post) => (
+                            <CardsVacantes key={post.id} post={post} setReloadUsers={setReloadUsers}/>
+                        ))}
+                    </div>
+                    )}
+                   
+
+               
             </div>
-          
+
             <footer>
                 <div className="Fcontainer">
                     <div className="row">

@@ -46,7 +46,7 @@ function Empresas() {
                         <Button variant="outline-primary">Encuentra capacitaciones avaladas ante STPS</Button>{' '}
                     </Form.Group>
                     <Form.Group as={Col} md="4">
-                        <Button variant="outline-primary">Mira el status de tus vacantes activas</Button>{' '}
+                        <Button variant="outline-primary" href="/Empresas/VacantesActivas">Mira el status de tus vacantes activas</Button>{' '}
                     </Form.Group>
                     <Form.Group as={Col} md="4">
                         <Button variant="outline-primary">Cotiza estudios socio economicos</Button>{' '}

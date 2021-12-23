@@ -14,7 +14,7 @@ import CardsVacantes from '../../components/CardsVacantes';
 import Cartas from '../../components/Cartas';
 import {getVacanciesActiveApi} from '../../api/vacancies';
 import { getAccessTokenApi } from '../../api/auth';
-
+import useAuth from "../../hooks/useAuth";
   const cardsPuestos = [
     {
       Nombre: 'Juan',
@@ -30,13 +30,13 @@ function Vacante() {
     const token = getAccessTokenApi();
     const [reloadUsers, setReloadUsers] = useState(false);
     const [vacanciesActive, setVacanciesActive]= useState([]);
-   
+    const user = useAuth();
     useEffect(()=>{
-        getVacanciesActiveApi(token, true).then(response=>{
+        getVacanciesActiveApi(token,user.name, true).then(response=>{
             setVacanciesActive(response.vacancies);
         });
         setReloadUsers(false);
-    }, [token, reloadUsers]);
+    }, [token, reloadUsers, user]);
     return (
         <div className="App">
            
@@ -58,7 +58,7 @@ function Vacante() {
                 <h5>Vacantes Activas</h5>
                 <div className="VacantesActivas">
                 {vacanciesActive.map((post) => (
-                  <CardsVacantes key={post.id} post={post} />
+                  <CardsVacantes key={post.id} post={post} setReloadUsers={setReloadUsers}/>
                 ))}
                 </div>
                 <Divider/>

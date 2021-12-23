@@ -247,7 +247,7 @@ function UserInactive(props){
           });
           setReloadUsers(true);
         }).catch(err=>{
-          notification["err"]({
+          notification["error"]({
             message: err
           })
         })

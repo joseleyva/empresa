@@ -42,6 +42,7 @@ export default function EditUserForm(props){
       setUserData({...userData, avatar: avatar.file});
     }
    // eslint-disable-next-line no-use-before-define
+   // eslint-disable-next-line react-hooks/exhaustive-deps
    }, [avatar]);
    
    const updateUser= e=>{

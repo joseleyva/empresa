@@ -28,7 +28,7 @@ function DatosEmpresas() {
       setUsers(result);
     });
     setReloadUsers(false);
-  }, [user, reloadUsers]);
+  }, [user, reloadUsers, token]);
   useEffect(() => {
     if (users.avatar) {
       getAvatarApi(users.avatar).then((response) => {

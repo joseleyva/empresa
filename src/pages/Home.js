@@ -80,21 +80,8 @@ const cards = [
     descripcion: 'Empresa formada en el año de 1987 en el estado de durango ',
     imagen: 'Usuario.jpg',
   },
-  {
-    title: 'Empresa7',
-    descripcion: 'Empresa formada en el año de 1987 en el estado de durango ',
-    imagen: 'Usuario.jpg',
-  },
-  {
-    title: 'Empresa8',
-    descripcion: 'Empresa formada en el año de 1987 en el estado de durango ',
-    imagen: 'empresas.jpg',
-  },
-  {
-    title: 'Empresa9',
-    descripcion: 'Empresa formada en el año de 1987 en el estado de durango ',
-    imagen: 'Usuario.jpg',
-  },
+  
+  
 ];
 
 

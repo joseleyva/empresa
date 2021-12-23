@@ -9,7 +9,7 @@ import { Formik } from "formik";
 import * as yup from "yup";
 import {notification} from 'antd';
 import { getAccessTokenApi } from "../../../api/auth";
-import { signInApi } from '../../../api/user';
+import { signInAdminApi } from '../../../api/user';
 import {ACCESS_TOKEN, REFRESH_TOKEN} from "../../../utils/constants";
 import { Redirect } from "react-router-dom";
 const schema = yup.object().shape({
@@ -36,7 +36,7 @@ function InicioS() {
             validationSchema={schema}
             onSubmit={async(valores, { resetForm }) => {
                 setValidated(true);
-                const result = await signInApi(valores);
+                const result = await signInAdminApi(valores);
                 if(result.message){
                     notification["error"]({
                         message: result.message,

@@ -5,7 +5,7 @@ import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import { CardActionArea } from '@mui/material';
-import Button from '@mui/material/Button';
+
 
 function Main(props) {
   const { post} = props;
@@ -28,7 +28,6 @@ function Main(props) {
           <Typography variant="body2" color="text.secondary">
             {post.descripcion}
           </Typography>
-          <Button >Ver mas</Button>
         </CardContent>
       </CardActionArea>
     </Card>

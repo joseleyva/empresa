@@ -11,7 +11,7 @@ import {useEffect, useState} from 'react';
         getUserApi(token, users.id).then((result) => {
           setUser(result);
         });
-      }, [users]);
+      }, [users,token]);
     useEffect(() => {
         if (user.avatar) {
           getAvatarApi(user.avatar).then((response) => {
@@ -20,7 +20,7 @@ import {useEffect, useState} from 'react';
         } else {
           setAvatar(null);
         }
-      }, [user]);
+      }, [user, setAvatar]);
 
       return null;
 }

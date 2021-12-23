@@ -52,7 +52,7 @@ export function updateInfoVacanciesApi(token, vacancies, userId){
     });
   }
 
-  export function getVacanciesActiveApi(token, status){
+  export function getVacanciesActiveApi(token,name, status){
     const url = `${basePath}/${apiVersion}/vacancies-active?active=${status}`;
   
     const params={
@@ -74,4 +74,45 @@ export function updateInfoVacanciesApi(token, vacancies, userId){
       return err.message;
     });
   
+  }
+  export function deleteVacanciesApi(token, userId){
+    const url =`${basePath}/${apiVersion}/delete-vacancies/${userId}`;
+  
+    const params={
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: token
+      }
+    }
+  
+    return fetch(url, params).then(response=>{
+      return response.json();
+    }).then(result=>{
+      return result.message;
+    }).catch(err=>{
+      return err.message;
+    })
+  }
+
+  export function activateVacancieApi(token, userId, status){
+    const url=`${basePath}/${apiVersion}/activate-vacancie/${userId}`;
+  
+    const params={
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization:token
+      },
+      body: JSON.stringify({
+        active: status
+      })
+    };
+    return fetch(url, params).then(response=>{
+      return response.json();
+    }).then(result=>{
+      return result.message;
+    }).catch(err=>{
+      return err.message;
+    });
   }

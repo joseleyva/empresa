@@ -1,5 +1,4 @@
 import React, {useState} from "react";
-import '../App.css';
 import { Layout } from "antd";
 import { Route, Switch } from "react-router-dom";
 import { Redirect } from "react-router-dom";
@@ -15,6 +14,7 @@ import {logout} from '../api/auth';
 import Logo from '../assets/img/png/logo512.png';
 import Perfil from '../assets/img/png/perfil.png';
 import AvatarPer from '../components/AvatarPer';
+import '../App.css';
 
 export default function LayoutsPanel({ routes }) {
   const { Content} = Layout;
@@ -58,7 +58,7 @@ export default function LayoutsPanel({ routes }) {
                                 <Nav.Link href="/Empresas/DatosEmpresa">Datos de la Empresa
                                     <Badge bg="danger">1</Badge>
                                 </Nav.Link>
-                                <Nav.Link href="/Empresas/Vacante">Publicar vacante</Nav.Link>
+                                <Nav.Link href="/Empresas/Vacante">Vacantes</Nav.Link>
                                 <Nav.Link href="/Empresas/Solicitudes">Evaluaciones
                                     <Badge bg="danger">1</Badge>
                                 </Nav.Link>
@@ -81,8 +81,8 @@ export default function LayoutsPanel({ routes }) {
                                         className="d-inline-block align-top "
                                     />
                                 </Navbar.Brand>
-                                <NavDropdown title="Perfil" id="basic-nav-dropdown">
-                                    <NavDropdown.Item href="/Empresas/DatosEmpresa">Datos de la Empresa</NavDropdown.Item>
+                                <NavDropdown title="Perfil" id="dropdown-menu-align-end" align="end" >
+                                    <NavDropdown.Item href="/Empresas/DatosEmpresa">Datos Generales</NavDropdown.Item>
                                     <NavDropdown.Divider />
                                     <NavDropdown.Item onClick={logoutUser}>Cerrar Sesion</NavDropdown.Item>
                                 </NavDropdown>

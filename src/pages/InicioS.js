@@ -57,7 +57,7 @@ function InicioS() {
             placement: 'bottomLeft',
           });
      
-        window.location.href="/Empresas/DatosR"
+        window.location.href="/DatosR/DatosR"
       
         }
       }}

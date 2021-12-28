@@ -2,6 +2,7 @@
 import LayoutAdmin from '../layouts/LayoutAdmin';
 import LayoutBasic from '../layouts/LayoutBasic';
 import LayoutPanel from '../layouts/LayoutPanel';
+import LayoutDatos from '../layouts/LayoutDatos';
 //Admin Pages
 import AdminHome from "../pages/Admin";
 import AdminSingIn from "../pages/Admin/SignIn";
@@ -17,7 +18,6 @@ import InicioS from '../pages/InicioS';
 import Empresas from '../pages/Empresas/Empresas';
 import Vacante from '../pages/Empresas/Vacante';
 import Formulario from '../components/Formulario';
-import DatosR from '../pages/DatosR';
 import Solicitudes from '../pages/Empresas/Solicitudes';
 import Referencias from '../pages/Empresas/Referencias';
 import FormReferencias from '../components/FormReferencias';
@@ -29,6 +29,7 @@ import VacantesActivas from '../pages/Empresas/VacantesActivas';
 import CandidatosPostulados from '../pages/Empresas/CandidatosPostulados';
 //Other pages
 import Error404 from '../pages/Error404';
+import DatosR from '../pages/DatosR';
 
 const routes=[
     {
@@ -61,7 +62,22 @@ const routes=[
                 component: Error404
             }
         ]
-    },
+    },{
+        path: "/DatosR",
+        exact: false,
+        component: LayoutDatos,
+         routes:[
+             
+             {
+                path: "/DatosR/DatosR",
+                component: DatosR,
+                exact:true
+            },
+            {
+                component: Error404
+            }
+         ]
+        },
     {
         path: "/Empresas",
         exact: false,

@@ -10,13 +10,14 @@ import { Redirect } from "react-router-dom";
 import MainBanner from "../components/Web/MainBanner";
 import HomeEmpresas from "../components/Web/HomeEmpresas"
 import HowMyPagesWork from "../components/Web/HowMyPagesWork"
+import Footer from "../components/Web/Footer"
 
 function App() {
   if (getAccessTokenApi()) {
     return <Redirect to="/Empresas" />;
   }
   return (
-
+      <>
     <div className="App">
           <header >
         <Navbar collapseOnSelect expand="lg" className="Barra ">
@@ -52,7 +53,11 @@ function App() {
     <HomeEmpresas/>
     <HowMyPagesWork/>
     
+
+    <Footer/>
     </div>
+   
+   </>
   );
 }
 

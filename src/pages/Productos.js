@@ -10,14 +10,9 @@ import CartasProductos from '../components/CartasProductos';
 import Typography from '@mui/material/Typography';
 import GlobalStyles from '@mui/material/GlobalStyles';
 import Grid from '@mui/material/Grid';
-import GitHubIcon from '@mui/icons-material/GitHub';
-import FacebookIcon from '@mui/icons-material/Facebook';
-import TwitterIcon from '@mui/icons-material/Twitter';
-import { Instagram } from '@mui/icons-material';
-import Link from '@mui/material/Link';
 import { getAccessTokenApi } from "../api/auth";
 import { Redirect } from "react-router-dom";
-
+import Footer from "../components/Web/Footer"
 const tiers = [
     {
         title: 'Free',
@@ -123,80 +118,7 @@ function Productos() {
 
                 </React.Fragment>
             </CardGroup>
-            <footer>
-                <div className="Fcontainer">
-                    <div className="row">
-                        <div className="Fcol-md-4 footer-col">
-                            <h4>Dirección</h4>
-                            <p>
-
-                            </p>
-                        </div>
-                        <div className="Fcol-md-4 footer-col">
-                            <h4>Correo</h4>
-                            <p>
-
-                            </p>
-                        </div>
-                        <div className="Fcol-md-4 footer-col">
-                            <h4>Redes Sociales</h4>
-                            <Link
-                                display="block"
-                                variant="body1"
-                                href="#"
-                                name="GitHub"
-                                sx={{ mb: 0.5 }}
-                            >
-                                <GitHubIcon name='GitHub'
-                                />
-                                <span>GitHub</span>
-                            </Link>
-                            <Link
-                                display="block"
-                                variant="body1"
-                                href="#"
-                                name="Facebook"
-                                sx={{ mb: 0.5 }}
-                            >
-                                <FacebookIcon name='Facebook'
-                                />
-                                <span>Facebook</span>
-                            </Link>
-                            <p>
-                                <Link
-                                    display="block"
-                                    variant="body1"
-                                    href="#"
-                                    name="Twitter"
-                                    sx={{ mb: 0.5 }}
-                                >
-                                    <TwitterIcon name='Twitter'
-                                    />
-                                    <span>Twitter</span>
-                                </Link>
-
-                                <Link
-                                    display="block"
-                                    variant="body1"
-                                    href="#"
-                                    name="Instagram"
-                                    sx={{ mb: 0.5 }}
-                                >
-                                    <Instagram name='Instagram'
-                                    />
-                                    <span>Instagram</span>
-                                </Link>
-                            </p>
-                        </div>
-                        <div className="Fcol-md-4 footer-col">
-                            <h4>Empresa</h4>
-                            <p>
-
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </footer>
+            <Footer/>
         </div>
 
 

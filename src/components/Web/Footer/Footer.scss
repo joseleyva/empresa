@@ -1,17 +1,5 @@
-@import "../../../scss/index.scss";
-
-.footer{
-    background-color: grey;
-    border-top: 3px solid black;
-
-    &__copyright{
-        margin-top: 30px;
-        .ant-col{
-            color: black;
-            &:last-of-type{
-                text-align: right;
-            }
-        }
-    }
-
+.ant-row.redes{
+    text-align: center;
+    display: block!important;
+    
 }

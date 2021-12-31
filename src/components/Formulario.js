@@ -239,6 +239,7 @@ function Formulario() {
                 type="file"
                 required
                 name="card"
+                
                 onChange={handleChange}
                 isValid={touched.card && !errors.card}
                 isInvalid={fallo ? !!errors.card : false}

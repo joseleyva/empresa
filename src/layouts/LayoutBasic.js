@@ -1,6 +1,7 @@
 import React from "react";
 import { Layout } from "antd";
 import { Route, Switch } from "react-router-dom";
+import Footer from "../components/Web/Footer"
 
 export default function LayoutsPanel({ routes }) {
   const { Content } = Layout;
@@ -11,6 +12,7 @@ export default function LayoutsPanel({ routes }) {
             <LoadRouters routes={routes} />
           </Content>
         </Layout>
+        <Footer/>
       </Layout>
     );
   

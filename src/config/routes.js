@@ -8,13 +8,8 @@ import AdminHome from "../pages/Admin";
 import AdminSingIn from "../pages/Admin/SignIn";
 import AdminUsers from "../pages/Admin/Users";
 import AdminMenuWeb from '../pages/Admin/MenuWeb';
-//Pages
-import Home from '../pages/Home';
-import Productos from '../pages/Productos';
-import Acerca from '../pages/Acerca';
-import Contacto from '../pages/Contacto';
-import CrearC from '../pages/CrearC';
-import InicioS from '../pages/InicioS';
+
+//Pages Panel
 import Empresas from '../pages/Empresas/Empresas';
 import Vacante from '../pages/Empresas/Vacante';
 import Formulario from '../components/Formulario';
@@ -27,6 +22,15 @@ import EstudiosSimple from '../pages/Empresas/EstudiosSimple';
 import VacanteForm from '../components/VacanteForm';
 import VacantesActivas from '../pages/Empresas/VacantesActivas';
 import CandidatosPostulados from '../pages/Empresas/CandidatosPostulados';
+
+//WebPages
+import Home from '../pages/Home';
+import Productos from '../pages/Productos';
+import Acerca from '../pages/Acerca';
+import Contacto from '../pages/Contacto';
+import CrearC from '../pages/CrearC';
+import InicioS from '../pages/InicioS';
+import MoreEmpresas from "../pages/MoreEmpresas";
 //Other pages
 import Error404 from '../pages/Error404';
 import DatosR from '../pages/DatosR';
@@ -189,6 +193,10 @@ const routes=[
             {
                 path: "/InicioS",
                 component: InicioS,
+                exact: true
+            },{
+                path: "/MoreEmpresas",
+                component: MoreEmpresas,
                 exact: true
             },
             {

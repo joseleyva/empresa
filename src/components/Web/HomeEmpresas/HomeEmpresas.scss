@@ -39,9 +39,13 @@
             .ant-card-meta-title,
             .ant-card-meta-description{
                 color: black;
-            }
+             }
             .ant-card-meta-title{
                 font-weight: bold;
+               
+            }
+            .ant-card-meta-description{
+                min-height: 40px;
             }
         }
 

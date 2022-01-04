@@ -126,6 +126,31 @@ export function uploadAvatarApi(token, avatar, userId){
   });
 }
 
+export function uploadCardApi(token, card, userId){
+  const url= `${basePath}/${apiVersion}/upload-card/${userId}`;
+  const formData= new FormData();
+ var file = new Blob([
+   JSON.stringify({})
+], { type: 'application/json' });
+  formData.append("File", file, card.name);
+
+  const params ={
+    method: "PUT",
+    body: formData,
+    headers:{
+      Authorization: token
+    }
+  }
+
+  return fetch(url, params).then(response=>{
+    return response.json();
+  }).then(result=>{
+    return result;
+  }).catch(err=>{
+    return err.message;
+  });
+}
+
 export function getAvatarApi(avatarName){
   const url=`${basePath}/${apiVersion}/get-avatar/${avatarName}`;
 

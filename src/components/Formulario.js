@@ -13,9 +13,10 @@ import DialogTitle from '@mui/material/DialogTitle';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { useTheme } from '@mui/material/styles';
 import { getAccessTokenApi } from '../api/auth';
-import { updateInfoUserApi } from '../api/user';
+import { updateInfoUserApi, uploadCardApi } from '../api/user';
 import { notification } from 'antd';
 import {logout} from '../api/auth'
+
 const schema = yup.object().shape({
   nameUser: yup.string().required("Ingrese su nombre").matches(/^[a-zA-Z ]+$/, "Solo letras"),
   lastnameP: yup.string().required("Ingrese su apellido").matches(/^[a-zA-Z ]+$/, 'Solo letras'),
@@ -43,7 +44,6 @@ function Formulario() {
   const {user} = useAuth();
   const token = getAccessTokenApi();
 
-
   const handleShow = () => setShow(!show);
   const handleClick = (event) => {
     const Button = event.currentTarget;
@@ -68,12 +68,27 @@ function Formulario() {
       validationSchema={schema}
       onSubmit={(valores, { resetForm }) => {
         setValidated(true);
+       
+
         updateInfoUserApi(token, valores, user.id).then(result=>{
           notification["success"]({
               message: result.message,
               placement: "bottomLeft",
             });
-            setEnviado(true);
+            uploadCardApi(token, valores.card, user.id).then(result=>{
+              notification["success"]({
+                message: result.message,
+                placement: "bottomLeft",
+              });
+              setEnviado(true);
+              
+              
+        }).catch(err=>{
+            notification["error"]({
+                message: err.message,
+                placement: "bottomLeft",
+              });
+        })
             
             
       }).catch(err=>{
@@ -233,13 +248,13 @@ function Formulario() {
               </Form.Control.Feedback>
             </Form.Group>
 
-            <Form.Group as={Col} md="8" className="position-relative">
+            <Form.Group as={Col} md="8" className="position-relative" >
               <Form.Label>Cedula fiscal</Form.Label>
               <Form.Control
                 type="file"
                 required
                 name="card"
-                
+                accept='.pdf, .docx'
                 onChange={handleChange}
                 isValid={touched.card && !errors.card}
                 isInvalid={fallo ? !!errors.card : false}
@@ -331,7 +346,7 @@ function Formulario() {
 
           <div className="divBD">
             <Button type="submit" onClick={handleClick} className="boton">Guardar</Button>
-            <Button variant="danger" href="/" className="boton">Cancelar</Button>
+            <Button variant="danger" href="/"  className="boton">Cancelar</Button>
           </div>
           {
             (enviado && (
@@ -369,5 +384,7 @@ function Formulario() {
   );
 
 }
+
+
 
 export default Formulario;

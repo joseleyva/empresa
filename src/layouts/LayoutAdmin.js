@@ -13,8 +13,9 @@ export default function LayoutsAdmin({routes}) {
   const { Header, Content, Footer} = Layout;
   const [menuCollapsed, setMenuCollapsed] =useState(true);
   const { user, isLoading } = useAuth();
- 
-  if(!user && !isLoading){
+  
+
+  if(!user && !isLoading && user.role==="admin"){
     return(
       <>
       <Route path="/admin/login" component={AdminSignIn}/>

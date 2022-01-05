@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Form, Col, Button, Row, InputGroup } from 'react-bootstrap';
 import { Formik } from 'formik';
 import * as yup from 'yup';
@@ -16,6 +16,7 @@ import { getAccessTokenApi } from '../api/auth';
 import { updateInfoUserApi, uploadCardApi } from '../api/user';
 import { notification } from 'antd';
 import {logout} from '../api/auth'
+import Dropzone from 'react-dropzone';
 
 const schema = yup.object().shape({
   nameUser: yup.string().required("Ingrese su nombre").matches(/^[a-zA-Z ]+$/, "Solo letras"),
@@ -30,7 +31,6 @@ const schema = yup.object().shape({
   suburb: yup.string().required("Ingrese la Col/Fracc").matches(/^[a-zA-Z -&]+$/),
   zip: yup.string().required("Ingrese el Codigo postal").matches(/^[0-9]+$/, 'Solo numeros'),
   estado: yup.string().required("Ingrese el Estado").matches(/^[a-zA-Z ]+$/),
-  card: yup.mixed().required("Ingrese su Cedula"),
 });
 
 function Formulario() {
@@ -43,6 +43,8 @@ function Formulario() {
   const [show, setShow] = useState(false);
   const {user} = useAuth();
   const token = getAccessTokenApi();
+  const [card, setCard]=useState(null);
+ 
 
   const handleShow = () => setShow(!show);
   const handleClick = (event) => {
@@ -75,7 +77,7 @@ function Formulario() {
               message: result.message,
               placement: "bottomLeft",
             });
-            uploadCardApi(token, valores.card, user.id).then(result=>{
+            uploadCardApi(token, card, user.id).then(result=>{
               notification["success"]({
                 message: result.message,
                 placement: "bottomLeft",
@@ -114,7 +116,6 @@ function Formulario() {
         suburb: "",
         zip: "",
         estado: "",
-        card: null,
       }}
     >
       {({
@@ -198,7 +199,7 @@ function Formulario() {
             <h4>Datos de la Empresa</h4>
           </Row>
           <Row className="mb-2">
-            <Form.Group as={Col} md="6" controlId="validationFormik03" className="position-relative">
+            <Form.Group as={Col} md="6" controlId="validationFormikRFC" className="position-relative">
               <Form.Label>R.F.C.</Form.Label>
               <Form.Control
                 type="text"
@@ -250,16 +251,7 @@ function Formulario() {
 
             <Form.Group as={Col} md="8" className="position-relative" >
               <Form.Label>Cedula fiscal</Form.Label>
-              <Form.Control
-                type="file"
-                required
-                name="card"
-                accept='.pdf, .docx'
-                onChange={handleChange}
-                isValid={touched.card && !errors.card}
-                isInvalid={fallo ? !!errors.card : false}
-              />
-              <Form.Control.Feedback type="invalid" tooltip> {errors.card}</Form.Control.Feedback>
+              <UploadAvatar card={card} setCard={setCard}/>
             </Form.Group>
           </Row>
 
@@ -386,5 +378,44 @@ function Formulario() {
 }
 
 
+function UploadAvatar(props){
+  const {card, setCard}=props;
+  const [cardUrl, setCardUrl]= useState(null);
+  useEffect(()=>{
+    if(card){
+      if(card){
+        setCardUrl(card[0].name)
+      }else{
+          setCardUrl(card[0].name)
+        }
+    }else{
+      setCardUrl(null);
+    }
+  }, [card]);
+
+  
+  return (
+<Dropzone onDrop={fil => setCard(fil)}>
+  {({getRootProps, getInputProps}) => (
+    <div className="container">
+      <div
+        {...getRootProps({
+          className: 'dropzone',
+          onDrop: event => event.stopPropagation()
+        })}
+      >
+        <input 
+        {...getInputProps({
+          required:false,
+      type:"file",
+        accept:".pdf"})} />
+      <p>{cardUrl ? cardUrl : "Presione aquí para subir un archivo"}</p>
+      </div>
+    </div>
+  )}
+</Dropzone>
+
+  );
+}
 
 export default Formulario;

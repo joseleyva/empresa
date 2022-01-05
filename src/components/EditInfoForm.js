@@ -77,7 +77,7 @@ export default function EditInfoForm(props){
               message: result.message,
               placement: 'bottomLeft',
             });
-            setIsVisibleModal(false);
+           setIsVisibleModal(false);
             setReloadUsers(true);
             window.location.reload();
           });

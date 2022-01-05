@@ -106,7 +106,6 @@ export function getUsersActiveApi(token, status){
 export function uploadAvatarApi(token, avatar, userId){
   const url= `${basePath}/${apiVersion}/upload-avatar/${userId}`;
   const formData= new FormData();
-
   formData.append("avatar", avatar, avatar.name);
 
   const params ={
@@ -129,11 +128,9 @@ export function uploadAvatarApi(token, avatar, userId){
 export function uploadCardApi(token, card, userId){
   const url= `${basePath}/${apiVersion}/upload-card/${userId}`;
   const formData= new FormData();
- var file = new Blob([
-   JSON.stringify({})
-], { type: 'application/json' });
-  formData.append("File", file, card.name);
+  formData.append('File', card[0], card[0].name);
 
+  console.log(formData);
   const params ={
     method: "PUT",
     body: formData,

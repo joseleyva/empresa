@@ -1,6 +1,5 @@
 import React from "react";
 import { Container } from 'react-bootstrap';
-import PropTypes from 'prop-types';
 import EditIcon from "@mui/icons-material/Edit";
 import CheckIcon from "@mui/icons-material/Check";
 import DeleteIcon from "@mui/icons-material/Delete";
@@ -16,7 +15,7 @@ function CardsVacantes(props) {
     const { post, setReloadUsers } = props;
     const showDeleteConfirm=()=>{
         const AccessToken= getAccessTokenApi();
-      
+       
         confirm({
           title: "Eliminar Vacante",
           content: `¿Estas seguro que quieres eliminar a ${post.nameP}?`,
@@ -71,7 +70,7 @@ function CardsVacantes(props) {
     return (
         <>
 
-            <Container className="ContenedorVacante">
+            <Container className="ContenedorVacante" >
                 <div className="C">
                     <div class="col-md-10">
                         <div class="card-body">
@@ -81,7 +80,9 @@ function CardsVacantes(props) {
                             <h6 align="left" class="card-title">Examenes:</h6>
                             {post.active ? (
                                <div className="buttonCards">
-                                <Button style={{ margin: 5 }} variant="contained">
+                                <Button style={{ margin: 5 }} variant="contained"
+                                
+                                >
                                 {<EditIcon />}
                             </Button>
                             <Button
@@ -123,10 +124,4 @@ function CardsVacantes(props) {
 }
 
 
-CardsVacantes.propTypes = {
-    post: PropTypes.shape({
-        Nombre: PropTypes.string.isRequired,
-        id: PropTypes.number.isRequired,
-    }).isRequired,
-};
 export default CardsVacantes;

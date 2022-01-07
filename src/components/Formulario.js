@@ -78,12 +78,18 @@ function Formulario() {
               placement: "bottomLeft",
             });
             uploadCardApi(token, card, user.id).then(result=>{
+              if(result.ok){
               notification["success"]({
                 message: result.message,
                 placement: "bottomLeft",
               });
               setEnviado(true);
-              
+            }else{
+              notification["error"]({
+                message: result.message,
+                placement: "bottomLeft",
+              });  
+            }
               
         }).catch(err=>{
             notification["error"]({
@@ -146,7 +152,7 @@ function Formulario() {
               <Form.Control.Feedback type="invalid" tooltip>{errors.nameUser}</Form.Control.Feedback>
 
             </Form.Group>
-            <Form.Group as={Col} md="4" controlId="validationFormik02" className="position-relative">
+            <Form.Group as={Col} md="4" controlId="validationFormikLastNameP" className="position-relative">
               <Form.Label>Apellido Paterno</Form.Label>
               <Form.Control
                 type="text"
@@ -161,7 +167,7 @@ function Formulario() {
               <Form.Control.Feedback type="invalid" tooltip>{errors.lastnameP}</Form.Control.Feedback>
             </Form.Group>
 
-            <Form.Group as={Col} md="4" controlId="validationFormik02" className="position-relative">
+            <Form.Group as={Col} md="4" controlId="validationFormikLastnameM" className="position-relative">
               <Form.Label>Apellido Materno</Form.Label>
               <Form.Control
                 type="text"
@@ -177,7 +183,7 @@ function Formulario() {
             </Form.Group>
           </Row>
           <Row className="mb-3">
-            <Form.Group as={Col} md="4" controlId="validationFormikUsername" className="position-relative">
+            <Form.Group as={Col} md="4" controlId="validationFormikNumberPhone" className="position-relative">
               <Form.Label>Telefono</Form.Label>
               <InputGroup hasValidation>
                 <Form.Control
@@ -257,7 +263,7 @@ function Formulario() {
 
           <Row className="mb-3">
             <Form.Label>DIRECCIÓN:</Form.Label>
-            <Form.Group as={Col} md="5" controlId="validationFormik03" className="position-relative">
+            <Form.Group as={Col} md="5" controlId="validationFormikStreet" className="position-relative">
               <Form.Label>Calle</Form.Label>
               <Form.Control
                 type="text"
@@ -271,7 +277,7 @@ function Formulario() {
               />
               <Form.Control.Feedback type="invalid" tooltip>{errors.street} </Form.Control.Feedback>
             </Form.Group>
-            <Form.Group as={Col} md="2" controlId="validationFormik03" className="position-relative">
+            <Form.Group as={Col} md="2" controlId="validationFormikHouseNumber" className="position-relative">
               <Form.Label>Numero</Form.Label>
               <Form.Control
                 type="text"
@@ -285,7 +291,7 @@ function Formulario() {
               />
               <Form.Control.Feedback type="invalid" tooltip>{errors.houseNumber} </Form.Control.Feedback>
             </Form.Group>
-            <Form.Group as={Col} md="5" controlId="validationFormik03" className="position-relative">
+            <Form.Group as={Col} md="5" controlId="validationFormikSuburb" className="position-relative">
               <Form.Label>Colonia o Fraccionamiento</Form.Label>
               <Form.Control
                 type="text"
@@ -301,7 +307,7 @@ function Formulario() {
             </Form.Group>
           </Row>
           <Row className="mb-3">
-            <Form.Group as={Col} md="3" controlId="validationFormik03" className="position-relative">
+            <Form.Group as={Col} md="3" controlId="validationFormikZip" className="position-relative">
               <Form.Label>Codigo Postal</Form.Label>
               <Form.Control
                 type="text"
@@ -315,7 +321,7 @@ function Formulario() {
               />
               <Form.Control.Feedback type="invalid" tooltip>{errors.zip} </Form.Control.Feedback>
             </Form.Group>
-            <Form.Group as={Col} md="4" controlId="validationFormik03" className="position-relative">
+            <Form.Group as={Col} md="4" controlId="validationFormikEstado" className="position-relative">
               <Form.Label>Estado</Form.Label>
               <Form.Control
                 type="text"
@@ -395,7 +401,7 @@ function UploadAvatar(props){
 
   
   return (
-<Dropzone onDrop={fil => setCard(fil)}>
+<Dropzone onDrop={file => setCard(file)}>
   {({getRootProps, getInputProps}) => (
     <div className="container">
       <div

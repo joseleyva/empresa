@@ -15,7 +15,7 @@ export default function LayoutsAdmin({routes}) {
   const { user, isLoading } = useAuth();
   
 
-  if(!user && !isLoading && user.role==="admin"){
+  if(!user && !isLoading){
     return(
       <>
       <Route path="/admin/login" component={AdminSignIn}/>
@@ -23,7 +23,11 @@ export default function LayoutsAdmin({routes}) {
       </>
       )
   }
-  if (user && !isLoading  ) {
+  if(user && !isLoading && user.role==="usuario"){
+    return <Redirect to="/Empresas"/>
+  }
+
+  if (user && !isLoading  && user.role === "admin") {
   return (
     <Layout>
      <MenuSider menuCollapsed={menuCollapsed}/>

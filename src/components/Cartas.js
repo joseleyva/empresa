@@ -18,10 +18,12 @@ function Cartas(props) {
                     <div className="C">
                         <div class="col-md-10">
                             <div class="card-body">
+                                <div>
                                 <h5 align="left" class="card-title">Nombre: {post.Nombre}</h5>
                                 <h5 align="left" class="card-title">Area: <h7>{post.Area}</h7></h5>
-                                <h5 align="left" class="card-title">Experiencia: <label>{post.Experiancia}</label></h5>
+                                <h5 align="left" class="card-title">Experiencia: <label></label></h5>
                                 <h5 align="left" class="card-title">Examenes:</h5>
+                                </div>
                                 <Dropdown as={ButtonGroup}  >
                                     <Button variant="success" className="Opciones">Opciones</Button>
                                     <Dropdown.Toggle split variant="success" id="dropdown-split-basic" />
@@ -55,7 +57,7 @@ Cartas.propTypes = {
     post: PropTypes.shape({
       Nombre: PropTypes.string.isRequired,
       Area: PropTypes.string.isRequired,
-      Experiancia: PropTypes.string.isRequired,
+      Experiancia: PropTypes.string,
       id:PropTypes.number.isRequired,
     }).isRequired,
   };

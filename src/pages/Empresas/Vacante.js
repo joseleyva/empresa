@@ -58,7 +58,7 @@ function Vacante() {
                 <h5>Vacantes Activas</h5>
                 <div className="VacantesActivas">
                 {vacanciesActive.map((post) => (
-                  <CardsVacantes key={post.id} post={post} setReloadUsers={setReloadUsers}/>
+                  <CardsVacantes  post={post} setReloadUsers={setReloadUsers}/>
                 ))}
                 </div>
                 <Divider/>

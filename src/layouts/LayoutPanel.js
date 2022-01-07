@@ -33,7 +33,12 @@ export default function LayoutsPanel({ routes }) {
           </>
         );
       }
-  if (user && !isLoading  ) {
+      
+      if(user && !isLoading && user.role==="admin"){
+        return <Redirect to="/admin"/>
+      }
+
+  if (user && !isLoading && user.role === "usuario") {
     return (
       <Layout>
 
@@ -110,6 +115,7 @@ function LoadRouters({ routes }) {
           path={route.path}
           component={route.component}
           exact={route.exact}
+          
         />
       ))}
     </Switch>

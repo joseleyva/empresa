@@ -24,7 +24,7 @@ import Cartas from '../../components/Cartas';
         Nombre: 'Pedro',
         Area: 'Velador',
         Experiencia:'2 años',
-        id:1,
+        id:2,
        
       }
    

@@ -141,11 +141,23 @@ export function uploadCardApi(token, card, userId){
 
   return fetch(url, params).then(response=>{
     return response.json();
-  }).then(result=>{
-    return result;
-  }).catch(err=>{
-    return err.message;
-  });
+  }).then(result =>{
+    if(result.cardName){
+       return {
+         ok:true,
+         message:'Archivo subido correctamente'
+       };
+     }
+    return {
+       ok:false,
+       message: result.message
+    };
+  }).catch(err => {
+   return {
+     ok:false,
+     message: err.message
+  };
+  })
 }
 
 export function getAvatarApi(avatarName){

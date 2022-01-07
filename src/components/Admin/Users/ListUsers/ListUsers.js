@@ -11,6 +11,7 @@ import Avatar from "@mui/material/Avatar";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import CheckIcon from "@mui/icons-material/Check";
+import PictureAsPdfOutlinedIcon from '@mui/icons-material/PictureAsPdfOutlined';
 import DoNotDisturbAltIcon from "@mui/icons-material/DoNotDisturbAlt";
 import NoAvatar from "../../../../assets/img/png/logo512.png";
 import Modal from "../../../../components/Modal";
@@ -18,6 +19,7 @@ import EditUserForm from "../EditUserForm";
 import {getAvatarApi, activateUserApi, deleteUserApi} from '../../../../api/user';
 import AddUserForm from '../AddUserForm';
 import {getAccessTokenApi} from '../../../../api/auth';
+import ViewPdf from "../ViewPdf/ViewPdf";
 import "./ListUsers.scss";
 const { confirm} = ModalAntd;
 
@@ -83,6 +85,11 @@ const editUser = user =>{
     setModalTitle(`Editar ${user.name}`);
     setModalContent(<EditUserForm user={user} setReloadUsers={setReloadUsers} setIsVisibleModal={setIsVisibleModal}/>);
 }
+const pdfView = user =>{
+  setIsVisibleModal(true);
+  setModalTitle(`Pdf de ${user.name}`);
+  setModalContent(<ViewPdf user={user} setReloadUsers={setReloadUsers} setIsVisibleModal={setIsVisibleModal}/>);
+}
 
   return (
     <List
@@ -90,16 +97,16 @@ const editUser = user =>{
       dense
       sx={{ width: "100%", bgcolor: "background.paper" }}
     >
-      {usersActive.map(user => <UserActive user={user} setReloadUsers={setReloadUsers} editUser={editUser}/>)}
+      {usersActive.map(user => <UserActive pdfView={pdfView} user={user} setReloadUsers={setReloadUsers} editUser={editUser}/>)}
     </List>
   );
 }
 
 
 function UserActive(props){
-  const {user, editUser, setReloadUsers} = props;
+  const {user, editUser, setReloadUsers, pdfView} = props;
   const [avatar, setAvatar] = useState(null);
-  
+  const AccessToken= getAccessTokenApi();
   useEffect(()=>{
 
     if(user.avatar){
@@ -111,9 +118,11 @@ function UserActive(props){
     }
   }, [user]);
 
+ 
+
   const desactivateUser= ()=>{
-    const accessToken= getAccessTokenApi();
-    activateUserApi(accessToken, user._id, false).then(response=>{
+    
+    activateUserApi(AccessToken, user._id, false).then(response=>{
       notification["success"]({
         message: response,
         placement: 'bottomLeft',
@@ -128,7 +137,6 @@ function UserActive(props){
   }
   
 const showDeleteConfirm=()=>{
-  const AccessToken= getAccessTokenApi();
 
   confirm({
     title: "Eliminar usuario",
@@ -159,6 +167,7 @@ const showDeleteConfirm=()=>{
     key={user.name}
     secondaryAction={
       <>
+      <Button style={{margin:5}} variant="contained" color="error" onClick={()=>pdfView(user)}> <PictureAsPdfOutlinedIcon /> </Button>
         <Button style={{ margin: 5 }} variant="contained" onClick={()=> editUser(user)}>
           {<EditIcon />}
         </Button>
@@ -198,6 +207,9 @@ const showDeleteConfirm=()=>{
         </React.Fragment>
       }
     />
+    <div> 
+    
+    </div>
   </ListItem>
   )
 }

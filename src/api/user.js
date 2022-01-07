@@ -160,6 +160,24 @@ export function uploadCardApi(token, card, userId){
   })
 }
 
+export function getCardApi(token,cardName){
+  const url=`${basePath}/${apiVersion}/get-card/${cardName}`;
+
+  const params={
+    method: "GET",
+    headers: {
+      "Content-Type": "application/pdf",
+      Authorization: token
+    }
+  }
+
+  return fetch(url, params).then(response=>{
+    return response.url;
+  }).catch(err=>{
+    return err.message;
+  })
+}
+
 export function getAvatarApi(avatarName){
   const url=`${basePath}/${apiVersion}/get-avatar/${avatarName}`;
 

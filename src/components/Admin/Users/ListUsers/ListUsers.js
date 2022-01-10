@@ -27,6 +27,7 @@ export default function ListUsers(props) {
   const { usersActive, usersInactive, setReloadUsers } = props;
   const [viewUsersActives, setViewUsersActives] = useState(true);
   const [isVisibleModal, setIsVisibleModal] = useState(false);
+  const [width, setWidth] = useState(500);
   const [modalTitle, setModalTitle] = useState("");
   const [modalContent, setModalContent] = useState("");
 
@@ -56,6 +57,7 @@ export default function ListUsers(props) {
       </div>   
          {viewUsersActives ? (
         <UsersActive
+          setWidth={setWidth}
           usersActive={usersActive}
           setIsVisibleModal={setIsVisibleModal}
           setModalTitle={setModalTitle}
@@ -66,6 +68,7 @@ export default function ListUsers(props) {
         <UsersInactive setReloadUsers={setReloadUsers} usersInactive={usersInactive} />
       )}
       <Modal
+        width={width}
         title={modalTitle}
         isVisible={isVisibleModal}
         setIsVisible={setIsVisibleModal}
@@ -79,13 +82,15 @@ export default function ListUsers(props) {
 
 
 function UsersActive(props) {
-  const { usersActive, setIsVisibleModal, setModalTitle, setModalContent, setReloadUsers } = props;
+  const { usersActive, setIsVisibleModal, setModalTitle, setModalContent, setReloadUsers, setWidth } = props;
 const editUser = user =>{
+  setWidth(500);
     setIsVisibleModal(true);
     setModalTitle(`Editar ${user.name}`);
     setModalContent(<EditUserForm user={user} setReloadUsers={setReloadUsers} setIsVisibleModal={setIsVisibleModal}/>);
 }
 const pdfView = user =>{
+  setWidth(1000);
   setIsVisibleModal(true);
   setModalTitle(`Pdf de ${user.name}`);
   setModalContent(<ViewPdf user={user} setReloadUsers={setReloadUsers} setIsVisibleModal={setIsVisibleModal}/>);

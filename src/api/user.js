@@ -160,14 +160,13 @@ export function uploadCardApi(token, card, userId){
   })
 }
 
-export function getCardApi(token,cardName){
+export function getCardApi(cardName){
   const url=`${basePath}/${apiVersion}/get-card/${cardName}`;
 
   const params={
     method: "GET",
     headers: {
       "Content-Type": "application/pdf",
-      Authorization: token
     }
   }
 

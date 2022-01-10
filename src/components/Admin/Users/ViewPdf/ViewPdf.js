@@ -1,34 +1,32 @@
-import React, {useState} from "react";
-import { Document, Page } from 'react-pdf';
-import {getAccessTokenApi} from '../../../../api/auth';
+import React, {useState, useEffect} from "react";
 import { getCardApi } from "../../../../api/user";
+import Iframe from 'react-iframe';
+
+
 
 export default function ViewPdf(props){
     const {user} = props;
-    const [numPages, setNumPages] = useState(null);
-    const [pageNumber, setPageNumber] = useState(1);
     const [card, setCard] = useState(null);
-    const AccessToken= getAccessTokenApi();
-    
-  const getPdf=()=>{
-    if(user.card){
-    getCardApi(AccessToken, user.card).then(response=>{
-      setCard(response);
-    })
-  }else{
-      setCard(null);
-  }
-  }
 
+    useEffect(() => {
+      if(user.card){
+        getCardApi(user.card).then(response=>{
+          setCard(response);
+        })
+      }else{
+          setCard(null);
+      }
+    }, [user])
+ 
     return (
-      <div>
-        <Document
-          fileUrl= {card}
-          onLoadSuccess={getPdf()}
-        >
-          <Page pageNumber={pageNumber} />
-        </Document>
-        <p>Page {pageNumber} of {numPages}</p>
+        <div className='pdf-container'>
+        
+        {card ? <Iframe url={card}
+        height="700px"
+        width="950px"
+        display="initial"
+        position="relative"/> : <h5>No se ha cargado ningun archivo</h5>}
+        
       </div>
-    );
+          );
 }

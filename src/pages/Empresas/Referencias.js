@@ -11,7 +11,7 @@ import {Row, Form, Col} from 'react-bootstrap';
 import {Divider} from '@mui/material';
 import CardsReferenciasMini from '../../components/CardsReferenciasMini';
 import CardsRefRecibidas from '../../components/CardsRefRecibidas';
-
+import usuario from '../../assets/img/jpg/Usuario.jpg'
 const cards = [
   {
     Nombre: 'Juan Lopez',
@@ -31,13 +31,13 @@ const cards = [
 const cardsRec = [
   {
     Nombre: 'Juan Lopez',
-    Imagen: 'Usuario.jpg',
+    Imagen: {usuario},
     id:1,
    
   },
   {
     Nombre: 'Pedro Paramo',
-    Imagen:'Usuario.jpg',
+    Imagen: {usuario},
     id:2,
   }
 ];

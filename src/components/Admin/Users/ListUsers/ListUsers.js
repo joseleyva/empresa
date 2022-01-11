@@ -65,7 +65,13 @@ export default function ListUsers(props) {
           setReloadUsers={setReloadUsers}
         />
       ) : (
-        <UsersInactive setReloadUsers={setReloadUsers} usersInactive={usersInactive} />
+        <UsersInactive 
+        setWidth={setWidth}
+        setIsVisibleModal={setIsVisibleModal}
+          setModalTitle={setModalTitle}
+          setModalContent={setModalContent}
+        setReloadUsers={setReloadUsers} 
+        usersInactive={usersInactive} />
       )}
       <Modal
         width={width}
@@ -93,7 +99,7 @@ const pdfView = user =>{
   setWidth(1000);
   setIsVisibleModal(true);
   setModalTitle(`Pdf de ${user.name}`);
-  setModalContent(<ViewPdf user={user} setReloadUsers={setReloadUsers} setIsVisibleModal={setIsVisibleModal}/>);
+  setModalContent(<ViewPdf user={user} pdfView={pdfView} setReloadUsers={setReloadUsers} setIsVisibleModal={setIsVisibleModal}/>);
 }
 
   return (
@@ -102,7 +108,7 @@ const pdfView = user =>{
       dense
       sx={{ width: "100%", bgcolor: "background.paper" }}
     >
-      {usersActive.map(user => <UserActive pdfView={pdfView} user={user} setReloadUsers={setReloadUsers} editUser={editUser}/>)}
+      {usersActive.map(user => <UserActive  pdfView={pdfView} user={user} setReloadUsers={setReloadUsers} editUser={editUser}/>)}
     </List>
   );
 }
@@ -172,7 +178,7 @@ const showDeleteConfirm=()=>{
     key={user.name}
     secondaryAction={
       <>
-      <Button style={{margin:5}} variant="contained" color="error" onClick={()=>pdfView(user)}> <PictureAsPdfOutlinedIcon /> </Button>
+        <Button style={{margin:5}} variant="contained" color="error" onClick={()=>pdfView(user)}> <PictureAsPdfOutlinedIcon /> </Button>
         <Button style={{ margin: 5 }} variant="contained" onClick={()=> editUser(user)}>
           {<EditIcon />}
         </Button>
@@ -221,21 +227,29 @@ const showDeleteConfirm=()=>{
 
 
 function UsersInactive(props) {
-  const { usersInactive, setReloadUsers } = props;
+  const { usersInactive,setIsVisibleModal, setModalTitle, setModalContent, setReloadUsers, setWidth } = props;
+  const pdfView = user =>{
+    setWidth(1000);
+    setIsVisibleModal(true);
+    setModalTitle(`Pdf de ${user.name}`);
+    setModalContent(<ViewPdf user={user} pdfView={pdfView} setReloadUsers={setReloadUsers} setIsVisibleModal={setIsVisibleModal}/>);
+  }
+ 
+
   return (
     <List
       className="users-active"
       dense
       sx={{ width: "100%", bgcolor: "background.paper" }}
     >
-      {usersInactive.map(user => <UserInactive setReloadUsers={setReloadUsers} user={user}/>)}
+      {usersInactive.map(user => <UserInactive pdfView={pdfView} setReloadUsers={setReloadUsers} user={user}/>)}
     </List>
   );
 }
 
 
 function UserInactive(props){
-  const {user ,setReloadUsers}= props;
+  const {user ,setReloadUsers , pdfView}= props;
   const [avatar, setAvatar] = useState(null);
 
   useEffect(()=>{
@@ -293,6 +307,7 @@ function UserInactive(props){
     key={user.name}
     secondaryAction={
       <>
+      <Button style={{margin:5}} variant="contained" color="error" onClick={()=>pdfView(user)}> <PictureAsPdfOutlinedIcon /> </Button>
         <Button style={{ margin: 5 }} variant="contained" onClick={activateUser}>
           {<CheckIcon />}
         </Button>

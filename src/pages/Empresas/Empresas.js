@@ -8,29 +8,30 @@ import TwitterIcon from '@mui/icons-material/Twitter';
 import { Instagram } from '@mui/icons-material';
 import Link from '@mui/material/Link';
 
-const data = {
-    labels: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio'],
-    datasets: [
-        {
-            label: 'Reputación',
-            data: [8, 10, 5, 6, 1, 7],
-            fill: false,
-            backgroundColor: 'rgb(255, 99, 132)',
-            borderColor: 'rgba(255, 99, 132, 0.2)',
-        },
-    ],
-};
 
-const options = {
-    scales: {
-        y: {
-            beginAtZero: true
-        }
-    }
-};
 
 function Empresas() {
     
+    const data = {
+        labels: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio'],
+        datasets: [
+            {
+                label: 'Reputación',
+                data: [8, 10, 5, 6, 1, 7],
+                fill: false,
+                backgroundColor: 'rgb(255, 99, 132)',
+                borderColor: 'rgba(255, 99, 132, 0.2)',
+            },
+        ],
+    };
+    
+    const options = {
+        scales: {
+            y: {
+                beginAtZero: true
+            }
+        }
+    };
     return (
 
         <div className="App">

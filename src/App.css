@@ -171,7 +171,7 @@
  }
  .BtnV{
   display: initial;
-  margin-left: 80px;
+  margin-left: 55px;
   text-align: right!important;
 }
  .ContenedorVacante{
@@ -180,12 +180,12 @@
   border-radius: 15px;
   border-color: rgb(94, 89, 89);
   width: 380px!important;
-  height: 180px!important;
+  height: 195px!important;
   display: inline-block;
 }
  .C{
    text-align: left!important;
-  width: 700px!important;
+  width: 480px!important;
   height: auto;
  }
 
@@ -348,6 +348,7 @@
   border-style: groove;
   background-color: white;
 }
+
 .VacantesActivas{
   width: 800px;
   display: inline-block!important;
@@ -531,6 +532,10 @@ display: grid!important;
 
 }
 .buttonCards{
-  text-align: center!important;  
+  text-align: left!important;  
   width: 380px!important;
+}
+
+.card-body{
+  padding-bottom: 0rem!important;
 }

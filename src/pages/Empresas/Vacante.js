@@ -14,22 +14,14 @@ import CardsVacantes from '../../components/CardsVacantes';
 import Cartas from '../../components/Cartas';
 import {getVacanciesActiveApi} from '../../api/vacancies';
 import { getAccessTokenApi } from '../../api/auth';
+import { getUsersActiveApi } from '../../api/user';
 import useAuth from "../../hooks/useAuth";
-  const cardsPuestos = [
-    {
-      Nombre: 'Juan',
-      Area: 'Contador',
-      Experiencia:'2 años',
-      id:1,
-     
-    },
-   
-  ];
 
 function Vacante() {
     const token = getAccessTokenApi();
     const [reloadUsers, setReloadUsers] = useState(false);
     const [vacanciesActive, setVacanciesActive]= useState([]);
+    const [users, setUsers] = useState([]);
     const user = useAuth();
     useEffect(()=>{
         getVacanciesActiveApi(token,user.name, true).then(response=>{
@@ -37,6 +29,14 @@ function Vacante() {
         });
         setReloadUsers(false);
     }, [token, reloadUsers, user]);
+
+    useEffect(() => {
+        getUsersActiveApi(token, true).then(response=>{
+            setUsers(response.users[0]);
+        });
+        setReloadUsers(false);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [token, reloadUsers])
     return (
         <div className="App">
            
@@ -58,15 +58,14 @@ function Vacante() {
                 <h5>Vacantes Activas</h5>
                 <div className="VacantesActivas">
                 {vacanciesActive.map((post) => (
-                  <CardsVacantes  post={post} setReloadUsers={setReloadUsers}/>
+                  <CardsVacantes key={post._id} post={post} setReloadUsers={setReloadUsers}/>
                 ))}
                 </div>
                 <Divider/>
                 <h5>Candidatos Postulados</h5>
                 <div className="VacantesActivas">
-                {cardsPuestos.map((post) => (
-                  <Cartas key={post.id} post={post} />
-                ))}
+                
+                <Cartas key={users._id} post={users} />
 
                 </div>
             </div>

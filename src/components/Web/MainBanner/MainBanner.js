@@ -10,7 +10,7 @@ export default function MainBanner(){
             <Row>
                 <Col lg={4}/>
                 <Col lg={16}>
-                    <h2> Empresa socialmente reponsable <br/>en el manejo de recursos humanos</h2>
+                    <h2> Empresa socialmente reponsable</h2>
                     <h3>
                         Nos comprometemos a que encuentres el personal que tanto necesitas para tu empresa
                     </h3>

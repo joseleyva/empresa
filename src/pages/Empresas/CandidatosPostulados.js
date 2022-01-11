@@ -2,6 +2,7 @@ import '../../App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Row, Form, Col } from 'react-bootstrap';
 import * as React from 'react';
+import { useState, useEffect } from 'react';
 import {Button} from 'react-bootstrap';
 import GitHubIcon from '@mui/icons-material/GitHub';
 import FacebookIcon from '@mui/icons-material/Facebook';
@@ -10,28 +11,22 @@ import { Instagram } from '@mui/icons-material';
 import Link from '@mui/material/Link';
 import { Divider } from '@mui/material';
 import Cartas from '../../components/Cartas';
+import {getUsersActiveApi} from '../../api/user';
+import {getAccessTokenApi} from '../../api/auth';
 
 
-  const cardsPuestos = [
-    {
-      Nombre: 'Juan',
-      Area: 'Contador',
-      Experiencia:'2 años',
-      id:1,
-     
-    },
-    {
-        Nombre: 'Pedro',
-        Area: 'Velador',
-        Experiencia:'2 años',
-        id:2,
-       
-      }
-   
-  ];
 
 function CandidatosPostulados() {
-   
+    const [users, setUsers] = useState([]);
+    const [reloadUsers,setReloadUsers] = useState(false);
+    const token = getAccessTokenApi();
+    useEffect(() => {
+        getUsersActiveApi(token, true).then(response=>{
+            setUsers(response.users);
+        });
+        setReloadUsers(false);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [token, reloadUsers])
 
     return (
         <div className="App">
@@ -52,7 +47,7 @@ function CandidatosPostulados() {
                 <Divider/>
                 <h5>Candidatos Postulados</h5>
                 <div className="VacantesActivas">
-                {cardsPuestos.map((post) => (
+                {users.map((post) => (
                   <Cartas key={post.id} post={post} />
                 ))}
 

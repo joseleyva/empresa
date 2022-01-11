@@ -18,10 +18,8 @@ const schema = yup.object().shape({
 const FormSueldo = (props) => {
     const [validated, setValidated]= useState(false)
     const [fallo, setFallo] = useState(false);
-    const [estado,setEstado]=React.useState(true);
-    const { funcion, place, valor } = props;
+    const {vacancie,setReloadUsers,setIsVisibleModal } = props;
     const token = getAccessTokenApi();
-    const { _id} = valor;
     const handleClick = (event) => {
         const Button = event.currentTarget;
         if (Button.checkValidity() === false) {
@@ -35,12 +33,13 @@ const FormSueldo = (props) => {
                 validationSchema={schema}
                 onSubmit={(valores, {resetForm})=>{
                     setValidated(true);
-                    setEstado(false);
-                    updateInfoVacanciesApi(token, valores, _id).then(result => {
+                    updateInfoVacanciesApi(token, valores, vacancie._id).then(result => {
                         notification["success"]({
                             message: result.message,
                             placement: "bottomLeft",
                         });
+                        setReloadUsers(true);
+                        setIsVisibleModal(false);
                     }).catch(err => {
                         notification["error"]({
                             message: err.message,
@@ -48,15 +47,16 @@ const FormSueldo = (props) => {
                         });
                     })
 
+
                     
                 }}
                 initialValues={{
-                    salary: "",
-                    period: "",
-                    extratime: "",
-                    benefits: "",
-                    bonds: "",
-                    tools: "",
+                    salary: vacancie.salary,
+                    period: vacancie.period,
+                    extratime: vacancie.extratime,
+                    benefits: vacancie.benefits,
+                    bonds: vacancie.bonds,
+                    tools: vacancie.tools,
 
                 }}
             >
@@ -171,15 +171,8 @@ const FormSueldo = (props) => {
                         </Row>
                         <div className="DivBF">
                             <Button type="submit" onClick={handleClick} className="botonF" >Guardar</Button>
-                            <Button variant="danger" className="botonF">Cancelar</Button>
+                            <Button variant="danger" onClick={()=>setIsVisibleModal(false) } className="botonF">Cancelar</Button>
                         </div>
-                        <Row className="mt-3">
-                        <Form.Group as={Col} md={{span:10, offset: 10}}>
-                        <Button onClick={funcion} disabled={estado} className="botonStep" variant="outline-secondary">
-                                {place}
-                                </Button>
-                        </Form.Group>
-                        </Row>
 
                     </Form>
                 )}

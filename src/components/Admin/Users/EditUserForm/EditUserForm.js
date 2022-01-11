@@ -57,7 +57,6 @@ export default function EditUserForm(props){
           });
          
         }else{
-          
           delete userUpdate.repeatPassword;
         }
 
@@ -150,7 +149,7 @@ function EditForm(props){
     return(
         <Form className="form-edit" onSubmit={updateUser}>
           <Row className="mb-3">
-          <Form.Group as={Col} md="4" controlId="validationFormik01" className="position-relative">
+          <Form.Group as={Col} md="4" controlId="validationFormikNameUserEm" className="position-relative">
               <Form.Label>Nombre de la Empresa</Form.Label>
               <Form.Control
               prefix={<UserOutlined/>}
@@ -165,7 +164,7 @@ function EditForm(props){
             </Form.Group>
           </Row>
           <Row className="mb-3">
-            <Form.Group as={Col} md="4" controlId="validationFormik01" className="position-relative">
+            <Form.Group as={Col} md="4" controlId="validationFormikNameUser" className="position-relative">
               <Form.Label>Nombre(s)</Form.Label>
               <Form.Control
               prefix={<UserOutlined/>}
@@ -178,7 +177,7 @@ function EditForm(props){
                 })}
               />
             </Form.Group>
-            <Form.Group as={Col} md="4" controlId="validationFormik02" className="position-relative">
+            <Form.Group as={Col} md="4" controlId="validationFormikLastnameP" className="position-relative">
               <Form.Label>Apellido Paterno</Form.Label>
               <Form.Control
                 type="text"
@@ -191,7 +190,7 @@ function EditForm(props){
                 required
               />
             </Form.Group>
-            <Form.Group as={Col} md="4" controlId="validationFormik02" className="position-relative">
+            <Form.Group as={Col} md="4" controlId="validationFormikLastnameM" className="position-relative">
               <Form.Label>Apellido Materno</Form.Label>
               <Form.Control
                 type="text"
@@ -207,7 +206,7 @@ function EditForm(props){
 
           </Row>
           <Row className="mb-3">
-            <Form.Group as={Col} md="6" controlId="validationFormikUsername" className="position-relative">
+            <Form.Group as={Col} md="6" controlId="validationFormikEmail" className="position-relative">
               <Form.Label>Correo</Form.Label>
               <InputGroup hasValidation>
                 <Form.Control
@@ -220,7 +219,7 @@ function EditForm(props){
                 />
               </InputGroup>
             </Form.Group>
-            <Form.Group as={Col} md="6" controlId="validationFormik04" className="position-relative">
+            <Form.Group as={Col} md="6" controlId="validationFormikSelect" className="position-relative">
             <Form.Label>Roles</Form.Label>
             <Form.Select
                   type="select"
@@ -237,7 +236,7 @@ function EditForm(props){
           </Row>
           <Row className="mb-3">
          
-            <Form.Group as={Col} md="6" controlId="validationFormik04" className="position-relative">
+            <Form.Group as={Col} md="6" className="position-relative">
               <Form.Label>Contraseña</Form.Label>
               <Form.Control
                 type="password"
@@ -246,7 +245,7 @@ function EditForm(props){
                 onChange={e=>setUserData({...userData, password: e.target.value})}
               />
             </Form.Group>
-            <Form.Group as={Col} md="6" controlId="validationFormik03" className="position-relative">
+            <Form.Group as={Col} md="6" className="position-relative">
             <Form.Label> Repetir Contraseña</Form.Label>
               <Form.Control
                 type="password"
@@ -258,7 +257,7 @@ function EditForm(props){
           </Row>
 
           <Row className="mb-3">
-          <Form.Group as={Col} md="6" controlId="validationFormik04" className="position-relative">
+          <Form.Group as={Col} md="6" controlId="validationFormikActive" className="position-relative">
             <Form.Label>Activar</Form.Label>
             <Form.Select
                   type="select"

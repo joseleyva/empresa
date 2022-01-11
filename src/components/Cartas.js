@@ -1,26 +1,38 @@
-import React from "react";
+import React,{useState, useEffect} from "react";
 import { Row, Col, Image } from 'react-bootstrap';
 import { Dropdown, ButtonGroup, Button, Container } from 'react-bootstrap';
-import PropTypes from 'prop-types';
+import { getAvatarApi } from "../api/user";
 import Imagen from '../assets/img/jpg/imagen1.jpg';
 
 function Cartas(props) {
-    const { post} = props;
+    const {key, post} = props;
+    const [avatar, setAvatar] = useState(null);
+    
+    useEffect(() => {
+        if (post.avatar) {
+          getAvatarApi(post.avatar).then((response) => {
+            setAvatar(response);
+          });
+        } else {
+          setAvatar(null);
+        }
+      }, [post]);
+
         return (
             <>
 
                 <Container className="ContenedorV">
-                    <Row className="IconCartas">
+                    <Row className="IconCartas" key={key}>
                         <Col xs={2} md={1}>
-                            <Image src={Imagen} roundedCircle width="150px" height="150px" />
+                            <Image src={avatar ? avatar : Imagen} roundedCircle width="150px" height="150px" />
                         </Col>
                     </Row>
                     <div className="C">
                         <div class="col-md-10">
                             <div class="card-body">
                                 <div>
-                                <h5 align="left" class="card-title">Nombre: {post.Nombre}</h5>
-                                <h5 align="left" class="card-title">Area: <h7>{post.Area}</h7></h5>
+                                <h5 align="left" class="card-title">Nombre: {post.name}</h5>
+                                <h5 align="left" class="card-title">Area: <h7>{post.email}</h7></h5>
                                 <h5 align="left" class="card-title">Experiencia: <label></label></h5>
                                 <h5 align="left" class="card-title">Examenes:</h5>
                                 </div>
@@ -53,13 +65,5 @@ function Cartas(props) {
 
 }
 
-Cartas.propTypes = {
-    post: PropTypes.shape({
-      Nombre: PropTypes.string.isRequired,
-      Area: PropTypes.string.isRequired,
-      Experiancia: PropTypes.string,
-      id:PropTypes.number.isRequired,
-    }).isRequired,
-  };
 
 export default Cartas;

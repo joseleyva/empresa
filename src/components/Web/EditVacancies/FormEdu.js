@@ -24,9 +24,9 @@ const schema = yup.object().shape({
 const FormEdu = (props) => {
     const [validated, setValidated] = useState(false)
     const [fallo, setFallo] = useState(false);
-    const {  valor } = props;
+    const {vacancie,setReloadUsers,setIsVisibleModal } = props;
     const token = getAccessTokenApi();
-    const { _id } = valor;
+    
     const handleClick = (event) => {
         const Button = event.currentTarget;
         if (Button.checkValidity() === false) {
@@ -42,11 +42,13 @@ const FormEdu = (props) => {
                 onSubmit={(valores, { resetForm }) => {
                     setValidated(true);
                 
-                    updateInfoVacanciesApi(token, valores, _id).then(result => {
+                    updateInfoVacanciesApi(token, valores, vacancie._id).then(result => {
                         notification["success"]({
                             message: result.message,
                             placement: "bottomLeft",
                         });
+                        setReloadUsers(true);
+                        setIsVisibleModal(false);
                     }).catch(err => {
                         notification["error"]({
                             message: err.message,
@@ -54,18 +56,19 @@ const FormEdu = (props) => {
                         });
                     })
 
+
                 }}
                 initialValues={{
-                    scholarship: "",
-                    knowledge: "",
-                    experience: "",
-                    competencies: "",
-                    abilities: "",
-                    parcel: "",
-                    idiom: "",
-                    actIdiom: "",
-                    levelIdiom: "",
-                    levelExpe: "",
+                    scholarship: vacancie.scholarship,
+                    knowledge: vacancie.knowledge,
+                    experience: vacancie.experience,
+                    competencies: vacancie.competencies,
+                    abilities: vacancie.abilities,
+                    parcel: vacancie.parcel,
+                    idiom: vacancie.idiom,
+                    actIdiom: vacancie.actIdiom,
+                    levelIdiom: vacancie.levelIdiom,
+                    levelExpe: vacancie.levelExpe,
                 }}
             >
                 {({
@@ -242,7 +245,7 @@ const FormEdu = (props) => {
                         </Row>
                         <div className="DivBF">
                             <Button type="submit" onClick={handleClick} className="botonF" >Guardar</Button>
-                            <Button variant="danger" className="botonF">Cancelar</Button>
+                            <Button variant="danger" onClick={()=> setIsVisibleModal(false)} className="botonF">Cancelar</Button>
                         </div>
                     </Form>
                 )}

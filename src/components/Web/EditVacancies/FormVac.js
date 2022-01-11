@@ -4,10 +4,9 @@ import * as React from 'react';
 import * as yup from 'yup';
 import { Form, Col, Button, Row, InputGroup } from 'react-bootstrap';
 import { Puesto, DiasP, SN, LugarT, RangoE, Genero } from '../../Opciones';
-import useAuth from '../../../hooks/useAuth';
 import { notification } from 'antd'; 
 import { getAccessTokenApi } from '../../../api/auth';
-import { createVacanciesApi } from '../../../api/vacancies';
+import { updateInfoVacanciesApi } from '../../../api/vacancies';
 import '../../../scss/index.scss';
 
 const schema = yup.object().shape({
@@ -32,10 +31,8 @@ const schema = yup.object().shape({
 const FormVac = (props) => {
     const [validated, setValidated] = useState(false)
     const [fallo, setFallo] = useState(false);
-    const [estado,setEstado]=React.useState(true);
-    const {funcion, place, setValor}=props;
     const token = getAccessTokenApi();
-    const {user} = useAuth();
+    const {vacancie,setReloadUsers,setIsVisibleModal } = props;
     const handleClick = (event) => {
         const Button = event.currentTarget;
         if (Button.checkValidity() === false) {
@@ -50,40 +47,39 @@ const FormVac = (props) => {
                 validationSchema={schema}
                 onSubmit={async(valores, { resetForm }) => {
                     setValidated(true);
-                    setEstado(false);
-                    const result = await createVacanciesApi(token,valores);
-                    if (!result.ok) {
-                        notification["error"]({
-                          description: result.message,
-                         placement: 'bottomLeft',
+                    updateInfoVacanciesApi(token, valores, vacancie._id).then(result => {
+                        notification["success"]({
+                            message: result.message,
+                            placement: "bottomLeft",
                         });
-                    }else{
-                      notification["success"]({
-                        description: result.message,
-                        placement: 'bottomLeft',
-                      });
-                      setValor(result.valor);
-                      
-                    }
+                        setReloadUsers(true);
+                        setIsVisibleModal(false);
+                    }).catch(err => {
+                        notification["error"]({
+                            message: err.message,
+                            placement: "bottomLeft",
+                        });
+                    })
+
                 }}
                 initialValues={{
-                    name: user.name, 
-                    nameP: "",
-                    numberP: "",
-                    activity: "",
-                    reportP: "",
-                    daysToWork: "",
-                    startTime: "",
-                    finishTime:"",
-                    turn: "",
-                    daysToPay: "",
-                    weekGap: "",
-                    trip: "",
-                    place: "",
-                    rangeAge: "",
-                    sex: "",
-                    disability: "",
-                    peopleOnCharge: "",
+                    name: vacancie.name, 
+                    nameP: vacancie.nameP,
+                    numberP: vacancie.numberP,
+                    activity: vacancie.activity,
+                    reportP: vacancie.reportP,
+                    daysToWork: vacancie.daysToWork,
+                    startTime: vacancie.startTime,
+                    finishTime:vacancie.finishTime,
+                    turn: vacancie.turn,
+                    daysToPay: vacancie.daysToPay,
+                    weekGap: vacancie.weekGap,
+                    trip: vacancie.trip,
+                    place: vacancie.place,
+                    rangeAge: vacancie.rangeAge,
+                    sex: vacancie.sex,
+                    disability: vacancie.disability,
+                    peopleOnCharge: vacancie.peopleOnCharge,
                 }
                 }
             >
@@ -386,15 +382,9 @@ const FormVac = (props) => {
 
                         <div className="DivBF">
                             <Button type="submit" onClick={handleClick} className="botonF"  >Guardar</Button>
-                            <Button variant="danger" className="botonF">Cancelar</Button>
+                            <Button variant="danger" onClick={()=> setIsVisibleModal(false)} className="botonF">Cancelar</Button>
                         </div>
-                        <Row className="mt-3">
-                        <Form.Group as={Col} md={{span:10, offset: 10}}>
-                        <Button  onClick={funcion} disabled={estado} className="botonStep" variant="outline-secondary">
-                                {place}
-                                </Button>
-                        </Form.Group>
-                        </Row>
+                        
                     </Form>
                 )}
             </Formik>

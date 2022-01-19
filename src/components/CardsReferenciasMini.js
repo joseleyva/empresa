@@ -1,7 +1,6 @@
 import React from "react";
 import { Row, Col, Form } from 'react-bootstrap';
 import { Button, Container } from 'react-bootstrap';
-import PropTypes from 'prop-types';
 
 function CardsReferenciasMini(props)  {
     const { post} = props;
@@ -11,13 +10,13 @@ function CardsReferenciasMini(props)  {
                 <Container className="ContenedorRefMini">
                    <Row className="mb-3">
                     <Form.Group as={Col} md="4">
-                    <Form.Label>{post.Nombre}</Form.Label>
+                    <Form.Label>{post.nameUser}</Form.Label>
                     </Form.Group>
                     <Form.Group as={Col} md="4">
-                    <Form.Label>{post.Area}</Form.Label>
+                    <Form.Label>{post.email}</Form.Label>
                     </Form.Group>
                     <Form.Group as={Col} md="4">
-                    <Form.Label>{post.Experiencia}</Form.Label>
+                    <Form.Label>{post.name}</Form.Label>
                     </Form.Group>
                    </Row> 
                    <Row>
@@ -32,12 +31,5 @@ function CardsReferenciasMini(props)  {
     
 
 }
-CardsReferenciasMini.propTypes = {
-    post: PropTypes.shape({
-      Nombre: PropTypes.string.isRequired,
-      Area: PropTypes.string.isRequired,
-      Experiencia: PropTypes.string.isRequired,
-      id:PropTypes.number.isRequired,
-    }).isRequired,
-  };
+
 export default CardsReferenciasMini;

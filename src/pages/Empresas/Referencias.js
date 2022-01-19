@@ -1,7 +1,7 @@
 import '../../App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-
 import * as React from 'react';
+import { useState, useEffect } from 'react';
 import GitHubIcon from '@mui/icons-material/GitHub';
 import FacebookIcon from '@mui/icons-material/Facebook';
 import TwitterIcon from '@mui/icons-material/Twitter';
@@ -11,37 +11,21 @@ import {Row, Form, Col} from 'react-bootstrap';
 import {Divider} from '@mui/material';
 import CardsReferenciasMini from '../../components/CardsReferenciasMini';
 import CardsRefRecibidas from '../../components/CardsRefRecibidas';
-import usuario from '../../assets/img/jpg/Usuario.jpg'
-const cards = [
-  {
-    Nombre: 'Juan Lopez',
-    Area: 'Contador',
-    Experiencia:'2 Años',
-    id:1,
-   
-  },
-  {
-    Nombre: 'Pedro Paramo',
-    Area: 'Desarrollador de Software',
-    Experiencia:'6 meses',
-    id:2,
-  }
-];
+import {getUsersActiveApi} from '../../api/user'
+import {getAccessTokenApi} from '../../api/auth'
 
-const cardsRec = [
-  {
-    Nombre: 'Juan Lopez',
-    Imagen: {usuario},
-    id:1,
-   
-  },
-  {
-    Nombre: 'Pedro Paramo',
-    Imagen: {usuario},
-    id:2,
-  }
-];
-    function Referencias() {
+
+
+function Referencias() {
+const [users, setUsers] = useState([]);
+const token = getAccessTokenApi();
+
+useEffect(()=>{
+  getUsersActiveApi(token, true).then(response=>{
+      setUsers(response.users);
+  });
+}, [token]);
+
     return(
         <div className="App">
          
@@ -61,14 +45,14 @@ const cardsRec = [
                 </Form.Group>
                 </Row>
                 <div className="MarginB">
-                {cards.map((post) => (
+                {users.map((post) => (
                   <CardsReferenciasMini key={post.id} post={post} />
                 ))}
                 </div>
               <Divider/>
               <h4>Referencias recibidas</h4>
-              <div className="DivRefRec">
-              {cardsRec.map((post) => (
+              <div className="divRefRec">
+              {users.map((post) => (
                   <CardsRefRecibidas key={post.id} post={post} />
                 ))}
               </div>

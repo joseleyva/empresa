@@ -9,24 +9,19 @@ import Link from '@mui/material/Link';
 import { Divider } from '@mui/material';
 import { Row, Form, Col } from 'react-bootstrap';
 import CardsEstudios from '../../components/CardsEstudios';
+import { getUsersActiveApi } from '../../api/user';
+import { getAccessTokenApi } from '../../api/auth';
 
-
-
-const cards = [
-    {
-      Nombre: 'Juan Lopez',
-      Imagen: 'Usuario.jpg',
-      id:1,
-     
-    },
-    {
-      Nombre: 'Pedro Paramo',
-      Imagen: 'Usuario.jpg',
-      id:2,
-    }
-  ];
 
 function Estudios() {
+    const [users, setUsers] = React.useState([]);
+    const token = getAccessTokenApi();
+    React.useEffect(() => {
+        getUsersActiveApi(token, true).then(response => {
+            setUsers(response.users)
+        })
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [users])
     return (
         <div className="App">
             <div className="ContenedorEmpresas">
@@ -45,9 +40,9 @@ function Estudios() {
                     </Form.Group>
                 </Row>
                 <div className="MarginB">
-                {cards.map((post) => (
-                  <CardsEstudios key={post.id} post={post} />
-                ))}
+                    {users.map((post) => (
+                        <CardsEstudios key={post.id} post={post} />
+                    ))}
                 </div>
             </div>
 

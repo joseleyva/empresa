@@ -184,7 +184,7 @@
   display: inline-block;
 }
  .C{
-   text-align: left!important;
+  text-align: left!important;
   width: 480px!important;
   height: auto;
  }
@@ -414,36 +414,26 @@ display: grid!important;
   margin-bottom: 5px!important;
 }
 
-.ContenedorRefRec{
-  margin-top: 5px;
-  border-style: solid;
-  border-radius: 22px;
-  border-width:thin;
-  border-color: rgb(94, 89, 89);
-  width:390px!important;
-  height: 120px!important;
-  display: flex!important;
-  
-}
 
 .BtnRefRec{
   width: 100px;
 }
-.DivRefRec{
-  display: flex!important;
-  margin-bottom: 5px!important;
-}
 
 .ContenedorRefRec{
-  margin-top: 5px;
+  margin: 5px!important;
   border-style: solid;
   border-radius: 22px;
   border-width:thin;
   border-color: rgb(94, 89, 89);
-  width:390px!important;
-  height: 120px!important;
-  display: flex!important;
+  width:380px!important;
+  height: 145px!important;
+  display: inline-flex!important;
   
+}
+.divRefRec{
+  margin-bottom: 5px!important;
+  width: 790px;
+  display: inline-block!important;
 }
 .ContenedorEstudios{
   margin-top: 5px;
@@ -479,7 +469,7 @@ display: grid!important;
 }
 .BtnEstudio2{
   width: 150px!important;
-  margin: 5px auto auto 15px!important;
+  margin: 37px auto auto 15px!important;
 }
 
 .BtnSolicitar{

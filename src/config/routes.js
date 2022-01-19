@@ -7,7 +7,7 @@ import LayoutDatos from '../layouts/LayoutDatos';
 import AdminHome from "../pages/Admin";
 import AdminSingIn from "../pages/Admin/SignIn";
 import AdminUsers from "../pages/Admin/Users";
-import AdminMenuWeb from '../pages/Admin/MenuWeb';
+import AdminProducts from "../pages/Admin/Products"
 
 //Pages Panel
 import Empresas from '../pages/Empresas/Empresas';
@@ -57,10 +57,11 @@ const routes=[
                 exact:true
             },
             {
-                path: "/admin/menu",
-                component: AdminMenuWeb,
+                path:"/admin/products",
+                component: AdminProducts,
                 exact: true
             },
+          
            
             {
                 component: Error404

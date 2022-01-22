@@ -8,7 +8,8 @@ import AdminHome from "../pages/Admin";
 import AdminSingIn from "../pages/Admin/SignIn";
 import AdminUsers from "../pages/Admin/Users";
 import AdminProducts from "../pages/Admin/Products"
-
+import AdminEmpresas from "../pages/Admin/Empresas"
+ 
 //Pages Panel
 import Empresas from '../pages/Empresas/Empresas';
 import Vacante from '../pages/Empresas/Vacante';
@@ -59,6 +60,11 @@ const routes=[
             {
                 path:"/admin/products",
                 component: AdminProducts,
+                exact: true
+            },
+            {
+                path:"/admin/empresas",
+                component: AdminEmpresas,
                 exact: true
             },
           

@@ -13,50 +13,11 @@ import Grid from '@mui/material/Grid';
 import { getAccessTokenApi } from "../api/auth";
 import { Redirect } from "react-router-dom";
 import Footer from "../components/Web/Footer"
-const tiers = [
-    {
-        title: 'Free',
-        price: '0',
-        description: [
-            '10 users included',
-            '2 GB of storage',
-            'Help center access',
-            'Email support',
-        ],
-        buttonText: 'Sign up for free',
-        buttonVariant: 'outlined',
-    },
-    {
-        title: 'Pro',
-        subheader: 'Most popular',
-        price: '15',
-        description: [
-            '20 users included',
-            '10 GB of storage',
-            'Help center access',
-            'Priority email support',
-        ],
-        buttonText: 'Get started',
-        buttonVariant: 'contained',
-    },
-    {
-        title: 'Enterprise',
-        price: '30',
-        description: [
-            '50 users included',
-            '30 GB of storage',
-            'Help center access',
-            'Phone & email support',
-        ],
-        buttonText: 'Contact us',
-        buttonVariant: 'outlined',
-    },
-];
 
 function Productos() {
     if (getAccessTokenApi()) {
         return <Redirect to="/Empresas" />;
-      }
+    }
     return (
         <div className="App">
             <Navbar collapseOnSelect expand="lg" className="Barra">
@@ -108,9 +69,9 @@ function Productos() {
                     </Container>
                     <Container maxWidth="md" component="main">
                         <Grid container spacing={5} alignItems="flex-end">
-                            {tiers.map((post) => (
-                                <CartasProductos key={post.title} post={post} />
-                            ))}
+
+                            <CartasProductos />
+
 
                         </Grid>
                     </Container>
@@ -118,7 +79,7 @@ function Productos() {
 
                 </React.Fragment>
             </CardGroup>
-            <Footer/>
+            <Footer />
         </div>
 
 

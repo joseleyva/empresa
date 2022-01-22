@@ -2,9 +2,9 @@ import React from "react";
 import { Link, withRouter } from "react-router-dom";
 import { Layout, Menu ,} from "antd";
 import "./MenuSider.scss";
-import { HomeOutlined, UserOutlined, ShoppingCartOutlined } from "@ant-design/icons";
+import { HomeOutlined, UserOutlined, ShoppingCartOutlined,AppstoreAddOutlined } from "@ant-design/icons";
 
- function MenuSider(props) {
+function MenuSider(props) {
 
   const { Sider } = Layout;
   const { menuCollapsed, location } = props;
@@ -31,6 +31,12 @@ import { HomeOutlined, UserOutlined, ShoppingCartOutlined } from "@ant-design/ic
           <Link to={"/admin/products"}>
           <ShoppingCartOutlined />
             <span className="nav-text">Productos</span>
+          </Link>
+        </Menu.Item>
+        <Menu.Item key="/admin/Empresas">
+          <Link to={"/admin/Empresas"}>
+          <AppstoreAddOutlined/>
+            <span className="nav-text">Empresas</span>
           </Link>
         </Menu.Item>
       </Menu>

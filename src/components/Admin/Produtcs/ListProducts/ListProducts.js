@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import Button from "@mui/material/Button";
-import {  Modal as ModalAntd } from "antd";
+import {notification,  Modal as ModalAntd } from "antd";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemText from "@mui/material/ListItemText";
@@ -9,6 +9,9 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import Typography from "@mui/material/Typography";
 import Modal from "../../../Modal";
 import AddProduct from '../AddProduct/AddProduct';
+import EditProduct from '../EditProduct';
+import {deleteProductsApi} from '../../../../api/products';
+import { getAccessTokenApi } from '../../../../api/auth'; 
 import "./ListProducts.scss";
 
 const { confirm} = ModalAntd;
@@ -19,13 +22,13 @@ export default function ListProducts(props) {
     const [width, setWidth] = useState(500);
     const [modalTitle, setModalTitle] = useState("");
     const [modalContent, setModalContent] = useState("");
-
+    const token = getAccessTokenApi();
 
     const editProduct = product =>{
         setWidth(500);
          setIsVisibleModal(true);
           setModalTitle(`Editar ${product.title}`);
-          setModalContent();
+          setModalContent(<EditProduct  product={product} setReloadProducts={setReloadProducts} setIsVisibleModal={setIsVisibleModal}  />);
       }
       const addProduct = product =>{
         setWidth(500);
@@ -42,7 +45,18 @@ export default function ListProducts(props) {
           okType: "danger",
           cancelText: "Cancelar",
           onOk(){
-            
+            deleteProductsApi(token, product._id).then(response=>{
+                notification["success"]({
+                  message: response,
+                  placement: "bottomLeft",
+                });
+                setReloadProducts(true);
+              }).catch(err=>{
+                notification["err"]({
+                  message: err,
+                  placement: "bottomLeft",
+                })
+              })
           }
         })
       }

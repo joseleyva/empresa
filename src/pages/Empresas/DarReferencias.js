@@ -9,14 +9,13 @@ import { Instagram } from '@mui/icons-material';
 import Link from '@mui/material/Link';
 import {Row, Form, Col} from 'react-bootstrap';
 import {Divider} from '@mui/material';
-import CardsReferenciasMini from '../../components/CardsReferenciasMini';
-import CardsRefRecibidas from '../../components/CardsRefRecibidas';
+import CardsReferencias from '../../components/CardsReferencias';
 import {getUsersActiveApi} from '../../api/user'
 import {getAccessTokenApi} from '../../api/auth'
 import {Button} from 'react-bootstrap'
 
 
-function Referencias() {
+function DarReferencias() {
 const [users, setUsers] = useState([]);
 const token = getAccessTokenApi();
 
@@ -33,13 +32,13 @@ useEffect(()=>{
             <h4> Escritorio Virtual</h4>
             <Row className="mb-3 BotonesEm">
                     <Form.Group as={Col} md="4">
-                        <Button variant="outline-primary" href="/Empresas/Referencias">Pedir referencias</Button>{' '}
+                        <Button variant="outline-primary" href="">Pedir referencias</Button>{' '}
                     </Form.Group>
                     <Form.Group as={Col} md="4">
                       
                     </Form.Group>
                     <Form.Group as={Col} md="4">
-                        <Button variant="outline-primary" href="/Empresas/DarReferencias">Dar referencias</Button>{' '}
+                        <Button variant="outline-primary" href="">Dar referencias</Button>{' '}
                     </Form.Group>
                 </Row>
                 
@@ -56,16 +55,10 @@ useEffect(()=>{
                         <h6>Años de experiancia</h6>
                 </Form.Group>
                 </Row>
-                <div className="MarginB">
-                {users.map((post) => (
-                  <CardsReferenciasMini key={post.id} post={post} />
-                ))}
-                </div>
-              <Divider/>
               <h4>Referencias recibidas</h4>
               <div className="divRefRec">
               {users.map((post) => (
-                  <CardsRefRecibidas key={post.id} post={post} />
+                  <CardsReferencias key={post.id} post={post} />
                 ))}
               </div>
             </div>
@@ -149,4 +142,4 @@ useEffect(()=>{
     );
 }
 
-export default Referencias;
+export default DarReferencias;

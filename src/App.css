@@ -529,3 +529,11 @@ display: grid!important;
 .card-body{
   padding-bottom: 0rem!important;
 }
+
+.buttonGoogle{
+  
+  width: 100%!important;
+  opacity: 1!important;
+  text-align: center!important;
+
+}

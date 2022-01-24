@@ -13,16 +13,15 @@ import AdminEmpresas from "../pages/Admin/Empresas"
 //Pages Panel
 import Empresas from '../pages/Empresas/Empresas';
 import Vacante from '../pages/Empresas/Vacante';
-import Formulario from '../components/Formulario';
 import Solicitudes from '../pages/Empresas/Solicitudes';
 import Referencias from '../pages/Empresas/Referencias';
-import FormReferencias from '../components/FormReferencias';
 import DatosEmpresa from '../pages/Empresas/DatosEmpresa';
 import Estudios from '../pages/Empresas/Estudios';
 import EstudiosSimple from '../pages/Empresas/EstudiosSimple';
 import VacanteForm from '../components/VacanteForm';
 import VacantesActivas from '../pages/Empresas/VacantesActivas';
 import CandidatosPostulados from '../pages/Empresas/CandidatosPostulados';
+import DarReferencias from '../pages/Empresas/DarReferencias';
 
 //WebPages
 import Home from '../pages/Home';
@@ -32,6 +31,7 @@ import Contacto from '../pages/Contacto';
 import CrearC from '../pages/CrearC';
 import InicioS from '../pages/InicioS';
 import MoreEmpresas from "../pages/MoreEmpresas";
+
 //Other pages
 import Error404 from '../pages/Error404';
 import DatosR from '../pages/DatosR';
@@ -106,11 +106,6 @@ const routes=[
                 exact: true
             },
             {
-                path: "/Empresas/Formulario",
-                component: Formulario,
-                exact: true
-            },
-            {
                 path: "/Empresas/DatosR",
                 component: DatosR,
                 exact: true
@@ -127,10 +122,11 @@ const routes=[
                 exact: true
             },
             {
-                path: "/Empresas/FormReferencias",
-                component: FormReferencias,
+                path: "/Empresas/DarReferencias",
+                component: DarReferencias,
                 exact: true
             },
+          
             {
                 path: "/Empresas/DatosEmpresa",
                 component: DatosEmpresa,

@@ -22,7 +22,8 @@ const schema = yup.object().shape({
     Comentarios: yup.string().required("Ingrese algun comentario").matches(/^[a-zA-Z ñÑ.,]+$/),
     Otro: yup.string(),
 });
-const FormReferencias = () => {
+function FormReferencias(props) {
+    const {post} = props;
     const [validated, setValidated] = useState(false)
     const [fallo, setFallo] = useState(false);
     const [enviado, setEnviado] = useState(false);
@@ -87,7 +88,7 @@ const FormReferencias = () => {
                     <div>
                         <div class="col-md-10">
                             <div class="card-body">
-                                <h5 align="left">Jose Perez</h5>
+                                <h5 align="left">{`${post.nameUser} ${post.lastnameP} ${post.lastnameM}`}</h5>
                             </div>
                         </div>
                     </div>
@@ -232,7 +233,7 @@ const FormReferencias = () => {
                         </Row>
                         <div className="DivBF">
                             <Button type="submit" onClick={handleClick} className="botonF" >Enviar</Button>
-                            <Button variant="danger" href="/Referencias" className="botonF">Cancelar</Button>
+                            <Button variant="danger" href="/Empresas/Referencias" className="botonF">Cancelar</Button>
                         </div>
                         {
                                     (enviado && (

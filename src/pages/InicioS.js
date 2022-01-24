@@ -17,6 +17,8 @@ import { signInApi } from "../api/user";
 import { getAccessTokenApi } from "../api/auth";
 import { ACCESS_TOKEN, REFRESH_TOKEN } from "../utils/constants";
 import { Redirect } from "react-router-dom";
+import GoogleLogin from "react-google-login";
+import '../App.css';
 
 const schema = yup.object().shape({
   email: yup.string().required("Ingrese el correo").email("Correo no valido"),
@@ -56,9 +58,9 @@ function InicioS() {
             message: "Login correcto",
             placement: 'bottomLeft',
           });
-     
-        window.location.href="/DatosR/DatosR"
-      
+
+          window.location.href = "/DatosR/DatosR"
+
         }
       }}
       initialValues={{
@@ -183,6 +185,18 @@ function InicioS() {
                           {errors.password}
                         </Form.Control.Feedback>
                       </FloatingLabel>
+                    </Form.Group>
+                  </Row>
+                  <Row className="mb-3 d-grid gap-2">
+                  <Form.Group
+                      as={Col}
+                      md="10"
+                    >
+                    <GoogleLogin
+                      className="buttonGoogle"
+                      buttonText="Log in with Google"
+                      icon={true}
+                    />
                     </Form.Group>
                   </Row>
                   <div className="d-grid gap-2">

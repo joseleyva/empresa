@@ -95,6 +95,9 @@ function CardsEstudios(props) {
             message: result.message,
             placement: "bottomLeft"
           })
+          setEstado(true);
+          setTextButton("Solicitado");
+          setVarinatButton("outline-secondary");
         }
       }).catch(err => {
         notification["error"]({

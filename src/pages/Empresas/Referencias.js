@@ -33,7 +33,7 @@ useEffect(()=>{
             <h4> Escritorio Virtual</h4>
             <Row className="mb-3 BotonesEm">
                     <Form.Group as={Col} md="4">
-                        <Button variant="outline-primary" href="/Empresas/Referencias">Pedir referencias</Button>{' '}
+                        <Button variant="outline-primary" href="/Empresas/Referencias">Solicitar referencias</Button>{' '}
                     </Form.Group>
                     <Form.Group as={Col} md="4">
                       

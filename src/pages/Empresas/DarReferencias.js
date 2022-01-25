@@ -10,20 +10,21 @@ import Link from '@mui/material/Link';
 import {Row, Form, Col} from 'react-bootstrap';
 import {Divider} from '@mui/material';
 import CardsReferencias from '../../components/CardsReferencias';
-import {getUsersActiveApi} from '../../api/user'
+import {getReqReferenceApi} from '../../api/reqReference'
 import {getAccessTokenApi} from '../../api/auth'
 import {Button} from 'react-bootstrap'
-
+import useAuth from '../../hooks/useAuth';
 
 function DarReferencias() {
 const [users, setUsers] = useState([]);
 const token = getAccessTokenApi();
+const {user} = useAuth();
 
 useEffect(()=>{
-  getUsersActiveApi(token, true).then(response=>{
-      setUsers(response.users);
+  getReqReferenceApi(token, user.name).then(response=>{
+      setUsers(response.reference);
   });
-}, [token]);
+}, [token, user]);
 
     return(
         <div className="App">
@@ -32,7 +33,7 @@ useEffect(()=>{
             <h4> Escritorio Virtual</h4>
             <Row className="mb-3 BotonesEm">
                     <Form.Group as={Col} md="4">
-                        <Button variant="outline-primary" href="">Pedir referencias</Button>{' '}
+                        <Button variant="outline-primary" href="/Empresas/Referencias">Solicitar referencias</Button>{' '}
                     </Form.Group>
                     <Form.Group as={Col} md="4">
                       
@@ -43,19 +44,7 @@ useEffect(()=>{
                 </Row>
                 
             <Divider/>
-                <Row className="MargenL" >
-                <Form.Group as={Col} md="4">
-                        <h6>Candidato activo </h6>
-                
-                </Form.Group>
-                <Form.Group as={Col} md="4">
-                        <h6>Area de especialidad</h6>
-                </Form.Group>
-                <Form.Group as={Col} md="4">
-                        <h6>Años de experiancia</h6>
-                </Form.Group>
-                </Row>
-              <h4>Referencias recibidas</h4>
+              <h4>Referencias</h4>
               <div className="divRefRec">
               {users.map((post) => (
                   <CardsReferencias key={post.id} post={post} />

@@ -10,8 +10,7 @@ function CardsReferenciasMini(props)  {
     const [estado, setEstado] = useState(false);
     const [textButton, setTextButton] = useState("Pedir Referencias");
     const [variantButton, setVariantButton]= useState("outline-primary");
-
-
+    
     const ReqReferencia = reference =>{
         const token = getAccessTokenApi();
       const datos ={
@@ -49,6 +48,7 @@ function CardsReferenciasMini(props)  {
           })
       })
 
+
     }
         return (
             <>
@@ -66,7 +66,7 @@ function CardsReferenciasMini(props)  {
                     </Form.Group>
                    </Row> 
                    <Row>
-                   <Button variant={variantButton} disabled={estado} onClick={()=> ReqReferencia(post)} className="BtnRefMini">{textButton}</Button>{' '}
+                       {post.solicitado ? <Button variant="outline-secondary" className="BtnRefMini" disabled>Solicitado</Button> :<Button variant={variantButton}  disabled={estado} onClick={()=> ReqReferencia(post)} className="BtnRefMini">{textButton}</Button>}
                    </Row>
                 </Container>
             </>

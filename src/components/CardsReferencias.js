@@ -4,14 +4,13 @@ import { Button, Container } from 'react-bootstrap';
 import FormReferencias from "./FormReferencias";
 import {getAvatarApi} from '../api/user';
 import Modal from "./Modal";
-import { notification, Modal as ModalAntd } from 'antd';
+import {  Modal as ModalAntd } from 'antd';
 import Perfil from '../assets/img/jpg/Usuario.jpg';
-import {getAccessTokenApi} from '../api/auth';
 const { confirm } = ModalAntd;
 
 
 function CardsReferencias(props) {
-    const { post } = props;
+    const { post , setReloadUsers} = props;
     const [avatar, setAvatar] = useState(null);
     const [isVisibleModal, setIsVisibleModal] = useState(false);
     const [width, setWidth] = useState(500);
@@ -32,11 +31,10 @@ function CardsReferencias(props) {
         setWidth(1000);
           setIsVisibleModal(true);
           setModalTitle(`Referencias de ${user.nameUser}`);
-          setModalContent(<FormReferencias userRef={user} avatar={avatar} setIsVisibleModal={setIsVisibleModal}/>);
+          setModalContent(<FormReferencias userRef={user} avatar={avatar} setReloadUsers={setReloadUsers} setIsVisibleModal={setIsVisibleModal}/>);
       }
 
       const showDeleteConfirm = () => {
-        const AccessToken = getAccessTokenApi();
     
         confirm({
           title: "Eliminar Referencia",

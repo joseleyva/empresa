@@ -4,10 +4,11 @@ import { Row, Col, Image } from 'react-bootstrap';
 import { Button } from 'react-bootstrap';
 import perfil from '../assets/img/jpg/Usuario.jpg'
 import { getAvatarApi } from '../api/user';
-import InfoUser from './Web/InfoUser'
-import Modal from '../components/Modal'
+import InfoUser from './Web/InfoUser';
+import Modal from '../components/Modal';
+
 function CardsRefRecibidas(props) {
-    const { post } = props;
+    const { post,setReloadReference} = props;
     const [avatar, setAvatar] = useState(null);
     const [isVisibleModal, setIsVisibleModal] = useState(false);
     const [width, setWidth] = useState(500);
@@ -21,10 +22,10 @@ function CardsRefRecibidas(props) {
     }, [avatar])
 
     const Info = user =>{
-        setWidth(1000);
+        setWidth(600);
           setIsVisibleModal(true);
           setModalTitle(`Información de ${user.nameUser} ${user.lastnameP} ${user.lastnameM}`);
-          setModalContent(<InfoUser user={user}  setIsVisibleModal={setIsVisibleModal}/>);
+          setModalContent(<InfoUser user={user} setReloadReference={setReloadReference}  setIsVisibleModal={setIsVisibleModal}/>);
       }
     return (
 

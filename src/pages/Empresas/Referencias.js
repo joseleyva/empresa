@@ -11,20 +11,33 @@ import {Row, Form, Col} from 'react-bootstrap';
 import {Divider} from '@mui/material';
 import CardsReferenciasMini from '../../components/CardsReferenciasMini';
 import CardsRefRecibidas from '../../components/CardsRefRecibidas';
-import {getUsersActiveApi} from '../../api/user'
+import {getReferenceApi} from '../../api/reference'
+import {getUserReferenceApi} from '../../api/userReference';
 import {getAccessTokenApi} from '../../api/auth'
 import {Button} from 'react-bootstrap'
-
+import useAuth from '../../hooks/useAuth';
 
 function Referencias() {
-const [users, setUsers] = useState([]);
+const [reference, setReference] = useState([]);
+const [usersReference, setUsersReference] = useState([]);
+const [reloadReference, setReloadReference] = useState(false);
 const token = getAccessTokenApi();
+const {user} = useAuth();
+useEffect(()=>{
+    getUserReferenceApi(token, user.name).then(response =>{
+        setUsersReference(response.reference);
+      });
+
+// eslint-disable-next-line react-hooks/exhaustive-deps
+}, [token])
 
 useEffect(()=>{
-  getUsersActiveApi(token, true).then(response=>{
-      setUsers(response.users);
+  getReferenceApi(token, user.name).then(response=>{
+      setReference(response.reference);
   });
-}, [token]);
+  setReloadReference(false);
+// eslint-disable-next-line react-hooks/exhaustive-deps
+}, [token, reloadReference]);
 
     return(
         <div className="App">
@@ -57,16 +70,17 @@ useEffect(()=>{
                 </Form.Group>
                 </Row>
                 <div className="MarginB">
-                {users.map((post) => (
+
+                {usersReference ? usersReference.map((post) => (
                   <CardsReferenciasMini key={post.id} post={post} />
-                ))}
+                )) : null}
                 </div>
               <Divider/>
               <h4>Referencias recibidas</h4>
               <div className="divRefRec">
-              {users.map((post) => (
-                  <CardsRefRecibidas key={post.id} post={post} />
-                ))}
+              {reference ? reference.map((post) => (
+                  <CardsRefRecibidas key={post.id} post={post}  setReloadReference={setReloadReference}/>
+                )) : null}
               </div>
             </div>
 

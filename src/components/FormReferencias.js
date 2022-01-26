@@ -11,8 +11,8 @@ import DialogTitle from '@mui/material/DialogTitle';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import Perfil from '../assets/img/jpg/Usuario.jpg'
 import { useTheme } from '@mui/material/styles';
-import useAuth from '../hooks/useAuth';
 import {CreateReferenceApi} from '../api/reference';
+import {updateInfoReferenceApi} from '../api/reqReference';
 import {getAccessTokenApi} from '../api/auth';
 import { notification } from 'antd';
 
@@ -28,15 +28,15 @@ const schema = yup.object().shape({
     
 });
 function FormReferencias(props) {
-    const { userRef, avatar, setIsVisibleModal } = props;
+    const { userRef, avatar, setIsVisibleModal, setReloadUsers } = props;
     const [validated, setValidated] = useState(false)
     const [fallo, setFallo] = useState(false);
     const [enviado, setEnviado] = useState(false);
     const [open, setOpen] = useState(false);
     const [data, setData]= useState({});
-    const {user} = useAuth();
     const theme = useTheme();
     const fullScreen = useMediaQuery(theme.breakpoints.down('md'));
+    
     const handleClick = (event) => {
         const Button = event.currentTarget;
         if (Button.checkValidity() === false) {
@@ -57,7 +57,24 @@ function FormReferencias(props) {
                     message: result.message,
                     placement: "bottomLeft"
                 })
+                
+                const send ={
+                    send: true
+                }
+                updateInfoReferenceApi(token,send ,userRef._id).then(result=>{
+                    notification["success"]({
+                        message: result.message,
+                        placement: "bottomLeft"
+                    })
+                
+                }).catch(err =>{
+                    notification["error"]({
+                        message: err.message,
+                        placement: "bottomLeft"
+                    })
+                })
                 setOpen(false);
+                setReloadUsers(true);
             }else{
                 notification["error"]({
                     message: result.message,
@@ -97,11 +114,13 @@ function FormReferencias(props) {
 
                 }}
                 initialValues={{
-                    nameEm: user.name,
+                    nameEm: userRef.nameEm,
+                    nameEmS: userRef.nameEmS,
                     nameUser: userRef.nameUser,
                     lastnameP: userRef.lastnameP,
                     lastnameM: userRef.lastnameM,
                     email: userRef.email,
+                    avatar: userRef.avatar,
                     startDate: "",
                     endDate: "",
                     job: "",

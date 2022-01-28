@@ -17,8 +17,8 @@ import {getAccessTokenApi} from '../api/auth';
 import { notification } from 'antd';
 
 const schema = yup.object().shape({
-    startDate: yup.string().required("Seleccione la fecha"),
-    endDate: yup.string().required("Seleccione la fecha"),
+    endDate: yup.date().max(new Date(), "Fecha incorrecta").min(yup.ref("startDate"), 'Fecha incorrecta').required("Seleccione"),
+    startDate: yup.date().max( yup.ref("endDate"),"Fecha incorrecta").required("Seleccione"),
     job: yup.string().required("Seleccione el puesto").min(5, 'muy corto').matches(/^[a-zA-Z ]+$/),
     workArea: yup.string().required("Ingrese el area").matches(/^[a-zA-Z ]+$/),
     reason: yup.string().required("Ingrese un motivo").min(5, 'muy corto').matches(/^[a-zA-Z ]+$/),
@@ -45,6 +45,8 @@ function FormReferencias(props) {
         setOpen(true);
         setFallo(true);
     };
+
+
     const handleClose = (event, reason) => {
         if (reason === 'clickaway') {
             return;
@@ -74,6 +76,9 @@ function FormReferencias(props) {
                     })
                 })
                 setOpen(false);
+                setEnviado(false);
+                setValidated(false);
+                setFallo(false);
                 setReloadUsers(true);
             }else{
                 notification["error"]({
@@ -106,14 +111,15 @@ function FormReferencias(props) {
         <div className="ReferenciasForm">
             <Formik
                 validationSchema={schema}
+                enableReinitialize={true}
                 onSubmit={(valores, { resetForm }) => {
                     setData(valores);
                     setEnviado(true);
                     setValidated(true);
                     setIsVisibleModal(false);
-
                 }}
                 initialValues={{
+
                     nameEm: userRef.nameEm,
                     nameEmS: userRef.nameEmS,
                     nameUser: userRef.nameUser,

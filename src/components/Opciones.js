@@ -1,3 +1,4 @@
+
 export const Puesto={
     'Jefe de area' : '1',
     'Gerente de operaciones': '2',
@@ -86,3 +87,4 @@ export const NoEmpleadosOp={
     '+250' : '4',
 
 }
+

@@ -14,19 +14,27 @@ import { getReqReferenceApi } from '../../api/reqReference'
 import { getAccessTokenApi } from '../../api/auth'
 import { Button } from 'react-bootstrap'
 import useAuth from '../../hooks/useAuth';
+import { Switch} from 'antd';
+
 
 function DarReferencias() {
-  const [users, setUsers] = useState([]);
+  const [usersActive, setUsersActive] = useState([]);
+  const [usersInactive, setUsersInactive] = useState([]);
+  const [viewUsersActives, setViewUsersActives] = useState(true);
   const [reloadUsers,setReloadUsers ] = useState(false);
   const token = getAccessTokenApi();
   const { user } = useAuth();
 
   useEffect(() => {
-    getReqReferenceApi(token, user.name).then(response => {
-      setUsers(response.reference);
+    getReqReferenceApi(token, user.name, false).then(response => {
+      setUsersActive(response.reference);
+    });
+    getReqReferenceApi(token, user.name, true).then(response => {
+      setUsersInactive(response.reference);
     });
     setReloadUsers(false);
-  }, [token, user, reloadUsers]);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [token,reloadUsers]);
 
   return (
     <div className="App">
@@ -46,14 +54,35 @@ function DarReferencias() {
         </Row>
 
         <Divider />
+        
+        
+        <div className="list-users">
+
+          <div className="switch">
+            <Switch
+              defaultChecked
+              onChange={() => setViewUsersActives(!viewUsersActives)}
+            />
+            <span>
+              {viewUsersActives ? "Referencias Activas" : "Referencias Enviadas"}
+            </span>
+          </div>
+        </div>
+        <Divider/>
         <h4>Referencias</h4>
         <div className="divRefRec">
-          {users ?
-            users.map((post) => (
-              <CardsReferencias key={post.id} post={post} setReloadUsers={setReloadUsers}/>
-            ))
-            : null
-          }
+        {viewUsersActives ? 
+        (usersActive ?
+           usersActive.map((post) => (
+           <CardsReferencias key={post.id} post={post} setReloadUsers={setReloadUsers}/>))
+           : 
+           null)
+          : 
+        (usersInactive ? 
+        usersInactive.map((post) => (
+        <CardsReferencias key={post.id} post={post} setReloadUsers={setReloadUsers}/>))
+        : 
+        null)}
         </div>
       </div>
 

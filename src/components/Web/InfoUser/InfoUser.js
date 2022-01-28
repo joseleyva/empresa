@@ -6,6 +6,8 @@ import Perfil from '../../../assets/img/jpg/Usuario.jpg';
 import {Col, Row, Image, Form, Button} from 'react-bootstrap';
 import { notification } from 'antd';
 import {Modal as ModalAntd} from 'antd';
+import moment from 'moment';
+import 'moment/locale/es-mx';
 const {confirm}= ModalAntd;
 
 export default function InfoUser(props) {
@@ -45,7 +47,8 @@ export default function InfoUser(props) {
           }
         })
       }
-
+      var startDate = moment(user.startDate);
+      var endDate = moment(user.endDate);
     return (
         <div>
             <Row className='mb-3'> 
@@ -98,17 +101,18 @@ export default function InfoUser(props) {
                 <Form.Group as={Col} md="6">
                 <Form.Label>Fecha de Inicio: </Form.Label>
                 <Form.Control
-                    type="date"
+                    type="text"
                     disabled
-                    defaultValue={user.startDate}
+                    defaultValue={`del ${startDate.format('dddd D, MMMM YYYY')}` }
+
                     />
                 </Form.Group>
                 <Form.Group as={Col} md="6">
                 <Form.Label>Fecha de Terminación: </Form.Label>
                 <Form.Control
-                    type="date"
+                    type="text"
                     disabled
-                    defaultValue={user.endDate}
+                    defaultValue={`al ${endDate.format('dddd D, MMMM YYYY')}`}
                     />
                 </Form.Group>
             </Row>

@@ -1,15 +1,13 @@
-import React, {useState} from "react";
+import React from "react";
 import { Row, Col, Form } from 'react-bootstrap';
 import { Button, Container } from 'react-bootstrap';
 import {CreateReqReferenceApi} from '../api/reqReference';
+import {updateInfoReferenceApi} from "../api/userReference";
 import {getAccessTokenApi} from '../api/auth';
 import {notification} from 'antd';
 
 function CardsReferenciasMini(props)  {
-    const { post} = props;
-    const [estado, setEstado] = useState(false);
-    const [textButton, setTextButton] = useState("Pedir Referencias");
-    const [variantButton, setVariantButton]= useState("outline-primary");
+    const { post, setReloadReference} = props;
     
     const ReqReferencia = reference =>{
         const token = getAccessTokenApi();
@@ -29,17 +27,26 @@ function CardsReferenciasMini(props)  {
                 message: result.message,
                 placement: "bottomLeft"
             })
-            setEstado(true);
-            setTextButton("Solicitado");
-            setVariantButton("outline-secondary");
+            const soli={
+                solicitado: true
+            }
+            updateInfoReferenceApi(token,soli, post._id ).then(result=>{
+                notification["success"]({
+                    message: result.message,
+                    placement: "bottomLeft"
+                })
+            }).catch(err=>{
+                notification["error"]({
+                    message: err.message,
+                    placement: "bottomLeft"
+                })
+            })
+            setReloadReference(true); 
           }else{
               notification["error"]({
                   message: result.message,
                   placement: "bottomLeft"
               })
-              setEstado(false);
-              setTextButton("Solicitado");
-              setVariantButton("outline-secondary");
           }
       }).catch(err =>{
           notification["error"]({
@@ -66,7 +73,10 @@ function CardsReferenciasMini(props)  {
                     </Form.Group>
                    </Row> 
                    <Row>
-                       {post.solicitado ? <Button variant="outline-secondary" className="BtnRefMini" disabled>Solicitado</Button> :<Button variant={variantButton}  disabled={estado} onClick={()=> ReqReferencia(post)} className="BtnRefMini">{textButton}</Button>}
+                       {post.solicitado ? 
+                       <Button variant="outline-secondary" className="BtnRefMini" disabled>Solicitado</Button> 
+                       :
+                       <Button variant="outline-primary"  disabled={false} onClick={()=> ReqReferencia(post)} className="BtnRefMini">Pedir Referencias</Button>}
                    </Row>
                 </Container>
             </>

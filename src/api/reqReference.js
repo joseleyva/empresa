@@ -32,8 +32,8 @@ export function CreateReqReferenceApi(token,data){
      })
 }
 
-export function getReqReferenceApi(token, status){
-    const url = `${basePath}/${apiVersion}/get-req-reference/${status}`;
+export function getReqReferenceApi(token, status, active){
+    const url = `${basePath}/${apiVersion}/get-req-reference/${status}?send=${active}`;
   
     const params={
       method: "GET",

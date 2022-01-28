@@ -51,7 +51,7 @@ function Productos() {
                 <React.Fragment>
                     <GlobalStyles styles={{ ul: { margin: 0, padding: 0, listStyle: 'none' } }} />
 
-                    <Container disableGutters maxWidth="sm" component="main" sx={{ pt: 8, pb: 6 }}>
+                    <Container  component="main" sx={{ pt: 8, pb: 6 }}>
                         <Typography
                             component="h1"
                             variant="h2"
@@ -67,7 +67,7 @@ function Productos() {
                             customization.
                         </Typography>
                     </Container>
-                    <Container maxWidth="md" component="main">
+                    <Container  component="main">
                         <Grid container spacing={5} alignItems="flex-end">
 
                             <CartasProductos />

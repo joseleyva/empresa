@@ -59,7 +59,7 @@ function Vacante() {
                 <div className="VacantesActivas">
 
                     {vacanciesActive ?
-                        <CardsVacantes key={vacanciesActive._id} post={vacanciesActive} setReloadUsers={setReloadUsers} />
+                        <CardsVacantes key={vacanciesActive._id} id={vacanciesActive._id} post={vacanciesActive} setReloadUsers={setReloadUsers} />
                         : null
                     }
 
@@ -69,7 +69,7 @@ function Vacante() {
                 <h5>Candidatos Postulados</h5>
                 <div className="VacantesActivas">
                     {users ?
-                        <Cartas key={users._id} post={users} />
+                        <Cartas key={users._id} id={users._id} post={users} />
                         : null
                     }
                 </div>

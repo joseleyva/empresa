@@ -44,7 +44,7 @@ function Contacto() {
                     </Navbar.Collapse>
                 </Container>
             </Navbar>
-            <Container>
+            <Container className='mt-4'>
                 <Grid container spacing={0} sx={{ mt: 2 }}>
                     <h3>Por favor complete el formulario</h3>
                     <Grid container spacing={0} className="Contacto">

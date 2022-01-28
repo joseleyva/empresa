@@ -8,13 +8,12 @@ import InfoUser from './Web/InfoUser';
 import Modal from '../components/Modal';
 
 function CardsRefRecibidas(props) {
-    const { post,setReloadReference} = props;
+    const { post,setReloadReference, id} = props;
     const [avatar, setAvatar] = useState(null);
     const [isVisibleModal, setIsVisibleModal] = useState(false);
     const [width, setWidth] = useState(500);
     const [modalTitle, setModalTitle] = useState("");
     const [modalContent, setModalContent] = useState("");
-  
     useEffect(() => {
         getAvatarApi(post.avatar).then(response => {
             setAvatar(response);
@@ -29,15 +28,15 @@ function CardsRefRecibidas(props) {
       }
     return (
 
-        <div className="ContenedorRefRec">
+        <div className="ContenedorRefRec" key={id}>
             <Row className="m-1">
                 <Col xs={2} md={1}>
                     <Image src={avatar ? avatar : perfil} roundedCircle width="110px" height="118px" />
                 </Col>
             </Row>
             <div>
-                <div class="col-md-10">
-                    <div class="card-body">
+                <div className="col-md-10">
+                    <div className="card-body">
                         <h6 align="left">Nombre del Candidato: </h6>
                         <h5 align="left">{`${post.nameUser} ${post.lastnameP} ${post.lastnameM}`}</h5>
                         <Button variant="outline-primary" onClick={()=> Info(post)} className="BtnRefRec">Ver</Button>

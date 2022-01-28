@@ -1,65 +1,35 @@
+import React from 'react';
 import '../../App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import {Col, Button, Form, Row} from 'react-bootstrap';
+import { Col, Button, Form, Row } from 'react-bootstrap';
 import GitHubIcon from '@mui/icons-material/GitHub';
 import FacebookIcon from '@mui/icons-material/Facebook';
 import TwitterIcon from '@mui/icons-material/Twitter';
 import { Instagram } from '@mui/icons-material';
 import Link from '@mui/material/Link';
 import { Divider } from '@mui/material';
+import FormAsk from '../../components/Web/FormAsk'
 
-function Solicitudes() {
+export default function CrearEvaluaciones() {
     return (
-
         <div className="App">
-           
+
             <div className="ContenedorEmpresas">
-            <h4> Escritorio Virtual</h4>
-            <Divider/>
-                <Row className="MargenL" >
-                <Form.Group as={Col} md="4">
-                        <h6>Evaluacíon Psicometrica </h6>
-                
-                </Form.Group>
-                <Form.Group as={Col} md="4">
-                        <h6> Evaluacíon de Conocimientos</h6>
-                </Form.Group>
-                <Form.Group as={Col} md="4">
-                        <h6>Resultados</h6>
-                </Form.Group>
-                </Row>
-                <Row className="mb-3 ">
+                <h4> Escritorio Virtual</h4>
+                <Divider />
+                <Row className='mb-3 mt-3'>
                     <Form.Group as={Col} md="4">
-                        <Button variant="outline-primary" className="BtnSolicitudes"></Button>{' '}
+
                     </Form.Group>
                     <Form.Group as={Col} md="4">
-                        <Button variant="outline-primary" className="BtnSolicitudes">Crea tu Evaluación</Button>{' '}
+
                     </Form.Group>
                     <Form.Group as={Col} md="4">
-                        <Button variant="outline-primary" className="BtnSolicitudes">Pruebas Finalizadas</Button>{' '}
+                        <Button variant='primary'>Agregar pregunta</Button>
                     </Form.Group>
                 </Row>
-                <Row className="mb-3 ">
-                    <Form.Group as={Col} md="4">
-                        <Button variant="outline-primary" className="BtnSolicitudes" ></Button>{' '}
-                    </Form.Group>
-                    <Form.Group as={Col} md="4">
-                        <Button variant="outline-primary" className="BtnSolicitudes">Evaluaciones Disponibles</Button>{' '}
-                    </Form.Group>
-                    <Form.Group as={Col} md="4">
-                        <Button variant="outline-primary" className="BtnSolicitudes">Ranking de Resultados</Button>{' '}
-                    </Form.Group>
-                </Row>
-                <Row className="mb-3 ">
-                    <Form.Group as={Col} md="4">
-                        <Button variant="outline-primary" className="BtnSolicitudes" ></Button>{' '}
-                    </Form.Group>
-                    <Form.Group as={Col} md="4">
-                    </Form.Group>
-                    <Form.Group as={Col} md="4">
-                        <Button variant="outline-primary" className="BtnSolicitudes">Volver al Inicio</Button>{' '}
-                    </Form.Group>
-                </Row>
+                <Divider />
+
             </div>
 
             <footer>
@@ -139,6 +109,3 @@ function Solicitudes() {
         </div>
     );
 }
-
-export default Solicitudes;
-

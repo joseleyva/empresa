@@ -5,7 +5,7 @@ import { getAvatarApi } from "../api/user";
 import Imagen from '../assets/img/jpg/imagen1.jpg';
 
 function Cartas(props) {
-    const {key, post} = props;
+    const {id, post} = props;
     const [avatar, setAvatar] = useState(null);
     
     useEffect(() => {
@@ -22,19 +22,19 @@ function Cartas(props) {
             <>
 
                 <Container className="ContenedorV">
-                    <Row className="IconCartas" key={key}>
+                    <Row className="IconCartas" key={id}>
                         <Col xs={2} md={1}>
                             <Image src={avatar ? avatar : Imagen} roundedCircle width="150px" height="150px" />
                         </Col>
                     </Row>
                     <div className="C">
-                        <div class="col-md-10">
-                            <div class="card-body">
+                        <div className="col-md-10">
+                            <div className="card-body">
                                 <div>
-                                <h5 align="left" class="card-title">Nombre: {post.name}</h5>
-                                <h5 align="left" class="card-title">Area: <h7>{post.email}</h7></h5>
-                                <h5 align="left" class="card-title">Experiencia: <label></label></h5>
-                                <h5 align="left" class="card-title">Examenes:</h5>
+                                <h5 align="left" className="card-title">Nombre: {post.name}</h5>
+                                <h5 align="left" className="card-title">Area: <label>{post.email}</label></h5>
+                                <h5 align="left" className="card-title">Experiencia: <label></label></h5>
+                                <h5 align="left" className="card-title">Examenes:</h5>
                                 </div>
                                 <Dropdown as={ButtonGroup}  >
                                     <Button variant="success" className="Opciones">Opciones</Button>

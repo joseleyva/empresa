@@ -45,8 +45,7 @@ getUserReferenceApi(token, user.name, true).then(response => {
     setReloadReference(false);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [token, reloadReference]);
-const noti = usersActiveReference.length;
-console.log(noti);
+
 return (
     <div className="App">
 
@@ -93,16 +92,16 @@ return (
         <div className="MarginB">
         {viewUsersActives ? (
           usersInctiveReference ? usersInctiveReference.map((post) => (
-            <CardsReferenciasMini key={post.id} post={post} setReloadReference={setReloadReference}  />
+            <CardsReferenciasMini key={post._id} id={post._id} post={post} setReloadReference={setReloadReference}  />
           )) : null) : (usersActiveReference ? usersActiveReference.map((post) => (
-            <CardsReferenciasMini key={post.id} post={post} setReloadReference={setReloadReference} />
+            <CardsReferenciasMini key={post._id} id={post._id} post={post} setReloadReference={setReloadReference} />
           )) : null)}
         </div>
         <Divider />
         <h4>Referencias recibidas</h4>
         <div className="divRefRec">
           {reference ? reference.map((post) => (
-            <CardsRefRecibidas key={post.id} post={post} setReloadReference={setReloadReference} />
+            <CardsRefRecibidas  key={post._id} id={post._id} post={post} setReloadReference={setReloadReference} />
           )) : null}
         </div>
       </div>

@@ -74,13 +74,13 @@ function DarReferencias() {
         {viewUsersActives ? 
         (usersActive ?
            usersActive.map((post) => (
-           <CardsReferencias key={post.id} post={post} setReloadUsers={setReloadUsers}/>))
+           <CardsReferencias key={post._id} id={post._id} post={post} setReloadUsers={setReloadUsers}/>))
            : 
            null)
           : 
         (usersInactive ? 
         usersInactive.map((post) => (
-        <CardsReferencias key={post.id} post={post} setReloadUsers={setReloadUsers}/>))
+        <CardsReferencias key={post._id} id={post._id} post={post} setReloadUsers={setReloadUsers}/>))
         : 
         null)}
         </div>

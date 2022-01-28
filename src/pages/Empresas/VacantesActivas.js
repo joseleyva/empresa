@@ -65,13 +65,13 @@ function Vacante() {
                     {viewUsersActives ? (
                          <div className="VacantesActivas">
                          {vacanciesActive.map((post) => (
-                             <CardsVacantes key={post.id} post={post} setReloadUsers={setReloadUsers}/>
+                             <CardsVacantes key={post._id} id={post._id} post={post} setReloadUsers={setReloadUsers}/>
                          ))}
                      </div>
                     ) : (
                         <div className="VacantesActivas">
                         {vacanciesInactive.map((post) => (
-                            <CardsVacantes key={post.id} post={post} setReloadUsers={setReloadUsers}/>
+                            <CardsVacantes key={post._id} id={post._id} post={post} setReloadUsers={setReloadUsers}/>
                         ))}
                     </div>
                     )}

@@ -1,59 +1,67 @@
 import '../../App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Row, Form, Col } from 'react-bootstrap';
-import * as React from 'react';
-import { useState, useEffect } from 'react';
-import {Button} from 'react-bootstrap';
+import {Col, Button, Form, Row} from 'react-bootstrap';
 import GitHubIcon from '@mui/icons-material/GitHub';
 import FacebookIcon from '@mui/icons-material/Facebook';
 import TwitterIcon from '@mui/icons-material/Twitter';
 import { Instagram } from '@mui/icons-material';
 import Link from '@mui/material/Link';
 import { Divider } from '@mui/material';
-import Cartas from '../../components/Cartas';
-import {getUsersActiveApi} from '../../api/user';
-import {getAccessTokenApi} from '../../api/auth';
 
-
-
-function CandidatosPostulados() {
-    const [users, setUsers] = useState([]);
-    const [reloadUsers,setReloadUsers] = useState(false);
-    const token = getAccessTokenApi();
-    useEffect(() => {
-        getUsersActiveApi(token, true).then(response=>{
-            setUsers(response.users);
-        });
-        setReloadUsers(false);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [token, reloadUsers])
-
+function Evaluaciones() {
     return (
-        <div className="App">
 
+        <div className="App">
+           
             <div className="ContenedorEmpresas">
-                <h4> Escritorio Virtual</h4>
-                <Row className="mb-3 BotonesEm">
+            <h4> Escritorio Virtual</h4>
+            <Divider/>
+                <Row className="MargenL" >
+                <Form.Group as={Col} md="4">
+                        <h6>Evaluacíon Psicometrica </h6>
+                
+                </Form.Group>
+                <Form.Group as={Col} md="4">
+                        <h6> Evaluacíon de Conocimientos</h6>
+                </Form.Group>
+                <Form.Group as={Col} md="4">
+                        <h6>Resultados</h6>
+                </Form.Group>
+                </Row>
+                <Row className="mb-3 ">
                     <Form.Group as={Col} md="4">
-                        <Button variant="outline-primary" href="/Empresas/VacanteForm">Publicar Vacante</Button>{' '}
+                        <Button variant="outline-primary" className="BtnSolicitudes"></Button>{' '}
                     </Form.Group>
                     <Form.Group as={Col} md="4">
-                        <Button variant="outline-primary" href="/Empresas/CandidatosPostulados">Candidatos Postulados</Button>{' '}
+                        <Button variant="outline-primary" href='/Empresas/CrearEvaluaciones'  className="BtnSolicitudes">Crea tu Evaluación</Button>{' '}
                     </Form.Group>
                     <Form.Group as={Col} md="4">
-                        <Button variant="outline-primary" href="/Empresas/VacantesActivas">Vacantes Activas</Button>{' '}
+                        <Button variant="outline-primary" className="BtnSolicitudes">Pruebas Finalizadas</Button>{' '}
                     </Form.Group>
                 </Row>
-                <Divider/>
-                <h5>Candidatos Postulados</h5>
-                <div className="VacantesActivas">
-                {users.map((post) => (
-                  <Cartas key={post._id} id={post._id} post={post} />
-                ))}
-
-                </div>
+                <Row className="mb-3 ">
+                    <Form.Group as={Col} md="4">
+                        <Button variant="outline-primary" className="BtnSolicitudes" ></Button>{' '}
+                    </Form.Group>
+                    <Form.Group as={Col} md="4">
+                        <Button variant="outline-primary" className="BtnSolicitudes">Evaluaciones Disponibles</Button>{' '}
+                    </Form.Group>
+                    <Form.Group as={Col} md="4">
+                        <Button variant="outline-primary" className="BtnSolicitudes">Ranking de Resultados</Button>{' '}
+                    </Form.Group>
+                </Row>
+                <Row className="mb-3 ">
+                    <Form.Group as={Col} md="4">
+                        <Button variant="outline-primary" className="BtnSolicitudes" ></Button>{' '}
+                    </Form.Group>
+                    <Form.Group as={Col} md="4">
+                    </Form.Group>
+                    <Form.Group as={Col} md="4">
+                        <Button variant="outline-primary" className="BtnSolicitudes">Volver al Inicio</Button>{' '}
+                    </Form.Group>
+                </Row>
             </div>
-          
+
             <footer>
                 <div className="Fcontainer">
                     <div className="row">
@@ -132,5 +140,5 @@ function CandidatosPostulados() {
     );
 }
 
+export default Evaluaciones;
 
-export default CandidatosPostulados;

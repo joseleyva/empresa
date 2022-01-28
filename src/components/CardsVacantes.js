@@ -18,7 +18,7 @@ const { confirm } = ModalAntd;
 
 
 function CardsVacantes(props) {
-  const { post, setReloadUsers } = props;
+  const { post, setReloadUsers , id} = props;
   const [isVisibleModal, setIsVisibleModal] = useState(false);
   const [width, setWidth] = useState(500);
   const [modalTitle, setModalTitle] = useState("");
@@ -99,14 +99,14 @@ function CardsVacantes(props) {
   return (
     <>
 
-      <Container className="ContenedorVacante" >
+      <Container className="ContenedorVacante" key={id} >
         <div className="C">
-          <div class="col-md-10">
-            <div class="card-body">
-              <h6 align="left" class="card-title">Nombre: {post.nameP} </h6>
-              <h6 align="left" class="card-title">Lugar: {post.place}</h6>
-              <h6 align="left" class="card-title">Experiencia: {post.levelExpe}</h6>
-              <h6 align="left" class="card-title">Examenes:</h6>
+          <div className="col-md-10">
+            <div className="card-body">
+              <h6 align="left" className="card-title">Nombre: {post.nameP} </h6>
+              <h6 align="left" className="card-title">Lugar: {post.place}</h6>
+              <h6 align="left" className="card-title">Experiencia: {post.levelExpe}</h6>
+              <h6 align="left" className="card-title">Examenes:</h6>
               <label align="left">Editar : </label>
             </div>
               {post.active ? (

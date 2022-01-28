@@ -7,7 +7,7 @@ import {getAccessTokenApi} from '../api/auth';
 import {notification} from 'antd';
 
 function CardsReferenciasMini(props)  {
-    const { post, setReloadReference} = props;
+    const { post, setReloadReference, id} = props;
     
     const ReqReferencia = reference =>{
         const token = getAccessTokenApi();
@@ -60,7 +60,7 @@ function CardsReferenciasMini(props)  {
         return (
             <>
 
-                <Container className="ContenedorRefMini">
+                <Container className="ContenedorRefMini" key={id}>
                    <Row className="mb-3">
                     <Form.Group as={Col} md="4">
                     <Form.Label>{`${post.nameUser} ${post.lastnameP} ${post.lastnameM}`}</Form.Label>

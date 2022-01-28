@@ -14,6 +14,7 @@
   }
 }
 
+
 .App-header {
   background-color: #282c34;
   min-height: 100vh;
@@ -60,6 +61,7 @@
 .CartasG{
   width: 1000px;
   margin: auto;
+  margin-top: 25px;
 }
 .Cartas{
   margin:10px;
@@ -69,10 +71,14 @@
 }
 
 .Fcontainer{
-  margin-top: 20px;
+  margin-top: 90px;
+  margin-bottom: 0px!important;
   height: 200px;
   background-color: lightgrey;
   align-content: center!important;
+  bottom: 0; 
+  width: 100%;
+
 }
 
 .Fcol-md-4{

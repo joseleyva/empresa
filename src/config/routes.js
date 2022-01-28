@@ -13,7 +13,7 @@ import AdminEmpresas from "../pages/Admin/Empresas"
 //Pages Panel
 import Empresas from '../pages/Empresas/Empresas';
 import Vacante from '../pages/Empresas/Vacante';
-import Solicitudes from '../pages/Empresas/Solicitudes';
+import Evaluaciones from '../pages/Empresas/Evaluaciones';
 import Referencias from '../pages/Empresas/Referencias';
 import DatosEmpresa from '../pages/Empresas/DatosEmpresa';
 import Estudios from '../pages/Empresas/Estudios';
@@ -22,6 +22,7 @@ import VacanteForm from '../components/VacanteForm';
 import VacantesActivas from '../pages/Empresas/VacantesActivas';
 import CandidatosPostulados from '../pages/Empresas/CandidatosPostulados';
 import DarReferencias from '../pages/Empresas/DarReferencias';
+import CrearEvaluaciones from '../pages/Empresas/CrearEvaluaciones';
 
 //WebPages
 import Home from '../pages/Home';
@@ -112,8 +113,13 @@ const routes=[
             },
             
             {
-                path: "/Empresas/Solicitudes",
-                component: Solicitudes,
+                path: "/Empresas/Evaluaciones",
+                component: Evaluaciones,
+                exact: true
+            },
+            {
+                path: "/Empresas/CrearEvaluaciones",
+                component: CrearEvaluaciones,
                 exact: true
             },
             {

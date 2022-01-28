@@ -1,133 +1,35 @@
-import { Formik } from 'formik'
-import React, { useState } from 'react'
+import React, {useState} from 'react';
+import {Form, Col, Row,Button,InputGroup} from "react-bootstrap";
 import * as yup from 'yup';
-import { Form, Col, Button, Row, InputGroup, Image, Container } from 'react-bootstrap';
-import { SN } from './Opciones';
-import Dialog from '@mui/material/Dialog';
-import DialogActions from '@mui/material/DialogActions';
-import DialogContent from '@mui/material/DialogContent';
-import DialogContentText from '@mui/material/DialogContentText';
-import DialogTitle from '@mui/material/DialogTitle';
-import useMediaQuery from '@mui/material/useMediaQuery';
-import Perfil from '../assets/img/jpg/Usuario.jpg'
-import { useTheme } from '@mui/material/styles';
-import {CreateReferenceApi} from '../api/reference';
-import {updateInfoReferenceApi} from '../api/reqReference';
-import {getAccessTokenApi} from '../api/auth';
-import { notification } from 'antd';
+import { Formik } from 'formik'
+import {SN} from '../../Opciones';
 
-const schema = yup.object().shape({
-    endDate: yup.date().max(new Date(), "Fecha incorrecta").min(yup.ref("startDate"), 'Fecha incorrecta').required("Seleccione"),
-    startDate: yup.date().max( yup.ref("endDate"),"Fecha incorrecta").required("Seleccione"),
-    job: yup.string().required("Seleccione el puesto").min(5, 'muy corto').matches(/^[a-zA-Z ]+$/),
-    workArea: yup.string().required("Ingrese el area").matches(/^[a-zA-Z ]+$/),
-    reason: yup.string().required("Ingrese un motivo").min(5, 'muy corto').matches(/^[a-zA-Z ]+$/),
-    tohire: yup.string().required("Seleccione una opción"),
-    recommendable: yup.string().required("Seleccione una opción"),
-    comments: yup.string().required("Ingrese algun comentario").matches(/^[a-zA-Z ñÑ.,]+$/),
-    
-});
-function FormReferencias(props) {
-    const { userRef, avatar, setIsVisibleModal, setReloadUsers } = props;
+
+export default function FormAsk(props) {
+    const schema = yup.object().shape({
+        endDate: yup.date().max(new Date(), "Fecha incorrecta").min(yup.ref("startDate"), 'Fecha incorrecta').required("Seleccione"),
+        startDate: yup.date().max( yup.ref("endDate"),"Fecha incorrecta").required("Seleccione"),
+        job: yup.string().required("Seleccione el puesto").min(5, 'muy corto').matches(/^[a-zA-Z ]+$/),
+        workArea: yup.string().required("Ingrese el area").matches(/^[a-zA-Z ]+$/),
+        reason: yup.string().required("Ingrese un motivo").min(5, 'muy corto').matches(/^[a-zA-Z ]+$/),
+        tohire: yup.string().required("Seleccione una opción"),
+        recommendable: yup.string().required("Seleccione una opción"),
+        comments: yup.string().required("Ingrese algun comentario").matches(/^[a-zA-Z ñÑ.,]+$/),
+        
+    });
+
     const [validated, setValidated] = useState(false)
     const [fallo, setFallo] = useState(false);
-    const [enviado, setEnviado] = useState(false);
-    const [open, setOpen] = useState(false);
-    const [data, setData]= useState({});
-    const theme = useTheme();
-    const fullScreen = useMediaQuery(theme.breakpoints.down('md'));
-    
-    const handleClick = (event) => {
-        const Button = event.currentTarget;
-        if (Button.checkValidity() === false) {
-
-        }
-        setOpen(true);
-        setFallo(true);
-    };
 
 
-    const handleClose = (event, reason) => {
-        if (reason === 'clickaway') {
-            return;
-        }
-        const token = getAccessTokenApi();
-
-        CreateReferenceApi(token, data).then(result=>{
-            if(result.ok){
-                notification["success"]({
-                    message: result.message,
-                    placement: "bottomLeft"
-                })
-                
-                const send ={
-                    send: true,
-                    toWork: true
-                }
-                updateInfoReferenceApi(token,send ,userRef._id).then(result=>{
-                    notification["success"]({
-                        message: result.message,
-                        placement: "bottomLeft"
-                    })
-                
-                }).catch(err =>{
-                    notification["error"]({
-                        message: err.message,
-                        placement: "bottomLeft"
-                    })
-                })
-                setOpen(false);
-                setEnviado(false);
-                setValidated(false);
-                setFallo(false);
-                setReloadUsers(true);
-            }else{
-                notification["error"]({
-                    message: result.message,
-                    placement: "bottomLeft"
-                })
-                setIsVisibleModal(true);
-                setOpen(false);
-            }
-        }).catch(err =>{
-            notification["error"]({
-                message: err.message,
-                placement: "bottomLeft"
-            })
-            setIsVisibleModal(true);
-            setOpen(false);
-        })
-    
-        
-    };
-    const handleCancel = (event, reason) => {
-        if (reason === 'clickaway') {
-            return;
-        }
-        setOpen(false);
-        setIsVisibleModal(true);
-    };
-
-    return (
-        <div className="ReferenciasForm">
-            <Formik
+  return(
+<Formik
                 validationSchema={schema}
                 enableReinitialize={true}
                 onSubmit={(valores, { resetForm }) => {
-                    setData(valores);
-                    setEnviado(true);
-                    setValidated(true);
-                    setIsVisibleModal(false);
+                
                 }}
                 initialValues={{
-
-                    nameEm: userRef.nameEm,
-                    nameEmS: userRef.nameEmS,
-                    nameUser: userRef.nameUser,
-                    lastnameP: userRef.lastnameP,
-                    lastnameM: userRef.lastnameM,
-                    email: userRef.email,
-                    avatar: userRef.avatar,
                     startDate: "",
                     endDate: "",
                     job: "",
@@ -151,20 +53,6 @@ function FormReferencias(props) {
                 }) => (
                     <Form noValidate validated={validated} onSubmit={handleSubmit} className="FormDatos">
                         <h4>Escribe aquí los datos del ex colaborador</h4>
-                        <Container className="ContenedorRefForm">
-                            <Row>
-                                <Col xs={2} md={1}>
-                                    <Image src={avatar ? avatar : Perfil} width="150px" height="150px" />
-                                </Col>
-                            </Row>
-                            <div>
-                                <div class="col-md-10">
-                                    <div class="card-body">
-                                        <h5 align="left">{`${userRef.nameUser} ${userRef.lastnameP} ${userRef.lastnameM}`}</h5>
-                                    </div>
-                                </div>
-                            </div>
-                        </Container>
                         <Row className="mb-3">
                             <Form.Label>¿Cuál fue el periodo de tiempo laborado por el ex empleado?</Form.Label>
                             <Form.Group as={Col} md="4" controlId="validationFormik01" className="position-relative">
@@ -299,45 +187,12 @@ function FormReferencias(props) {
 
                         </Row>
                         <div className="DivBF">
-                            <Button type="submit" onClick={handleClick} className="botonF" >Enviar</Button>
-                            <Button variant="danger" onClick={() => setIsVisibleModal(false)} className="botonF">Cancelar</Button>
+                            <Button type="submit" className="botonF" >Enviar</Button>
                         </div>
-                        {
-                            (enviado && (
-                                <Dialog
-                                    fullScreen={fullScreen}
-                                    open={open}
-                                    onClose={handleClose}
-                                    aria-labelledby="responsive-dialog-title"
-                                >
-                                    <DialogTitle id="responsive-dialog-title">
-                                        {"Confirmación de datos"}
-                                    </DialogTitle>
-                                    <DialogContent>
-                                        <DialogContentText>
-                                            ¿Estás seguro de que haz llenado los datos correctamente?
-                                        </DialogContentText>
-                                    </DialogContent>
-                                    <DialogActions>
-                                        <Button className="boton" onClick={handleClose} autoFocus>
-                                            Sí, Enviar
-                                        </Button>
-                                        <Button variant="danger" className="boton" onClick={handleCancel}>No, Enviar</Button>
-                                    </DialogActions>
-                                </Dialog>
-                            ))
-                        }
+                        
                     </Form>
                 )}
             </Formik>
 
-
-        </div>
-
-    );
-
-
-
+  );
 }
-
-export default FormReferencias;

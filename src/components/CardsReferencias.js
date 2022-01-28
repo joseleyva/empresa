@@ -4,19 +4,22 @@ import { Button, Container } from 'react-bootstrap';
 import FormReferencias from "./FormReferencias";
 import {getAvatarApi} from '../api/user';
 import Modal from "./Modal";
-import {  Modal as ModalAntd } from 'antd';
+import {notification,  Modal as ModalAntd } from 'antd';
 import Perfil from '../assets/img/jpg/Usuario.jpg';
+import {CreateReferenceApi} from '../api/reference';
+import {updateInfoReferenceApi} from '../api/reqReference';
+import {getAccessTokenApi} from '../api/auth';
 const { confirm } = ModalAntd;
 
 
 function CardsReferencias(props) {
-    const { post , setReloadUsers} = props;
+    const { post , setReloadUsers, id} = props;
     const [avatar, setAvatar] = useState(null);
     const [isVisibleModal, setIsVisibleModal] = useState(false);
     const [width, setWidth] = useState(500);
     const [modalTitle, setModalTitle] = useState("");
     const [modalContent, setModalContent] = useState("");
-
+   
     useEffect(() => {
         if (post.avatar) {
           getAvatarApi(post.avatar).then((response) => {
@@ -35,37 +38,90 @@ function CardsReferencias(props) {
       }
 
       const showDeleteConfirm = () => {
-    
+    const token = getAccessTokenApi();
         confirm({
-          title: "Eliminar Referencia",
-          content: `¿Estas seguro que quieres eliminar a ${post.nameUser}?`,
-          okText: "Eliminar",
+          title: "Rechazar Referencia",
+          content: `¿Estas seguro que ${post.nameUser} no fue su colaborador?`,
+          okText: "Si",
           okType: "danger",
-          cancelText: "Cancelar",
+          cancelText: "No",
           onOk() {
-            
+            const data= {
+              nameEm: post.nameEm,
+              nameEmS: post.nameEmS,
+              nameUser: post.nameUser,
+              lastnameP: post.lastnameP,
+              lastnameM: post.lastnameM,
+              email: post.email,
+              avatar: post.avatar,
+              toWork: false
+            }
+            CreateReferenceApi(token, data).then(result=>{
+              if(result.ok){
+                  notification["success"]({
+                      message: result.message,
+                      placement: "bottomLeft"
+                  })
+                  
+                  const send ={
+                      send: true,
+                      toWork: false
+                  }
+                  updateInfoReferenceApi(token,send ,post._id).then(result=>{
+                      notification["success"]({
+                          message: result.message,
+                          placement: "bottomLeft"
+                      })
+                  
+                  }).catch(err =>{
+                      notification["error"]({
+                          message: err.message,
+                          placement: "bottomLeft"
+                      })
+                  })
+               
+                  setReloadUsers(true);
+              }else{
+                  notification["error"]({
+                      message: result.message,
+                      placement: "bottomLeft"
+                  })
+              }
+          }).catch(err =>{
+              notification["error"]({
+                  message: err.message,
+                  placement: "bottomLeft"
+              })
+              
+          })
           }
         })
       }
 
     return (
 
-        <Container className="ContenedorRef">
+        <Container className="ContenedorRef" key={id}>
             <Row>
                 <Col xs={2} md={1}>
                     <Image src={avatar ? avatar : Perfil} className="mt-3" roundedCircle width="100px" height="100px" />
                 </Col>
             </Row>
             <div>
-                <div class="col-md-10">
-                    <div class="card-body">
+                <div className="col-md-10">
+                    <div className="card-body">
                         <h6 align="left">El Candidato {`${post.nameUser} ${post.lastnameP} ${post.lastnameM}`} ha mencionado haber trabajado con la empresa a la que representas</h6>
                         <div className="DivRef">
-                            <label>¿Trabajó en la empresa?</label>
+                        {post.send ? <h5>Referencia enviada </h5>
+                              :
+                              (<>
+                              <label>¿Trabajó en la empresa?</label>
                             <div className="BtnsRef">
-                                <Button variant="primary" onClick={() => darReferencia(post)} className="botonRef" >Si</Button>
-                                <Button variant="danger" onClick={()=> showDeleteConfirm(post)} className="botonRef" >No</Button>
-                            </div>
+                              <Button variant="primary" onClick={() => darReferencia(post)} className="botonRef" >Si</Button> 
+                              <Button variant="danger" onClick={()=> showDeleteConfirm(post)} className="botonRef" >No</Button>
+                              </div>
+                              </>)}
+                                
+                           
                         </div>
                     </div>
 

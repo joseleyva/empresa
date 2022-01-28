@@ -64,7 +64,7 @@ export default function LayoutsPanel({ routes }) {
                                     <Badge bg="danger">1</Badge>
                                 </Nav.Link>
                                 <Nav.Link href="/Empresas/Vacante">Vacantes</Nav.Link>
-                                <Nav.Link href="/Empresas/Solicitudes">Evaluaciones
+                                <Nav.Link href="/Empresas/Evaluaciones">Evaluaciones
                                     <Badge bg="danger">1</Badge>
                                 </Nav.Link>
                                 <Nav.Link href="/Empresas/Referencias">Referencias

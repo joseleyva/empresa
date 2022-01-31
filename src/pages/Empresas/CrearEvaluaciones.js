@@ -33,7 +33,7 @@ export default function CrearEvaluaciones() {
 
     let persons = [];
     for (let i = 0; i<num.numberAsk; i++){
-      persons.push(<FormAsk ask={i}/>)
+      persons.push(<FormAsk ask={`Pregunta${i}`}/>)
     }
     return (
         <div className="App">

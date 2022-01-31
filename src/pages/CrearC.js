@@ -152,7 +152,6 @@ function CrearC() {
                                                 label="Nombre Comercial"
                                             >
                                                 <Form.Control
-                                                    className="FormInicio"
                                                     type="text"
                                                     placeholder="Ingrese el nombre"
                                                     name="name"
@@ -180,7 +179,6 @@ function CrearC() {
                                                 label="Correo electronico"
                                             >
                                                 <Form.Control
-                                                    className="FormInicio"
                                                     type="email"
                                                     name="email"
                                                     placeholder="Ingrese el correo"

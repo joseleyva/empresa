@@ -145,7 +145,6 @@
 
 
 .form-control{
-  width: 90%!important;
   margin: 0px 0px 0px 0px ;
   align-self: center!important;
 }
@@ -292,9 +291,6 @@
 }
 .btnP{
   margin: auto!important;
-}
-.FormInicio{
-  width: 100%!important;
 }
 
 .ContenedorRef{

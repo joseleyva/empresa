@@ -30,7 +30,7 @@ function Evaluaciones() {
                 </Row>
                 <Row className="mb-3 ">
                     <Form.Group as={Col} md="4">
-                        <Button variant="outline-primary" className="BtnSolicitudes"></Button>{' '}
+                        <Button variant="outline-primary" className="BtnSolicitudes">CLEAVER</Button>{' '}
                     </Form.Group>
                     <Form.Group as={Col} md="4">
                         <Button variant="outline-primary" href='/Empresas/CrearEvaluaciones'  className="BtnSolicitudes">Crea tu Evaluación</Button>{' '}
@@ -41,7 +41,7 @@ function Evaluaciones() {
                 </Row>
                 <Row className="mb-3 ">
                     <Form.Group as={Col} md="4">
-                        <Button variant="outline-primary" className="BtnSolicitudes" ></Button>{' '}
+                        <Button variant="outline-primary" className="BtnSolicitudes" >Estilo Gerencial</Button>{' '}
                     </Form.Group>
                     <Form.Group as={Col} md="4">
                         <Button variant="outline-primary" className="BtnSolicitudes">Evaluaciones Disponibles</Button>{' '}
@@ -52,7 +52,7 @@ function Evaluaciones() {
                 </Row>
                 <Row className="mb-3 ">
                     <Form.Group as={Col} md="4">
-                        <Button variant="outline-primary" className="BtnSolicitudes" ></Button>{' '}
+                        <Button variant="outline-primary" className="BtnSolicitudes" >Ver más</Button>{' '}
                     </Form.Group>
                     <Form.Group as={Col} md="4">
                     </Form.Group>

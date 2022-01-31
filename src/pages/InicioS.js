@@ -144,7 +144,6 @@ function InicioS() {
                         label="Correo electronico"
                       >
                         <Form.Control
-                          className="FormInicio"
                           type="email"
                           placeholder="Ingrese el correo"
                           name="email"
@@ -171,7 +170,6 @@ function InicioS() {
                         label="Contraseña"
                       >
                         <Form.Control
-                          className="FormInicio"
                           type="password"
                           placeholder="Contraseña"
                           name="password"

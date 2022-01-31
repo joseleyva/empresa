@@ -194,7 +194,7 @@ function EditForm(props){
 
           </Row>
           <Row className="mb-3">
-            <Form.Group as={Col} md="6" controlId="validationFormikUsername" className="position-relative">
+            <Form.Group as={Col} md="4" controlId="validationFormikUsername" className="position-relative">
               <Form.Label>Correo</Form.Label>
               <InputGroup hasValidation>
                 <Form.Control
@@ -207,7 +207,7 @@ function EditForm(props){
                 />
               </InputGroup>
             </Form.Group>
-            <Form.Group as={Col} md="5" controlId="validationFormikUsername" className="position-relative">
+            <Form.Group as={Col} md="4" controlId="validationFormikUsername" className="position-relative">
               <Form.Label>Numero de telefono</Form.Label>
               <InputGroup hasValidation>
                 <Form.Control
@@ -222,7 +222,7 @@ function EditForm(props){
             </Form.Group>
           </Row>
           <Row className="mb-3">
-          <Form.Group as={Col} md="5" controlId="validationFormikUsername" className="position-relative">
+          <Form.Group as={Col} md="4" controlId="validationFormikUsername" className="position-relative">
               <Form.Label>Puesto del encargado</Form.Label>
               <InputGroup hasValidation>
                 <Form.Control
@@ -240,7 +240,7 @@ function EditForm(props){
               <h4>Datos de la Empresa</h4>
           </Row>
           <Row className="mb-3">
-            <Form.Group as={Col} md="5" controlId="validationFormik01" className="position-relative">
+            <Form.Group as={Col} md="4" controlId="validationFormik01" className="position-relative">
               <Form.Label>Nombre de la empresa</Form.Label>
               <Form.Control
               prefix={<UserOutlined/>}

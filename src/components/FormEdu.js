@@ -134,7 +134,7 @@ const FormEdu = (props) => {
                                 />
                                 <Form.Control.Feedback type="invalid" tooltip>{errors.experience}</Form.Control.Feedback>
                             </Form.Group>
-                            <Form.Group as={Col} md="3" controlId="validationFormik04" className="position-relative">
+                            <Form.Group as={Col} md="4" controlId="validationFormik04" className="position-relative">
                                 <Form.Label> Nivel en años</Form.Label>
                                 <Form.Control
                                     required
@@ -197,7 +197,7 @@ const FormEdu = (props) => {
                         </Row>
 
                         <Row className="mb-3">
-                            <Form.Group as={Col} md="3" controlId="validationFormik04" className="position-relative">
+                            <Form.Group as={Col} md="4" controlId="validationFormik04" className="position-relative">
                                 <Form.Label>Idiomas adicionales</Form.Label>
                                 <Form.Control
                                     required
@@ -210,7 +210,7 @@ const FormEdu = (props) => {
                                 />
                                 <Form.Control.Feedback type="invalid" tooltip>{errors.idiom}</Form.Control.Feedback>
                             </Form.Group>
-                            <Form.Group as={Col} md="3" controlId="validationFormik04" className="position-relative">
+                            <Form.Group as={Col} md="4" controlId="validationFormik04" className="position-relative">
                                 <Form.Label> Nivel de idioma</Form.Label>
                                 <Form.Select
                                     required
@@ -226,7 +226,7 @@ const FormEdu = (props) => {
                                 </Form.Select>
                                 <Form.Control.Feedback type="invalid" tooltip>{errors.levelIdiom}</Form.Control.Feedback>
                             </Form.Group>
-                            <Form.Group as={Col} md="5" controlId="validationFormik03" className="position-relative">
+                            <Form.Group as={Col} md="4" controlId="validationFormik03" className="position-relative">
                                 <Form.Label>¿Para que actividades utiliza el idioma?</Form.Label>
                                 <Form.Control
                                     required

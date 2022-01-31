@@ -128,7 +128,7 @@ function DatosEmpresas() {
           title={modalTitle}
           isVisible={isVisibleModal}
           setIsVisible={setIsVisibleModal}
-          width={1000}
+          width={700}
         >
             
           {modalContent}

@@ -85,7 +85,7 @@ const FormSueldo = (props) => {
                                 />
                                 <Form.Control.Feedback type="invalid" tooltip>{errors.salary}</Form.Control.Feedback>
                             </Form.Group>
-                            <Form.Group as={Col} md="3" controlId="validationFormik04" className="position-relative">
+                            <Form.Group as={Col} md="4" controlId="validationFormik04" className="position-relative">
                                 <Form.Label> Periodo de pago</Form.Label>
 
                                 <Form.Select

@@ -23,6 +23,7 @@ import VacantesActivas from '../pages/Empresas/VacantesActivas';
 import CandidatosPostulados from '../pages/Empresas/CandidatosPostulados';
 import DarReferencias from '../pages/Empresas/DarReferencias';
 import CrearEvaluaciones from '../pages/Empresas/CrearEvaluaciones';
+import EvaluacionesDisponibles from '../pages/Empresas/EvaluacionesDisponibles';
 
 //WebPages
 import Home from '../pages/Home';
@@ -120,6 +121,11 @@ const routes=[
             {
                 path: "/Empresas/CrearEvaluaciones",
                 component: CrearEvaluaciones,
+                exact: true
+            },
+            {
+                path: "/Empresas/EvaluacionesDisponibles",
+                component: EvaluacionesDisponibles,
                 exact: true
             },
             {

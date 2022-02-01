@@ -97,7 +97,7 @@ const FormVac = (props) => {
                     isInvalid,
                     errors,
                 }) => (
-                    <Form noValidate validated={validated} onSubmit={handleSubmit} className="FormDatos">
+                    <Form noValidate validated={validated} onSubmit={handleSubmit} className="m-3">
                         <Form.Label className="titulo">Datos de la vacante</Form.Label>
                         <Row className="mb-3">
                             <Form.Group as={Col} md="4" controlId="validationFormik01" className="position-relative">

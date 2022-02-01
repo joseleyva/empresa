@@ -16,16 +16,16 @@ const schema = yup.object().shape({
     tools: yup.string().required("Ingrese las herramientas").matches(/^[a-zA-Z]+$/).min(1),
 });
 const FormSueldo = (props) => {
-    const [validated, setValidated]= useState(false)
+    const [validated, setValidated] = useState(false)
     const [fallo, setFallo] = useState(false);
-    const [estado,setEstado]=React.useState(true);
+    const [estado, setEstado] = React.useState(true);
     const { funcion, place, valor } = props;
     const token = getAccessTokenApi();
-    const { _id} = valor;
+    const { _id } = valor;
     const handleClick = (event) => {
         const Button = event.currentTarget;
         if (Button.checkValidity() === false) {
-           
+
         }
         setFallo(true);
     };
@@ -33,7 +33,7 @@ const FormSueldo = (props) => {
         <div className="VacanteForm">
             <Formik
                 validationSchema={schema}
-                onSubmit={(valores, {resetForm})=>{
+                onSubmit={(valores, { resetForm }) => {
                     setValidated(true);
                     setEstado(false);
                     updateInfoVacanciesApi(token, valores, _id).then(result => {
@@ -48,7 +48,7 @@ const FormSueldo = (props) => {
                         });
                     })
 
-                    
+
                 }}
                 initialValues={{
                     salary: "",
@@ -69,7 +69,7 @@ const FormSueldo = (props) => {
                     isValid,
                     errors,
                 }) => (
-                    <Form noValidate validated={validated} onSubmit={handleSubmit} className="FormDatos">
+                    <Form noValidate validated={validated} onSubmit={handleSubmit} className="m-3">
                         <Form.Label className="titulo">Datos del Sueldo</Form.Label>
                         <Row className="mb-3">
                             <Form.Group as={Col} md="4" controlId="validationFormik01" className="position-relative">
@@ -174,11 +174,11 @@ const FormSueldo = (props) => {
                             <Button variant="danger" className="botonF">Cancelar</Button>
                         </div>
                         <Row className="mt-3">
-                        <Form.Group as={Col} md={{span:10, offset: 10}}>
-                        <Button onClick={funcion} disabled={estado} className="botonStep" variant="outline-secondary">
-                                {place}
+                            <Form.Group as={Col} md={{ span: 10, offset: 10 }}>
+                                <Button onClick={funcion} disabled={estado} className="botonStep" variant="outline-secondary">
+                                    {place}
                                 </Button>
-                        </Form.Group>
+                            </Form.Group>
                         </Row>
 
                     </Form>

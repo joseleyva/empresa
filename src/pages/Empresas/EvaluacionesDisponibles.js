@@ -1,63 +1,112 @@
+import React from 'react';
 import '../../App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import {Col, Button, Form, Row} from 'react-bootstrap';
+import {Row, Col, Form, Button} from 'react-bootstrap';
+import { Divider } from '@mui/material';
 import GitHubIcon from '@mui/icons-material/GitHub';
 import FacebookIcon from '@mui/icons-material/Facebook';
 import TwitterIcon from '@mui/icons-material/Twitter';
 import { Instagram } from '@mui/icons-material';
 import Link from '@mui/material/Link';
-import { Divider } from '@mui/material';
+import CardsEvaluaciones from '../../components/CardsEvaluaciones';
 
-function Evaluaciones() {
+
+const post = [
+    {
+        id: 1,
+        nameEvaluation: "fisica",
+        time: 50,
+        exam: [
+            {
+                label: "dskidjfls",
+                type: "sdfsdfsd",
+                options: ""
+            },
+            {
+                label: "dskidjfls",
+                type: "sdfsdfsd",
+                options: ""
+            },
+            {
+                label: "dskidjfls",
+                type: "sdfsdfsd",
+                options: ""
+            }
+        ]
+
+    },
+    {
+        id: 2,
+        nameEvaluation: "fisica",
+        time: 50,
+        exam: [
+            {
+                label: "dskidjfls",
+                type: "sdfsdfsd",
+                options: ""
+            },
+            {
+                label: "dskidjfls",
+                type: "sdfsdfsd",
+                options: ""
+            },
+            {
+                label: "dskidjfls",
+                type: "sdfsdfsd",
+                options: ""
+            }
+        ]
+
+    },
+    {
+        id: 3,
+        nameEvaluation: "fisica",
+        time: 50,
+        exam: [
+            {
+                label: "dskidjfls",
+                type: "sdfsdfsd",
+                options: ""
+            },
+            {
+                label: "dskidjfls",
+                type: "sdfsdfsd",
+                options: ""
+            },
+            {
+                label: "dskidjfls",
+                type: "sdfsdfsd",
+                options: ""
+            }
+        ]
+
+    },
+   
+
+];
+export default function EvaluacionesDisponibles() {
     return (
-
         <div className="App">
-           
+
             <div className="ContenedorEmpresas">
-            <h4> Escritorio Virtual</h4>
-            <Divider/>
-                <Row className="MargenL" >
-                <Form.Group as={Col} md="4">
-                        <h6>Evaluacíon Psicometrica </h6>
+                <h4> Escritorio Virtual</h4>
+                <Divider />
+                <h4>Evaluaciones Disponibles</h4>
+                <Divider/>
+                <div className="DivEvaluaciones">
                 
-                </Form.Group>
-                <Form.Group as={Col} md="4">
-                        <h6> Evaluacíon de Conocimientos</h6>
-                </Form.Group>
-                <Form.Group as={Col} md="4">
-                        <h6>Resultados</h6>
-                </Form.Group>
-                </Row>
-                <Row className="mb-3 ">
+                {post.map((post)=>(
+                    <CardsEvaluaciones post={post} key={post.id} id={post.id}/>
+                ))}
+                </div>
+                <Row className='mb-3'>
                     <Form.Group as={Col} md="4">
-                        <Button variant="outline-primary" className="BtnSolicitudes">CLEAVER</Button>{' '}
+                    <Button variant="secondary" href="/Empresas/Evaluaciones"> Regresar </Button>
                     </Form.Group>
                     <Form.Group as={Col} md="4">
-                        <Button variant="outline-primary" href='/Empresas/CrearEvaluaciones'  className="BtnSolicitudes">Crea tu Evaluación</Button>{' '}
+
                     </Form.Group>
                     <Form.Group as={Col} md="4">
-                        <Button variant="outline-primary" className="BtnSolicitudes">Pruebas Finalizadas</Button>{' '}
-                    </Form.Group>
-                </Row>
-                <Row className="mb-3 ">
-                    <Form.Group as={Col} md="4">
-                        <Button variant="outline-primary" className="BtnSolicitudes" >Estilo Gerencial</Button>{' '}
-                    </Form.Group>
-                    <Form.Group as={Col} md="4">
-                        <Button variant="outline-primary" href="/Empresas/EvaluacionesDisponibles" className="BtnSolicitudes">Evaluaciones Disponibles</Button>{' '}
-                    </Form.Group>
-                    <Form.Group as={Col} md="4">
-                        <Button variant="outline-primary" className="BtnSolicitudes">Ranking de Resultados</Button>{' '}
-                    </Form.Group>
-                </Row>
-                <Row className="mb-3 ">
-                    <Form.Group as={Col} md="4">
-                        <Button variant="outline-primary" className="BtnSolicitudes" >Ver más</Button>{' '}
-                    </Form.Group>
-                    <Form.Group as={Col} md="4">
-                    </Form.Group>
-                    <Form.Group as={Col} md="4">
-                        <Button variant="outline-primary" className="BtnSolicitudes">Volver al Inicio</Button>{' '}
                     </Form.Group>
                 </Row>
             </div>
@@ -139,6 +188,3 @@ function Evaluaciones() {
         </div>
     );
 }
-
-export default Evaluaciones;
-

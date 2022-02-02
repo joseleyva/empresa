@@ -1,6 +1,6 @@
 import React,{useState, useEffect} from "react";
 import { Row, Col, Image } from 'react-bootstrap';
-import { Dropdown, ButtonGroup, Button, Container } from 'react-bootstrap';
+import { Form, Button, Container } from 'react-bootstrap';
 import { getAvatarApi } from "../api/user";
 import Imagen from '../assets/img/jpg/imagen1.jpg';
 
@@ -36,19 +36,16 @@ function Cartas(props) {
                                 <h5 align="left" className="card-title">Experiencia: <label></label></h5>
                                 <h5 align="left" className="card-title">Examenes:</h5>
                                 </div>
-                                <Dropdown as={ButtonGroup}  >
-                                    <Button variant="success" className="Opciones">Opciones</Button>
-                                    <Dropdown.Toggle split variant="success" id="dropdown-split-basic" />
-                                    <Dropdown.Menu>
-                                        <Dropdown.Item href="#/action-1">Opcion 1</Dropdown.Item>
-                                        <Dropdown.Item href="#/action-2">Opcion 2</Dropdown.Item>
-                                        <Dropdown.Item href="#/action-3">Crear uno</Dropdown.Item>
-                                    </Dropdown.Menu>
-                                </Dropdown>
-                                <div className="BtnV">
-                                    <Button variant="primary" className="boton" >Enviar Examen</Button>
-                                    <Button variant="primary" className="boton" >Ver más</Button>
-                                </div>
+                                <Row>
+                                    <Form.Group as={Col} md="6">
+
+                                    <Button variant="primary" className="m-1" >Enviar Examen</Button>
+                                    </Form.Group>
+                                    <Form.Group as={Col} md="6">
+
+                                    <Button variant="primary" className="m-1" >Ver más</Button>
+                                    </Form.Group>
+                                </Row>
                             </div>
 
                         </div>

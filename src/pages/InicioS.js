@@ -39,8 +39,13 @@ function InicioS() {
   if (getAccessTokenApi()) {
     return <Redirect to="/Empresas" />;
   }
+
+  const handleLogin =  (googleData)=>{
+    console.log(googleData)
+  }
   return (
     <Formik
+    
       validationSchema={schema}
       onSubmit={async (valores, { resetForm }) => {
         setValidated(true);
@@ -193,6 +198,9 @@ function InicioS() {
                     <GoogleLogin
                       className="buttonGoogle"
                       buttonText="Log in with Google"
+                      clientId="564024155592-3ss6jku6up1ahup0furr44p3omqsh0p2.apps.googleusercontent.com"
+                      onSuccess={handleLogin}
+                      cookiePolicy={'single_host_origin'}
                       icon={true}
                     />
                     </Form.Group>

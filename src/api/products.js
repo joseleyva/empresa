@@ -67,6 +67,8 @@ export function deleteProductsApi(token, productId){
     return err.message;
   })
 }
+
+
 export function updateInfoProductsApi(token, products, productId){
   const url=`${basePath}/${apiVersion}/update-products/${productId}`;
 

@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import '../../App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import {Row, Col, Form, Button} from 'react-bootstrap';
+import { Row, Col, Form, Button } from 'react-bootstrap';
 import { Divider } from '@mui/material';
 import GitHubIcon from '@mui/icons-material/GitHub';
 import FacebookIcon from '@mui/icons-material/Facebook';
@@ -9,82 +9,27 @@ import TwitterIcon from '@mui/icons-material/Twitter';
 import { Instagram } from '@mui/icons-material';
 import Link from '@mui/material/Link';
 import CardsEvaluaciones from '../../components/CardsEvaluaciones';
+import { getAccessTokenApi } from '../../api/auth';
+import { getEvaluationApi } from '../../api/userEvaluations';
+import useAuth from '../../hooks/useAuth';
 
 
-const post = [
-    {
-        id: 1,
-        nameEvaluation: "fisica",
-        time: 50,
-        exam: [
-            {
-                label: "dskidjfls",
-                type: "sdfsdfsd",
-                options: ""
-            },
-            {
-                label: "dskidjfls",
-                type: "sdfsdfsd",
-                options: ""
-            },
-            {
-                label: "dskidjfls",
-                type: "sdfsdfsd",
-                options: ""
-            }
-        ]
-
-    },
-    {
-        id: 2,
-        nameEvaluation: "fisica",
-        time: 50,
-        exam: [
-            {
-                label: "dskidjfls",
-                type: "sdfsdfsd",
-                options: ""
-            },
-            {
-                label: "dskidjfls",
-                type: "sdfsdfsd",
-                options: ""
-            },
-            {
-                label: "dskidjfls",
-                type: "sdfsdfsd",
-                options: ""
-            }
-        ]
-
-    },
-    {
-        id: 3,
-        nameEvaluation: "fisica",
-        time: 50,
-        exam: [
-            {
-                label: "dskidjfls",
-                type: "sdfsdfsd",
-                options: ""
-            },
-            {
-                label: "dskidjfls",
-                type: "sdfsdfsd",
-                options: ""
-            },
-            {
-                label: "dskidjfls",
-                type: "sdfsdfsd",
-                options: ""
-            }
-        ]
-
-    },
-   
-
-];
 export default function EvaluacionesDisponibles() {
+    const [evaluations, setEvaluations] = useState([]);
+    const token = getAccessTokenApi();
+    const [reloadEvaluations, setReloadEvaluations] = useState(false);
+    const { user } = useAuth();
+
+    useEffect(() => {
+        getEvaluationApi(token, user.name).then(response => {
+            setEvaluations(response.userevaluation);
+        })
+        setReloadEvaluations(false);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [user, reloadEvaluations])
+
+
+
     return (
         <div className="App">
 
@@ -92,16 +37,16 @@ export default function EvaluacionesDisponibles() {
                 <h4> Escritorio Virtual</h4>
                 <Divider />
                 <h4>Evaluaciones Disponibles</h4>
-                <Divider/>
+                <Divider />
                 <div className="DivEvaluaciones">
-                
-                {post.map((post)=>(
-                    <CardsEvaluaciones post={post} key={post.id} id={post.id}/>
-                ))}
+
+                    {evaluations.map((post) => (
+                        <CardsEvaluaciones post={post} key={post.id} id={post.id} setReloadEvaluations={setReloadEvaluations} />
+                    ))}
                 </div>
                 <Row className='mb-3'>
                     <Form.Group as={Col} md="4">
-                    <Button variant="secondary" href="/Empresas/Evaluaciones"> Regresar </Button>
+                        <Button variant="secondary" href="/Empresas/Evaluaciones"> Regresar </Button>
                     </Form.Group>
                     <Form.Group as={Col} md="4">
 

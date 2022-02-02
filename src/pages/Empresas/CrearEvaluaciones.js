@@ -55,6 +55,7 @@ export default function CrearEvaluaciones() {
                     message: result.message,
                     placement: "bottomLeft"
                 })
+                window.location.href = "/Empresas/Evaluaciones";
             } else {
                 notification["error"]({
                     message: result.message,
@@ -70,7 +71,7 @@ export default function CrearEvaluaciones() {
     }
     let persons = [];
     for (let i = 0; i < num; i++) {
-        persons.push(<FormAsk ask={`Pregunta${i+1}`} key={i+1} id={i+1} exam={exam} setExam={setExam} />)
+        persons.push(<FormAsk ask={`Pregunta${i + 1}`} key={i + 1} id={i + 1} exam={exam} setExam={setExam} />)
     }
     return (
         <div className="App">
@@ -165,13 +166,14 @@ export default function CrearEvaluaciones() {
 
                 {persons}
 
-                <Row className='mb-3'>
-                    <Form.Group as={Col} md="4" >
+                <Row className='m-1'>
+                    <Form.Group className='mt-3 d-grid gap-2' as={Col} md="4" >
+                        <Button variant='primary' className='ml-1 mr-1' disabled={Buttondisabled} onClick={saveAl}>Guardar</Button>
                     </Form.Group>
-                    <Form.Group className='d-grid gap-2' as={Col} md="4" >
-                        <Button variant='primary' disabled={Buttondisabled} onClick={saveAl}>Guardar</Button>
+                    <Form.Group  as={Col} md="4" >
                     </Form.Group>
-                    <Form.Group as={Col} md="4" >
+                    <Form.Group as={Col} md="4" className='mt-3 d-grid gap-2'>
+                    <Button variant='danger' className='ml-1 mr-1' href="/Empresas/Evaluaciones">Cancelar</Button>
                     </Form.Group>
                 </Row>
             </div>

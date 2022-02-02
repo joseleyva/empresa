@@ -35,12 +35,14 @@ function CardsVacantes(props) {
       onOk() {
         deleteVacanciesApi(AccessToken, post._id).then(response => {
           notification["success"]({
-            message: response
+            message: response,
+            placement: "bottomLeft"
           });
           setReloadUsers(true);
         }).catch(err => {
           notification["error"]({
-            message: err
+            message: err,
+            placement: "bottomLeft"
           })
         })
       }

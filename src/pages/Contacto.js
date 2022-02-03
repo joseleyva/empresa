@@ -38,8 +38,8 @@ function Contacto() {
                             <Nav.Link href="/Contacto">Contacto</Nav.Link>
                         </Nav>
                         <Nav>
-                            <Button className="boton" variant="danger" href="/CrearC">Crear Cuenta</Button>
-                            <Button className="boton" href="/InicioS">Iniciar Sesion</Button>
+                            <Button className="m-1" variant="danger" href="/CrearC">Crear Cuenta</Button>
+                            <Button className="m-1" href="/InicioS">Iniciar Sesion</Button>
                         </Nav>
                     </Navbar.Collapse>
                 </Container>

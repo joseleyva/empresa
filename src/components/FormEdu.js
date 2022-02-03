@@ -78,7 +78,7 @@ const FormEdu = (props) => {
                     isValid,
                     errors,
                 }) => (
-                    <Form noValidate validated={validated} onSubmit={handleSubmit} className="m3-3">
+                    <Form noValidate validated={validated} onSubmit={handleSubmit} className="m-3">
                         <Form.Label className="titulo">Datos de Escolaridad</Form.Label>
                         <Row className="mb-3">
                             <Form.Group as={Col} md="4" controlId="validationFormik01" className="position-relative">

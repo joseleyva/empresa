@@ -40,8 +40,8 @@ function App() {
                 <Nav.Link href="/Contacto">Contacto</Nav.Link>
               </Nav>
               <div>
-                <Button className="boton" variant="danger" href="/CrearC">Crear Cuenta</Button>
-                <Button className="boton" href="/InicioS">Iniciar Sesion</Button>
+                <Button className="m-1" variant="danger" href="/CrearC">Crear Cuenta</Button>
+                <Button className="m-1" href="/InicioS">Iniciar Sesion</Button>
               </div>
             </Navbar.Collapse>
           </Container>

@@ -57,6 +57,7 @@ const FormSueldo = (props) => {
                     benefits: "",
                     bonds: "",
                     tools: "",
+                    active: true
 
                 }}
             >

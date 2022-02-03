@@ -39,7 +39,7 @@ function Estudios() {
                         <h6>Seleccionar si aplica</h6>
                     </Form.Group>
                 </Row>
-                <div className="MarginB">
+                <div className="mb-3">
                     {users.map((post) => (
                         <CardsEstudios key={post.id} post={post} />
                     ))}

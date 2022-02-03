@@ -331,3 +331,37 @@ export function signInAdminApi(data){
    return err.message;
   })
 }
+
+export function googleSignInApi(data){
+  const url= `${basePath}/${apiVersion}/google`;
+  console.log(data);
+  const params={
+    method: "POST",
+    headers:{
+      "Content-Type":"application/json"
+    },
+    body: JSON.stringify(data)
+  };
+  return fetch(url, params)
+  .then(response=>{
+    return response.json();
+  })
+  .then(result=>{
+    if(result.user){
+      return {
+        result,
+        ok:true,
+        message:'Usuario creado correctamente'
+      }
+    }else{
+      return{
+        ok: false,
+        message: result.message
+      }
+    }
+      
+  })
+  .catch(err=>{
+   return err.message;
+  })
+}

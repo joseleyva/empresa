@@ -343,8 +343,8 @@ function Formulario() {
 
 
           <div className="divBD">
-            <Button type="submit" onClick={handleClick} className="boton">Guardar</Button>
-            <Button variant="danger" href="/" onClick={()=> logout()}  className="boton">Cancelar</Button>
+            <Button type="submit" onClick={handleClick} className="m-1">Guardar</Button>
+            <Button variant="danger" href="/" onClick={()=> logout()}  className="m-1">Cancelar</Button>
           </div>
           {
             (enviado && (

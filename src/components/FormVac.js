@@ -386,7 +386,7 @@ const FormVac = (props) => {
 
                         <div className="DivBF">
                             <Button type="submit" onClick={handleClick} className="botonF"  >Guardar</Button>
-                            <Button variant="danger" className="botonF">Cancelar</Button>
+                            <Button variant="danger" href='/Empresas/Vacante' className="botonF">Cancelar</Button>
                         </div>
                         <Row className="mt-3">
                         <Form.Group as={Col} md={{span:10, offset: 10}}>

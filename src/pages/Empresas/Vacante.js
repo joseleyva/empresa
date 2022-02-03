@@ -14,7 +14,7 @@ import CardsVacantes from '../../components/CardsVacantes';
 import Cartas from '../../components/Cartas';
 import { getVacanciesActiveApi } from '../../api/vacancies';
 import { getAccessTokenApi } from '../../api/auth';
-import { getUsersActiveApi } from '../../api/user';
+import { getUserReferenceApi } from '../../api/userReference';
 import useAuth from "../../hooks/useAuth";
 
 function Vacante() {
@@ -22,7 +22,7 @@ function Vacante() {
     const [reloadUsers, setReloadUsers] = useState(false);
     const [vacanciesActive, setVacanciesActive] = useState([]);
     const [users, setUsers] = useState([]);
-    const user = useAuth();
+    const {user} = useAuth();
     useEffect(() => {
         getVacanciesActiveApi(token, user.name, true).then(response => {
             setVacanciesActive(response.vacancies[0]);
@@ -31,12 +31,11 @@ function Vacante() {
     }, [token, reloadUsers, user]);
 
     useEffect(() => {
-        getUsersActiveApi(token, true).then(response => {
-            setUsers(response.users[0]);
-        });
-        setReloadUsers(false);
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [token, reloadUsers])
+        getUserReferenceApi(token, user.name, true).then(response => {
+              setUsers(response.reference[0]);
+            });
+            // eslint-disable-next-line react-hooks/exhaustive-deps
+          }, [user]);
     return (
         <div className="App">
 

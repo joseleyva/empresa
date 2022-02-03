@@ -13,13 +13,13 @@ import { useTheme } from "@mui/material/styles";
 import { Formik } from "formik";
 import * as yup from "yup";
 import { notification } from "antd";
-import { signInApi } from "../api/user";
+import { signInApi , googleSignInApi} from "../api/user";
 import { getAccessTokenApi } from "../api/auth";
 import { ACCESS_TOKEN, REFRESH_TOKEN } from "../utils/constants";
 import { Redirect } from "react-router-dom";
 import GoogleLogin from "react-google-login";
 import '../App.css';
-
+  
 const schema = yup.object().shape({
   email: yup.string().required("Ingrese el correo").email("Correo no valido"),
   password: yup.string().required("Ingrese la contraseña"),
@@ -41,7 +41,30 @@ function InicioS() {
   }
 
   const handleLogin =  (googleData)=>{
-    console.log(googleData)
+    googleSignInApi(googleData).then(result=>{
+      if(result.ok){
+        const { accessToken, refreshToken } = result.result;
+        localStorage.setItem(ACCESS_TOKEN, accessToken);
+        localStorage.setItem(REFRESH_TOKEN, refreshToken);
+        notification["success"]({
+          message: "login Correcto",
+          placement: "bottomLeft"
+        })
+        window.location.href = "/DatosR/DatosR"
+      }else{
+        notification["error"]({
+          message: result.message,
+          placement: "bottomLeft"
+        })
+      }
+     
+    }).catch(err=>{
+       notification["error"]({
+          message: err.message,
+          placement: "bottomLeft"
+        })
+      
+    })
   }
   return (
     <Formik
@@ -200,6 +223,7 @@ function InicioS() {
                       buttonText="Log in with Google"
                       clientId="564024155592-3ss6jku6up1ahup0furr44p3omqsh0p2.apps.googleusercontent.com"
                       onSuccess={handleLogin}
+                      onFailure={handleLogin}
                       cookiePolicy={'single_host_origin'}
                       icon={true}
                     />

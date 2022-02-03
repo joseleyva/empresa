@@ -75,11 +75,11 @@ function DatosEmpresas() {
               <Button
                 variant="success"
                 onClick={() => editUser(users)}
-                className="boton"
+                className="m-1"
               >
                 Editar datos
               </Button>
-              <Button variant="primary" className="boton" href="/Empresas">
+              <Button variant="primary" className="m-1" href="/Empresas">
                 Volver al inicio
               </Button>
             </div>

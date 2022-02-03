@@ -11,22 +11,22 @@ import { Instagram } from '@mui/icons-material';
 import Link from '@mui/material/Link';
 import { Divider } from '@mui/material';
 import Cartas from '../../components/Cartas';
-import {getUsersActiveApi} from '../../api/user';
+import { getUserReferenceApi } from '../../api/userReference';
 import {getAccessTokenApi} from '../../api/auth';
+import useAuth from '../../hooks/useAuth';
 
 
 
 function CandidatosPostulados() {
-    const [users, setUsers] = useState([]);
-    const [reloadUsers,setReloadUsers] = useState(false);
+  const [usersActiveReference, setUsersActiveReference] = useState([])
     const token = getAccessTokenApi();
+  const { user } = useAuth();
     useEffect(() => {
-        getUsersActiveApi(token, true).then(response=>{
-            setUsers(response.users);
+    getUserReferenceApi(token, user.name, true).then(response => {
+          setUsersActiveReference(response.reference);
         });
-        setReloadUsers(false);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [token, reloadUsers])
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+      }, [token]);
 
     return (
         <div className="App">
@@ -47,7 +47,7 @@ function CandidatosPostulados() {
                 <Divider/>
                 <h5>Candidatos Postulados</h5>
                 <div className="VacantesActivas">
-                {users.map((post) => (
+                {usersActiveReference.map((post) => (
                   <Cartas key={post._id} id={post._id} post={post} />
                 ))}
 

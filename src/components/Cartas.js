@@ -43,17 +43,20 @@ function Cartas(props) {
                         <div className="card-body">
                             <div>
                                 <h5 align="left" className="card-title">Nombre: {`${post.nameUser} ${post.lastnameP} ${post.lastnameM}`}</h5>
-                                <h5 align="left" className="card-title">Area: <label>{post.email}</label></h5>
-                                <h5 align="left" className="card-title">Experiencia: <label></label></h5>
+                                <h5 align="left" className="card-title">Area: <label>{post.workArea}</label></h5>
+                                <h5 align="left" className="card-title">Experiencia: <label>{post.yearsEx}</label></h5>
                                 <h5 align="left" className="card-title">Puesto:</h5>
                             </div>
                             <Row>
-                                <Form.Group as={Col} md="6">
+                                <Form.Group as={Col} md="4">
 
                                 </Form.Group>
-                                <Form.Group as={Col} md="6">
+                                <Form.Group as={Col} md="4">
 
-                                    <Button variant="primary" className="m-1" onClick={()=>infoCandidato(post)}>Ver más</Button>
+                                </Form.Group>
+                                <Form.Group as={Col} md="4" className='d-grid gap-2'>
+
+                                    <Button variant="outline-primary" className="m-1" onClick={()=>infoCandidato(post)}>Ver más</Button>
                                 </Form.Group>
                             </Row>
                         </div>

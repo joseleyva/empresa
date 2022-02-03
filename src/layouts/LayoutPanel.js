@@ -63,7 +63,7 @@ export default function LayoutsPanel({ routes }) {
                                 <Nav.Link href="/Empresas/DatosEmpresa">Datos de la Empresa
                                     <Badge bg="danger">1</Badge>
                                 </Nav.Link>
-                                <Nav.Link href="/Empresas/Vacante">Vacantes</Nav.Link>
+                                <Nav.Link href="/Empresas/Vacante">Vacantes/Candidatos</Nav.Link>
                                 <Nav.Link href="/Empresas/Evaluaciones">Evaluaciones
                                     <Badge bg="danger">1</Badge>
                                 </Nav.Link>

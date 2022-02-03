@@ -50,13 +50,13 @@ export default function InfoCandidate(props) {
           </Row>
           <Row className="mb-3">
             <Form.Group as={Col} md="4">
-                <Form.Label>  </Form.Label>
+                <Form.Label> Continuar con el proceso: </Form.Label>
             </Form.Group>
-            <Form.Group as={Col} md="4">
-
+            <Form.Group as={Col} md="4" className='d-grid gap-2'>
+            <Button>Si</Button>
             </Form.Group>
-            <Form.Group as={Col} md="4">
-
+            <Form.Group as={Col} md="4" className='d-grid gap-2'>
+            <Button variant='danger'>No</Button>
             </Form.Group>
           </Row>
           <Row>

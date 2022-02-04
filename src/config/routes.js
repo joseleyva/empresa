@@ -24,6 +24,7 @@ import CandidatosPostulados from '../pages/Empresas/CandidatosPostulados';
 import DarReferencias from '../pages/Empresas/DarReferencias';
 import CrearEvaluaciones from '../pages/Empresas/CrearEvaluaciones';
 import EvaluacionesDisponibles from '../pages/Empresas/EvaluacionesDisponibles';
+import PruebasFinalizadas from '../pages/Empresas/PruebasFinalizadas';
 
 //WebPages
 import Home from '../pages/Home';
@@ -167,6 +168,11 @@ const routes=[
             {
                 path: "/Empresas/CandidatosPostulados",
                 component: CandidatosPostulados,
+                exact: true
+            },
+            {
+                path: "/Empresas/PruebasFinalizadas",
+                component: PruebasFinalizadas,
                 exact: true
             },
             {

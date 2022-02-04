@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import { Layout } from "antd";
+import { Layout, Affix } from "antd";
 import { Route, Switch } from "react-router-dom";
 import { Redirect } from "react-router-dom";
 import Home from '../pages/Home';
@@ -43,7 +43,7 @@ export default function LayoutsPanel({ routes }) {
       <Layout>
 
         <Layout>
-
+        <Affix offsetTop={0}>
             <header>
                 <Navbar collapseOnSelect expand="lg" className="BarraEm">
                     <Container>
@@ -96,6 +96,7 @@ export default function LayoutsPanel({ routes }) {
                     </Container>
                 </Navbar>
             </header>
+            </Affix>
           <Content>
             <LoadRouters routes={routes} />
           </Content>

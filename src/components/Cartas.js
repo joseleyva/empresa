@@ -23,7 +23,7 @@ function Cartas(props) {
         }
     }, [post]);
     const infoCandidato = candidato => {
-        setWidth(600);
+        setWidth(700);
         setIsVisibleModal(true);
         setModalTitle(`Información de ${candidato.nameUser} ${candidato.lastnameP} ${candidato.lastnameM}`);
         setModalContent(<InfoCandidate candidato={candidato} avatar={avatar} setIsVisibleModal={setIsVisibleModal} />);

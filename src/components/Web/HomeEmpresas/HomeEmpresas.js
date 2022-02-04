@@ -1,6 +1,6 @@
 import React from 'react';
 import {Row, Col, Card, Button} from "antd";
-import {Link} from "react-router-dom"
+//import {Link} from "react-router-dom"
 import lala from "../../../assets/img/jpg/lala.jpg";
 import adidas from "../../../assets/img/jpg/Logo-Adidas.jpg";
 import toyota from "../../../assets/img/jpg/logo-toyota.jpg";
@@ -28,12 +28,13 @@ export default function HomeEmpresas() {
                     <Col md={6}><CardEmpresas image={fedex} title="Fedex" subtitle="Empresa numero 1 en paqueteria"/> </Col>
                 </Row>
             </Col>
-            <Col lg={4}/>
+          {/*  <Col lg={4}/>
             <Col lg={24} className="home-empresas__more">
                 <Link to="/MoreEmpresas">
                     <Button>Ver más</Button>                
                 </Link>
             </Col>
+       */}
         </Row>
     )
 }

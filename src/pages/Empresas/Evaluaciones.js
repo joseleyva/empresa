@@ -36,7 +36,7 @@ function Evaluaciones() {
                         <Button variant="outline-primary" href='/Empresas/CrearEvaluaciones'  className="BtnSolicitudes">Crea tu Evaluación</Button>{' '}
                     </Form.Group>
                     <Form.Group as={Col} md="4">
-                        <Button variant="outline-primary" className="BtnSolicitudes">Pruebas Finalizadas</Button>{' '}
+                        <Button variant="outline-primary" className="BtnSolicitudes" href="/Empresas/PruebasFinalizadas">Pruebas Finalizadas</Button>{' '}
                     </Form.Group>
                 </Row>
                 <Row className="mb-3 ">

@@ -11,7 +11,18 @@ import MainBanner from "../components/Web/MainBanner";
 import HomeEmpresas from "../components/Web/HomeEmpresas"
 import HowMyPagesWork from "../components/Web/HowMyPagesWork"
 import Footer from "../components/Web/Footer"
+import { BackTop } from 'antd';
 
+const style = {
+  height: 50,
+  width: 50,
+  lineHeight: '50px',
+  borderRadius: 4,
+  backgroundColor: '#1088e9',
+  color: '#fff',
+  textAlign: 'center',
+  fontSize: 27,
+};
 function App() {
   if (getAccessTokenApi()) {
     return <Redirect to="/Empresas" />;
@@ -55,6 +66,10 @@ function App() {
     
 
     <Footer/>
+
+    <BackTop>
+      <div style={style}>UP</div>
+    </BackTop>
     </div>
    
    </>

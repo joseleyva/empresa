@@ -2,6 +2,8 @@ import { Divider } from '@mui/material';
 import React from 'react';
 import { Button, Row, Col, Form, Image } from "react-bootstrap";
 import Imagen from '../../../assets/img/jpg/Usuario.jpg';
+import { Descriptions } from 'antd';
+
 export default function InfoCandidate(props) {
   const { candidato, avatar, setIsVisibleModal } = props;
   return (
@@ -16,258 +18,58 @@ export default function InfoCandidate(props) {
       <Row className='mb-2'>
         <h3>Datos Personales:</h3>
       </Row>
-      <Row className='mb-2'>
-        <Form.Group as={Col} md="4">
-          <Form.Label>Nombre del candidato:</Form.Label>
-        </Form.Group>
-        <Form.Group as={Col} md="4">
-          <Form.Label style={{ fontFamily: "sans-serif", fontWeight: "bold", fontSize: 16 }}>{`${candidato.nameUser} ${candidato.lastnameP} ${candidato.lastnameM}`}</Form.Label>
-        </Form.Group>
-        <Form.Group as={Col} md="4">
-          <Form.Label></Form.Label>
-        </Form.Group>
-      </Row>
-      <Row className='mb-3'>
-        <Form.Group as={Col} md="5">
-          <Form.Label>Fecha de naciemiento:</Form.Label>
-          <Form.Control
-            disabled
-            defaultValue={"24 de marzo de 1990"}
-          />
-        </Form.Group>
-        <Form.Group as={Col} md="5">
-          <Form.Label>Lugar de naciemiento:</Form.Label>
-          <Form.Control
-            disabled
-            defaultValue={"Durango, DGO."}
-          />
-        </Form.Group>
-
-      </Row>
-      <Row className='mb-3'>
-        <Form.Group as={Col} md="4">
-          <Form.Label>Teléfono (Celular):</Form.Label>
-          <Form.Control
-            disabled
-            defaultValue={"6181456987"}
-          />
-        </Form.Group>
-        <Form.Group as={Col} md="4">
-          <Form.Label>Teléfono (Casa):</Form.Label>
-          <Form.Control
-            disabled
-            defaultValue={"6181456987"}
-          />
-        </Form.Group>
-      </Row>
-      <Row className='mb-2'>
-        <Form.Group as={Col} md="5">
-          <Form.Label>Calle:</Form.Label>
-          <Form.Control
-            disabled
-            defaultValue={"Zapopan"}
-          />
-        </Form.Group>
-        <Form.Group as={Col} md="2">
-          <Form.Label > Numero:</Form.Label>
-          <Form.Control
-            disabled
-            defaultValue={"456"}
-          />
-        </Form.Group>
-        <Form.Group as={Col} md="5">
-          <Form.Label>Colonia:</Form.Label>
-          <Form.Control
-            disabled
-            defaultValue={"Huizache 1"}
-          />
-        </Form.Group>
-      </Row>
-      <Row className='mb-2'>
-        <Form.Group as={Col} md="4">
-          <Form.Label>Codigo postal:</Form.Label>
-          <Form.Control
-            disabled
-            defaultValue={"34500"}
-          />
-        </Form.Group>
-        <Form.Group as={Col} md="4">
-          <Form.Label > Estado:</Form.Label>
-          <Form.Control
-            disabled
-            defaultValue={"Durango"}
-          />
-        </Form.Group>
-        <Form.Group as={Col} md="4">
-          <Form.Label>Municipio:</Form.Label>
-          <Form.Control
-            disabled
-            defaultValue={"Durango"}
-          />
-        </Form.Group>
-      </Row>
+      <Descriptions className='mb-3' size='small' layout="vertical" bordered>
+        <Descriptions.Item label="Nombre">{candidato.nameUser}</Descriptions.Item>
+        <Descriptions.Item label="Apellido Paterno">{candidato.lastnameP}</Descriptions.Item>
+        <Descriptions.Item label="Apellido Materno">{candidato.lastnameM}</Descriptions.Item>
+        <Descriptions.Item label="Teléfono (Casa)">6181546544</Descriptions.Item>
+        <Descriptions.Item label="Teléfono (Celular)" span={2}>6189779878</Descriptions.Item>
+        <Descriptions.Item label="Calle">Zapopan</Descriptions.Item>
+        <Descriptions.Item label="Numero">456</Descriptions.Item>
+        <Descriptions.Item label="Colonia">Huizache 1</Descriptions.Item>
+        <Descriptions.Item label="Codígo postal">34500</Descriptions.Item>
+        <Descriptions.Item label="Estado">Durango</Descriptions.Item>
+        <Descriptions.Item label="Municipio">Durango</Descriptions.Item>
+      </Descriptions>
       <Divider />
       <Row className='mb-2'>
         <h3>Datos Academicos:</h3>
       </Row>
+      <Descriptions className='mb-3' size='small' layout='vertical' bordered>
+        <Descriptions.Item label="Último grado alcanzado">Universidad</Descriptions.Item>
+        <Descriptions.Item label="Avance academico" span={2}>Terminado</Descriptions.Item>
+        <Descriptions.Item label="Fecha de inicio" > Enero de 2020</Descriptions.Item>
+        <Descriptions.Item label="Fecha de termino"> Enero de 2021</Descriptions.Item>
+        <Descriptions.Item label="Instituto"> Instituto Tecnologico de Durango</Descriptions.Item>
+        <Descriptions.Item label="Carrera">Sistemas</Descriptions.Item>
+      </Descriptions>
 
-      <Row className="mb-2">
-        <Form.Group as={Col} md="4">
-          <Form.Label>Último grado alcanzado</Form.Label>
-          <Form.Control
-            disabled
-            defaultValue={"Universidad"}
-          />
-        </Form.Group>
-
-        <Form.Group as={Col} md="4">
-          <Form.Label>Avance Academico:</Form.Label>
-          <Form.Control
-            disabled
-            defaultValue={"Terminado"}
-          />
-        </Form.Group>
-        <Form.Group as={Col} md="4">
-          <Form.Label>Fecha de Inicio:</Form.Label>
-          <Form.Control
-            disabled
-            defaultValue={"Enero de 2020"}
-          />
-        </Form.Group>
-      </Row>
-      <Row className='mb-2'>
-        <Form.Group as={Col} md="4">
-          <Form.Label>Fecha de Termino:</Form.Label>
-          <Form.Control
-            disabled
-            defaultValue={"Enero de 2021"}
-          />
-        </Form.Group>
-        <Form.Group as={Col} md="8">
-          <Form.Label>Instituto:</Form.Label>
-          <Form.Control
-            disabled
-            defaultValue={"Instituto Tecnologico de durango"}
-          />
-        </Form.Group>
-
-      </Row>
-      <Row className='mb-2'>
-        <Form.Group as={Col} md="5">
-          <Form.Label>Carrera: </Form.Label>
-          <Form.Control
-            disabled
-            defaultValue={"Sistemas"}
-          />
-        </Form.Group>
-      </Row>
       <Divider />
       <Row className='mb-1'>
         <h3>Datos Laborales</h3>
       </Row>
-      <Row className='mb-2'>
-        <h5>Último trabajo</h5>
-        <Form.Group as={Col} md="4">
-          <Form.Label>Empresa:</Form.Label>
-          <Form.Control
-            disabled
-            defaultValue={"ALEF GLOBAL"}
-          />
-        </Form.Group>
-        <Form.Group as={Col} md="4">
-          <Form.Label>Puesto:</Form.Label>
-          <Form.Control
-            disabled
-            defaultValue={"Desarrollador"}
-          />
-        </Form.Group>
-        <Form.Group as={Col} md="4">
-          <Form.Label>Area o departamento:</Form.Label>
-          <Form.Control
-            disabled
-            defaultValue={"Sistemas"}
-          />
-        </Form.Group>
+      <Descriptions className='mb-3' title="Último trabajo" size='small' layout='vertical' bordered>
+        <Descriptions.Item label="Empresa">ALEF GLOBAL</Descriptions.Item>
+        <Descriptions.Item label="Puesto">Desarrollador</Descriptions.Item>
+        <Descriptions.Item label="Area o Departamento">Sistemas</Descriptions.Item>
+        <Descriptions.Item label="Fecha de inicio">Enero de 2020</Descriptions.Item>
+        <Descriptions.Item label="Fecha de termino">Enero de 2021</Descriptions.Item>
+        <Descriptions.Item label="Años de Experiencia">2 Años</Descriptions.Item>
+      </Descriptions>
+      <Divider />
+      <Descriptions title="Experiencia laboral" className='mb-3' size='small' layout='vertical' bordered>
+        <Descriptions.Item label="Empresa">ALEF GLOBAL</Descriptions.Item>
+        <Descriptions.Item label="Puesto">Desarrollador</Descriptions.Item>
+        <Descriptions.Item label="Area o Departamento">Sistemas</Descriptions.Item>
+        <Descriptions.Item label="Fecha de inicio">Enero de 2020</Descriptions.Item>
+        <Descriptions.Item label="Fecha de termino" span={2}>Enero de 2021</Descriptions.Item>
+        <Descriptions.Item label="Breve descripción del puesto">
+          Breve descripción del puesto que desarrollo en su paso por la Empresas<br/>
+          Empresa en la que se trabajo en todo este tiempo
 
-      </Row>
-      <Row className='mb-3'>
-        <Form.Group as={Col} md="4">
-          <Form.Label>Fecha de Inicio</Form.Label>
-          <Form.Control
-            disabled
-            defaultValue={"Enero de 2020"}
-          />
-        </Form.Group>
-        <Form.Group as={Col} md="4">
-          <Form.Label>Fecha de termino</Form.Label>
-          <Form.Control
-            disabled
-            defaultValue={"enero de 2021"}
-          />
-        </Form.Group>
+        </Descriptions.Item>
 
-        <Form.Group as={Col} md="4">
-          <Form.Label>Años de Experiancia:</Form.Label>
-          <Form.Control
-            disabled
-            defaultValue={candidato.yearsEx}
-          />
-        </Form.Group>
-      </Row>
-      <Row className='mb-2'>
-        <h5>Experiancia laboral</h5>
-      </Row>
-      <Row className='mb-3'>
-        <Form.Group as={Col} md="4">
-          <Form.Label>Empresa:</Form.Label>
-          <Form.Control
-            disabled
-            defaultValue={"ALEF GLOBAL"}
-          />
-        </Form.Group>
-        <Form.Group as={Col} md="4">
-          <Form.Label>Puesto:</Form.Label>
-          <Form.Control
-            disabled
-            defaultValue={"Desarrollador"}
-          />
-        </Form.Group>
-        <Form.Group as={Col} md="4">
-          <Form.Label>Área o departamento</Form.Label>
-          <Form.Control
-            disabled
-            defaultValue={"Sistemas"}
-          />
-        </Form.Group>
-      </Row>
-      <Row className='mb-2'>
-        <Form.Group as={Col} md="4">
-          <Form.Label>Fecha de Inicio:</Form.Label>
-          <Form.Control
-            disabled
-            defaultValue={"Enero de 2020"}
-          />
-        </Form.Group>
-        <Form.Group as={Col} md="4">
-          <Form.Label>Fecha de Terminacion</Form.Label>
-          <Form.Control
-            disabled
-            defaultValue={"Enero de 2021"}
-          />
-        </Form.Group>
-      </Row>
-      <Row className='mb-2'>
-        <Form.Group as={Col} md="10">
-          <Form.Label>Breve descripción del puesto: </Form.Label>
-          <Form.Control
-            disabled
-            style={{ resize: "none" }}
-            as="textarea"
-            rows={4}
-            defaultValue={"Breve descripcion sobre el trabajo que realizabas en el puesto de trabajo"}
-          />
-        </Form.Group>
-      </Row>
+      </Descriptions>
       <Row className="mb-3">
         <Form.Group as={Col} md="4">
           <Form.Label> Continuar con el proceso: </Form.Label>

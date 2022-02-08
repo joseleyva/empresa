@@ -5,7 +5,7 @@ import { deleteReferenceApi } from '../../../api/reference';
 import Perfil from '../../../assets/img/jpg/Usuario.jpg';
 import { Col, Row, Image, Form, Button } from 'react-bootstrap';
 import { notification } from 'antd';
-import { Modal as ModalAntd } from 'antd';
+import { Modal as ModalAntd, Descriptions } from 'antd';
 import moment from 'moment';
 import 'moment/locale/es-mx';
 const { confirm } = ModalAntd;
@@ -63,106 +63,21 @@ export default function InfoUser(props) {
             {user.toWork ?
                 (
                     <>
-                        <Row className='mb-3'>
-                            <Form.Group as={Col} md="6">
-                                <Form.Label>Nombre:  </Form.Label>
-                                <Form.Control
-                                    readOnly
-                                    disabled
-                                    defaultValue={`${user.nameUser} ${user.lastnameP} ${user.lastnameM}`}
-                                />
-                            </Form.Group>
-                            <Form.Group as={Col} md="6">
-                                <Form.Label>Correo: </Form.Label>
-                                <Form.Control
-                                    disabled
-                                    readOnly
-                                    defaultValue={user.email}
-                                />
-                            </Form.Group>
-                        </Row>
-                        <Row className='mb-3'>
-                            <Form.Group as={Col} md="6">
-                                <Form.Label>Puesto que desempeño: </Form.Label>
-                                <Form.Control
-                                    disabled
-                                    readOnly
-                                    defaultValue={user.job}
-                                />
-                            </Form.Group>
-                            <Form.Group as={Col} md="6">
-                                <Form.Label>Área o departamento</Form.Label>
-                                <Form.Control
-                                    disabled
-                                    readOnly
-                                    defaultValue={user.workArea}
-                                />
-                            </Form.Group>
-                        </Row>
-                        <Row className="mb-2">
-                            <Form.Group as={Col} md="6">
-                                <Form.Label>Periodo en el que trabajo:</Form.Label>
-                            </Form.Group>
-                        </Row>
-                        <Row className="mb-3">
-                            <Form.Group as={Col} md="6">
-                                <Form.Label>Fecha de Inicio: </Form.Label>
-                                <Form.Control
-                                    type="text"
-                                    disabled
-                                    readOnly
-                                    defaultValue={`del ${startDate.format('dddd D, MMMM YYYY')}`}
+                   <Descriptions size='small' layout='vertical' className='mb-3' bordered>
+                    <Descriptions.Item  label="Nombre">{user.nameUser}</Descriptions.Item>
+                    <Descriptions.Item label="Apellido paterno">{user.lastnameP}</Descriptions.Item>
+                    <Descriptions.Item label="Apellido materno">{user.lastnameM}</Descriptions.Item>
+                    <Descriptions.Item label="Correo" span={2}>{user.email}</Descriptions.Item>
+                    <Descriptions.Item label="Puesto que desempeño">{user.job}</Descriptions.Item>
+                    <Descriptions.Item label="Area o departamento">{user.workArea}</Descriptions.Item>
+                    <Descriptions.Item label="Fecha de inicio">{startDate.format('LL')}</Descriptions.Item>
+                    <Descriptions.Item label="Fecha de terminación" span={2}>{endDate.format('LL')}</Descriptions.Item>
+                    <Descriptions.Item label="Motivo de su salida">{user.reason}</Descriptions.Item>
+                    <Descriptions.Item label="Recontratable">{user.tohire}</Descriptions.Item>
+                    <Descriptions.Item label="Recomendable">{user.recommendable}</Descriptions.Item>
+                    <Descriptions.Item label="Comentarios" span={3}>{user.comments}</Descriptions.Item>
+                   </Descriptions>
 
-                                />
-                            </Form.Group>
-                            <Form.Group as={Col} md="6">
-                                <Form.Label>Fecha de Terminación: </Form.Label>
-                                <Form.Control
-                                    type="text"
-                                    disabled
-                                    readOnly
-                                    defaultValue={`al ${endDate.format('dddd D, MMMM YYYY')}`}
-                                />
-                            </Form.Group>
-                        </Row>
-                        <Row className="mb-3">
-                            <Form.Group as={Col} md="4">
-                                <Form.Label>Motivo de su salida: </Form.Label>
-                                <Form.Control
-                                    disabled
-                                    readOnly
-                                    defaultValue={user.reason}
-                                />
-                            </Form.Group>
-                            <Form.Group as={Col} md="4">
-                                <Form.Label>Recontratable: </Form.Label>
-                                <Form.Control
-                                    disabled
-                                    readOnly
-                                    defaultValue={user.tohire}
-                                />
-                            </Form.Group>
-                            <Form.Group as={Col} md="4">
-                                <Form.Label>Recomendable: </Form.Label>
-                                <Form.Control
-                                    disabled
-                                    readOnly
-                                    defaultValue={user.recommendable}
-                                />
-                            </Form.Group>
-
-                            <Form.Group as={Col} md="10">
-                                <Form.Label>Recomendable: </Form.Label>
-                                <Form.Control
-                                    disabled
-                                    readOnly
-                                    style={{ resize: "none" }}
-                                    as="textarea"
-                                    rows={4}
-                                    defaultValue={user.comments}
-                                />
-                            </Form.Group>
-                        </Row>
                         <Row className='mb-3'>
                             <Form.Group as={Col} md="4" className="d-grid gap-2">
                                 <Button variant='success'>Imprimir</Button>

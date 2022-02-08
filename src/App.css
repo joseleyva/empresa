@@ -1,4 +1,3 @@
-
 .App {
   text-align: center;
 }
@@ -14,7 +13,6 @@
   }
 }
 
-
 .App-header {
   background-color: #282c34;
   min-height: 100vh;
@@ -24,7 +22,6 @@
   justify-content: center;
   font-size: calc(10px + 2vmin);
   color: white;
-  
 }
 
 .App-link {
@@ -39,281 +36,271 @@
     transform: rotate(360deg);
   }
 }
-.botonC{
-  margin:15px;
+.botonC {
+  margin: 15px;
 }
 
-.botonF{
+.botonF {
   margin-left: 50px;
   width: 200px;
 }
 
-.Barra{
+.Barra {
   background-color: lightskyblue;
 }
-.BarraEm{
-  background-color:steelblue  ;
+.BarraEm {
+  background-color: steelblue;
 }
 
-.CartasG{
+.CartasG {
   width: 1000px;
   margin: auto;
   margin-top: 25px;
 }
-.Cartas{
-  margin:10px;
+.Cartas {
+  margin: 10px;
   border: 1px;
-  border-color:slategrey;
-  border-style:groove;
+  border-color: slategrey;
+  border-style: groove;
 }
 
-.Fcontainer{
+.Fcontainer {
   margin-top: 90px;
-  margin-bottom: 0px!important;
+  margin-bottom: 0px !important;
   height: 200px;
   background-color: lightgrey;
-  align-content: center!important;
-  bottom: 0; 
+  align-content: center !important;
+  bottom: 0;
   width: 100%;
-
 }
 
-.Fcol-md-4{
+.Fcol-md-4 {
   flex: 0 0 auto;
-  width: 25%!important;
+  width: 25% !important;
 }
 
-.FormularioC{
+.FormularioC {
   width: 350px;
-  text-align: left!important;
+  text-align: left !important;
   background-color: white;
   margin: auto 10px;
   margin-top: 0px;
   border-style: groove;
   border-radius: 10px;
-  
 }
 
-.Contenedor{
-  margin:100px auto;
+.Contenedor {
+  margin: 100px auto;
   display: inline-flex;
   border-style: groove;
   border: lightgrey;
   background-color: white;
   border-radius: 10px;
 }
-.ContenedorC{
-  margin:100px auto;
+.ContenedorC {
+  margin: 100px auto;
   display: inline-flex;
   border-style: groove;
   border: lightgrey;
   width: 800px;
 }
 
-
-.divB{
+.divB {
   display: inline-flex;
   margin-left: auto;
 }
-.divBD{
+.divBD {
   display: table;
-  margin:auto;
+  margin: auto;
 }
-.divBC{
+.divBC {
   display: inline-flex;
   margin-left: 30px;
 }
-.ImagenC{
+.ImagenC {
   width: 350px;
-  height: 454px!important;
-  margin: 0px 0px 0px 0px!important;
+  height: 454px !important;
+  margin: 0px 0px 0px 0px !important;
   display: inline-flex;
 }
-.ImgC{
+.ImgC {
   width: 350px;
-  height: 454px!important;
+  height: 454px !important;
 }
 
-
-.PrincipalC{
+.PrincipalC {
   text-align: center;
-  
 }
 
-
-.form-control{
-  margin: 0px 0px 0px 0px ;
-  align-self: center!important;
+.form-control {
+  margin: 0px 0px 0px 0px;
+  align-self: center !important;
 }
 
- .card-img-top{
-   margin: 15px!important;
-   width: 90%!important;
- }
+.card-img-top {
+  margin: 15px !important;
+  width: 90% !important;
+}
 
- .labelI{
-   color: red!important;
- }
- .MargenL{
-   margin-top: 5px!important;
- }
+.labelI {
+  color: red !important;
+}
+.MargenL {
+  margin-top: 5px !important;
+}
 
- .ContenedorV{
-   margin-top: 5px;
-   margin-bottom: 5px;
-   border-style: solid;
-   border-radius: 22px;
-   border-color: rgb(94, 89, 89);
-   width: 700px!important;
-   height: 200px!important;
-   display: inline-flex;
- }
- .IconCartas{
-   margin-top: 5px!important;
- }
- .BtnV{
+.ContenedorV {
+  margin-top: 5px;
+  margin-bottom: 5px;
+  border-style: solid;
+  border-radius: 22px;
+  border-color: rgb(94, 89, 89);
+  width: 700px !important;
+  height: 200px !important;
+  display: inline-flex;
+}
+.IconCartas {
+  margin-top: 5px !important;
+}
+.BtnV {
   display: initial;
   margin-left: 55px;
-  text-align: right!important;
+  text-align: right !important;
 }
- .ContenedorVacante{
+.ContenedorVacante {
   margin: 5px !important;
   border-style: solid;
   border-radius: 15px;
   border-color: rgb(94, 89, 89);
-  width: 380px!important;
-  height: 195px!important;
+  width: 380px !important;
+  height: 195px !important;
   display: inline-block;
 }
- .ContenedorEvaluaciones{
+.ContenedorEvaluaciones {
   margin: 5px !important;
   border-style: solid;
   border-radius: 15px;
   border-color: rgb(94, 89, 89);
-  width: 250px!important;
-  height: 195px!important;
-  display: inline-block!important;
+  width: 250px !important;
+  height: 195px !important;
+  display: inline-block !important;
 }
- .C{
-  text-align: left!important;
-  width: 480px!important;
+.C {
+  text-align: left !important;
+  width: 480px !important;
   height: auto;
- }
-
- .Opciones{
-    margin-left: 40px;
- }
-
-
- .col-md-10{
-  width: 100%!important;
- }
-
- .FormC{
-   margin-left: 10px!important;
- }
- .FormI{
-   height: 454px!important;
-  margin-left: 5px!important;
 }
 
- .FormularioI{
+.Opciones {
+  margin-left: 40px;
+}
+
+.col-md-10 {
+  width: 100% !important;
+}
+
+.FormC {
+  margin-left: 10px !important;
+}
+.FormI {
+  height: 454px !important;
+  margin-left: 5px !important;
+}
+
+.FormularioI {
   width: 700px;
-  margin:50px auto;
+  margin: 50px auto;
   display: inline-flex;
-  text-align: left!important;
+  text-align: left !important;
   background-color: white;
   border-style: groove;
   border-radius: 10px;
- }
+}
 
- .FormD{
-   margin-left: 5px!important;
-   margin-right: 5px!important;
-   margin-top: 10px!important;
- }
+.FormD {
+  margin-left: 5px !important;
+  margin-right: 5px !important;
+  margin-top: 10px !important;
+}
 
- .VacanteForm{
-   width: 800px;
-   margin: auto;
-
- }
- .VacanteStep{
+.VacanteForm {
+  width: 800px;
+  margin: auto;
+}
+.VacanteStep {
   width: 800px;
   margin: 20px auto;
   border-radius: 20px;
   border-style: groove;
- }
- .botonStep{
-   width: 100px;
- }
- .botonStepG{
-   margin-right: 10px!important;
+}
+.botonStep {
   width: 100px;
 }
- .titulo{
-   font-size: xx-large!important;
- }
-
-
- .TextP{
-   resize: none;
-   height: 150px!important;
- }
-
- .DivBF{
-    margin-left: 115px;
- }
-
- .InicioP{
-   width: 800px;
-   margin: 100px auto;
- }
- 
- .LabelEmp{
-  text-align: left!important;
-  color:royalblue!important;
+.botonStepG {
+  margin-right: 10px !important;
+  width: 100px;
+}
+.titulo {
+  font-size: xx-large !important;
 }
 
-.CartasPr{
+.TextP {
+  resize: none;
+  height: 150px !important;
+}
+
+.DivBF {
+  margin-left: 115px;
+}
+
+.InicioP {
+  width: 800px;
+  margin: 100px auto;
+}
+
+.LabelEmp {
+  text-align: left !important;
+  color: royalblue !important;
+}
+
+.CartasPr {
   margin: 5px;
   border-color: black;
   border-radius: 22px;
   border-style: groove;
   max-width: 230px;
-
 }
 
-.ContApp{
-  margin-top:10px;
+.ContApp {
+  margin-top: 10px;
 }
 
-.ContCartas{
-  width: 855px!important;
+.ContCartas {
+  width: 855px !important;
 }
-.btnP{
-  margin: auto!important;
+.btnP {
+  margin: auto !important;
 }
 
-.ContenedorRef{
+.ContenedorRef {
   margin-top: 25px;
   border-style: solid;
   border-radius: 22px;
   border-color: rgb(94, 89, 89);
-  width: 500px!important;
-  height: 150px!important;
+  width: 500px !important;
+  height: 150px !important;
   display: flex;
 }
-.botonRef{
+.botonRef {
   margin-left: 10px;
   width: 50px;
-  text-align: center!important;
+  text-align: center !important;
 }
-.DivRef{
+.DivRef {
   display: flex;
-  align-self: center!important;
+  align-self: center !important;
 }
-.ReferenciasForm{
+.ReferenciasForm {
   width: 800px;
   margin: auto;
   border-style: solid;
@@ -321,30 +308,30 @@
   border-color: rgb(94, 89, 89);
 }
 
-.BtnsRef{
+.BtnsRef {
   margin-left: 20px;
 }
-.ContenedorRefForm{
-  width: 500px!important;
-  height: 150px!important;
+.ContenedorRefForm {
+  width: 500px !important;
+  height: 150px !important;
   display: inline-flex;
 }
 
 .navbar-brand {
-  padding-top: 0px!important;
+  padding-top: 0px !important;
 }
 .navbar {
-  padding-top: .2rem!important;
-  padding-bottom: .2rem!important;
+  padding-top: 0.2rem !important;
+  padding-bottom: 0.2rem !important;
 }
 .nav-link {
-  color: black!important;
+  color: black !important;
 }
 .UsuarioImg {
-  padding-top: 4px!important;
+  padding-top: 4px !important;
 }
 
-.ContenedorEmpresas{
+.ContenedorEmpresas {
   width: 800px;
   margin: 20px auto;
   border-color: rgba(0, 0, 0, 0.5);
@@ -353,29 +340,27 @@
   background-color: white;
 }
 
-.VacantesActivas{
+.VacantesActivas {
   width: 800px;
-  display: inline-block!important;
+  display: inline-block !important;
 }
 
-.DivEvaluaciones{
+.DivEvaluaciones {
   width: 800px;
-  display: inline-block!important;
-
+  display: inline-block !important;
 }
 
-.Graficas{
-  width:500px;
+.Graficas {
+  width: 500px;
   margin: 20px auto;
   border-radius: 20px;
   border-style: groove;
-  
 }
 
-.BotonesEm{
-  margin: 20px auto !important;;
+.BotonesEm {
+  margin: 20px auto !important;
 }
-.DivDatosEmpresa{
+.DivDatosEmpresa {
   width: 800px;
   margin: 20px auto;
   border-radius: 20px;
@@ -384,175 +369,183 @@
   background-color: lightgray;
 }
 
-.ImagenDatosEmpresa{
-  margin-top: 5px!important;
-}
 
-.DatosEmpresas{
-  text-align: left!important;
-}
-.AlinDatosEmpresas{
-display: grid!important;
-}
-.DivBtnDE{
+.DivBtnDE {
   margin-top: 150px;
 }
-.InicioAli{
-  margin: auto!important;
+.InicioAli {
+  margin: auto !important;
 }
-.BtnSolicitudes{
-  width: 227px!important;
+.BtnSolicitudes {
+  width: 227px !important;
 }
 
-.ContenedorRefMini{
+.ContenedorRefMini {
   margin-top: 5px;
   border-style: solid;
   border-radius: 22px;
-  border-width:thin;
+  border-width: thin;
   border-color: rgb(94, 89, 89);
-  width:790px!important;
-  height: 100px!important;
-  
+  width: 790px !important;
+  height: 100px !important;
 }
-.BtnRefMini{
-  width: 150px!important;
-  margin: auto!important;
- 
+.BtnRefMini {
+  width: 150px !important;
+  margin: auto !important;
 }
 
-.MarginB{
-  margin-bottom: 5px!important;
+.MarginB {
+  margin-bottom: 5px !important;
 }
 
-
-.BtnRefRec{
+.BtnRefRec {
   width: 100px;
 }
 
-.ContenedorRefRec{
-  margin: 5px!important;
+.ContenedorRefRec {
+  margin: 5px !important;
   border-style: solid;
   border-radius: 22px;
-  border-width:thin;
+  border-width: thin;
   border-color: rgb(94, 89, 89);
-  width:380px!important;
-  height: 145px!important;
-  display: inline-flex!important;
-  
+  width: 380px !important;
+  height: 145px !important;
+  display: inline-flex !important;
 }
-.divRefRec{
-  margin-bottom: 5px!important;
+.divRefRec {
+  margin-bottom: 5px !important;
   width: 790px;
-  display: inline-block!important;
+  display: inline-block !important;
 }
-.ContenedorEstudios{
+.ContenedorEstudios {
   margin-top: 5px;
   border-style: solid;
   border-radius: 22px;
-  border-width:thin;
+  border-width: thin;
   border-color: rgb(94, 89, 89);
-  width: 790px!important;
-  height: 120px!important;
-  
+  width: 790px !important;
+  height: 120px !important;
 }
 
-.ImgEstudios{
-  display: block!important;
+.ImgEstudios {
+  display: block !important;
 }
 
-.Aplica{
-  width: 27%!important;
+.Aplica {
+  width: 27% !important;
 }
-.Aplica1{
-  width: 29%!important;
+.Aplica1 {
+  width: 29% !important;
 }
-.Candidato{
-  width: 40.333333%!important;
-}
-
-.Aspectos{
-  width: 30.666667%!important;
-}
-.BtnEstudio{
-  width: 200px!important;
-  margin: 5px auto!important;
-}
-.BtnEstudio2{
-  width: 150px!important;
-  margin: 37px auto auto 15px!important;
+.Candidato {
+  width: 40.333333% !important;
 }
 
-.BtnSolicitar{
-  margin: 50px auto!important;
-  width: 160px!important;
+.Aspectos {
+  width: 30.666667% !important;
 }
-.Paquetes{
+.BtnEstudio {
+  width: 200px !important;
+  margin: 5px auto !important;
+}
+.BtnEstudio2 {
+  width: 150px !important;
+  margin: 37px auto auto 15px !important;
+}
+
+.BtnSolicitar {
+  margin: 50px auto !important;
+  width: 160px !important;
+}
+.Paquetes {
   width: 700px;
-  margin: auto!important;
+  margin: auto !important;
   border-radius: 20px;
   border-style: groove;
 }
-.Texto{
-  margin: 10px auto 0px auto!important;
-  width: 650px!important;
+.Texto {
+  margin: 10px auto 0px auto !important;
+  width: 650px !important;
 }
-.pagos{
+.pagos {
   border-style: solid;
   border-radius: 22px;
-  border-width:thin;
+  border-width: thin;
   border-color: rgb(94, 89, 89);
-  height: 350px!important;
-  margin: 5px auto!important;
+  height: 350px !important;
+  margin: 5px auto !important;
 }
 
-.BtnPagos{
-  width: 160px!important;
- margin-left: 10px!important;
- margin-top: 5px!important;
+.BtnPagos {
+  width: 160px !important;
+  margin-left: 10px !important;
+  margin-top: 5px !important;
 }
 
-.Contacto{
-  width: 80%!important;
+.Contacto {
+  width: 80% !important;
 }
 
-.FormContacto{
-  width: 890px!important;
-  text-align: left!important;
+.FormContacto {
+  width: 890px !important;
+  text-align: left !important;
 }
-.switch{
+.switch {
   display: flex;
   align-items: center;
   margin: 10px;
 }
-.list-users__header{
+.list-users__header {
   display: flex;
-        align-items: center;
-        justify-content: space-between;
-        margin-bottom: 20px;
-
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
 }
-.buttonCards{
-  text-align: left!important;  
-  width: 380px!important;
-}
-
-.card-body{
-  padding-bottom: 0rem!important;
+.buttonCards {
+  text-align: left !important;
+  width: 380px !important;
 }
 
-.buttonGoogle{
-  
-  width: 100%!important;
-  opacity: 1!important;
-  text-align: center!important;
+.card-body {
+  padding-bottom: 0rem !important;
+}
+
+.buttonGoogle {
+  width: 100% !important;
+  opacity: 1 !important;
+  text-align: center !important;
+}
+
+.MuiTablePagination-selectLabel {
+  margin-top: 15px !important;
+}
+
+.MuiTablePagination-displayedRows {
+  margin-top: 15px !important;
+}
+
+
+.ant-descriptions-item-label{
+  background-color: lightgray;
+  border: 1px solid rgba(0, 0, 0, 0.5);
+  font-weight: bold!important;
+}
+
+.ant-descriptions-item-content{
+  background-color: white;
+  border: 1px solid rgba(0, 0, 0, 0.5);
+}
+
+.ant-descriptions-bordered .ant-descriptions-view{
+  border: 1px solid rgba(0, 0, 0, 0.5);
+}
+
+.ant-descriptions-bordered .ant-descriptions-item-content{
+  border-right: 1px solid rgba(0, 0, 0, 0.5);
 
 }
 
-.MuiTablePagination-selectLabel{
-    margin-top: 15px!important;
-}
-
-.MuiTablePagination-displayedRows{
-  margin-top: 15px!important;
+.ant-descriptions-bordered .ant-descriptions-item-label{
+  border-right: 1px solid rgba(0, 0, 0, 0.5);
 
 }

@@ -1,6 +1,6 @@
 import { Divider } from '@mui/material';
 import React from 'react';
-import { notification, Modal } from 'antd';
+import { notification, Modal, Descriptions } from 'antd';
 import { Row, Col, Form, Button } from 'react-bootstrap';
 import { getAccessTokenApi } from '../../../api/auth';
 import { deleteEvaluationApi } from '../../../api/userEvaluations';
@@ -36,88 +36,25 @@ export default function InfoEvaluations(props) {
     }
     return (
         <div>
-            <Row className='mb-3'>
-                <Form.Group as={Col} md="4">
-                    <Form.Label> Nombre del Examen: </Form.Label>
-                    <Form.Control
-                        disabled
-                        readOnly
-                        defaultValue={evaluations.nameEvaluation}
-                    />
-                </Form.Group>
-                <Form.Group as={Col} md="4">
-                    <Form.Label> Tiempo de duración: </Form.Label>
-                    <Form.Control
-                        disabled
-                        readOnly
-                        defaultValue={`${evaluations.time} min`}
-                    />
-                </Form.Group>
-                <Form.Group as={Col} md="4">
-                    <Form.Label>Cantidad de preguntas: </Form.Label>
-                    <Form.Control
-                        disabled
-                        readOnly
-                        defaultValue={evaluations.exam.length}
-                    />
-                </Form.Group>
-            </Row>
+            <Descriptions size='small' className='mb-3' layout='vertical' bordered>
+                <Descriptions.Item label="Nombre del examen">{evaluations.nameEvaluation}</Descriptions.Item>
+                <Descriptions.Item label="Tiempo de duración">{`${evaluations.time} min`}</Descriptions.Item>
+                <Descriptions.Item label="Cantidad de preguntas"> {evaluations.exam.length}</Descriptions.Item>
+            </Descriptions>
             {evaluations.exam.map((post) => (
                 <>
                     <Divider style={{ backgroundColor: "black", color: "black", opacity: 1 }} />
-                    <Row className='mb-3'>
-                        <Form.Group as={Col} md="6">
-                            <Form.Label >{post.ask}</Form.Label>
-                            <Form.Control
-                                disabled
-                                readOnly
-                                defaultValue={post.label}
-                            />
-                        </Form.Group>
-                        <Form.Group as={Col} md="6">
-                            <Form.Label >Tipo de pregunta</Form.Label>
-                            <Form.Control
-                                disabled
-                                readOnly
-                                defaultValue={post.type}
-                            />
-                        </Form.Group>
-                    </Row>
+                    <Descriptions title={post.ask} size="small" layout='vertical' className='mb-3' bordered>
+                        <Descriptions.Item label="Pregunta">{post.label}</Descriptions.Item>
+                        <Descriptions label="Tipo de pregunta">{post.type === "select"? "Opciones" : "Abierta" }</Descriptions>
+                    </Descriptions>
                     {post.type === "select" && (
-                        <Row className="mb-3">
-                            <Form.Group as={Col} md="3">
-                                <Form.Label>Opción 1</Form.Label>
-                                <Form.Control
-                                    disabled
-                                    readOnly
-                                    defaultValue={post.options.option1}
-                                />
-                            </Form.Group>
-                            <Form.Group as={Col} md="3">
-                                <Form.Label>Opción 2</Form.Label>
-                                <Form.Control
-                                    disabled
-                                    readOnly
-                                    defaultValue={post.options.option2}
-                                />
-                            </Form.Group>
-                            <Form.Group as={Col} md="3">
-                                <Form.Label>Opción 3</Form.Label>
-                                <Form.Control
-                                    disabled
-                                    readOnly
-                                    defaultValue={post.options.option3}
-                                />
-                            </Form.Group>
-                            <Form.Group as={Col} md="3">
-                                <Form.Label>Opción 4</Form.Label>
-                                <Form.Control
-                                    disabled
-                                    readOnly
-                                    defaultValue={post.options.option4}
-                                />
-                            </Form.Group>
-                        </Row>
+                        <Descriptions column={{xs:8, sm:16, md:24}} title="Opciones" size='small' className='mb-3' layout='vertical' bordered>
+                            <Descriptions.Item label="Opción 1">{post.options.option1}</Descriptions.Item>
+                            <Descriptions.Item label="Opción 2">{post.options.option2}</Descriptions.Item>
+                            <Descriptions.Item label="Opción 3">{post.options.option3}</Descriptions.Item>
+                            <Descriptions.Item label="Opción 4">{post.options.option4}</Descriptions.Item>
+                        </Descriptions>
                     )}
 
                 </>

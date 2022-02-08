@@ -13,7 +13,7 @@ export default function CardsEvaluaciones(props) {
     const [modalContent, setModalContent] = useState("");
 
     const Info = evaluations => {
-        setWidth(600);
+        setWidth(650);
         setIsVisibleModal(true);
         setModalTitle(`Examen de ${evaluations.nameEvaluation}`);
         setModalContent(<InfoEvaluations evaluations={evaluations} setIsVisibleModal={setIsVisibleModal} setReloadEvaluations={setReloadEvaluations} />);

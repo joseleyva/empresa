@@ -45,7 +45,7 @@ function getStyles(name, personName, theme) {
 
 
 function CardsEstudios(props) {
-  const { post } = props;
+  const { post , id} = props;
 
   const theme = useTheme();
   const [personName, setPersonName] = React.useState([]);
@@ -116,7 +116,7 @@ function CardsEstudios(props) {
   return (
     <>
 
-      <Container className="ContenedorEstudios">
+      <Container className="ContenedorEstudios" id={id}>
         <Row className="mb-3" >
           <Form.Group as={Col} md="4" className="Candidato">
             <Form.Label className="ImgEstudios">{post.nameUser}</Form.Label>

@@ -67,7 +67,7 @@ function DatosEmpresas() {
   return (
     <div className="App">
       <div className="DivDatosEmpresa">
-        <Row className="mb-3 mt-1">
+        <Row className="mb-3 mt-3">
           <Col  flex="190px">
             <Image
               src={avatar ? avatar : NoAvatar}

@@ -26,7 +26,7 @@ function Estudios() {
         <div className="App">
             <div className="ContenedorEmpresas">
                 <h4> Escritorio Virtual</h4>
-                <Divider />
+                <Divider className='mb-3'/>
                 <Row className="MargenL" >
                     <Form.Group as={Col} md="4" className="Candidato">
                         <h6>Candidato/Perfil que se postuló </h6>
@@ -41,7 +41,7 @@ function Estudios() {
                 </Row>
                 <div className="mb-3">
                     {users.map((post) => (
-                        <CardsEstudios key={post.id} post={post} />
+                        <CardsEstudios key={post._id} id={post._id} post={post} />
                     ))}
                 </div>
             </div>

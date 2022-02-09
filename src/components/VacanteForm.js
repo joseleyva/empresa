@@ -63,7 +63,7 @@ function VacanteForm() {
                     {activeStep === steps.length ? (
                        
                         <React.Fragment>
-                            <Typography sx={{ mt: 2, mb: 1 }}>
+                            <Typography component="span" sx={{ mt: 2, mb: 1 }}>
                                 Formulario terminado
                             </Typography>
                             <Box sx={{ display: 'flex', flexDirection: 'row', pt: 1 }}>
@@ -73,7 +73,7 @@ function VacanteForm() {
                         </React.Fragment>
                     ) : (
                         <React.Fragment>
-                            <Typography sx={{ mt: 2, mb: 1 }}>{getStepContent(activeStep)}</Typography>
+                            <Typography component="span" sx={{ mt: 2, mb: 1 }}>{getStepContent(activeStep)}</Typography>
                             <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
                                 <Box sx={{ flex: '1 1 auto' }} />
                                 

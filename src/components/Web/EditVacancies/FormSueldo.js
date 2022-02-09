@@ -16,7 +16,6 @@ const schema = yup.object().shape({
     tools: yup.string().required("Ingrese las herramientas").matches(/^[a-zA-Z]+$/).min(1),
 });
 const FormSueldo = (props) => {
-    const [validated, setValidated]= useState(false)
     const [fallo, setFallo] = useState(false);
     const {vacancie,setReloadUsers,setIsVisibleModal } = props;
     const token = getAccessTokenApi();
@@ -32,7 +31,6 @@ const FormSueldo = (props) => {
             <Formik
                 validationSchema={schema}
                 onSubmit={(valores, {resetForm})=>{
-                    setValidated(true);
                     updateInfoVacanciesApi(token, valores, vacancie._id).then(result => {
                         notification["success"]({
                             message: result.message,
@@ -69,7 +67,7 @@ const FormSueldo = (props) => {
                     isValid,
                     errors,
                 }) => (
-                    <Form noValidate validated={validated} onSubmit={handleSubmit} className="FormDatos">
+                    <Form noValidate  onSubmit={handleSubmit} className="FormDatos">
                         <Form.Label className="titulo">Datos del Sueldo</Form.Label>
                         <Row className="mb-3">
                             <Form.Group as={Col} md="4" controlId="validationFormik01" className="position-relative">

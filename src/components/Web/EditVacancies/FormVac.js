@@ -29,7 +29,6 @@ const schema = yup.object().shape({
 
 });
 const FormVac = (props) => {
-    const [validated, setValidated] = useState(false)
     const [fallo, setFallo] = useState(false);
     const token = getAccessTokenApi();
     const {vacancie,setReloadUsers,setIsVisibleModal } = props;
@@ -42,11 +41,9 @@ const FormVac = (props) => {
     };
     
     return (
-        <div className="VacanteForm">
             <Formik
                 validationSchema={schema}
                 onSubmit={async(valores, { resetForm }) => {
-                    setValidated(true);
                     updateInfoVacanciesApi(token, valores, vacancie._id).then(result => {
                         notification["success"]({
                             message: result.message,
@@ -93,7 +90,7 @@ const FormVac = (props) => {
                     isInvalid,
                     errors,
                 }) => (
-                    <Form noValidate validated={validated} onSubmit={handleSubmit} className="FormDatos">
+                    <Form noValidate  onSubmit={handleSubmit} className="FormDatos">
                         <Form.Label className="titulo">Datos de la vacante</Form.Label>
                         <Row className="mb-3">
                             <Form.Group as={Col} md="4" controlId="validationFormik01" className="position-relative">
@@ -127,7 +124,7 @@ const FormVac = (props) => {
                                 <Form.Control.Feedback type="invalid" tooltip>{errors.numberP}</Form.Control.Feedback>
 
                             </Form.Group>
-                            <Form.Group as={Col} md="4" validated={validated} controlId="validationFormik01" className="position-relative">
+                            <Form.Group as={Col} md="4" controlId="validationFormik01" className="position-relative">
                                 <Form.Label>¿A que puesto Reportara?</Form.Label>
                                 <Form.Select id="inlineFormCustomSelect"
                                     type="select"
@@ -390,7 +387,6 @@ const FormVac = (props) => {
             </Formik>
 
 
-        </div>
 
     );
 

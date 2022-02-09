@@ -41,10 +41,10 @@ export default function EvaluacionesDisponibles() {
                 <div className="DivEvaluaciones">
 
                     {evaluations.map((post) => (
-                        <CardsEvaluaciones post={post} key={post.id} id={post.id} setReloadEvaluations={setReloadEvaluations} />
+                        <CardsEvaluaciones post={post} key={post._id} id={post._id} setReloadEvaluations={setReloadEvaluations} />
                     ))}
                 </div>
-                <Row className='mb-3'>
+                <Row className='mb-3 mt-3'>
                     <Form.Group as={Col} md="4">
                         <Button variant="secondary" href="/Empresas/Evaluaciones"> Regresar </Button>
                     </Form.Group>

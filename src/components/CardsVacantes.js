@@ -160,6 +160,8 @@ function CardsVacantes(props) {
           
 
         </div>
+
+      </Container>
         <Modal
           width={width}
           title={modalTitle}
@@ -168,8 +170,6 @@ function CardsVacantes(props) {
         >
           {modalContent}
         </Modal>
-
-      </Container>
     </>
 
 

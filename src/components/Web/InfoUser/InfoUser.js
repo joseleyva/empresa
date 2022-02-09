@@ -63,7 +63,7 @@ export default function InfoUser(props) {
             {user.toWork ?
                 (
                     <>
-                   <Descriptions size='small' layout='vertical' className='mb-3' bordered>
+                   <Descriptions size='small' column={3} layout='vertical' className='mb-3' bordered>
                     <Descriptions.Item  label="Nombre">{user.nameUser}</Descriptions.Item>
                     <Descriptions.Item label="Apellido paterno">{user.lastnameP}</Descriptions.Item>
                     <Descriptions.Item label="Apellido materno">{user.lastnameM}</Descriptions.Item>
@@ -71,7 +71,7 @@ export default function InfoUser(props) {
                     <Descriptions.Item label="Puesto que desempeño">{user.job}</Descriptions.Item>
                     <Descriptions.Item label="Area o departamento">{user.workArea}</Descriptions.Item>
                     <Descriptions.Item label="Fecha de inicio">{startDate.format('LL')}</Descriptions.Item>
-                    <Descriptions.Item label="Fecha de terminación" span={2}>{endDate.format('LL')}</Descriptions.Item>
+                    <Descriptions.Item label="Fecha de terminación">{endDate.format('LL')}</Descriptions.Item>
                     <Descriptions.Item label="Motivo de su salida">{user.reason}</Descriptions.Item>
                     <Descriptions.Item label="Recontratable">{user.tohire}</Descriptions.Item>
                     <Descriptions.Item label="Recomendable">{user.recommendable}</Descriptions.Item>

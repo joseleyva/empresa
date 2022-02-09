@@ -16,7 +16,7 @@ export default function CardsEvaluaciones(props) {
         setWidth(650);
         setIsVisibleModal(true);
         setModalTitle(`Examen de ${evaluations.nameEvaluation}`);
-        setModalContent(<InfoEvaluations evaluations={evaluations} setIsVisibleModal={setIsVisibleModal} setReloadEvaluations={setReloadEvaluations} />);
+        setModalContent(<InfoEvaluations id={evaluations._id} evaluations={evaluations} setIsVisibleModal={setIsVisibleModal} setReloadEvaluations={setReloadEvaluations} />);
     }
     return (
         <Card id={id} className="ContenedorEvaluaciones">

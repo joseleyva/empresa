@@ -30,7 +30,6 @@ const schema = yup.object().shape({
 
 });
 const FormVac = (props) => {
-    const [validated, setValidated] = useState(false)
     const [fallo, setFallo] = useState(false);
     const [estado,setEstado]=React.useState(true);
     const {funcion, place, setValor}=props;
@@ -49,7 +48,6 @@ const FormVac = (props) => {
             <Formik
                 validationSchema={schema}
                 onSubmit={async(valores, { resetForm }) => {
-                    setValidated(true);
                     setEstado(false);
                     const result = await createVacanciesApi(token,valores);
                     if (!result.ok) {
@@ -97,7 +95,7 @@ const FormVac = (props) => {
                     isInvalid,
                     errors,
                 }) => (
-                    <Form noValidate validated={validated} onSubmit={handleSubmit} className="m-3">
+                    <Form noValidate onSubmit={handleSubmit} className="m-3">
                         <Form.Label className="titulo">Datos de la vacante</Form.Label>
                         <Row className="mb-3">
                             <Form.Group as={Col} md="4" controlId="validationFormik01" className="position-relative">
@@ -131,7 +129,7 @@ const FormVac = (props) => {
                                 <Form.Control.Feedback type="invalid" tooltip>{errors.numberP}</Form.Control.Feedback>
 
                             </Form.Group>
-                            <Form.Group as={Col} md="4" validated={validated} controlId="validationFormik01" className="position-relative">
+                            <Form.Group as={Col} md="4" controlId="validationFormik01" className="position-relative">
                                 <Form.Label>¿A que puesto Reportara?</Form.Label>
                                 <Form.Select id="inlineFormCustomSelect"
                                     type="select"

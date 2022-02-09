@@ -7,7 +7,7 @@ import { deleteEvaluationApi } from '../../../api/userEvaluations';
 const { confirm } = Modal;
 
 export default function InfoEvaluations(props) {
-    const { evaluations, setIsVisibleModal, setReloadEvaluations } = props;
+    const { id, evaluations, setIsVisibleModal, setReloadEvaluations } = props;
     const deleteEvaluation = evaluation => {
         const token = getAccessTokenApi();
 
@@ -35,16 +35,16 @@ export default function InfoEvaluations(props) {
         })
     }
     return (
-        <div>
+        <div id={id}>
             <Descriptions size='small' className='mb-3' layout='vertical' bordered>
                 <Descriptions.Item label="Nombre del examen">{evaluations.nameEvaluation}</Descriptions.Item>
                 <Descriptions.Item label="Tiempo de duración">{`${evaluations.time} min`}</Descriptions.Item>
                 <Descriptions.Item label="Cantidad de preguntas"> {evaluations.exam.length}</Descriptions.Item>
             </Descriptions>
             {evaluations.exam.map((post) => (
-                <>
+                <div id={post.label} key={post.label}>
                     <Divider style={{ backgroundColor: "black", color: "black", opacity: 1 }} />
-                    <Descriptions title={post.ask} size="small" layout='vertical' className='mb-3' bordered>
+                    <Descriptions  title={post.ask} size="small" layout='vertical' className='mb-3' bordered>
                         <Descriptions.Item label="Pregunta">{post.label}</Descriptions.Item>
                         <Descriptions label="Tipo de pregunta">{post.type === "select"? "Opciones" : "Abierta" }</Descriptions>
                     </Descriptions>
@@ -57,7 +57,7 @@ export default function InfoEvaluations(props) {
                         </Descriptions>
                     )}
 
-                </>
+                </div>
             ))}
             <Row className='mt-3 mb-3'>
                 <Form.Group as={Col} md="6" className='d-grid gap-2'>

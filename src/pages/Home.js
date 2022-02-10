@@ -12,9 +12,10 @@ import HomeEmpresas from "../components/Web/HomeEmpresas"
 import HowMyPagesWork from "../components/Web/HowMyPagesWork"
 import Footer from "../components/Web/Footer"
 import { BackTop } from 'antd';
+import { ArrowUpOutlined } from '@ant-design/icons';
 
 const style = {
-  height: 50,
+  height: 45,
   width: 50,
   lineHeight: '50px',
   borderRadius: 4,
@@ -68,7 +69,7 @@ function App() {
     <Footer/>
 
     <BackTop>
-      <div style={style}>UP</div>
+      <div style={style}><ArrowUpOutlined style={{fontSize: '45px', textAlign: "center"}}/></div>
     </BackTop>
     </div>
    

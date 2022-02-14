@@ -28,9 +28,10 @@
 
         .ant-card-cover{
             img{
-                height: 150px!important;
+                height: 120px!important;
                 width: 224px!important;
                 transform: scale(0.7);
+                object-fit: contain;
             }
         }
 

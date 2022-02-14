@@ -12,18 +12,9 @@ import HomeEmpresas from "../components/Web/HomeEmpresas"
 import HowMyPagesWork from "../components/Web/HowMyPagesWork"
 import Footer from "../components/Web/Footer"
 import { BackTop } from 'antd';
-import { ArrowUpOutlined } from '@ant-design/icons';
+import {IconButton} from '@mui/material';
+import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward';
 
-const style = {
-  height: 45,
-  width: 50,
-  lineHeight: '50px',
-  borderRadius: 4,
-  backgroundColor: '#1088e9',
-  color: '#fff',
-  textAlign: 'center',
-  fontSize: 27,
-};
 function App() {
   if (getAccessTokenApi()) {
     return <Redirect to="/Empresas" />;
@@ -69,7 +60,9 @@ function App() {
     <Footer/>
 
     <BackTop>
-      <div style={style}><ArrowUpOutlined style={{fontSize: '45px', textAlign: "center"}}/></div>
+    <IconButton color="primary" style={{width: 50}} aria-label="upload picture" component="span">
+    <ArrowUpwardIcon />
+  </IconButton>
     </BackTop>
     </div>
    

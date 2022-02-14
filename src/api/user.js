@@ -130,7 +130,6 @@ export function uploadCardApi(token, card, userId){
   const formData= new FormData();
   formData.append('File', card[0], card[0].name);
 
-  console.log(formData);
   const params ={
     method: "PUT",
     body: formData,

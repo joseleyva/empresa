@@ -1,12 +1,15 @@
 import React, { useState, useEffect } from 'react'
-import { Switch, List, Button, Modal as ModalAntd, notification } from 'antd';
+import { Switch, List, Button, Modal as ModalAntd, notification, Avatar } from 'antd';
 import { EditOutlined, DeleteOutlined } from '@ant-design/icons';
-import { updateCompanyApi, activateCompanyApi } from '../../../../api/company';
+import { updateCompanyApi, activateCompanyApi, deleteCompanyApi } from '../../../../api/company';
+import { getAvatarApi } from '../../../../api/user';
 import { getAccessTokenApi } from '../../../../api/auth';
 import AddEmpresa from '../AddEmpresa';
 import Modal from '../../../Modal';
+import EditEmpresas from '../EditEmpresas/EditEmpresas';
 import DragSortableList from 'react-drag-sortable';
 import './EmpresasList.scss';
+import NoImagen from '../../../../assets/img/jpg/Usuario.jpg';
 
 const { confirm } = ModalAntd;
 
@@ -21,7 +24,7 @@ export default function ListEmpresas(props) {
         const ListItemsArray = [];
         companies.forEach((item) => {
             ListItemsArray.push({
-                content: (<CompanyItem item={item} activateCompany={activateCompany} />)
+                content: (<CompanyItem showDeleteConfirm={showDeleteConfirm} item={item} activateCompany={activateCompany} editCompanyModal={editCompanyModal}/>)
             })
         });
         setListItems(ListItemsArray);
@@ -52,8 +55,40 @@ export default function ListEmpresas(props) {
     const addCompanyModal = () => {
         setIsVisibleModal(true);
         setModalTitle("Crando nueva empresa");
-        setModalContent(<AddEmpresa/>);
+        setModalContent(<AddEmpresa setIsVisibleModal={setIsVisibleModal} setRealoadCompany={setRealoadCompany} />);
     }
+
+
+    const editCompanyModal= company =>{
+        setIsVisibleModal(true);
+        setModalTitle(`Editando empresa: ${company.title}`);
+        setModalContent(<EditEmpresas setIsVisibleModal={setIsVisibleModal} setRealoadCompany={setRealoadCompany} company={company}/>);
+    }
+
+    const showDeleteConfirm=company=>{
+        const token = getAccessTokenApi();
+        confirm({
+          title: "Eliminar Empresa",
+          content: `¿Estas seguro que quieres eliminar a ${company.title}?`,
+          okText: "Eliminar",
+          okType: "danger",
+          cancelText: "Cancelar",
+          onOk(){
+            deleteCompanyApi(token, company._id).then(response=>{
+              notification["success"]({
+                message: response,
+                placement: "bottomLeft",
+              });
+              setRealoadCompany(true);
+            }).catch(err=>{
+              notification["err"]({
+                message: err,
+                placement: "bottomLeft",
+              })
+            })
+          }
+        })
+      }
     return (
         <div className='empresas-list'>
             <div className='empresas-list__header'>
@@ -77,17 +112,33 @@ export default function ListEmpresas(props) {
 }
 
 function CompanyItem(props) {
-    const { item, activateCompany } = props;
+    const { item, activateCompany, editCompanyModal, showDeleteConfirm } = props;
+    const [avatar, setAvatar] = useState(null);
+
+    useEffect(() => {
+        if (item.avatar) {
+            getAvatarApi(item.avatar).then(response => {
+                setAvatar(response);
+            })
+        } else {
+            setAvatar(null);
+        }
+    }, [item]);
 
     return (
         <List.Item
             actions={[
                 <Switch defaultChecked={item.active} onChange={e => activateCompany(item, e)} />,
-                <Button type='primary' icon={<EditOutlined />}></Button>,
-                <Button type='danger' icon={<DeleteOutlined />}></Button>,
+                <Button type='primary' icon={<EditOutlined />} onClick={()=> editCompanyModal(item)}></Button>,
+                <Button type='danger' icon={<DeleteOutlined />} onClick={()=> showDeleteConfirm(item)}></Button>,
             ]}
         >
-            <List.Item.Meta title={item.title} description={item.description} />
+
+            <List.Item.Meta
+                title={item.title}
+                description={item.description}
+                avatar={<Avatar src={avatar ? avatar : NoImagen}/>}
+             />
         </List.Item>
     );
 }

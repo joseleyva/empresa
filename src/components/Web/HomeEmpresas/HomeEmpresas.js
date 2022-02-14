@@ -1,15 +1,20 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import {Row, Col, Card, Button} from "antd";
+import { getCompanyApi } from '../../../api/company';
+import { getAvatarApi } from '../../../api/user';
 //import {Link} from "react-router-dom"
-import lala from "../../../assets/img/jpg/lala.jpg";
-import adidas from "../../../assets/img/jpg/Logo-Adidas.jpg";
-import toyota from "../../../assets/img/jpg/logo-toyota.jpg";
-import cemex from "../../../assets/img/jpg/logotipo-constructora-cemex.jpg";
-import mcdonalds from "../../../assets/img/png/mcdonalds.png";
-import fedex from "../../../assets/img/png/fedex.png";
 
 import "./HomeEmpresas.scss"
 export default function HomeEmpresas() {
+    const [reloadCompany, setRealoadCompany] = useState(false);
+    const [companies, setCompanies]= useState([]);
+  
+    useEffect(() => {
+      getCompanyApi().then(response => {
+        setCompanies(response.company);
+      })
+      setRealoadCompany(false);
+    }, [reloadCompany]);
     return (
         <Row className="home-empresas">
             <Col lg={24} className="home-empresas__title">
@@ -18,14 +23,10 @@ export default function HomeEmpresas() {
             <Col lg={4}/>
             <Col lg={16}>
                 <Row className="row-empresas">
-                    <Col md={6}> <CardEmpresas image={lala} title="LALA" subtitle="Empresa dedicada a la leche" /></Col>
-                    <Col md={6}><CardEmpresas image={toyota} title="Toyota" subtitle="Empresa numero 1 en automoviles"/> </Col>
-                    <Col md={6}><CardEmpresas image={cemex} title="Cemex" subtitle="Empresa numero 1 en construccion"/> </Col>
-                    <Col md={6}><CardEmpresas image={adidas} title="Adidas" subtitle="Empresa numero 1 en moda"/> </Col>
-                    <Col md={6}><CardEmpresas image={cemex} title="Cemex" subtitle="Empresa numero 1 en construccion"/> </Col>
-                    <Col md={6}><CardEmpresas image={mcdonalds} title="Mc Donalds" subtitle="Empresa numero 1 en comida"/> </Col>
-                    <Col md={6}><CardEmpresas image={toyota} title="Toyota" subtitle="Empresa numero 1 en automoviles"/> </Col>
-                    <Col md={6}><CardEmpresas image={fedex} title="Fedex" subtitle="Empresa numero 1 en paqueteria"/> </Col>
+                    {companies.map((post)=>(                       
+                    <Col md={6}> <CardEmpresas image={post.avatar} title={post.title} description={post.description} /></Col>
+                    ))}
+                   
                 </Row>
             </Col>
           {/*  <Col lg={4}/>
@@ -41,17 +42,22 @@ export default function HomeEmpresas() {
 
 
 function CardEmpresas(props){
-    const {image, title, subtitle, link} = props;
+    const {image, title, description, link} = props;
+    const [avatar, setAvatar]=useState(null);
     const {Meta} = Card;
-
+    useEffect(()=>{
+            getAvatarApi(image).then(response=>{
+                setAvatar(response);
+            })
+    }, [image])
     return(
         <a href={link} >
             <Card 
             className="home-empresas__card" 
-            cover={<img src={image} alt={title}/>}
+            cover={<img src={avatar} alt={title}/>}
             actions={[<Button> Ver más</Button>]}
             >
-            <Meta title={title} description={subtitle}/>
+            <Meta title={title} description={description}/>
             </Card>
         </a>
     )

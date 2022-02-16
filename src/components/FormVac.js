@@ -1,13 +1,14 @@
 import { Formik } from 'formik';
-import { useState} from 'react';
+import { useState } from 'react';
 import * as React from 'react';
 import * as yup from 'yup';
 import { Form, Col, Button, Row, InputGroup } from 'react-bootstrap';
-import { Puesto, DiasP, SN, LugarT, RangoE, Genero } from './Opciones';
+import { Puesto, DiasP, SN, LugarT, RangoE, Genero, Estados } from './Opciones';
 import useAuth from '../hooks/useAuth';
-import { notification } from 'antd'; 
+import { notification } from 'antd';
 import { getAccessTokenApi } from '../api/auth';
 import { createVacanciesApi } from '../api/vacancies';
+import {CreateStatesApi} from '../api/states';
 import '../scss/index.scss';
 
 const schema = yup.object().shape({
@@ -27,14 +28,16 @@ const schema = yup.object().shape({
     sex: yup.string().required("Seleccione una opcion"),
     disability: yup.string().required("Seleccione una opción"),
     peopleOnCharge: yup.string().required("Seleccione una opción"),
+    state: yup.string().required("Seleccione una opción"),
+    municipality: yup.string().required("Ingrese el puesto")
 
 });
 const FormVac = (props) => {
     const [fallo, setFallo] = useState(false);
-    const [estado,setEstado]=React.useState(true);
-    const {funcion, place, setValor}=props;
+    const [estado, setEstado] = React.useState(true);
+    const { funcion, place, setValor } = props;
     const token = getAccessTokenApi();
-    const {user} = useAuth();
+    const { user } = useAuth();
     const handleClick = (event) => {
         const Button = event.currentTarget;
         if (Button.checkValidity() === false) {
@@ -42,37 +45,46 @@ const FormVac = (props) => {
         }
         setFallo(true);
     };
-    
+
     return (
         <div className="VacanteForm">
             <Formik
                 validationSchema={schema}
-                onSubmit={async(valores, { resetForm }) => {
+                onSubmit={async (valores, { resetForm }) => {
                     setEstado(false);
-                    const result = await createVacanciesApi(token,valores);
+                    const result = await createVacanciesApi(token, valores);
                     if (!result.ok) {
                         notification["error"]({
-                          description: result.message,
-                         placement: 'bottomLeft',
+                            description: result.message,
+                            placement: 'bottomLeft',
                         });
-                    }else{
-                      notification["success"]({
-                        description: result.message,
-                        placement: 'bottomLeft',
-                      });
-                      setValor(result.valor);
-                      
+                    } else {
+                        notification["success"]({
+                            description: result.message,
+                            placement: 'bottomLeft',
+                        });
+                        const states={
+                            state: valores.state,
+                            municipality: valores.municipality
+                        }
+                        CreateStatesApi(token, states).then(result=>{
+                            console.log(result.message);
+                        }).catch(err=>{
+                            console.log(err.message);
+                        })
+                        setValor(result.valor);
+
                     }
                 }}
                 initialValues={{
-                    name: user.name, 
+                    name: user.name,
                     nameP: "",
                     numberP: "",
                     activity: "",
                     reportP: "",
                     daysToWork: "",
                     startTime: "",
-                    finishTime:"",
+                    finishTime: "",
                     turn: "",
                     daysToPay: "",
                     weekGap: "",
@@ -82,6 +94,8 @@ const FormVac = (props) => {
                     sex: "",
                     disability: "",
                     peopleOnCharge: "",
+                    municipality: "",
+                    state: "",
                 }
                 }
             >
@@ -168,7 +182,7 @@ const FormVac = (props) => {
                             </Form.Group>
                         </Row>
                         <Row className="mb-2">
-                           
+
                             <Form.Group as={Col} md="4" controlId="validationFormik01" className="position-relative">
                                 <Form.Label>Dias de trabajo</Form.Label>
                                 <Form.Control
@@ -381,17 +395,47 @@ const FormVac = (props) => {
                             </Form.Group>
 
                         </Row>
-
+                        <Row className="mb-3">
+                            <Form.Group as={Col} md="4" className='position-relative'>
+                                <Form.Label>Estado</Form.Label>
+                                <Form.Select
+                                    type="select"
+                                    name="state"
+                                    value={values.state}
+                                    onChange={handleChange}
+                                    isValid={touched.state && !errors.state}
+                                    isInvalid={fallo ? !!errors.state : false}
+                                    required
+                                >
+                                    <option value="">Seleccione</option>
+                                    {Object.keys(Estados).map((x, i) => (<option value={x} key={i}>{x}</option>))}
+                                </Form.Select>
+                                <Form.Control.Feedback type="invalid" tooltip>{errors.state}</Form.Control.Feedback>
+                            </Form.Group>
+                            <Form.Group as={Col} md="4" className='position-relative'>
+                                <Form.Label>Municipio</Form.Label>
+                                <Form.Control
+                                    type="text"
+                                    name="municipality"
+                                    value={values.municipality}
+                                    onChange={handleChange}
+                                    isValid={touched.municipality && !errors.municipality}
+                                    isInvalid={fallo ? !!errors.municipality : false}
+                                    required
+                                />
+                                <Form.Control.Feedback type="invalid" tooltip>{errors.municipality}</Form.Control.Feedback>
+                            </Form.Group>
+                        </Row>
                         <div className="DivBF">
                             <Button type="submit" onClick={handleClick} className="botonF"  >Guardar</Button>
                             <Button variant="danger" href='/Empresas/Vacante' className="botonF">Cancelar</Button>
                         </div>
                         <Row className="mt-3">
-                        <Form.Group as={Col} md={{span:10, offset: 10}}>
-                        <Button  onClick={funcion} disabled={estado} className="botonStep" variant="outline-secondary">
-                                {place}
+                            <Form.Group as={Col} md={{ span: 10, offset: 10 }}>
+                                <Button onClick={funcion} disabled={estado} className="botonStep" variant="outline-secondary">
+                                    {place}
                                 </Button>
-                        </Form.Group>
+                            </Form.Group>
                         </Row>
                     </Form>
                 )}

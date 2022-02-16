@@ -49,6 +49,19 @@ export function getCompanyApi() {
     })
 }
 
+export function getCompanyActiveApi(active) {
+    const url = `${basePath}/${apiVersion}/get-company-active?active=${active}`;
+
+    
+    return fetch(url).then(response => {
+        return response.json();
+    }).then(result => {
+        return result;
+    }).catch(err => {
+        return err.message;
+    })
+}
+
 export function updateCompanyApi(token, id, data) {
     const url = `${basePath}/${apiVersion}/update-company/${id}`;
 

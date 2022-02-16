@@ -60,8 +60,8 @@ function App() {
     <Footer/>
 
     <BackTop>
-    <IconButton color="primary" style={{width: 50}} aria-label="upload picture" component="span">
-    <ArrowUpwardIcon />
+    <IconButton color="primary"  aria-label="upload picture" component="span">
+    <ArrowUpwardIcon className="arrow" />
   </IconButton>
     </BackTop>
     </div>

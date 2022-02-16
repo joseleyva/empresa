@@ -88,3 +88,37 @@ export const NoEmpleadosOp={
 
 }
 
+export const Estados={
+    "Aguascalientes": '1',
+    "Baja California": '2',
+    "Baja California Sur": '3',
+    "Campeche": '4',
+    "Chiapas": '5',
+    "Chihuahua": '6',
+    "Coahuila": '7',
+    "Colima": '8',
+    "Ciudad de México": '9',
+    "Durango": '10',
+    "Estado de México": '11',
+    "Guanajuato": '12',
+    "Guerrero": '13',
+    "Hidalgo": '14',
+    "Jalisco":'15',
+    "Michoacán": '16',
+    "Morelos": '17',
+    "Nayarit": '18',
+    "Nuevo león": '19',
+    "Oaxaca": '20',
+    "Puebla":'21',
+    "Querétaro": '22',
+    "Quintana Roo": '23',
+    "San Luis Potosí": '24',
+    "Sinaloa": '25',
+    "Sonora": '26',
+    "Tabasco": '27',
+    "Tamaulipas": '28',
+    "Tlaxcala": '29',
+    "Veracruz": '30',
+    "Yucatán": '31',
+    "Zacatecas": '32'
+}

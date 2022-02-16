@@ -30,7 +30,7 @@ const schema = yup.object().shape({
   houseNumber: yup.string().required("Ingrese el numero").matches(/^[a-zA-Z 0-9]+$/),
   suburb: yup.string().required("Ingrese la Col/Fracc").matches(/^[a-zA-Z -&]+$/),
   zip: yup.string().required("Ingrese el Codigo postal").matches(/^[0-9]+$/, 'Solo numeros'),
-  estado: yup.string().required("Ingrese el Estado").matches(/^[a-zA-Z ]+$/),
+  state: yup.string().required("Ingrese el Estado").matches(/^[a-zA-Z ]+$/),
 });
 
 function Formulario() {
@@ -121,7 +121,7 @@ function Formulario() {
         houseNumber: "",
         suburb: "",
         zip: "",
-        estado: "",
+        state: "",
       }}
     >
       {({
@@ -326,14 +326,14 @@ function Formulario() {
               <Form.Control
                 type="text"
                 placeholder="Estado"
-                name="estado"
-                value={values.estado}
+                name="state"
+                value={values.state}
                 onChange={handleChange}
-                isValid={touched.estado && !errors.estado}
-                isInvalid={fallo ? !!errors.estado : false}
+                isValid={touched.state && !errors.state}
+                isInvalid={fallo ? !!errors.state : false}
                 required
               />
-              <Form.Control.Feedback type="invalid" tooltip>{errors.estado} </Form.Control.Feedback>
+              <Form.Control.Feedback type="invalid" tooltip>{errors.state} </Form.Control.Feedback>
             </Form.Group>
             <Form.Group as={Col} md="3">
               <Form.Label>Paquetes Ofrecidos </Form.Label>

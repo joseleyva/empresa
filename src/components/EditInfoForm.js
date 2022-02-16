@@ -20,7 +20,7 @@ export default function EditInfoForm(props){
         lastnameM: user.lastnameM,
         RFC: user.RFC,
         RSocial: user.RSocial,
-        estado: user.estado,
+        state: user.state,
         houseNumber: user.houseNumber,
         nameUser: user.nameUser,
         numberEm: user.numberEm,
@@ -363,9 +363,9 @@ function EditForm(props){
             <Form.Label> Estado</Form.Label>
               <Form.Control
                 type="text"
-                value={userData.estado}
+                value={userData.state}
                 placeholder="Estado"
-                onChange={e=>setUserData({...userData, estado: e.target.value})}
+                onChange={e=>setUserData({...userData, state: e.target.value})}
               />
               </Form.Group>
               <Form.Group as={Col} md="4" controlId="validationFormik02" className="position-relative">

@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import {Row, Col, Card, Button} from "antd";
-import { getCompanyApi } from '../../../api/company';
+import { getCompanyActiveApi } from '../../../api/company';
 import { getAvatarApi } from '../../../api/user';
 //import {Link} from "react-router-dom"
 
@@ -10,7 +10,7 @@ export default function HomeEmpresas() {
     const [companies, setCompanies]= useState([]);
   
     useEffect(() => {
-      getCompanyApi().then(response => {
+        getCompanyActiveApi(true).then(response => {
         setCompanies(response.company);
       })
       setRealoadCompany(false);
@@ -23,10 +23,11 @@ export default function HomeEmpresas() {
             <Col lg={4}/>
             <Col lg={16}>
                 <Row className="row-empresas">
-                    {companies.map((post)=>(                       
-                    <Col md={6}> <CardEmpresas image={post.avatar} title={post.title} description={post.description} /></Col>
-                    ))}
-                   
+                    {companies ? 
+                     companies.map((post)=>(                       
+                    <Col md={6}> <CardEmpresas key={post._id} id={post._id} image={post.avatar} title={post.title} description={post.description} /></Col>
+                    ))
+                    : null}
                 </Row>
             </Col>
           {/*  <Col lg={4}/>
@@ -42,17 +43,19 @@ export default function HomeEmpresas() {
 
 
 function CardEmpresas(props){
-    const {image, title, description, link} = props;
+    const {image, title, description, link, id} = props;
     const [avatar, setAvatar]=useState(null);
     const {Meta} = Card;
     useEffect(()=>{
             getAvatarApi(image).then(response=>{
                 setAvatar(response);
             })
-    }, [image])
+    }, [image]);
     return(
-        <a href={link} >
+        <a href={link} id={id} key={id}>
             <Card 
+            id={id}
+            key={id}
             className="home-empresas__card" 
             cover={<img src={avatar} alt={title}/>}
             actions={[<Button> Ver más</Button>]}

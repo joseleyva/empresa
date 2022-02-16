@@ -6,12 +6,13 @@ import { EscolaridadOp, Nivel } from './Opciones';
 import { updateInfoVacanciesApi } from '../api/vacancies';
 import { getAccessTokenApi } from '../api/auth';
 import { notification } from 'antd';
+import { MultiSelect } from "react-multi-select-component";
 
 const schema = yup.object().shape({
     scholarship: yup.string().required("Seleccione la Escolaridad"),
     knowledge: yup.string().required("especifique los conociemntos").min(1).matches(/^[a-zA-ZñÑ ]+$/),
     experience: yup.string().required("Especifique el puesto").matches(/^[a-zA-ZñÑ ]+$/),
-    competencies: yup.string().required("Especifique las competencias").matches(/^[a-zA-ZñÑ ]+$/),
+    competencies: yup.string(),
     abilities: yup.string().required("Especifique las habilidades").matches(/^[a-zA-ZñÑ ]+$/),
     parcel: yup.string().required("Especifique"),
     idiom: yup.string().required("Ingrese los idiomas").matches(/^[a-zA-ZñÑ ]+$/),
@@ -21,9 +22,16 @@ const schema = yup.object().shape({
 
 
 });
+
+const options = [
+    { label: "Grapes 🍇", value: "grapes" },
+    { label: "Mango 🥭", value: "mango" },
+    { label: "Strawberry 🍓", value: "strawberry" },
+];
 const FormEdu = (props) => {
     const [fallo, setFallo] = useState(false);
     const [estado, setEstado] = React.useState(true);
+    const [selected, setSelected] = useState([]);
     const { funcion, place, valor } = props;
     const token = getAccessTokenApi();
     const { _id } = valor;
@@ -40,6 +48,7 @@ const FormEdu = (props) => {
             <Formik
                 validationSchema={schema}
                 onSubmit={(valores, { resetForm }) => {
+                    valores.competencies = selected;
                     setEstado(false);
                     updateInfoVacanciesApi(token, valores, _id).then(result => {
                         notification["success"]({
@@ -149,14 +158,12 @@ const FormEdu = (props) => {
                         <Row className="mb-3">
                             <Form.Group as={Col} md="4" controlId="validationFormik01" className="position-relative">
                                 <Form.Label>Competencias requeridas</Form.Label>
-                                <Form.Control
+                                <MultiSelect
                                     required
-                                    type="text"
-                                    name="competencies"
-                                    value={values.competencies}
-                                    onChange={handleChange}
-                                    isValid={touched.competencies && !errors.competencies}
-                                    isInvalid={fallo ? !!errors.competencies : false}
+                                    options={options}
+                                    value={selected}
+                                    onChange={setSelected}
+                                    labelledBy="Select"
                                 />
                                 <Form.Control.Feedback type="invalid" tooltip>{errors.competencies}</Form.Control.Feedback>
                             </Form.Group>

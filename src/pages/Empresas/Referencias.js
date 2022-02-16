@@ -15,7 +15,7 @@ import { getReferenceApi } from '../../api/reference'
 import { getUserReferenceApi } from '../../api/userReference';
 import { getAccessTokenApi } from '../../api/auth'
 import { Button } from 'react-bootstrap'
-import { Switch} from 'antd';
+import { Switch } from 'antd';
 import useAuth from '../../hooks/useAuth';
 
 function Referencias() {
@@ -31,7 +31,7 @@ function Referencias() {
       setUsersInctiveReference(response.reference);
     });
 
-getUserReferenceApi(token, user.name, true).then(response => {
+    getUserReferenceApi(token, user.name, true).then(response => {
       setUsersActiveReference(response.reference);
     });
     setReloadReference(false);
@@ -46,7 +46,7 @@ getUserReferenceApi(token, user.name, true).then(response => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [token, reloadReference]);
 
-return (
+  return (
     <div className="App">
 
       <div className="ContenedorEmpresas">
@@ -76,7 +76,7 @@ return (
             </span>
           </div>
         </div>
-        <Divider/>
+        <Divider />
         <Row className="MargenL" >
           <Form.Group as={Col} md="4">
             <h6>Candidato activo </h6>
@@ -90,18 +90,18 @@ return (
           </Form.Group>
         </Row>
         <div className="MarginB">
-        {viewUsersActives ? (
-          usersInctiveReference ? usersInctiveReference.map((post) => (
-            <CardsReferenciasMini key={post._id} id={post._id} post={post} setReloadReference={setReloadReference}  />
-          )) : null) : (usersActiveReference ? usersActiveReference.map((post) => (
-            <CardsReferenciasMini key={post._id} id={post._id} post={post} setReloadReference={setReloadReference} />
-          )) : null)}
+          {viewUsersActives ? (
+            usersInctiveReference ? usersInctiveReference.map((post) => (
+              <CardsReferenciasMini key={post._id} id={post._id} post={post} setReloadReference={setReloadReference} />
+            )) : null) : (usersActiveReference ? usersActiveReference.map((post) => (
+              <CardsReferenciasMini key={post._id} id={post._id} post={post} setReloadReference={setReloadReference} />
+            )) : null)}
         </div>
         <Divider />
         <h4>Referencias recibidas</h4>
         <div className="divRefRec">
           {reference ? reference.map((post) => (
-            <CardsRefRecibidas  key={post._id} id={post._id} post={post} setReloadReference={setReloadReference} />
+            <CardsRefRecibidas key={post._id} id={post._id} post={post} setReloadReference={setReloadReference} />
           )) : null}
         </div>
       </div>

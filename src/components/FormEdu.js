@@ -6,13 +6,17 @@ import { EscolaridadOp, Nivel } from './Opciones';
 import { updateInfoVacanciesApi } from '../api/vacancies';
 import { getAccessTokenApi } from '../api/auth';
 import { notification } from 'antd';
-import { MultiSelect } from "react-multi-select-component";
+import { MultiSelect } from 'primereact/multiselect';
+import 'primereact/resources/themes/bootstrap4-light-blue/theme.css'
+import "primereact/resources/primereact.min.css";                  //core css
+import "primeicons/primeicons.css";                                //icons
+import '../App.css';
 
 const schema = yup.object().shape({
     scholarship: yup.string().required("Seleccione la Escolaridad"),
     knowledge: yup.string().required("especifique los conociemntos").min(1).matches(/^[a-zA-ZñÑ ]+$/),
     experience: yup.string().required("Especifique el puesto").matches(/^[a-zA-ZñÑ ]+$/),
-    competencies: yup.string(),
+    competencies: yup.array().of(yup.string().required("Seleccione")).required("Selecione"),
     abilities: yup.string().required("Especifique las habilidades").matches(/^[a-zA-ZñÑ ]+$/),
     parcel: yup.string().required("Especifique"),
     idiom: yup.string().required("Ingrese los idiomas").matches(/^[a-zA-ZñÑ ]+$/),
@@ -23,15 +27,19 @@ const schema = yup.object().shape({
 
 });
 
-const options = [
-    { label: "Grapes 🍇", value: "grapes" },
-    { label: "Mango 🥭", value: "mango" },
-    { label: "Strawberry 🍓", value: "strawberry" },
+const citySelectItems = [
+    { label: 'New York', value: 'NY' },
+    { label: 'Rome', value: 'RM' },
+    { label: 'London', value: 'LDN' },
+    { label: 'Istanbul', value: 'IST' },
+    { label: 'Paris', value: 'PRS' }
 ];
+
+
 const FormEdu = (props) => {
     const [fallo, setFallo] = useState(false);
     const [estado, setEstado] = React.useState(true);
-    const [selected, setSelected] = useState([]);
+    const [select, setSelect] = useState(true);
     const { funcion, place, valor } = props;
     const token = getAccessTokenApi();
     const { _id } = valor;
@@ -48,21 +56,29 @@ const FormEdu = (props) => {
             <Formik
                 validationSchema={schema}
                 onSubmit={(valores, { resetForm }) => {
-                    valores.competencies = selected;
                     setEstado(false);
-                    updateInfoVacanciesApi(token, valores, _id).then(result => {
-                        notification["success"]({
-                            message: result.message,
-                            placement: "bottomLeft",
-                        });
-                    }).catch(err => {
+                    if (valores.competencies.length === 0) {
                         notification["error"]({
-                            message: err.message,
-                            placement: "bottomLeft",
-                        });
-                    })
-
+                            message: "Ingrese todos los datos",
+                            placement: "bottomLeft"
+                        })
+                        setSelect(false);
+                    } else {
+                        updateInfoVacanciesApi(token, valores, _id).then(result => {
+                            notification["success"]({
+                                message: result.message,
+                                placement: "bottomLeft",
+                            });
+                            setSelect(true);
+                        }).catch(err => {
+                            notification["error"]({
+                                message: err.message,
+                                placement: "bottomLeft",
+                            });
+                        })
+                    }
                 }}
+
                 initialValues={{
                     scholarship: "",
                     knowledge: "",
@@ -76,6 +92,7 @@ const FormEdu = (props) => {
                     levelExpe: "",
                 }}
             >
+
                 {({
                     handleSubmit,
                     handleChange,
@@ -159,13 +176,20 @@ const FormEdu = (props) => {
                             <Form.Group as={Col} md="4" controlId="validationFormik01" className="position-relative">
                                 <Form.Label>Competencias requeridas</Form.Label>
                                 <MultiSelect
-                                    required
-                                    options={options}
-                                    value={selected}
-                                    onChange={setSelected}
-                                    labelledBy="Select"
+                                    name="competencies"
+                                    value={values.competencies}
+                                    options={citySelectItems}
+                                    onChange={handleChange}
+                                    style={{ width: "235px" }}
+                                    isValid={touched.competencies && !errors.competencies}
+                                    isInvalid={fallo ? !!errors.competencies : false}
+                                    className={select ? "p-valid" : "p-invalid"}
                                 />
-                                <Form.Control.Feedback type="invalid" tooltip>{errors.competencies}</Form.Control.Feedback>
+                                {select ?
+                                    false
+                                    :
+                                    <Form.Control.Feedback type="invalid" className="tooltip-select" tooltip> Seleccione una Opción</Form.Control.Feedback>
+                                }
                             </Form.Group>
                             <Form.Group as={Col} md="4" controlId="validationFormik01" className="position-relative">
                                 <Form.Label>Habilidades requeridas</Form.Label>
@@ -251,8 +275,10 @@ const FormEdu = (props) => {
                             <Button variant="danger" className="botonF">Cancelar</Button>
                         </div>
                         <Row className="mt-3">
-                            <Form.Group as={Col} md={{ span: 10, offset: 10 }}>
-                                <Button onClick={funcion} disabled={estado} className="botonStep" variant="outline-secondary">
+                            <Form.Group as={Col} md="5"></Form.Group>
+                            <Form.Group as={Col} md="5"></Form.Group>
+                            <Form.Group as={Col} md="2">
+                                <Button onClick={funcion} disabled={estado} style={{ width: "70px" }} variant="outline-secondary">
                                     {place}
                                 </Button>
                             </Form.Group>

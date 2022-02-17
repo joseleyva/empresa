@@ -148,7 +148,7 @@ function VacanteForm() {
                                 </Link>
                             </p>
                         </div>
-                        <div className="Fcol-md-4 footer-col">
+                        <div className="Fcol-md-4 footer-col" style={{paddingRigth: "0px"}}>
                             <h4>Empresa</h4>
                             <p>
                             </p>

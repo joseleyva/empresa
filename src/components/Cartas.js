@@ -38,7 +38,7 @@ function Cartas(props) {
                         <Image src={avatar ? avatar : Imagen} roundedCircle width="150px" height="150px" />
                     </Col>
                 </Row>
-                <div className="C">
+                <div className="Candidatos">
                     <div className="col-md-10">
                         <div className="card-body">
                             <div>

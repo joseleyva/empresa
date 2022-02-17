@@ -173,8 +173,10 @@ const FormSueldo = (props) => {
                             <Button variant="danger" className="botonF">Cancelar</Button>
                         </div>
                         <Row className="mt-3">
-                            <Form.Group as={Col} md={{ span: 10, offset: 10 }}>
-                                <Button onClick={funcion} disabled={estado} className="botonStep" variant="outline-secondary">
+                        <Form.Group as={Col} md="5"></Form.Group>
+                            <Form.Group as={Col} md="5"></Form.Group>
+                            <Form.Group as={Col} md="2">
+                                <Button onClick={funcion} disabled={estado} style={{width: "70px"}} variant="outline-secondary">
                                     {place}
                                 </Button>
                             </Form.Group>

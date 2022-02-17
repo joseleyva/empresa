@@ -71,7 +71,7 @@
   background-color: lightgrey;
   align-content: center !important;
   bottom: 0;
-  width: 100%;
+  width: 99%;
 }
 
 .Fcol-md-4 {
@@ -187,10 +187,14 @@
 }
 .C {
   text-align: left !important;
-  width: 480px !important;
+  width: 360px !important;
   height: auto;
 }
-
+.Candidatos{
+  text-align: left !important;
+  width: 460px !important;
+  height: auto;
+}
 .Opciones {
   margin-left: 40px;
 }
@@ -232,9 +236,6 @@
   margin: 20px auto;
   border-radius: 20px;
   border-style: groove;
-}
-.botonStep {
-  width: 100px;
 }
 .botonStepG {
   margin-right: 10px !important;
@@ -552,4 +553,8 @@
 .arrow{
   font-size: 4.5rem!important;
   overflow: hidden;
+}
+
+.tooltip-select{
+  display: block!important;
 }

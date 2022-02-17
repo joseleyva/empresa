@@ -103,7 +103,7 @@ function CardsVacantes(props) {
 
       <Container className="ContenedorVacante" key={id} >
         <div className="C">
-          <div className="col-md-10">
+          <div className="col-md-8">
             <div className="card-body">
               <h6 align="left" className="card-title">Nombre: {post.nameP} </h6>
               <h6 align="left" className="card-title">Lugar: {post.place}</h6>

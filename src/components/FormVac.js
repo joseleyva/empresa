@@ -12,7 +12,7 @@ import {CreateStatesApi} from '../api/states';
 import '../scss/index.scss';
 
 const schema = yup.object().shape({
-    nameP: yup.string().required("Ingrese el puesto").matches(/^[a-zA-Z ]+$/, "Solo letras").min(5, 'muy corto'),
+    nameP: yup.string().required("Ingrese el puesto").matches(/^[a-zA-Z ñÑ]+$/, "Solo letras").min(5, 'muy corto'),
     numberP: yup.number().required("Numero de vacantes").min(1, 'Ingrese un numero'),
     activity: yup.string().max(100, 'Muy largo').min(0, 'Ingrese la descripción').required("Describir la actividad"),
     reportP: yup.string().required("Seleccione una opción"),
@@ -431,8 +431,10 @@ const FormVac = (props) => {
                             <Button variant="danger" href='/Empresas/Vacante' className="botonF">Cancelar</Button>
                         </div>
                         <Row className="mt-3">
-                            <Form.Group as={Col} md={{ span: 10, offset: 10 }}>
-                                <Button onClick={funcion} disabled={estado} className="botonStep" variant="outline-secondary">
+                        <Form.Group as={Col} md="5"></Form.Group>
+                            <Form.Group as={Col} md="5"></Form.Group>
+                            <Form.Group as={Col} md="2">
+                                <Button onClick={funcion} disabled={estado} style={{width: "70px"}} variant="outline-secondary">
                                     {place}
                                 </Button>
                             </Form.Group>

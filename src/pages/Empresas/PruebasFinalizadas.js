@@ -1,123 +1,204 @@
 import * as React from 'react';
+import { useState, useEffect, useRef } from 'react';
+import { DataTable } from 'primereact/datatable';
+import { Column } from 'primereact/column';
+import { Button } from 'primereact/button';
+import { Tooltip } from 'primereact/tooltip';
 import { Divider } from '@mui/material'
-import { Row, Col, Button } from 'react-bootstrap';
+import { Row, Col } from 'react-bootstrap';
 import GitHubIcon from '@mui/icons-material/GitHub';
 import FacebookIcon from '@mui/icons-material/Facebook';
 import TwitterIcon from '@mui/icons-material/Twitter';
 import { Instagram } from '@mui/icons-material';
 import Link from '@mui/material/Link';
-import { DataGrid, GridToolbarContainer, GridToolbarExport, GridRowsProp, GridColDef } from '@mui/x-data-grid';
+import { classNames } from 'primereact/utils';
+import { dcsv, dpdf, dxlsx } from '../../components/Opciones';
+import 'primereact/resources/themes/bootstrap4-light-blue/theme.css'
+import "primereact/resources/primereact.min.css";                  //core css
+import "primeicons/primeicons.css";                                //icons
+
 import '../../App.css';
 
 
-function CustomToolbar() {
-    return (
-        <GridToolbarContainer>
-            <GridToolbarExport />
-        </GridToolbarContainer>
-    );
-}
-
-
-const rows: GridRowsProp = [
+const datos = [
 
     {
         id: 1,
         name: "jose leyva",
         prueba: "Socieconomica",
-        resultados: 90
+        resultados: 34
     },
     {
         id: 2,
         name: "jose leyva",
         prueba: "Socieconomica",
-        resultados: 90
+        resultados: 54
     },
     {
         id: 3,
         name: "jose leyva",
         prueba: "Socieconomica",
-        resultados: 90
+        resultados: 65
     },
     {
         id: 4,
         name: "jose leyva",
         prueba: "Socieconomica",
-        resultados: 90
+        resultados: 76
     },
     {
         id: 5,
         name: "jose leyva",
         prueba: "Socieconomica",
-        resultados: 90
+        resultados: 94
     },
     {
         id: 6,
         name: "jose leyva",
         prueba: "Socieconomica",
-        resultados: 90
+        resultados: 0
     },
     {
         id: 7,
         name: "jose leyva",
         prueba: "Socieconomica",
-        resultados: 90
+        resultados: 51
     },
     {
         id: 8,
         name: "jose leyva",
         prueba: "Socieconomica",
-        resultados: 90
+        resultados: 52
     },
     {
         id: 9,
         name: "jose leyva",
         prueba: "Socieconomica",
-        resultados: 90
+        resultados: 64
     },
     {
         id: 10,
         name: "jose leyva",
         prueba: "Socieconomica",
-        resultados: 90
+        resultados: 68
     },
 
 
 ];
-const columns: GridColDef[] = [
-    { field: 'name', headerName: 'name', width: 250 },
-    { field: 'prueba', headerName: 'prueba', width: 250 },
-    { field: 'resultados', headerName: 'resultados', width: 250 },
-];
 
 export default function PruebasFinalizadas() {
+    const [products, setProducts] = useState([]);
+    const dt = useRef(null);
 
+
+    const cols = [
+        { field: 'name', header: 'name' },
+        { field: 'prueba', header: 'prueba' },
+        { field: 'resultados', header: 'resultados' }
+    ];
+
+    const exportColumns = cols.map(col => ({ title: col.header, dataKey: col.field }));
+
+    useEffect(() => {
+        setProducts(datos);
+    }, [datos]); // eslint-disable-line react-hooks/exhaustive-deps
+
+
+    const exportCSV = (selectionOnly) => {
+        dt.current.exportCSV({ selectionOnly });
+    }
+
+    const exportPdf = () => {
+        import('jspdf').then(jsPDF => {
+            import('jspdf-autotable').then(() => {
+                const doc = new jsPDF.default(0, 0);
+                doc.autoTable(exportColumns, products);
+                doc.save('products.pdf');
+            })
+        })
+    }
+
+    const exportExcel = () => {
+        import('xlsx').then(xlsx => {
+            const worksheet = xlsx.utils.json_to_sheet(products);
+            const workbook = { Sheets: { 'data': worksheet }, SheetNames: ['data'] };
+            const excelBuffer = xlsx.write(workbook, { bookType: 'xlsx', type: 'array' });
+            saveAsExcelFile(excelBuffer, 'products');
+        });
+    }
+
+    const saveAsExcelFile = (buffer, fileName) => {
+        import('file-saver').then(FileSaver => {
+            let EXCEL_TYPE = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8';
+            let EXCEL_EXTENSION = '.xlsx';
+            const data = new Blob([buffer], {
+                type: EXCEL_TYPE
+            });
+            FileSaver.saveAs(data, fileName + '_export_' + new Date().getTime() + EXCEL_EXTENSION);
+        });
+    }
+
+
+
+
+    const stockBodyTemplate = (rowData) => {
+        const stockClassName = classNames({
+            'outofstock': rowData.resultados === 0,
+            'lowstock': rowData.resultados > 0 && rowData.resultados < 69,
+            'instock': rowData.resultados >= 70
+        });
+
+        return (
+            <div className={stockClassName}>
+                {rowData.resultados}
+            </div>
+        );
+    }
+
+    const header = (
+        <div className="flex export-buttons" style={{ textAlign: "left" }}>
+            <label>Descargar:</label>
+            <Row style={{marginLeft:"10px"}}>
+                <Button type="button" icon={<svg xmlns="http://www.w3.org/2000/svg" width="23" height="23" fill="currentColor" className="bi bi-filetype-csv" viewBox="0 0 16 16">
+                    <path fillRule="evenodd" d={dcsv} />
+                </svg>} onClick={() => exportCSV(false)} className="p-button-success m-1" data-pr-tooltip="CSV" />
+                <Button type="button" icon={<svg xmlns="http://www.w3.org/2000/svg" width="23" height="23" fill="currentColor" className="bi bi-filetype-xlsx" viewBox="0 0 16 16">
+                    <path fillRule="evenodd" d={dxlsx} />
+                </svg>} onClick={exportExcel} className="p-button-success m-1" data-pr-tooltip="XLS" />
+                <Button type="button" icon={<svg xmlns="http://www.w3.org/2000/svg" width="23" height="23" fill="currentColor" className="bi bi-filetype-pdf" viewBox="0 0 16 16">
+                    <path fillRule="evenodd" d={dpdf} />
+                </svg>} onClick={exportPdf} className="p-button-danger m-1" data-pr-tooltip="PDF" />
+            </Row>
+        </div>
+    );
     return (
         <div className='App'>
             <div className='ContenedorEmpresas'>
                 <h4>Pruebas Finalizadas</h4>
                 <Divider className='mb-2' />
-                <div style={{ height: 500, width: '100%' }}>
-                    <DataGrid
-                        columns={columns}
-                        rows={rows}
+                <div>
 
-                        components={{
-                            Toolbar: CustomToolbar,
-                            toolbar: { printOptions: { disableToolbarButton: true } }
-                        }}
-                    />
+                    <div className="card">
+                        <Tooltip target=".export-buttons>button" position="bottom" />
 
+                        <DataTable ref={dt} value={products} scrollable scrollHeight="400px" resizableColumns columnResizeMode="expand" showGridlines header={header} dataKey="id" responsiveLayout="scroll" breakpoint="600px" >
+                            {
+                                cols.map((col, index) => <Column key={index} field={col.field} header={col.header} body={col.header === "resultados" ? stockBodyTemplate : null} sortable />)
+                            }
+                        </DataTable>
+                    </div>
                 </div>
+
                 <Row className="mb-3">
                     <Col className="d-grid gap-2">
-                        <Button className="m-2">Volver al incio</Button>
                     </Col>
                     <Col>
                     </Col>
                     <Col className="d-grid gap-2">
+                        <Button className="m-2">Volver al incio</Button>
                     </Col>
                 </Row>
+
             </div>
             <footer>
                 <div className="Fcontainer">

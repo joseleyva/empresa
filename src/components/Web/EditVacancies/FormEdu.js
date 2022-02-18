@@ -10,7 +10,7 @@ import { MultiSelect } from 'primereact/multiselect';
 import 'primereact/resources/themes/bootstrap4-light-blue/theme.css';
 import "primereact/resources/primereact.min.css";                  //core css
 import "primeicons/primeicons.css";                                //icons
- 
+import "../../../App.css";
 const schema = yup.object().shape({
     scholarship: yup.string().required("Seleccione la Escolaridad"),
     knowledge: yup.string().required("especifique los conociemntos").min(1).matches(/^[a-zA-ZñÑ ]+$/),
@@ -36,9 +36,9 @@ const citySelectItems = [
 
 const FormEdu = (props) => {
     const [fallo, setFallo] = useState(false);
-    const {vacancie,setReloadUsers,setIsVisibleModal } = props;
+    const { vacancie, setReloadUsers, setIsVisibleModal } = props;
     const token = getAccessTokenApi();
-    const [cities, setCities] = useState(vacancie.competencies);
+    const [select, setSelect] = useState(true);
 
     const handleClick = (event) => {
         const Button = event.currentTarget;
@@ -53,22 +53,28 @@ const FormEdu = (props) => {
             <Formik
                 validationSchema={schema}
                 onSubmit={(valores, { resetForm }) => {
-                    valores.competencies= cities;
-                    console.log(valores.competencies)
-                    updateInfoVacanciesApi(token, valores, vacancie._id).then(result => {
-                        notification["success"]({
-                            message: result.message,
-                            placement: "bottomLeft",
-                        });
-                        setReloadUsers(true);
-                        setIsVisibleModal(false);
-                    }).catch(err => {
+                    if (valores.competencies.length === 0) {
                         notification["error"]({
-                            message: err.message,
-                            placement: "bottomLeft",
-                        });
-                    })
-
+                            message: "Ingrese todos los datos",
+                            placement: "bottomLeft"
+                        })
+                        setSelect(false);
+                    } else {
+                        updateInfoVacanciesApi(token, valores, vacancie._id).then(result => {
+                            notification["success"]({
+                                message: result.message,
+                                placement: "bottomLeft",
+                            });
+                            setReloadUsers(true);
+                            setIsVisibleModal(false);
+                            setSelect(true);
+                        }).catch(err => {
+                            notification["error"]({
+                                message: err.message,
+                                placement: "bottomLeft",
+                            });
+                        })
+                    }
 
                 }}
                 initialValues={{
@@ -166,14 +172,22 @@ const FormEdu = (props) => {
                         <Row className="mb-3">
                             <Form.Group as={Col} md="4" controlId="validationFormik01" className="position-relative">
                                 <Form.Label>Competencias requeridas</Form.Label>
-                                <MultiSelect 
-                                value={cities} 
-                                options={citySelectItems}
-                                 onChange={(e) => setCities(e.value)}
-                                 style={{width: "235px"}}
-                                  />
-                                <Form.Control.Feedback type="invalid" tooltip>{errors.competencies}</Form.Control.Feedback>
-                            </Form.Group>
+                                <MultiSelect
+                                    name="competencies"
+                                    value={values.competencies}
+                                    options={citySelectItems}
+                                    onChange={handleChange}
+                                    display="chip"
+                                    style={{ width: "250px"}}
+                                    isValid={touched.competencies && !errors.competencies}
+                                    isInvalid={fallo ? !!errors.competencies : false}
+                                    className={select ? "p-valid" : "p-invalid"}
+                                />
+                                {select ?
+                                    false
+                                    :
+                                    <Form.Control.Feedback type="invalid" className="tooltip-select" tooltip> Seleccione una Opción</Form.Control.Feedback>
+                                }</Form.Group>
                             <Form.Group as={Col} md="4" controlId="validationFormik01" className="position-relative">
                                 <Form.Label>Habilidades requeridas</Form.Label>
                                 <Form.Control
@@ -255,7 +269,7 @@ const FormEdu = (props) => {
                         </Row>
                         <div className="DivBF">
                             <Button type="submit" onClick={handleClick} className="botonF" >Guardar</Button>
-                            <Button variant="danger" onClick={()=> setIsVisibleModal(false)} className="botonF">Cancelar</Button>
+                            <Button variant="danger" onClick={() => setIsVisibleModal(false)} className="botonF">Cancelar</Button>
                         </div>
                     </Form>
                 )}

@@ -180,6 +180,7 @@ const FormEdu = (props) => {
                                     value={values.competencies}
                                     options={citySelectItems}
                                     onChange={handleChange}
+                                    display="chip"
                                     style={{ width: "235px" }}
                                     isValid={touched.competencies && !errors.competencies}
                                     isInvalid={fallo ? !!errors.competencies : false}

@@ -25,7 +25,7 @@ function App() {
           <header >
         <Navbar collapseOnSelect expand="lg" className="Barra ">
           <Container>
-            <Navbar.Brand href="/Home">
+            <Navbar.Brand href="/">
               <img
                 alt=""
                 src="logo512.png"

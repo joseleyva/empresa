@@ -1,46 +1,84 @@
 import '../../App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Row, Button, Form, Col } from 'react-bootstrap';
-import { Line } from 'react-chartjs-2';
 import GitHubIcon from '@mui/icons-material/GitHub';
 import FacebookIcon from '@mui/icons-material/Facebook';
 import TwitterIcon from '@mui/icons-material/Twitter';
 import { Instagram } from '@mui/icons-material';
 import Link from '@mui/material/Link';
+import { Chart } from 'primereact/chart';
 
 
 
 function Empresas() {
-    
-    const data = {
-        labels: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio'],
+
+    const basicData = {
+        labels: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Nobiembre', 'Diciembre'],
         datasets: [
             {
-                label: 'Reputación',
-                data: [8, 10, 5, 6, 1, 7],
+                label: 'First Dataset',
+                data: [65, 59, 80, 81, 56, 55, 40, 54, 65, 34, 51, 100],
                 fill: false,
-                backgroundColor: 'rgb(255, 99, 132)',
-                borderColor: 'rgba(255, 99, 132, 0.2)',
+                borderColor: '#42A5F5',
+                tension: .4
             },
-        ],
-    };
-    
-    const options = {
-        scales: {
-            y: {
-                beginAtZero: true
+            {
+                label: 'Second Dataset',
+                data: [28, 48, 40, 19, 86, 27, 90, 13, 53, 12, 56, 10],
+                fill: false,
+                borderColor: '#FFA726',
+                tension: .4
             }
-        }
+        ]
     };
+    const getLightTheme = () => {
+        let basicOptions = {
+            maintainAspectRatio: false,
+            aspectRatio: .6,
+            plugins: {
+                legend: {
+                    labels: {
+                        color: '#495057'
+                    }
+                }
+            },
+            scales: {
+                x: {
+                    ticks: {
+                        color: '#495057'
+                    },
+                    grid: {
+                        color: '#ebedef'
+                    }
+                },
+                y: {
+                    ticks: {
+                        color: '#495057'
+                    },
+                    grid: {
+                        color: '#ebedef'
+                    }
+                }
+            }
+        };
+
+
+        return {
+            basicOptions
+        }
+    }
+
+    const { basicOptions, } = getLightTheme();
+
     return (
 
         <div className="App">
-            
+
 
             <div className="ContenedorEmpresas">
                 <h4> Escritorio Virtual</h4>
                 <div className="Graficas">
-                    <Line data={data} options={options} />
+                    <Chart type="line" height='350px' data={basicData} options={basicOptions} />
                 </div>
                 <Row className="mb-3 BotonesEm">
                     <Form.Group as={Col} md="4">

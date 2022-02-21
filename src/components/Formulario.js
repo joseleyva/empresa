@@ -31,6 +31,7 @@ const schema = yup.object().shape({
   suburb: yup.string().required("Ingrese la Col/Fracc").matches(/^[a-zA-Z -&]+$/),
   zip: yup.string().required("Ingrese el Codigo postal").matches(/^[0-9]+$/, 'Solo numeros'),
   state: yup.string().required("Ingrese el Estado").matches(/^[a-zA-Z ]+$/),
+  municipality: yup.string().required("Ingrese el Municipio").matches(/^[a-zA-Z ]+$/),
 });
 
 function Formulario() {
@@ -122,6 +123,7 @@ function Formulario() {
         suburb: "",
         zip: "",
         state: "",
+        municipality: ""
       }}
     >
       {({
@@ -335,6 +337,22 @@ function Formulario() {
               />
               <Form.Control.Feedback type="invalid" tooltip>{errors.state} </Form.Control.Feedback>
             </Form.Group>
+            <Form.Group as={Col} md="4" controlId="validationFormikEstado" className="position-relative">
+              <Form.Label>Municipio</Form.Label>
+              <Form.Control
+                type="text"
+                placeholder="Municipio"
+                name="municipality"
+                value={values.municipality}
+                onChange={handleChange}
+                isValid={touched.state && !errors.municipality}
+                isInvalid={fallo ? !!errors.municipality : false}
+                required
+              />
+              <Form.Control.Feedback type="invalid" tooltip>{errors.municipality} </Form.Control.Feedback>
+            </Form.Group>
+          </Row>
+          <Row className='mb-3'>
             <Form.Group as={Col} md="3">
               <Form.Label>Paquetes Ofrecidos </Form.Label>
               <Button variant="outline-success" onClick={handleShow}>Pagar Servicio</Button>

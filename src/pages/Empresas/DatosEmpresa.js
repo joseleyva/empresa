@@ -57,7 +57,7 @@ function DatosEmpresas() {
     Giro: users.business,
     Nombre: `${users.nameUser} ${users.lastnameP} ${users.lastnameM}`,
     Puesto: users.job,
-    Estado: users.estado,
+    Estado: users.state,
     Municipio: users.municipality,
     Codigo: users.zip,
     telefono: users.numberphone,

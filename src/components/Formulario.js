@@ -139,7 +139,7 @@ function Formulario() {
           <h4>Datos de acceso y Contacto</h4>
 
           <Row className="mb-3">
-            <Form.Group as={Col} md="4" controlId="validationFormik01" className="position-relative">
+            <Form.Group as={Col} md="4" controlId="validationFormikNameUser" className="position-relative">
               <Form.Label>Nombre(s)</Form.Label>
               <Form.Control
                 type="text"
@@ -223,7 +223,7 @@ function Formulario() {
               <Form.Control.Feedback type="invalid" tooltip>{errors.RFC}
               </Form.Control.Feedback>
             </Form.Group>
-            <Form.Group as={Col} md="6" controlId="validationFormik04" className="position-relative">
+            <Form.Group as={Col} md="6" controlId="validationFormikRSocial" className="position-relative">
               <Form.Label>Razon Social</Form.Label>
               <Form.Control
                 type="text"
@@ -239,7 +239,7 @@ function Formulario() {
             </Form.Group>
           </Row>
           <Row className="mb-3">
-            <Form.Group as={Col} md="4" controlId="validationFormik03" className="position-relative">
+            <Form.Group as={Col} md="4" controlId="validationFormikNumberEm" className="position-relative">
               <Form.Label>Numero de empleados</Form.Label>
               <Form.Select
                 type="select"
@@ -337,7 +337,7 @@ function Formulario() {
               />
               <Form.Control.Feedback type="invalid" tooltip>{errors.state} </Form.Control.Feedback>
             </Form.Group>
-            <Form.Group as={Col} md="4" controlId="validationFormikEstado" className="position-relative">
+            <Form.Group as={Col} md="4" controlId="validationFormikMunicipality" className="position-relative">
               <Form.Label>Municipio</Form.Label>
               <Form.Control
                 type="text"

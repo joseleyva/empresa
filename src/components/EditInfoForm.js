@@ -152,7 +152,7 @@ function EditForm(props){
             <h4>Datos de Contacto</h4>
             </Row>
           <Row className="mb-3">
-            <Form.Group as={Col} md="4" controlId="validationFormik01" className="position-relative">
+            <Form.Group as={Col} md="4" controlId="validationFormikName" className="position-relative">
               <Form.Label>Nombre(s)</Form.Label>
               <Form.Control
               prefix={<UserOutlined/>}
@@ -165,7 +165,7 @@ function EditForm(props){
                 })}
               />
             </Form.Group>
-            <Form.Group as={Col} md="4" controlId="validationFormik02" className="position-relative">
+            <Form.Group as={Col} md="4" controlId="validationFormikLastnameP" className="position-relative">
               <Form.Label>Apellido Paterno</Form.Label>
               <Form.Control
                 type="text"
@@ -178,7 +178,7 @@ function EditForm(props){
                 required
               />
             </Form.Group>
-            <Form.Group as={Col} md="4" controlId="validationFormik02" className="position-relative">
+            <Form.Group as={Col} md="4" controlId="validationFormiklastnameM" className="position-relative">
               <Form.Label>Apellido Materno</Form.Label>
               <Form.Control
                 type="text"
@@ -194,7 +194,7 @@ function EditForm(props){
 
           </Row>
           <Row className="mb-3">
-            <Form.Group as={Col} md="4" controlId="validationFormikUsername" className="position-relative">
+            <Form.Group as={Col} md="4" controlId="validationFormikEmail" className="position-relative">
               <Form.Label>Correo</Form.Label>
               <InputGroup hasValidation>
                 <Form.Control
@@ -207,7 +207,7 @@ function EditForm(props){
                 />
               </InputGroup>
             </Form.Group>
-            <Form.Group as={Col} md="4" controlId="validationFormikUsername" className="position-relative">
+            <Form.Group as={Col} md="4" controlId="validationFormik<numberPhone" className="position-relative">
               <Form.Label>Numero de telefono</Form.Label>
               <InputGroup hasValidation>
                 <Form.Control
@@ -240,7 +240,7 @@ function EditForm(props){
               <h4>Datos de la Empresa</h4>
           </Row>
           <Row className="mb-3">
-            <Form.Group as={Col} md="4" controlId="validationFormik01" className="position-relative">
+            <Form.Group as={Col} md="4" controlId="validationFormikNameEm" className="position-relative">
               <Form.Label>Nombre de la empresa</Form.Label>
               <Form.Control
               prefix={<UserOutlined/>}
@@ -253,7 +253,7 @@ function EditForm(props){
                 })}
               />
             </Form.Group>    
-            <Form.Group as={Col} md="4" controlId="validationFormik02" className="position-relative">
+            <Form.Group as={Col} md="4" controlId="validationFormikBusiness" className="position-relative">
               <Form.Label>Giro Empresarial</Form.Label>
               <Form.Control
                 type="text"
@@ -268,7 +268,7 @@ function EditForm(props){
             </Form.Group>
             </Row>
           <Row className="mb-3">
-          <Form.Group as={Col} md="4" controlId="validationFormikUsername" className="position-relative">
+          <Form.Group as={Col} md="4" controlId="validationFormikRFC" className="position-relative">
               <Form.Label>RFC</Form.Label>
               <InputGroup hasValidation>
                 <Form.Control
@@ -281,7 +281,7 @@ function EditForm(props){
                 />
               </InputGroup>
             </Form.Group>
-            <Form.Group as={Col} md="4" controlId="validationFormik04" className="position-relative">
+            <Form.Group as={Col} md="4" controlId="validationFormikRsocial" className="position-relative">
               <Form.Label>Razon Social</Form.Label>
               <Form.Control
                 type="text"
@@ -290,7 +290,7 @@ function EditForm(props){
                 onChange={e=>setUserData({...userData, RSocial: e.target.value})}
               />
             </Form.Group>
-            <Form.Group as={Col} md="4" controlId="validationFormik04" className="position-relative">
+            <Form.Group as={Col} md="4" controlId="validationFormikSchedule" className="position-relative">
               <Form.Label>Horario de atencion</Form.Label>
               <Form.Control
                 type="text"
@@ -304,7 +304,7 @@ function EditForm(props){
 
           <Row className="mb-3">
 
-          <Form.Group as={Col} md="4" controlId="validationFormikUsername" className="position-relative">
+          <Form.Group as={Col} md="4" controlId="validationFormikStreet" className="position-relative">
               <Form.Label>Calle</Form.Label>
               <InputGroup hasValidation>
                 <Form.Control
@@ -317,7 +317,7 @@ function EditForm(props){
                 />
               </InputGroup>
             </Form.Group>
-            <Form.Group as={Col} md="4" controlId="validationFormikUsername" className="position-relative">
+            <Form.Group as={Col} md="4" controlId="validationFormikHouseNumber" className="position-relative">
               <Form.Label>Numero</Form.Label>
               <InputGroup hasValidation>
                 <Form.Control
@@ -330,7 +330,7 @@ function EditForm(props){
                 />
               </InputGroup>
             </Form.Group>
-            <Form.Group as={Col} md="4" controlId="validationFormikUsername" className="position-relative">
+            <Form.Group as={Col} md="4" controlId="validationFormikSuburb" className="position-relative">
               <Form.Label>Colonia</Form.Label>
               <InputGroup hasValidation>
                 <Form.Control
@@ -346,7 +346,7 @@ function EditForm(props){
 
           </Row>
           <Row className="mb-3">
-          <Form.Group as={Col} md="4" controlId="validationFormikUsername" className="position-relative">
+          <Form.Group as={Col} md="4" controlId="validationFormikZip" className="position-relative">
               <Form.Label>Codigo Postal</Form.Label>
               <InputGroup hasValidation>
                 <Form.Control
@@ -359,7 +359,7 @@ function EditForm(props){
                 />
               </InputGroup>
             </Form.Group>
-            <Form.Group as={Col} md="4" controlId="validationFormik03" className="position-relative">
+            <Form.Group as={Col} md="4" controlId="validationFormikState" className="position-relative">
             <Form.Label> Estado</Form.Label>
               <Form.Control
                 type="text"
@@ -368,7 +368,7 @@ function EditForm(props){
                 onChange={e=>setUserData({...userData, state: e.target.value})}
               />
               </Form.Group>
-              <Form.Group as={Col} md="4" controlId="validationFormik02" className="position-relative">
+              <Form.Group as={Col} md="4" controlId="validationFormikMunicipality" className="position-relative">
               <Form.Label>Municipio</Form.Label>
               <Form.Control
                 type="text"

@@ -11,6 +11,7 @@ import Typography from '@mui/material/Typography';
 import FormularioContacto from '../components/FormularioContacto';
 import { getAccessTokenApi } from "../api/auth";
 import { Redirect } from "react-router-dom";
+import {Affix} from 'antd';
 
 function Contacto() {
     if (getAccessTokenApi()) {
@@ -18,6 +19,8 @@ function Contacto() {
       }
     return (
         <div className="App">
+            <Affix offsetTop={0}>
+
             <Navbar collapseOnSelect expand="lg" className="Barra">
                 <Container>
                     <Navbar.Brand href="/">
@@ -27,7 +30,7 @@ function Contacto() {
                             width="30"
                             height="30"
                             className="d-inline-block align-top"
-                        />{' '}
+                            />{' '}
                         Nombre de la empresa
                     </Navbar.Brand>
                     <Navbar.Toggle aria-controls="responsive-navbar-nav" />
@@ -44,6 +47,7 @@ function Contacto() {
                     </Navbar.Collapse>
                 </Container>
             </Navbar>
+            </Affix>
             <Container className='mt-4'>
                 <Grid container spacing={0} sx={{ mt: 2 }}>
                     <h3>Por favor complete el formulario</h3>

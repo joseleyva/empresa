@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import {Row, Col, Card, Button} from "antd";
+import {Row, Col, Card, Button, Rate} from "antd";
 import { getCompanyActiveApi } from '../../../api/company';
 import { getAvatarApi } from '../../../api/user';
 //import {Link} from "react-router-dom"
@@ -25,7 +25,7 @@ export default function HomeEmpresas() {
                 <Row className="row-empresas">
                     {companies ? 
                      companies.map((post)=>(                       
-                    <Col md={6}> <CardEmpresas key={post._id} id={post._id} image={post.avatar} title={post.title} description={post.description} /></Col>
+                    <Col md={6}> <CardEmpresas key={post._id} id={post._id} image={post.avatar} title={post.title} description={post.description} rate={post.rate} /></Col>
                     ))
                     : null}
                 </Row>
@@ -43,7 +43,7 @@ export default function HomeEmpresas() {
 
 
 function CardEmpresas(props){
-    const {image, title, description, link, id} = props;
+    const {image, title, description, link, id, rate} = props;
     const [avatar, setAvatar]=useState(null);
     const {Meta} = Card;
     useEffect(()=>{
@@ -61,6 +61,7 @@ function CardEmpresas(props){
             actions={[<Button> Ver más</Button>]}
             >
             <Meta title={title} description={description}/>
+            <Rate defaultValue={rate} disabled />
             </Card>
         </a>
     )

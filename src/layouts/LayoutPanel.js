@@ -81,8 +81,8 @@ export default function LayoutsPanel({ routes }) {
                                     roundedCircle
                                         alt=""
                                         src={avatar ? avatar : Perfil}
-                                        width="30"
-                                        height="30"
+                                        width="35"
+                                        height="35"
                                         className="d-inline-block align-top "
                                     />
                                 </Navbar.Brand>

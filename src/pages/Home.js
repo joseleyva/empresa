@@ -11,7 +11,7 @@ import MainBanner from "../components/Web/MainBanner";
 import HomeEmpresas from "../components/Web/HomeEmpresas"
 import HowMyPagesWork from "../components/Web/HowMyPagesWork"
 import Footer from "../components/Web/Footer"
-import { BackTop } from 'antd';
+import { BackTop , Affix} from 'antd';
 import {IconButton} from '@mui/material';
 import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward';
 
@@ -22,6 +22,7 @@ function App() {
   return (
       <>
     <div className="App">
+    <Affix offsetTop={0}>
           <header >
         <Navbar collapseOnSelect expand="lg" className="Barra ">
           <Container>
@@ -51,6 +52,7 @@ function App() {
         </Navbar>
 
       </header>
+      </Affix>
 
     <MainBanner/>
     <HomeEmpresas/>

@@ -2,7 +2,7 @@ import * as React from 'react';
 import { useState, useEffect, useRef } from 'react';
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
-import { Button } from 'primereact/button';
+import { Button } from 'react-bootstrap';
 import { Tooltip } from 'primereact/tooltip';
 import { Divider } from '@mui/material'
 import { Row, Col } from 'react-bootstrap';
@@ -12,7 +12,9 @@ import TwitterIcon from '@mui/icons-material/Twitter';
 import { Instagram } from '@mui/icons-material';
 import Link from '@mui/material/Link';
 import { classNames } from 'primereact/utils';
-import { dcsv, dpdf, dxlsx } from '../../components/Opciones';
+import { getAvatarApi, getUserApi } from '../../api/user';
+import { getAccessTokenApi } from '../../api/auth';
+import useAuth from '../../hooks/useAuth';
 import 'primereact/resources/themes/bootstrap4-light-blue/theme.css'
 import "primereact/resources/primereact.min.css";                  //core css
 import "primeicons/primeicons.css";                                //icons
@@ -89,55 +91,75 @@ const datos = [
 export default function PruebasFinalizadas() {
     const [products, setProducts] = useState([]);
     const dt = useRef(null);
-
-
+    const [avatar, setAvatar] = useState(null);
+    const { user } = useAuth();
+    const token = getAccessTokenApi();
+ 
     const cols = [
         { field: 'name', header: 'name' },
         { field: 'prueba', header: 'prueba' },
         { field: 'resultados', header: 'resultados' }
     ];
 
-    const exportColumns = cols.map(col => ({ title: col.header, dataKey: col.field }));
+    useEffect(() => {
+        getUserApi(token, user.id).then((result) => {
+            getAvatarApi(result.avatar).then(response => {
+                setAvatar(response);
+            })
+        });
 
+
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [token, user]);
+  
+    const exportColumns = cols.map(col => ({ title: col.header, dataKey: col.field }));
+  
     useEffect(() => {
         setProducts(datos);
     }, [datos]); // eslint-disable-line react-hooks/exhaustive-deps
 
-
-    const exportCSV = (selectionOnly) => {
-        dt.current.exportCSV({ selectionOnly });
-    }
-
+    console.log(avatar);
     const exportPdf = () => {
         import('jspdf').then(jsPDF => {
             import('jspdf-autotable').then(() => {
                 const doc = new jsPDF.default(0, 0);
-                doc.autoTable(exportColumns, products);
+                doc.addImage(avatar, 'JPEG', 10, 10, 30, 30);
+                doc.setFontSize(14);
+                doc.text(45, 20, 'ALEF-GLOBAL Integral Productivity Consulting');
+                doc.autoTable(exportColumns, products, {
+                    margin: { top: 60 }
+                })
                 doc.save('products.pdf');
             })
         })
     }
 
-    const exportExcel = () => {
-        import('xlsx').then(xlsx => {
-            const worksheet = xlsx.utils.json_to_sheet(products);
-            const workbook = { Sheets: { 'data': worksheet }, SheetNames: ['data'] };
-            const excelBuffer = xlsx.write(workbook, { bookType: 'xlsx', type: 'array' });
-            saveAsExcelFile(excelBuffer, 'products');
-        });
-    }
-
-    const saveAsExcelFile = (buffer, fileName) => {
-        import('file-saver').then(FileSaver => {
-            let EXCEL_TYPE = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8';
-            let EXCEL_EXTENSION = '.xlsx';
-            const data = new Blob([buffer], {
-                type: EXCEL_TYPE
+    // eslint-disable-next-line no-lone-blocks
+    {/*
+        const exportCSV = (selectionOnly) => {
+            dt.current.exportCSV({ selectionOnly });
+        }
+        const exportExcel = () => {
+            import('xlsx').then(xlsx => {
+                const worksheet = xlsx.utils.json_to_sheet(products);
+                const workbook = { Sheets: { 'data': worksheet }, SheetNames: ['data'] };
+                const excelBuffer = xlsx.write(workbook, { bookType: 'xlsx', type: 'array' });
+                saveAsExcelFile(excelBuffer, 'products');
             });
-            FileSaver.saveAs(data, fileName + '_export_' + new Date().getTime() + EXCEL_EXTENSION);
-        });
-    }
-
+        }
+        
+        const saveAsExcelFile = (buffer, fileName) => {
+            import('file-saver').then(FileSaver => {
+                let EXCEL_TYPE = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8';
+                let EXCEL_EXTENSION = '.xlsx';
+                const data = new Blob([buffer], {
+                    type: EXCEL_TYPE
+                });
+                FileSaver.saveAs(data, fileName + '_export_' + new Date().getTime() + EXCEL_EXTENSION);
+            });
+        }
+        
+    */}
 
 
 
@@ -155,22 +177,7 @@ export default function PruebasFinalizadas() {
         );
     }
 
-    const header = (
-        <div className="flex export-buttons" style={{ textAlign: "left" }}>
-            <label>Descargar:</label>
-            <Row style={{marginLeft:"10px"}}>
-                <Button type="button" icon={<svg xmlns="http://www.w3.org/2000/svg" width="23" height="23" fill="currentColor" className="bi bi-filetype-csv" viewBox="0 0 16 16">
-                    <path fillRule="evenodd" d={dcsv} />
-                </svg>} onClick={() => exportCSV(false)} className="p-button-success m-1" data-pr-tooltip="CSV" />
-                <Button type="button" icon={<svg xmlns="http://www.w3.org/2000/svg" width="23" height="23" fill="currentColor" className="bi bi-filetype-xlsx" viewBox="0 0 16 16">
-                    <path fillRule="evenodd" d={dxlsx} />
-                </svg>} onClick={exportExcel} className="p-button-success m-1" data-pr-tooltip="XLS" />
-                <Button type="button" icon={<svg xmlns="http://www.w3.org/2000/svg" width="23" height="23" fill="currentColor" className="bi bi-filetype-pdf" viewBox="0 0 16 16">
-                    <path fillRule="evenodd" d={dpdf} />
-                </svg>} onClick={exportPdf} className="p-button-danger m-1" data-pr-tooltip="PDF" />
-            </Row>
-        </div>
-    );
+
     return (
         <div className='App'>
             <div className='ContenedorEmpresas'>
@@ -181,7 +188,7 @@ export default function PruebasFinalizadas() {
                     <div className="card">
                         <Tooltip target=".export-buttons>button" position="bottom" />
 
-                        <DataTable ref={dt} value={products} scrollable scrollHeight="400px" resizableColumns columnResizeMode="expand" showGridlines header={header} dataKey="id" responsiveLayout="scroll" breakpoint="600px" >
+                        <DataTable ref={dt} value={products} scrollable scrollHeight="400px" resizableColumns columnResizeMode="expand" showGridlines dataKey="id" responsiveLayout="scroll" breakpoint="600px" >
                             {
                                 cols.map((col, index) => <Column key={index} field={col.field} header={col.header} body={col.header === "resultados" ? stockBodyTemplate : null} sortable />)
                             }
@@ -191,11 +198,12 @@ export default function PruebasFinalizadas() {
 
                 <Row className="mb-3">
                     <Col className="d-grid gap-2">
+                        <Button className="m-2">Volver al incio</Button>
                     </Col>
                     <Col>
                     </Col>
                     <Col className="d-grid gap-2">
-                        <Button className="m-2">Volver al incio</Button>
+                        <Button className='m-2' variant="danger" onClick={exportPdf}> Descargar en PDF</Button>
                     </Col>
                 </Row>
 

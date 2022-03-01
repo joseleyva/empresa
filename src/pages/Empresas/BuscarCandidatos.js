@@ -1,103 +1,79 @@
+import React from 'react'
 import '../../App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Row, Button, Form, Col } from 'react-bootstrap';
+import { Row, Col } from 'react-bootstrap';
 import GitHubIcon from '@mui/icons-material/GitHub';
 import FacebookIcon from '@mui/icons-material/Facebook';
 import TwitterIcon from '@mui/icons-material/Twitter';
 import { Instagram } from '@mui/icons-material';
 import Link from '@mui/material/Link';
-import { Chart } from 'primereact/chart';
+import { Input } from 'antd';
+import { Divider } from '@mui/material';
+import CardsBuscarCandidatos from '../../components/CardsBuscarCandidatos';
+import Imagen from '../../assets/img/jpg/Usuario.jpg'
+const { Search } = Input;
+
+const users= [
+    {
+    id: 1,
+    name: "Jose guadalupe leyva robles",
+    expeciality: "Sistemas",
+    imagen: Imagen
+    },
+    {
+    id: 2,
+    name: "Jose guadalupe leyva robles",
+    expeciality: "Sistemas",
+    imagen: Imagen
+    },
+    {
+    id: 3,
+    name: "Jose guadalupe leyva robles",
+    expeciality: "Sistemas",
+    imagen: Imagen
+    },
+    {
+    id: 4,
+    name: "Jose guadalupe leyva robles",
+    expeciality: "Sistemas",
+    imagen: Imagen
+    },
+    {
+    id: 5,
+    name: "Jose guadalupe leyva robles",
+    expeciality: "Sistemas",
+    imagen: Imagen
+    },
+]
 
 
-
-function Empresas() {
-
-    const basicData = {
-        labels: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Nobiembre', 'Diciembre'],
-        datasets: [
-            {
-                label: 'First Dataset',
-                data: [65, 59, 80, 81, 56, 55, 40, 54, 65, 34, 51, 100],
-                fill: false,
-                borderColor: '#42A5F5',
-                tension: .4
-            },
-            {
-                label: 'Second Dataset',
-                data: [28, 48, 40, 19, 86, 27, 90, 13, 53, 12, 56, 10],
-                fill: false,
-                borderColor: '#FFA726',
-                tension: .4
-            }
-        ]
-    };
-    const getLightTheme = () => {
-        let basicOptions = {
-            maintainAspectRatio: false,
-            aspectRatio: .6,
-            plugins: {
-                legend: {
-                    labels: {
-                        color: '#495057'
-                    }
-                }
-            },
-            scales: {
-                x: {
-                    ticks: {
-                        color: '#495057'
-                    },
-                    grid: {
-                        color: '#ebedef'
-                    }
-                },
-                y: {
-                    ticks: {
-                        color: '#495057'
-                    },
-                    grid: {
-                        color: '#ebedef'
-                    }
-                }
-            }
-        };
-
-
-        return {
-            basicOptions
-        }
-    }
-
-    const { basicOptions, } = getLightTheme();
-
+export default function BuscarCandidatos() {
+    const onSearch = value => console.log(value);
     return (
+        <div className='App'>
 
-        <div className="App">
-
-
-            <div className="ContenedorEmpresas">
-                <h4> Escritorio Virtual</h4>
-                <Row>
-                    <Col></Col>
-                    <Col></Col>
-                    <Col>
-                        <Button variant='outline-primary' href="/Empresas/BuscarCandidatos">Buscar Candidatos</Button>
-                    </Col>
+            <div className='ContenedorEmpresas'>
+                <h5>Buscar Candidatos</h5>
+                <Divider className='mb-3'/>
+                <Row className='mb-3'>
+                <Col></Col>
+                <Col xs={6}>
+                <Search
+                    placeholder="Buscar Candidatos"
+                    allowClear
+                    enterButton="Buscar"
+                    size="large"
+                    onSearch={onSearch}
+                    />
+                </Col>
+                <Col></Col>
                 </Row>
-                <div className="Graficas">
-                    <Chart type="line" height='350px' data={basicData} options={basicOptions} />
+                <Divider/>
+                <div className="DivBuscar">
+                    {users.map((user)=>((
+                    <CardsBuscarCandidatos user={user} key={user.id} id={user.id}/>
+                    )))}
                 </div>
-                <Row className="mb-3 BotonesEm">
-                    <Form.Group as={Col} md="4">
-                        <Button variant="outline-primary">Encuentra capacitaciones avaladas ante STPS</Button>{' '}
-                    </Form.Group>
-                    <Form.Group as={Col} md="4">
-                        <Button variant="outline-primary" href="/Empresas/VacantesActivas">Mira el status de tus vacantes activas</Button>{' '}
-                    </Form.Group>
-                    <Form.Group as={Col} md="4">
-                        <Button variant="outline-primary">Cotiza estudios socio economicos</Button>{' '}
-                    </Form.Group>
-                </Row>
             </div>
             <footer>
                 <div className="Fcontainer">
@@ -174,8 +150,5 @@ function Empresas() {
                 </div>
             </footer>
         </div>
-    );
+    )
 }
-
-export default Empresas;
-

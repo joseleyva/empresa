@@ -45,7 +45,7 @@ const FormVac = (props) => {
         }
         setFallo(true);
     };
-
+console.log(user);
     return (
         <div className="VacanteForm">
             <Formik
@@ -78,6 +78,7 @@ const FormVac = (props) => {
                 }}
                 initialValues={{
                     name: user.name,
+                    idCompany: user.id,
                     nameP: "",
                     numberP: "",
                     activity: "",

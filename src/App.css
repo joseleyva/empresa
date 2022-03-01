@@ -582,3 +582,20 @@
 .row-accessories {
   background-color: rgba(0, 0, 0, 0.15) !important;
 }
+
+.DivBuscar {
+  width: 800px;
+  display: inline-block !important;
+}
+.imageCandidatos{
+  height: 120px!important;
+  transform: scale(0.9);
+  object-fit: contain;
+}
+
+.CardsBuscar{
+  margin: 5px !important;
+  width: 300px !important;
+  height: 270px !important;
+  display: inline-block;
+}

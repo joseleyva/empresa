@@ -46,7 +46,6 @@ export function signInApi(data){
     return response.json();
   })
   .then(result=>{
-    console.log(result);
       return result;
   })
   .catch(err=>{
@@ -202,12 +201,12 @@ export function updateUserApi(token, user, userId){
     return response.json();
   }).then(result=>{
     return result;
-  }).catch(err=>{
+   }).catch(err=>{
     return err.message;
   });
 }
-export function updateInfoUserApi(token, user, userId){
-  const url=`${basePath}/${apiVersion}/update-info-user/${userId}`;
+export function updateDataUserApi(token, user, userId){
+  const url=`${basePath}/${apiVersion}/update-user-info/${userId}`;
 
   const params={
     method:"PUT",
@@ -222,6 +221,36 @@ export function updateInfoUserApi(token, user, userId){
     return response.json();
   }).then(result=>{
     return result;
+  }).catch(err=>{
+    return err.message;
+  });
+}
+export function updateInfoUserApi(token, user, userId){
+  const url=`${basePath}/${apiVersion}/update-info-user/${userId}`;
+
+  const params={
+    method:"POST",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: token
+    },
+    body: JSON.stringify(user)
+  }
+
+  return fetch(url, params).then(response=>{
+    return response.json();
+  }).then(result=>{
+    if(result.infoUser){
+        return {
+          ok:true,
+          message:'Información Actualizada'
+        };
+      }
+     return {
+        ok:false,
+        message: result.message
+     
+    }
   }).catch(err=>{
     return err.message;
   });
@@ -271,6 +300,23 @@ export function deleteUserApi(token, userId){
 
 export function getUserApi(token, userId){
   const url =`${basePath}/${apiVersion}/user/${userId}`;
+
+  const params={
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: token
+    }
+  }
+
+  return fetch(url, params).then(response=>{
+    return response.json();
+  }).catch(err=>{
+    return err.message;
+  })
+}
+export function getInfoUserApi(token, userId){
+  const url =`${basePath}/${apiVersion}/info-user/${userId}`;
 
   const params={
     method: "GET",

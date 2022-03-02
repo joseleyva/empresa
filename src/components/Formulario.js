@@ -109,8 +109,7 @@ function Formulario() {
         
       }}
       initialValues={{
-        active: false,
-        date: true,
+        idCompany: user.id,
         nameUser: '',
          lastnameP: '',
         lastnameM: '',

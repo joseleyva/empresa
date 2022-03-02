@@ -9,7 +9,7 @@ import { Instagram } from "@mui/icons-material";
 import Link from "@mui/material/Link";
 import NoAvatar from "../../assets/img/png/logo512.png";
 import { getAccessTokenApi } from "../../api/auth";
-import { getUserApi, getAvatarApi } from "../../api/user";
+import { getUserApi, getAvatarApi, getInfoUserApi } from "../../api/user";
 import useAuth from "../../hooks/useAuth";
 import {Col, Row, Descriptions } from "antd";
 import EditInfoForm from "../../components/EditInfoForm";
@@ -21,16 +21,21 @@ function DatosEmpresas() {
   const [avatar, setAvatar] = useState(null);
   const { user } = useAuth();
   const [users, setUsers] = useState([]);
+  const [userInfo, setUserInfo]= useState([]);
   const [isVisibleModal, setIsVisibleModal] = useState(false);
   const [modalTitle, setModalTitle] = useState("");
   const [modalContent, setModalContent] = useState("");
   const [reloadUsers, setReloadUsers] = useState(false);
   useEffect(() => {
-    getUserApi(token, user.id).then((result) => {
+    getInfoUserApi(token, user.id).then((result) => {
+      setUserInfo(result);
+    });
+    getUserApi(token, user.id).then((result)=>{
       setUsers(result);
     });
     setReloadUsers(false);
   }, [user, reloadUsers, token]);
+
   useEffect(() => {
     if (users.avatar) {
       getAvatarApi(users.avatar).then((response) => {
@@ -44,24 +49,24 @@ function DatosEmpresas() {
     setIsVisibleModal(true);
     setModalTitle(`Editar ${users.name}`);
     setModalContent(
-      <EditInfoForm user={users} setReloadUsers={setReloadUsers} setIsVisibleModal={setIsVisibleModal} />
+      <EditInfoForm user={users} infoUser={userInfo} setReloadUsers={setReloadUsers} setIsVisibleModal={setIsVisibleModal} />
     );
   };
 
   const Datos = {
-    RazonSocial: users.RSocial,
-    Calle: users.street,
-    Numero: users.houseNumber,
-    Colonia: users.suburb,
-    RFC: users.RFC,
-    Giro: users.business,
-    Nombre: `${users.nameUser} ${users.lastnameP} ${users.lastnameM}`,
-    Puesto: users.job,
-    Estado: users.state,
-    Municipio: users.municipality,
-    Codigo: users.zip,
-    telefono: users.numberphone,
-    Horario: users.schedule,
+    RazonSocial: userInfo.RSocial,
+    Calle: userInfo.street,
+    Numero: userInfo.houseNumber,
+    Colonia: userInfo.suburb,
+    RFC: userInfo.RFC,
+    Giro: userInfo.business,
+    Nombre: `${userInfo.nameUser} ${userInfo.lastnameP} ${userInfo.lastnameM}`,
+    Puesto: userInfo.job,
+    Estado: userInfo.state,
+    Municipio: userInfo.municipality,
+    Codigo: userInfo.zip,
+    telefono: userInfo.numberphone,
+    Horario: userInfo.schedule,
     Correo: users.email,
   };
   return (

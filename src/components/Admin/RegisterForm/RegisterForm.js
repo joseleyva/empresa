@@ -7,7 +7,7 @@ import { useTheme } from '@mui/material/styles';
 import { Formik } from 'formik';
 import {notification} from 'antd';
 import * as yup from 'yup';
-import { signUpApi } from "../../../api/user";
+import { signUpAdminApi } from "../../../api/user";
 
 
 const schema = yup.object().shape({
@@ -39,7 +39,7 @@ const schema = yup.object().shape({
           validationSchema={schema}
           onSubmit={async(valores, { resetForm }) => {
               setValidated(true);
-              const result = await signUpApi(valores);
+              const result = await signUpAdminApi(valores);
               if (!result.ok) {
                   notification["error"]({
                     description: result.message,

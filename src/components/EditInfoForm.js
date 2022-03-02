@@ -9,35 +9,35 @@ import {getAccessTokenApi} from "../api/auth"
 
 
 export default function EditInfoForm(props){
-   const {user, setIsVisibleModal ,setReloadUsers} = props;
+   const {user, infoUser,setIsVisibleModal ,setReloadUsers} = props;
    const [avatar, setAvatar]=useState(null);
    const [userData, setUserData]= useState({});
   
    useEffect(()=>{
       setUserData({
         name: user.name,
-        lastnameP: user.lastnameP,
-        lastnameM: user.lastnameM,
-        RFC: user.RFC,
-        RSocial: user.RSocial,
-        state: user.state,
-        houseNumber: user.houseNumber,
-        nameUser: user.nameUser,
-        numberEm: user.numberEm,
-        numberphone: user.numberphone,
-        street: user.street,
-        suburb: user.suburb,
-        municipality: user.municipality,
-        business: user.business,
-        schedule: user.schedule,
-        job: user.job,
-        zip: user.zip,
+        lastnameP: infoUser.lastnameP,
+        lastnameM: infoUser.lastnameM,
+        RFC: infoUser.RFC,
+        RSocial: infoUser.RSocial,
+        state: infoUser.state,
+        houseNumber: infoUser.houseNumber,
+        nameUser: infoUser.nameUser,
+        numberEm: infoUser.numberEm,
+        numberphone: infoUser.numberphone,
+        street: infoUser.street,
+        suburb: infoUser.suburb,
+        municipality: infoUser.municipality,
+        business: infoUser.business,
+        schedule: infoUser.schedule,
+        job: infoUser.job,
+        zip: infoUser.zip,
         email: user.email,
         avatar: user.avatar,
 
     });
       
-   }, [user]);
+   }, [user, infoUser]);
 
 
    useEffect(()=>{

@@ -1,6 +1,6 @@
 import React from 'react'
 import { Card } from 'antd';
-import { EditOutlined, InfoCircleOutlined, SettingOutlined } from '@ant-design/icons';
+import { EditOutlined, SettingOutlined } from '@ant-design/icons';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import '../App.css';
 

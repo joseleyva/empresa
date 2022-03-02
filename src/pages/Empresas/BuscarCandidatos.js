@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import '../../App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Row, Col } from 'react-bootstrap';
@@ -13,65 +13,87 @@ import CardsBuscarCandidatos from '../../components/CardsBuscarCandidatos';
 import Imagen from '../../assets/img/jpg/Usuario.jpg'
 const { Search } = Input;
 
-const users= [
+const users = [
     {
-    id: 1,
-    name: "Jose guadalupe leyva robles",
-    expeciality: "Sistemas",
-    imagen: Imagen
+        id: 1,
+        name: "Jose guadalupe leyva robles",
+        expeciality: "Sistemas",
+        imagen: Imagen
     },
     {
-    id: 2,
-    name: "Jose guadalupe leyva robles",
-    expeciality: "Sistemas",
-    imagen: Imagen
+        id: 2,
+        name: "Jose guadalupe leyva robles",
+        expeciality: "Informatica",
+        imagen: Imagen
     },
     {
-    id: 3,
-    name: "Jose guadalupe leyva robles",
-    expeciality: "Sistemas",
-    imagen: Imagen
+        id: 3,
+        name: "Jose guadalupe leyva robles",
+        expeciality: "TICS",
+        imagen: Imagen
     },
     {
-    id: 4,
-    name: "Jose guadalupe leyva robles",
-    expeciality: "Sistemas",
-    imagen: Imagen
+        id: 4,
+        name: "Jose guadalupe leyva robles",
+        expeciality: "Quimica",
+        imagen: Imagen
     },
     {
-    id: 5,
-    name: "Jose guadalupe leyva robles",
-    expeciality: "Sistemas",
-    imagen: Imagen
+        id: 5,
+        name: "Jose guadalupe leyva robles",
+        expeciality: "Civil",
+        imagen: Imagen
     },
 ]
 
 
 export default function BuscarCandidatos() {
-    const onSearch = value => console.log(value);
+    const [usuarios, setUsuarios] = useState([]);
+    const [tablaUsuarios, setTablaUsuarios] = useState([]);
+
+    useEffect(() => {
+        setUsuarios(users);
+        setTablaUsuarios(users);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [users]);
+
+    const onSearch = value => {
+        filtrar(value);
+    };
+
+    const filtrar = (terminoBusqueda) => {
+        // eslint-disable-next-line array-callback-return
+        var resultadosBusqueda = tablaUsuarios.filter((elemento) => {
+            if (elemento.expeciality.toString().toLowerCase().includes(terminoBusqueda.toLowerCase())) {
+                return elemento;
+            }
+        });
+        setUsuarios(resultadosBusqueda);
+    }
+
     return (
         <div className='App'>
 
             <div className='ContenedorEmpresas'>
                 <h5>Buscar Candidatos</h5>
-                <Divider className='mb-3'/>
+                <Divider className='mb-3' />
                 <Row className='mb-3'>
-                <Col></Col>
-                <Col xs={6}>
-                <Search
-                    placeholder="Buscar Candidatos"
-                    allowClear
-                    enterButton="Buscar"
-                    size="large"
-                    onSearch={onSearch}
-                    />
-                </Col>
-                <Col></Col>
+                    <Col></Col>
+                    <Col xs={6}>
+                        <Search
+                            placeholder="Buscar Candidatos"
+                            allowClear
+                            enterButton="Buscar"
+                            size="large"
+                            onSearch={onSearch}
+                        />
+                    </Col>
+                    <Col></Col>
                 </Row>
-                <Divider/>
+                <Divider />
                 <div className="DivBuscar">
-                    {users.map((user)=>((
-                    <CardsBuscarCandidatos user={user} key={user.id} id={user.id}/>
+                    {usuarios.map((user) => ((
+                        <CardsBuscarCandidatos user={user} key={user.id} id={user.id} />
                     )))}
                 </div>
             </div>

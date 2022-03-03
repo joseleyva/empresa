@@ -88,6 +88,7 @@ export default function LayoutsPanel({ routes }) {
                                 </Navbar.Brand>
                                 <NavDropdown title="Perfil" id="dropdown-menu-align-end" align="end" >
                                     <NavDropdown.Item href="/Empresas/DatosEmpresa">Datos Generales</NavDropdown.Item>
+                                    <NavDropdown.Item href="/Empresas/Configuracion">Configuración</NavDropdown.Item>
                                     <NavDropdown.Divider />
                                     <NavDropdown.Item onClick={logoutUser}>Cerrar Sesion</NavDropdown.Item>
                                 </NavDropdown>

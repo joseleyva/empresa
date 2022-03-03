@@ -15,7 +15,6 @@ export default function EditInfoForm(props){
   
    useEffect(()=>{
       setUserData({
-        name: user.name,
         lastnameP: infoUser.lastnameP,
         lastnameM: infoUser.lastnameM,
         RFC: infoUser.RFC,
@@ -32,7 +31,6 @@ export default function EditInfoForm(props){
         schedule: infoUser.schedule,
         job: infoUser.job,
         zip: infoUser.zip,
-        email: user.email,
         avatar: user.avatar,
 
     });
@@ -62,7 +60,7 @@ export default function EditInfoForm(props){
       const token= getAccessTokenApi();
       let userUpdate=userData;
       
-      if(!userUpdate.nameUser || !userUpdate.lastnameP || !userUpdate.email || !userUpdate.lastnameM || !userUpdate.name){
+      if(!userUpdate.nameUser || !userUpdate.lastnameP || !userUpdate.lastnameM){
         notification["error"]({
           message: "El nombre, apellidos y email son obligatorios",
           placement: 'bottomLeft',
@@ -157,6 +155,7 @@ function EditForm(props){
               <Form.Control
               prefix={<UserOutlined/>}
                 type="text"
+                required
                 name="nameUser"
                 placeholder="Nombre(s)"
                 value={userData.nameUser}
@@ -169,6 +168,7 @@ function EditForm(props){
               <Form.Label>Apellido Paterno</Form.Label>
               <Form.Control
                 type="text"
+                
                 name="ApellidosP"
                 placeholder="Apellidos"
                 value={userData.lastnameP}
@@ -194,19 +194,6 @@ function EditForm(props){
 
           </Row>
           <Row className="mb-3">
-            <Form.Group as={Col} md="4" controlId="validationFormikEmail" className="position-relative">
-              <Form.Label>Correo</Form.Label>
-              <InputGroup hasValidation>
-                <Form.Control
-                  type="email"
-                  placeholder="Correo"
-                  value={userData.email}
-                  onChange={e=> setUserData({
-                      ...userData, email: e.target.value
-                  })}
-                />
-              </InputGroup>
-            </Form.Group>
             <Form.Group as={Col} md="4" controlId="validationFormik<numberPhone" className="position-relative">
               <Form.Label>Numero de telefono</Form.Label>
               <InputGroup hasValidation>
@@ -214,20 +201,20 @@ function EditForm(props){
                   type="text"
                   placeholder="Numero de telefono"
                   value={userData.numberphone}
+                  required
                   onChange={e=> setUserData({
                       ...userData, numberphone: e.target.value
                   })}
                 />
               </InputGroup>
             </Form.Group>
-          </Row>
-          <Row className="mb-3">
           <Form.Group as={Col} md="4" controlId="validationFormikUsername" className="position-relative">
               <Form.Label>Puesto del encargado</Form.Label>
               <InputGroup hasValidation>
                 <Form.Control
                   type="text"
                   placeholder="Puesto del encargado"
+                  required
                   value={userData.job}
                   onChange={e=> setUserData({
                       ...userData, job: e.target.value
@@ -239,26 +226,14 @@ function EditForm(props){
           <Row>
               <h4>Datos de la Empresa</h4>
           </Row>
-          <Row className="mb-3">
-            <Form.Group as={Col} md="4" controlId="validationFormikNameEm" className="position-relative">
-              <Form.Label>Nombre de la empresa</Form.Label>
-              <Form.Control
-              prefix={<UserOutlined/>}
-                type="text"
-                name="Nombre"
-                placeholder="Nombre(s)"
-                value={userData.name}
-                onChange={e=> setUserData({
-                    ...userData, name: e.target.value
-                })}
-              />
-            </Form.Group>    
+          <Row className="mb-3">   
             <Form.Group as={Col} md="4" controlId="validationFormikBusiness" className="position-relative">
               <Form.Label>Giro Empresarial</Form.Label>
               <Form.Control
                 type="text"
                 name="business"
                 placeholder="Giro empresarial"
+                
                 value={userData.business}
                 onChange={e=> setUserData({
                     ...userData, business: e.target.value
@@ -274,6 +249,7 @@ function EditForm(props){
                 <Form.Control
                   type="text"
                   placeholder="RFC"
+                  required
                   value={userData.RFC}
                   onChange={e=> setUserData({
                       ...userData, RFC: e.target.value
@@ -286,6 +262,7 @@ function EditForm(props){
               <Form.Control
                 type="text"
                value={userData.RSocial}
+               required
                 placeholder="Razon social"
                 onChange={e=>setUserData({...userData, RSocial: e.target.value})}
               />
@@ -296,6 +273,7 @@ function EditForm(props){
                 type="text"
                value={userData.schedule}
                 placeholder="Horario"
+                required
                 onChange={e=>setUserData({...userData, schedule: e.target.value})}
               />
             </Form.Group>
@@ -311,6 +289,7 @@ function EditForm(props){
                   type="text"
                   placeholder="Calle"
                   value={userData.street}
+                  required
                   onChange={e=> setUserData({
                       ...userData, street: e.target.value
                   })}
@@ -324,6 +303,7 @@ function EditForm(props){
                   type="text"
                   placeholder="Numero de casa"
                   value={userData.houseNumber}
+                  required
                   onChange={e=> setUserData({
                       ...userData, houseNumber: e.target.value
                   })}
@@ -337,6 +317,7 @@ function EditForm(props){
                   type="text"
                   placeholder="Colonia"
                   value={userData.suburb}
+                  required
                   onChange={e=> setUserData({
                       ...userData, suburb: e.target.value
                   })}
@@ -353,6 +334,7 @@ function EditForm(props){
                   type="text"
                   placeholder="Codigo postal"
                   value={userData.zip}
+                  required
                   onChange={e=> setUserData({
                       ...userData, zip: e.target.value
                   })}
@@ -365,6 +347,7 @@ function EditForm(props){
                 type="text"
                 value={userData.state}
                 placeholder="Estado"
+                required
                 onChange={e=>setUserData({...userData, state: e.target.value})}
               />
               </Form.Group>
@@ -374,6 +357,7 @@ function EditForm(props){
                 type="text"
                 name="municipality"
                 placeholder="Municipio"
+                
                 value={userData.municipality}
                 onChange={e=> setUserData({
                     ...userData, municipality: e.target.value

@@ -20,7 +20,7 @@ export default function Configuracion() {
             <div className='ContenedorEmpresas'>
                 <h4 className='App'>Configuracion</h4>
                 <Divider/>
-                <div className=" mb-2">
+                <div className=" m-2">
                     <TabView className="tabview-custom">
                         <TabPanel header="Usuario" leftIcon="pi pi-user">
                             <InfoAccount/>
@@ -28,10 +28,8 @@ export default function Configuracion() {
                         <TabPanel header="Contraseña" leftIcon="pi pi-key">
                             <Password/>
                         </TabPanel>
-                        <TabPanel header="Header III" leftIcon="pi pi-search" >
-                            <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati
-                                cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio.
-                                Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus.</p>
+                        <TabPanel header="Ajustes" leftIcon="pi pi-search" >
+                          
                         </TabPanel>
                     </TabView>
                 </div>

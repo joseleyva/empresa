@@ -205,6 +205,27 @@ export function updateUserApi(token, user, userId){
     return err.message;
   });
 }
+export function updateAccountApi(token, user, userId){
+  const url=`${basePath}/${apiVersion}/update-account/${userId}`;
+
+  const params={
+    method:"PUT",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: token
+    },
+    body: JSON.stringify(user)
+  }
+
+  return fetch(url, params).then(response=>{
+    return response.json();
+  }).then(result=>{
+    return result;
+   }).catch(err=>{
+    return err.message;
+  });
+}
+
 export function updateDataUserApi(token, user, userId){
   const url=`${basePath}/${apiVersion}/update-user-info/${userId}`;
 

@@ -71,8 +71,8 @@ function Productos() {
                             customization.
                         </Typography>
                     </Container>
-                    <Container component="main">
-                        <Grid container spacing={5} alignItems="flex-end">
+                    <Container component="main" >
+                        <Grid container spacing={5} style={{margin: "auto"}} alignItems="flex-end">
 
                             <CartasProductos />
 

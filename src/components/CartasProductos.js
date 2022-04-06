@@ -8,6 +8,7 @@ import CardHeader from '@mui/material/CardHeader';
 import Grid from '@mui/material/Grid';
 import StarIcon from '@mui/icons-material/StarBorder';
 import Typography from '@mui/material/Typography';
+import {Table} from 'react-bootstrap';
 import {getProductsApi} from '../api/products'
 
 function CartasProductos() {
@@ -20,6 +21,70 @@ function CartasProductos() {
   
   return (
     <>
+  <Table striped bordered style={{borderColor: "black"}}>
+  <thead>
+    <tr>
+      <th></th>
+      <th>Gratis</th>
+      <th>Basico</th>
+      <th>Premium</th>
+      <th>Gold</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr style={{height: 100}} valign = "middle" >
+      <td >Vacantes</td>
+      <td>1</td>
+      <td>7</td>
+      <td>+20</td>
+      <td></td>
+    </tr>
+    <tr style={{height: 100}} valign = "middle" >
+      <td >CV</td>
+      <td>2</td>
+      <td>5</td>
+      <td>Ilimitados</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td>Larry the Bird</td>
+      <td></td>
+      <td>@twitter</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td>Larry the Bird</td>
+      <td></td>
+      <td>@twitter</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td>Larry the Bird</td>
+      <td></td>
+      <td>@twitter</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td>Larry the Bird</td>
+      <td></td>
+      <td>@twitter</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td>Larry the Bird</td>
+      <td></td>
+      <td>@twitter</td>
+      <td></td>
+    </tr>
+  </tbody>
+</Table>
+
+    {/*
     {
       products.map((post) => (
         <Grid
@@ -86,6 +151,7 @@ function CartasProductos() {
 
       ))
     }
+              */}
     </>
   );
 }

@@ -294,6 +294,7 @@ function UserInactive(props){
       });
       setReloadUsers(true);
     }).catch(err=>{
+      
       notification["error"]({
         message: err,
         placement: 'bottomLeft',

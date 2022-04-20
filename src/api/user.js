@@ -13,7 +13,7 @@ export function signUpApi(data){
   return response.json();
           
        }).then(result =>{
-         if(result.user){
+         if(result.userStore){
             return {
               ok:true,
               message:'Usuario creado correctamente'
@@ -25,7 +25,7 @@ export function signUpApi(data){
          };
        }).catch(err => {
         return {
-          ok:false,
+          ok:false, 
           message: err.message
        };
        })
